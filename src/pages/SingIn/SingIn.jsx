@@ -67,7 +67,7 @@ export const SingIn = () => {
               <p className="font-poppins font-normal text-xl leading-6 flex items-center text-gray-500">
                 ¿No tienes cuenta?
                 <strong className="text-purple-600 ml-3">
-                  <Link className="hover:underline" to="/singUp">¡Crea una ahora!</Link>
+                  <Link className="hover:underline" to="/SingUp">¡Crea una ahora!</Link>
                 </strong>
               </p>
 
