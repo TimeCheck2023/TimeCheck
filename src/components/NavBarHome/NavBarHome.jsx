@@ -4,6 +4,7 @@ import { BiGroup } from "react-icons/bi";
 import { AiFillHome } from "react-icons/ai";
 import { FiLogIn } from "react-icons/fi";
 import { IoIosPersonAdd } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 export const NavBarHome = () => {
   const [isDarkModeOn, setIsDarkModeOn] = useState(false);
@@ -58,14 +59,14 @@ export const NavBarHome = () => {
                 <div className="text-2xl">
                   <FiLogIn />
                 </div>
-                <a href="/singIn">Inicia Sesión</a>
+                <Link to="/singIn">Inicia Sesión</Link>
               </li>
               <li className="my-5 flex gap-4 items-center  w-4/5 py-2 pl-2 rounded-sm hover:bg-neutral-800">
                 {" "}
                 <div className="text-2xl">
                   <IoIosPersonAdd />
                 </div>
-                <a href="/singUp">Registrate</a>
+                <Link to="/singUp">Registrate</Link>
               </li>
             </ul>
           </div>
