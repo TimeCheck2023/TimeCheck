@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import { LabelBtn } from "../../components/LabelBtn/LabelBtn";
+import { FcGoogle } from "react-icons/fc";
 
 export const SingUp = () => {
+  const [selectedOption, setSelectedOption] = useState("Personal");
+  const handleSelectChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
   return (
     <div className="w-screen h-screen flex flex-row">
       <div className="w-1/2 h-full bg-violet-700">
@@ -20,18 +26,70 @@ export const SingUp = () => {
             </p>
           </div>
         </div>
-        <div className="relative left-56 top-52">
-          <img src="/vite.svg" alt="img" width={400} />
+        <div className="relative left-24 top-40">
+          <img src="/image1.webp" alt="img" width={600} />
         </div>
       </div>
       <div className="w-1/2 h-full ">
-        <div>
-          <h2>¡Crear una cuenta Personal!</h2>
-          <p>¡Únete a nuestra comunidad de organizadores y asistentes de eventos hoy mismo!</p>
+        <div className="flex justify-center items-center flex-col">
+          <h2 className="font-bold text-6xl tracking-tight leading-1.19 font-poppins text-base-02 mt-8">
+            ¡Crear una cuenta {selectedOption}!
+          </h2>
+          <p className="font-normal text-lg leading-1.67 font-poppins text-gray-500 relative mt-5 ">
+            ¡Únete a nuestra comunidad de organizadores y asistentes de eventos
+            hoy mismo!
+          </p>
         </div>
         <div>
-          <label htmlFor="">Tipo de cuenta <strong className="text-red-600">*</strong></label>
-          <input type="text" />
+          <div className="flex flex-col my-16 mx-20">
+            <label htmlFor="" className="font-bold">
+              Tipo de cuenta <strong className="text-red-600">*</strong>
+            </label>
+            <select
+              onChange={handleSelectChange}
+              id="tipo-usuario"
+              name="tipo-usuario"
+              className="bg-gray-100 shadow-md rounded-md w-2/5 h-11 px-2 border border-gray-400 text-gray-500">
+              <option value="personal">Personal</option>
+              <option value="organizacion">Organización</option>
+            </select>
+          </div>
+          <div className="flex my-10 mx-20 justify-between">
+            <LabelBtn label="Nombre" width="80" id="name" />
+            <LabelBtn label="Primer Apellido" width="70" id="firstname" />
+            <LabelBtn label="Segundo Apellido" width="70" id="secondname" />
+          </div>
+          <div className="flex my-10 mx-20 justify-between ">
+            <LabelBtn label="Correo electronico" width="96" id="email" />
+            <LabelBtn label="Teléfono" width="96" id="tel" />
+          </div>
+          <div className="flex my-10 mx-20 justify-between">
+            <LabelBtn label="Contraseña" width="96" id="pass" />
+            <LabelBtn label="Confirmar Contraseña" width="96" id="conpass" />
+          </div>
+          <div className="footer my-20 mx-20 flex flex-col justify-center items-center ">
+            <div className="flex gap-56">
+              <button className=" p-4 w-80 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold">
+                Registrarse
+              </button>
+              <button className=" p-4 w-80 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-9">
+                <p className="text-2xl pl-7">
+                  <FcGoogle />
+                </p>
+                <p>Registrate con Google</p>
+              </button>
+            </div>
+            <div className="mt-24">
+              <p className="font-poppins font-normal text-2xl leading-6 flex items-center text-gray-500">
+                ¿Ya tines cuenta?{" "}
+                <strong className="text-purple-600 ml-3">
+                  <a href="/singIn" className="hover:underline">
+                    Inicia sesión
+                  </a>
+                </strong>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
