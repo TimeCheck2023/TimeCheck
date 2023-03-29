@@ -1,6 +1,7 @@
 import React from "react";
 import { LabelBtn } from "../../components/LabelBtn/LabelBtn";
 import { FcGoogle } from "react-icons/fc";
+import { Link } from "react-router-dom";
 
 export const SingIn = () => {
   return (
@@ -51,7 +52,7 @@ export const SingIn = () => {
             </div>
           </div>
           <div className="footer my-20 mx-20 flex flex-col justify-center items-center ">
-            <div className="flex gap-28">
+            <div className="flex lg:gap-28 xl:gap-16">
               <button className=" p-4 w-80 h-14   bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold">
                 Iniciar Sesion
               </button>
@@ -62,15 +63,16 @@ export const SingIn = () => {
                 <p>Iniciar con Google</p>
               </button>
             </div>
-            <div className="mt-24">
-              <p className="font-poppins font-normal text-2xl leading-6 flex items-center text-gray-500">
+            <div className="mt-24 flex justify-center items-center flex-col">
+              <p className="font-poppins font-normal text-xl leading-6 flex items-center text-gray-500">
                 ¿No tienes cuenta?
                 <strong className="text-purple-600 ml-3">
-                  <a href="/singUp" className="hover:underline">
-                    ¡Crea una ahora!
-                  </a>
+                  <Link className="hover:underline" to="/singUp">¡Crea una ahora!</Link>
                 </strong>
               </p>
+
+                <Link className=" p-4 w-40 h-14 mt-10 bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center" to="/">Volver</Link>
+
             </div>
           </div>
         </div>

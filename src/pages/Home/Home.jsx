@@ -4,7 +4,7 @@ import { NavBarHome } from "../../components/NavBarHome/NavBarHome";
 
 export const Home = () => {
   return (
-    <div className="flex w-screen bg-slate-500">
+    <div className="flex w-screen h-screen">
       <NavBarHome />
       <BodyHome />
     </div>

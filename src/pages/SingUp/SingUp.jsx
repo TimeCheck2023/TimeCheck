@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { LabelBtn } from "../../components/LabelBtn/LabelBtn";
 import { FcGoogle } from "react-icons/fc";
+import { Link } from "react-router-dom";
+
 
 export const SingUp = () => {
   const [selectedOption, setSelectedOption] = useState("Personal");
@@ -68,7 +70,7 @@ export const SingUp = () => {
             <LabelBtn label="Confirmar Contraseña" width="96" id="conpass" />
           </div>
           <div className="footer my-20 mx-20 flex flex-col justify-center items-center ">
-            <div className="flex gap-56">
+            <div className="flex lg:gap-56 xl:gap-40">
               <button className=" p-4 w-80 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold">
                 Registrarse
               </button>
@@ -79,15 +81,14 @@ export const SingUp = () => {
                 <p>Registrate con Google</p>
               </button>
             </div>
-            <div className="mt-24">
-              <p className="font-poppins font-normal text-2xl leading-6 flex items-center text-gray-500">
+            <div className="mt-10 flex justify-center items-center flex-col">
+              <p className="font-poppins font-normal text-xl leading-6 flex items-center text-gray-500">
                 ¿Ya tines cuenta?{" "}
                 <strong className="text-purple-600 ml-3">
-                  <a href="/singIn" className="hover:underline">
-                    Inicia sesión
-                  </a>
+                <Link className="hover:underline" to="/singIn">¡Inicia sesión!</Link>
                 </strong>
               </p>
+              <Link className=" w-40 h-14 mt-10 bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center" to="/">Volver</Link>
             </div>
           </div>
         </div>
