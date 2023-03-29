@@ -34,14 +34,12 @@ export const NavBarHome = () => {
           <div className=" my-5">
             <ul>
               <li className="my-5 flex gap-4 items-center bg-neutral-700 w-4/5 py-2 pl-2 rounded-sm">
-                {" "}
                 <div className="text-2xl">
                   <AiFillHome />
                 </div>
                 Inicio
               </li>
               <li className="my-5 flex gap-4 items-center  w-4/5 py-2 pl-2 rounded-sm hover:bg-neutral-800">
-                {" "}
                 <div className="text-2xl">
                   <MdGroups />
                 </div>
@@ -59,14 +57,13 @@ export const NavBarHome = () => {
                 <div className="text-2xl">
                   <FiLogIn />
                 </div>
-                <Link to="/singIn">Inicia Sesión</Link>
+                <Link to="/SingIn">Inicia Sesión</Link>
               </li>
               <li className="my-5 flex gap-4 items-center  w-4/5 py-2 pl-2 rounded-sm hover:bg-neutral-800">
-                {" "}
                 <div className="text-2xl">
                   <IoIosPersonAdd />
                 </div>
-                <Link to="/singUp">Registrate</Link>
+                <Link to="/SingUp">Registrate</Link>
               </li>
             </ul>
           </div>
