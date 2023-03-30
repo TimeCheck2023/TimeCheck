@@ -28,11 +28,12 @@ export const NavBarHome = () => {
           </h2>
         </div>
       </div>
+      <hr />
       <div className="menu text-white ml-8 ">
-        <div>
-          <h3 className="text-slate-500">Menú</h3>
-          <div className=" my-5">
-            <ul>
+        <div className="relative top-20">
+          <h3 className="text-slate-500 ">Menú</h3>
+          <div className="my-5 relative top-3">
+            <ul className="">
               <li className="my-5 flex gap-4 items-center bg-neutral-700 w-4/5 py-2 pl-2 rounded-sm">
                 <div className="text-2xl">
                   <AiFillHome />
@@ -52,25 +53,28 @@ export const NavBarHome = () => {
                 </div>
                 Contáctanos
               </li>
-              <li className="my-5 flex gap-4 items-center  w-4/5 py-2 pl-2 rounded-sm hover:bg-neutral-800">
-                {" "}
-                <div className="text-2xl">
-                  <FiLogIn />
-                </div>
-                <Link to="/SingIn">Inicia Sesión</Link>
-              </li>
-              <li className="my-5 flex gap-4 items-center  w-4/5 py-2 pl-2 rounded-sm hover:bg-neutral-800">
-                <div className="text-2xl">
-                  <IoIosPersonAdd />
-                </div>
-                <Link to="/SingUp">Registrate</Link>
-              </li>
+              <Link to="/SingIn">
+                <li className="my-5 flex gap-4 items-center  w-4/5 py-2 pl-2 rounded-sm hover:bg-neutral-800">
+                  {" "}
+                  <div className="text-2xl">
+                    <FiLogIn />
+                  </div>
+                  <p>Inicia Sesión</p>
+                </li>
+              </Link>
+              <Link to="/SingUp">
+                <li className="my-5 flex gap-4 items-center  w-4/5 py-2 pl-2 rounded-sm hover:bg-neutral-800">
+                  <div className="text-2xl">
+                    <IoIosPersonAdd />
+                  </div>
+                  <p>Registrate</p>
+                </li>
+              </Link>
             </ul>
           </div>
         </div>
       </div>
-      <hr className="relative top-60 " />
-      <div className="footer relative top-96 ml-5 my-8 ">
+      <div className="footer relative top-96 my-16 ">
         <div className="flex item-center justify-center">
           <div className="relative">
             <input
@@ -82,9 +86,9 @@ export const NavBarHome = () => {
             />
             <label
               htmlFor="toggle"
-              className="block bg-gray-600 w-14 h-8 rounded-full dark:bg-gray-400"></label>
+              className="block bg-gray-600 w-16 h-8 rounded-full dark:bg-gray-400"></label>
             <div
-              className={`dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition ${
+              className={`dot absolute left-2 top-1 bg-white w-6 h-6 rounded-full transition ${
                 isDarkModeOn ? "transform translate-x-full" : ""
               }`}></div>
           </div>

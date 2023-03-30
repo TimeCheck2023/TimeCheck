@@ -32,7 +32,7 @@ export const BodyHome = () => {
         <div className="imagenes flex flex-row justify-end relative right-20 gap-5 bottom-20">
           <div>
             <div
-              className={`bg-cover bg-center h-80 w-60 rounded-md ${styles.img3}`}></div>
+              className={`bg-cover bg-center h-80 w-60 rounded-md ${styles.img3} hover:relative hover:bottom-16`}></div>
           </div>
           <div>
             <div
