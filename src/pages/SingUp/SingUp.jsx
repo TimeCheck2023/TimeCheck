@@ -13,12 +13,12 @@ export const SingUp = () => {
       <div className="w-1/2 h-full bg-violet-700">
         <div>
           <div className="relative left-24 top-20">
-            <h1 className="text-white font-bold text-6xl leading-66 tracking-wider font-poppins">
+            <h1 className="text-white font-bold text-6xl leading-66 tracking-wider font-sans">
               ¡Registrate en <br></br>nuestra plataforma!
             </h1>
           </div>
           <div className="relative left-24 top-28 w-3/4">
-            <p className="text-white font-poppins text-justify text-xl">
+            <p className="text-white font-sans text-justify text-xl">
               Si eres un usuario que va a asistir a eventos, podrás ver todos
               los eventos a los que estás registrado y confirmar tu asistencia.
               Si eres un usuario que va a crear eventos, podrás agregar nuevos
@@ -33,10 +33,10 @@ export const SingUp = () => {
       </div>
       <div className="w-1/2 h-full ">
         <div className="flex justify-center items-center flex-col">
-          <h2 className="font-bold text-6xl tracking-tight leading-1.19 font-poppins text-base-02 mt-8">
+          <h2 className="font-bold text-6xl tracking-tight leading-1.19 font-sans text-base-02 mt-8">
             ¡Crear una cuenta {selectedOption}!
           </h2>
-          <p className="font-normal text-lg leading-1.67 font-poppins text-gray-500 relative mt-5 ">
+          <p className="font-normal text-lg leading-1.67 font-sans text-gray-500 relative mt-5 ">
             ¡Únete a nuestra comunidad de organizadores y asistentes de eventos
             hoy mismo!
           </p>
@@ -81,7 +81,7 @@ export const SingUp = () => {
               </button>
             </div>
             <div className="mt-10 flex justify-center items-center flex-col">
-              <p className="font-poppins font-normal text-xl leading-6 flex items-center text-gray-500">
+              <p className="font-sans font-normal text-xl leading-6 flex items-center text-gray-500">
                 ¿Ya tines cuenta?{" "}
                 <strong className="text-purple-600 ml-3">
                   <Link className="hover:underline" to="/SingIn">

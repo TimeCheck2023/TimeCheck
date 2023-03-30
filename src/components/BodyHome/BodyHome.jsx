@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styles from "./BodyHome.module.css";
 import { AiFillLike } from "react-icons/ai";
+import { Servicios } from "../Servicios/Servicios";
+import { Footer } from "../Footer/Footer";
 
 export const BodyHome = () => {
   const [hovered, setHovered] = useState(false);
@@ -12,13 +14,14 @@ export const BodyHome = () => {
   const toggleHover1 = () => setHovered1(!hovered1);
   const toggleHover2 = () => setHovered2(!hovered2);
   const toggleHover3 = () => setHovered3(!hovered3);
+
   return (
     <div className="w-full overflow-scroll h-full">
       <div className={` bg-cover bg-center h-80 w-full ${styles.img}`}>
-        <div className="text-white font-bold text-5xl font-poppins relative left-20 top-16 w-2/3">
+        <div className="text-white font-bold text-5xl font-sans relative left-20 top-16 w-2/3">
           <h1>Los Mejores Eventos</h1>
         </div>
-        <div className="text-slate-100 relative font-thin left-20 top-20 w-1/3">
+        <div className="text-slate-100 relative font-sans left-20 top-20 w-1/3">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, elit
             nibh et nisl, pellentesque scelerisque faucibus facilisis at.
@@ -27,19 +30,19 @@ export const BodyHome = () => {
         </div>
       </div>
       <div>
-        <div className="relative left-20 top-24 w-4/5">
-          <div className="text-purple-600 text-4xl font-semibold">
+        <div className="relative left-20 top-28 w-4/5">
+          <div className="text-purple-600 text-4xl xl:text-3xl font-semibold font-sans">
             <h1>Algunos de Nuestros Eventos</h1>
           </div>
           <div className="w-1/3 relative top-5">
-            <p>
+            <p className="font-sans">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus,
               elit nibh et nisl, pellentesque scelerisque faucibus facilisis at.
               Placerat morbi sem viverra diam lectus odio orci...{" "}
             </p>
           </div>
         </div>
-        <div className="imagenes flex flex-row justify-end relative right-20 gap-5 bottom-20 ">
+        <div className="imagenes flex flex-row justify-end relative right-20 gap-5 bottom-0 ">
           <div
             onMouseEnter={toggleHover}
             onMouseLeave={toggleHover}
@@ -65,10 +68,11 @@ export const BodyHome = () => {
               <div></div>
             )}
           </div>
-          <div className="shadow-2xl rounded-md">
+          <div
+            onMouseEnter={toggleHover1}
+            onMouseLeave={toggleHover1}
+            className="shadow-2xl rounded-md">
             <div
-              onMouseEnter={toggleHover1}
-              onMouseLeave={toggleHover1}
               className={`bg-cover bg-center h-80 w-60 rounded-md ${styles.img4} hover:relative hover:bottom-24 rounded-md`}></div>
             {hovered1 ? (
               <div className="abajo absolute top-56 p-2 flex flex-col">
@@ -90,10 +94,11 @@ export const BodyHome = () => {
               <div></div>
             )}
           </div>
-          <div className="shadow-2xl rounded-md">
+          <div
+            onMouseEnter={toggleHover2}
+            onMouseLeave={toggleHover2}
+            className="shadow-2xl rounded-md">
             <div
-              onMouseEnter={toggleHover2}
-              onMouseLeave={toggleHover2}
               className={`bg-cover bg-center h-80 w-60 rounded-md ${styles.img5} hover:relative hover:bottom-24 rounded-md`}></div>
             {hovered2 ? (
               <div className="abajo absolute top-56 p-2 flex flex-col">
@@ -115,10 +120,11 @@ export const BodyHome = () => {
               <div></div>
             )}
           </div>
-          <div className="shadow-2xl rounded-md">
+          <div
+            onMouseEnter={toggleHover3}
+            onMouseLeave={toggleHover3}
+            className="shadow-2xl rounded-md">
             <div
-              onMouseEnter={toggleHover3}
-              onMouseLeave={toggleHover3}
               className={`bg-cover bg-center h-80 w-60 rounded-md ${styles.img6} hover:relative hover:bottom-24 rounded-md`}></div>
             {hovered3 ? (
               <div className="abajo absolute top-56 p-2 flex flex-col">
@@ -142,6 +148,9 @@ export const BodyHome = () => {
           </div>
         </div>
       </div>
+      <hr className="mt-10"/>
+      <Servicios/>
+      <Footer/>
     </div>
   );
 };
