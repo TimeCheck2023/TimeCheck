@@ -40,19 +40,6 @@ export const NavBarHome = () => {
                 </div>
                 Inicio
               </li>
-              <li className="my-5 flex gap-4 items-center  w-4/5 py-2 pl-2 rounded-sm hover:bg-neutral-800">
-                <div className="text-2xl">
-                  <MdGroups />
-                </div>
-                Sobre Nosotros
-              </li>
-              <li className="my-5 flex gap-4 items-center  w-4/5 py-2 pl-2 rounded-sm hover:bg-neutral-800">
-                {" "}
-                <div className="text-2xl">
-                  <MdContactSupport />
-                </div>
-                Contáctanos
-              </li>
               <Link to="/SingIn">
                 <li className="my-5 flex gap-4 items-center  w-4/5 py-2 pl-2 rounded-sm hover:bg-neutral-800">
                   {" "}
@@ -70,6 +57,20 @@ export const NavBarHome = () => {
                   <p>Registrate</p>
                 </li>
               </Link>
+
+              <li className="my-5 flex gap-4 items-center  w-4/5 py-2 pl-2 rounded-sm hover:bg-neutral-800">
+                <div className="text-2xl">
+                  <MdGroups />
+                </div>
+                Sobre Nosotros
+              </li>
+              <li className="my-5 flex gap-4 items-center  w-4/5 py-2 pl-2 rounded-sm hover:bg-neutral-800">
+                {" "}
+                <div className="text-2xl">
+                  <MdContactSupport />
+                </div>
+                Contáctanos
+              </li>
             </ul>
           </div>
         </div>
