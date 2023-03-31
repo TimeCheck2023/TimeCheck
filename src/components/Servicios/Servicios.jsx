@@ -3,7 +3,7 @@ import styles from "./Servicios.module.css";
 
 export const Servicios = () => {
   return (
-    <div className=" w-full bg-slate-500 h-3/5 mt-0">
+    <div className=" w-full h-3/5 mt-0">
       <div>
         <h2 className="text-purple-600 text-3xl px-16 py-5 font-sans font-semibold">
           Servicios
