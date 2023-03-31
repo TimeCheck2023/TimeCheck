@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export const SingIn = () => {
   return (
     <div className="w-screen h-screen flex flex-row">
-      <div className="w-1/2 h-full bg-violet-700">
+      <div className="w-full h-full bg-violet-700">
         <div>
           <div className="relative left-24 top-20">
             <h1 className="text-white font-bold text-6xl leading-66 tracking-wider font-sans">
@@ -38,19 +38,39 @@ export const SingIn = () => {
           </p>
         </div>
         <div className="mt-20 w-full ">
-          <div className="flex my-10 mx-32">
-            <LabelBtn label="Correo electronico:" id="name" width={"96"} />
-          </div>
-          <div className="flex my-10 mx-32 ">
-            <LabelBtn label="Contraseña" width="96" id="email" />
-            <div className="mt-24 relative right-32">
-              <p className="font-sans font-normal text-lg leading-6 flex items-center text-purple-600">
-                <a href="" className="hover:underline">
-                  ¿Se te olvidó la contaseña?
-                </a>
-              </p>
+          <div className="flex my-10 mx-32 relative left-20">
+            <div className="flex flex-col w-full ">
+              <label htmlFor="" className="font-bold">
+                Correo electronico:
+              </label>
+              <input
+                id=""
+                className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
+                type="email"
+              />
             </div>
           </div>
+
+          <div className="flex my-10 mx-32 relative left-20">
+            <div className="flex flex-col w-full ">
+              <label htmlFor="" className="font-bold">
+                Contraseña:
+              </label>
+              <input
+                id=""
+                className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
+                type="password"
+              />
+            </div>
+          </div>
+          <div className="relative left-96 w-60">
+            <p className="font-sans font-normal text-lg leading-6 flex items-center relative left-24 text-purple-600">
+              <Link to="" className="hover:underline">
+                ¿Se te olvidó la contaseña?
+              </Link>
+            </p>
+          </div>
+
           <div className="footer my-20 mx-20 flex flex-col justify-center items-center ">
             <div className="flex lg:gap-28 xl:gap-16">
               <button className=" p-4 w-80 h-14   bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold">
@@ -67,12 +87,17 @@ export const SingIn = () => {
               <p className="font-sans font-normal text-xl leading-6 flex items-center text-gray-500">
                 ¿No tienes cuenta?
                 <strong className="text-purple-600 ml-3">
-                  <Link className="hover:underline" to="/SingUp">¡Crea una ahora!</Link>
+                  <Link className="hover:underline" to="/SingUp">
+                    ¡Crea una ahora!
+                  </Link>
                 </strong>
               </p>
 
-                <Link className=" p-4 w-40 h-14 mt-10 bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center" to="/">Volver</Link>
-
+              <Link
+                className=" p-4 w-40 h-14 mt-10 bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center"
+                to="/">
+                Volver
+              </Link>
             </div>
           </div>
         </div>

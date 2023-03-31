@@ -60,13 +60,58 @@ export const SingUp = () => {
             <LabelBtn label="Primer Apellido" width="70" id="firstname" />
             <LabelBtn label="Segundo Apellido" width="70" id="secondname" />
           </div>
-          <div className="flex my-10 mx-20 justify-between ">
-            <LabelBtn label="Correo electronico" width="96" id="email" />
-            <LabelBtn label="Teléfono" width="96" id="tel" />
+          <div className="flex my-10 justify-between w-full">
+            <div className="flex relative left-20 w-full">
+              <div className="flex flex-col w-full ">
+                <label htmlFor="" className="font-bold">
+                  Correo electronico<strong className="text-red-600">*</strong>
+                </label>
+                <input
+                  id=""
+                  className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
+                  type="email"
+                />
+              </div>
+            </div>{" "}
+            <div className="flex w-full">
+              <div className="flex flex-col w-full ">
+                <label htmlFor="" className="font-bold">
+                  Telefono<strong className="text-red-600">*</strong>
+                </label>
+                <input
+                  id=""
+                  className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
+                  type="number"
+                />
+              </div>
+            </div>
           </div>
           <div className="flex my-10 mx-20 justify-between">
-            <LabelBtn label="Contraseña" width="96" id="pass" />
-            <LabelBtn label="Confirmar Contraseña" width="96" id="conpass" />
+            <div className="flex w-full">
+              <div className="flex flex-col w-full ">
+                <label htmlFor="" className="font-bold">
+                  Contraseña<strong className="text-red-600">*</strong>
+                </label>
+                <input
+                  id=""
+                  className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
+                  type="password"
+                />
+              </div>
+            </div>
+            <div className="flex w-full">
+              <div className="flex flex-col w-full ">
+                <label htmlFor="" className="font-bold">
+                  Confirmar contraseña
+                  <strong className="text-red-600">*</strong>
+                </label>
+                <input
+                  id=""
+                  className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
+                  type="password"
+                />
+              </div>
+            </div>
           </div>
           <div className="footer my-20 mx-20 flex flex-col justify-center items-center ">
             <div className="flex lg:gap-56 xl:gap-40">
