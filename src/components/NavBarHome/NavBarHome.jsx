@@ -87,7 +87,7 @@ export const NavBarHome = () => {
           </div>
         </div>
       </div>
-      <div className="footer relative top-96 my-8 right-3 ">
+      <div className="footer relative top-60 lg:top-96 my-8 right-3 ">
         <div className="flex item-center justify-center">
           <div className="relative ">
             <input
