@@ -33,47 +33,55 @@ export const NavBarHome = () => {
       </div>
       <div className="menu text-white">
         <div className="relative top-20">
-          <h3 className={`${openNavBar ? 'text-slate-300 px-4' : 'text-slate-300'}`}>Menú</h3>
+          <h3
+            className={`${
+              openNavBar ? "text-slate-300 px-4" : "text-slate-300"
+            }`}>
+            Menú
+          </h3>
           <div className="my-5 relative xl:top-10 top-3">
-            <ul className={`${openNavBar ? 'px-4' : ''}`}>
-              <li className={`my-5 xl:my-0 gap-4 flex items-center bg-neutral-700 ${openNavBar ? 'w-60' : 'w-full '} py-2 pl-2 rounded-sm`}>
+            <div className={`${openNavBar ? "px-4" : ""}`}>
+              <div
+                className={`my-5 xl:my-0 gap-4 flex items-center bg-neutral-700 ${
+                  openNavBar ? "w-60" : "w-full "
+                } py-2 pl-2 rounded-sm`}>
                 <div className="text-2xl">
                   <AiFillHome />
                 </div>
                 {openNavBar ? <p>Inicio</p> : ""}
-              </li>
+              </div>
               <Link to="/SingIn">
-                <li className="my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800">
+                <div className="my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800">
                   {" "}
                   <div className="text-2xl">
                     <FiLogIn />
                   </div>
                   {openNavBar ? <p>Inicia Sesión</p> : ""}
-                </li>
+                </div>
               </Link>
               <Link to="/SingUp">
-                <li className="my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800">
+                <div className="my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800">
                   <div className="text-2xl">
                     <IoIosPersonAdd />
                   </div>
                   {openNavBar ? <p>Registrate</p> : ""}
-                </li>
+                </div>
               </Link>
 
-              <li className="my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800">
+              <div className="my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800">
                 <div className="text-2xl">
                   <MdGroups />
                 </div>
                 {openNavBar ? <p> Sobre Nosotros</p> : ""}
-              </li>
-              <li className="my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800">
+              </div>
+              <div className="my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800">
                 {" "}
                 <div className="text-2xl">
                   <MdContactSupport />
                 </div>
                 {openNavBar ? <p>Contáctanos</p> : ""}
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -96,14 +104,15 @@ export const NavBarHome = () => {
               <></>
             )}
 
-            {
-              openNavBar ?  <div
-              className={`dot absolute left-2 top-1 bg-white w-6 h-6 rounded-full transition ${
-                isDarkModeOn ? "transform translate-x-full" : ""
-              }`}></div> : <div
-              className={`dot absolute top-1 bg-white w-6 h-6 rounded-full transition`}></div>
-            }
-           
+            {openNavBar ? (
+              <div
+                className={`dot absolute left-2 top-1 bg-white w-6 h-6 rounded-full transition ${
+                  isDarkModeOn ? "transform translate-x-full" : ""
+                }`}></div>
+            ) : (
+              <div
+                className={`dot absolute top-1 bg-white w-6 h-6 rounded-full transition`}></div>
+            )}
           </div>
         </div>
       </div>
