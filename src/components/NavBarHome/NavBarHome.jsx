@@ -50,7 +50,7 @@ export const NavBarHome = () => {
                 </div>
                 {openNavBar ? <p>Inicio</p> : ""}
               </div>
-              <Link to="/SingIn">
+              <Link to="/SingIn" aria-label="Ve a iniciar sesión">
                 <div className="my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800">
                   {" "}
                   <div className="text-2xl">
@@ -59,7 +59,9 @@ export const NavBarHome = () => {
                   {openNavBar ? <p>Inicia Sesión</p> : ""}
                 </div>
               </Link>
-              <Link to="/SingUp">
+              <Link
+                to="/SingUp"
+                aria-label="Registrate para poder acceder a todos los servicios">
                 <div className="my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800">
                   <div className="text-2xl">
                     <IoIosPersonAdd />
