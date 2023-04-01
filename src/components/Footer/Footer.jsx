@@ -24,7 +24,7 @@ export const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className="flex flex-row text-4xl gap-2 relative md:left-10 lg:right-14 justify-center mt-3 lg:justify-normal lg:mt-0">
+        <div className="flex flex-row text-4xl gap-2 relative lg:right-20 justify-center mt-3 lg:justify-normal lg:mt-0">
           <div className="flex rounded-full  text-slate-950 justify-center items-center h-10 w-10">
             <AiFillTwitterCircle />
           </div>

@@ -1,0 +1,14 @@
+.img1{
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    background-image: url('/image12.webp');
+}
+.img2{
+    background-image: url('/image13.webp');
+}
+.img3{
+    background-image: url('/image14.webp');
+}
+.img4{
+    background-image: url('/image15.webp');
+}
+

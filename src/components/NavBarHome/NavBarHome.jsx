@@ -41,15 +41,17 @@ export const NavBarHome = () => {
           </h3>
           <div className="my-5 relative xl:top-10 top-3">
             <div className={`${openNavBar ? "px-4" : ""}`}>
-              <div
-                className={`my-5 xl:my-0 gap-4 flex items-center bg-neutral-700 ${
-                  openNavBar ? "w-60" : "w-full "
-                } py-2 pl-2 rounded-sm`}>
-                <div className="text-2xl">
-                  <AiFillHome />
+              <Link to="/" aria-label="Ir al inicio principal">
+                <div
+                  className={`my-5 xl:my-0 gap-4 flex items-center bg-neutral-700 ${
+                    openNavBar ? "w-60" : "w-full "
+                  } py-2 pl-2 rounded-sm`}>
+                  <div className="text-2xl">
+                    <AiFillHome />
+                  </div>
+                  {openNavBar ? <p>Inicio</p> : ""}
                 </div>
-                {openNavBar ? <p>Inicio</p> : ""}
-              </div>
+              </Link>
               <Link to="/SingIn" aria-label="Ve a iniciar sesión">
                 <div className="my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800">
                   {" "}
@@ -69,13 +71,16 @@ export const NavBarHome = () => {
                   {openNavBar ? <p>Registrate</p> : ""}
                 </div>
               </Link>
-
-              <div className="my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800">
-                <div className="text-2xl">
-                  <MdGroups />
+              <Link
+                to="/AboutUs"
+                aria-label="Observa quienes son el equipo de trabajo y más sobre TimeCheck">
+                <div className="my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800">
+                  <div className="text-2xl">
+                    <MdGroups />
+                  </div>
+                  {openNavBar ? <p> Sobre Nosotros</p> : ""}
                 </div>
-                {openNavBar ? <p> Sobre Nosotros</p> : ""}
-              </div>
+              </Link>
               <div className="my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800">
                 {" "}
                 <div className="text-2xl">
