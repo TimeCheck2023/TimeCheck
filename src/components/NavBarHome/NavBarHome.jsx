@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { MdGroups, MdContactSupport } from "react-icons/md";
-
 import { AiFillHome } from "react-icons/ai";
 import { FiLogIn } from "react-icons/fi";
 import { IoIosPersonAdd } from "react-icons/io";
 import { Link } from "react-router-dom";
-export const NavBarHome = () => {
+
+export const NavBarHome = (props) => {
   const [openNavBar, setOpenNavBar] = useState(false);
   const [isDarkModeOn, setIsDarkModeOn] = useState(false);
 
@@ -43,9 +43,9 @@ export const NavBarHome = () => {
             <div className={`${openNavBar ? "px-4" : ""}`}>
               <Link to="/" aria-label="Ir al inicio principal">
                 <div
-                  className={`my-5 xl:my-0 gap-4 flex items-center bg-neutral-700 ${
-                    openNavBar ? "w-60" : "w-full "
-                  } py-2 pl-2 rounded-sm`}>
+                  className={`my-5 xl:my-0 gap-4 flex items-center ${
+                    props.homeActive ? "bg-neutral-700" : "hover:bg-neutral-800"
+                  } ${openNavBar ? "w-60" : "w-full "} py-2 pl-2 rounded-sm`}>
                   <div className="text-2xl">
                     <AiFillHome />
                   </div>
@@ -53,7 +53,8 @@ export const NavBarHome = () => {
                 </div>
               </Link>
               <Link to="/SingIn" aria-label="Ve a iniciar sesión">
-                <div className="my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800">
+                <div
+                  className={`my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800`}>
                   {" "}
                   <div className="text-2xl">
                     <FiLogIn />
@@ -74,20 +75,34 @@ export const NavBarHome = () => {
               <Link
                 to="/AboutUs"
                 aria-label="Observa quienes son el equipo de trabajo y más sobre TimeCheck">
-                <div className="my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800">
+                <div
+                  className={`my-5 flex gap-4 items-center ${
+                    props.AboutUsActive
+                      ? "bg-neutral-700"
+                      : "hover:bg-neutral-800"
+                  } w-full py-2 pl-2 rounded-sm `}>
                   <div className="text-2xl">
                     <MdGroups />
                   </div>
                   {openNavBar ? <p> Sobre Nosotros</p> : ""}
                 </div>
               </Link>
-              <div className="my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800">
-                {" "}
-                <div className="text-2xl">
-                  <MdContactSupport />
+              <Link
+                to="/ContactUs"
+                aria-label="Dejanos tus comentarios o dudas que tengas!">
+                <div
+                  className={`my-5 flex gap-4 items-center ${
+                    props.ContactUsActive
+                      ? "bg-neutral-700"
+                      : "hover:bg-neutral-800"
+                  } w-full py-2 pl-2 rounded-sm hover:bg-neutral-800`}>
+                  {" "}
+                  <div className="text-2xl">
+                    <MdContactSupport />
+                  </div>
+                  {openNavBar ? <p>Contáctanos</p> : ""}
                 </div>
-                {openNavBar ? <p>Contáctanos</p> : ""}
-              </div>
+              </Link>
             </div>
           </div>
         </div>

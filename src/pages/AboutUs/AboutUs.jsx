@@ -5,7 +5,11 @@ import { BodyAboutUs } from "../../components/BodyAboutUs/BodyAboutUs";
 export const AboutUs = () => {
   return (
     <div className="flex w-screen h-screen">
-      <NavBarHome />
+      <NavBarHome
+        homeActive={false}
+        AboutUsActive={true}
+        ContactUsActive={false}
+      />
       <BodyAboutUs />
     </div>
   );

@@ -65,7 +65,6 @@ export const BodyHome = () => {
       </div>
       <hr className="mt-10" />
       <Servicios />
-      <hr className="my-3" />
       <Footer />
     </div>
   );
