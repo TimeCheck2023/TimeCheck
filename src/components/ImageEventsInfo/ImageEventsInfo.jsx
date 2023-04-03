@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiFillLike } from "react-icons/ai";
 
-export const ImageEventsInfo = (props) => {
+export default function ImageEventsInfo(props) {
   const [hovered, setHovered] = useState(false);
   const toggleHover = () => setHovered(!hovered);
   return (
@@ -32,4 +32,4 @@ export const ImageEventsInfo = (props) => {
       )}
     </div>
   );
-};
+}

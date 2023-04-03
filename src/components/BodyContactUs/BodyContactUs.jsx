@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Footer } from "../Footer/Footer";
+import styles from "./BodyContactUs.module.css";
 
 export const BodyContactUs = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    window.addEventListener("load", () => {
+      setIsLoading(false);
+    });
+  }, []);
+
   return (
     <div className="w-full overflow-scroll h-full bg-slate-100">
       <div className="w-full h-full flex flex-row">
-        <div className="w-2/5 bg-black h-full"></div>
+        <div
+          className={`w-1/2 bg-cover bg-center ${
+            isLoading ? "bg-black" : styles.img1
+          } h-full`}></div>
         <div className="w-3/5 h-full">
           <div className="w-full h-80 ">
             <div className="p-10 flex flex-col gap-5 items-center">

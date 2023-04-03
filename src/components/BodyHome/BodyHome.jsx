@@ -1,13 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import styles from "./BodyHome.module.css";
 import { Servicios } from "../Servicios/Servicios";
 import { Footer } from "../Footer/Footer";
-import { ImageEventsInfo } from "../ImageEventsInfo/ImageEventsInfo";
+import { LoadingCard } from "../LoadingCard/LoadingCard";
+
+const ImageEventsInfo = lazy(() =>
+  delayForDemo(import("../ImageEventsInfo/ImageEventsInfo"))
+);
 
 export const BodyHome = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    window.addEventListener("onload", () => {
+      setIsLoading(false);
+    });
+  }, []);
+
   return (
     <div className="w-full overflow-scroll h-full bg-slate-100">
-      <div className={` bg-cover bg-center h-80 md:h-80 w-full ${styles.img}`}>
+      <div
+        className={`bg-cover bg-center h-80 md:h-80 w-full ${
+          !isLoading ? "bg-gray-400 animate-pulse" : styles.img
+        }`}>
         <div className="text-white font-bold text-3xl md:text-5xl font-sans relative left-5 md:left-20 top-16 w-full md:w-2/3">
           <h1>Los Mejores Eventos</h1>
         </div>
@@ -33,34 +48,41 @@ export const BodyHome = () => {
           </div>
         </div>
         <div className="imagenes flex flex-col md:flex-row  justify-end relative md:right-20  gap-20 md:gap-5 bottom-0 ">
-          <ImageEventsInfo
-            typeEvent="Carrera de atletismo"
-            imageEvent={styles.img3}
-            placeEvent="Montenegro/Pueblo Tapao"
-            priceEvent="GRATIS"
-            likesEvent={10}
-          />
-          <ImageEventsInfo
-            typeEvent="Concierto de Morat"
-            imageEvent={styles.img4}
-            placeEvent="Bogotá"
-            priceEvent="GRATIS"
-            likesEvent={30}
-          />
-          <ImageEventsInfo
-            typeEvent="Obra de Teatro"
-            imageEvent={styles.img5}
-            placeEvent="Armenia"
-            priceEvent="GRATIS"
-            likesEvent={1}
-          />
-          <ImageEventsInfo
-            typeEvent="Charla QA"
-            imageEvent={styles.img6}
-            placeEvent="Armenia - Sena"
-            priceEvent="GRATIS"
-            likesEvent={21}
-          />
+          {isLoading && (
+            <Suspense fallback={<LoadingCard />}>
+              <ImageEventsInfo
+                typeEvent="Carrera de atletismo"
+                imageEvent={styles.img3}
+                placeEvent="Montenegro/Pueblo Tapao"
+                priceEvent="GRATIS"
+                likesEvent={10}
+              />
+
+              <ImageEventsInfo
+                typeEvent="Concierto de Morat"
+                imageEvent={styles.img4}
+                placeEvent="Bogotá"
+                priceEvent="GRATIS"
+                likesEvent={30}
+              />
+
+              <ImageEventsInfo
+                typeEvent="Obra de Teatro"
+                imageEvent={styles.img5}
+                placeEvent="Armenia"
+                priceEvent="GRATIS"
+                likesEvent={1}
+              />
+
+              <ImageEventsInfo
+                typeEvent="Charla QA"
+                imageEvent={styles.img6}
+                placeEvent="Armenia - Sena"
+                priceEvent="GRATIS"
+                likesEvent={21}
+              />
+            </Suspense>
+          )}
         </div>
       </div>
       <hr className="mt-10" />
@@ -69,3 +91,9 @@ export const BodyHome = () => {
     </div>
   );
 };
+
+function delayForDemo(promise) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 1000);
+  }).then(() => promise);
+}
