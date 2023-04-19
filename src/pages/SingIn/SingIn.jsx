@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export const SingIn = () => {
   return (
     <div className="w-screen h-screen flex flex-row">
-      <div className="w-full h-full bg-violet-700">
+      <div className="hidden lg:block w-1/2 h-full bg-violet-700">
         <div>
           <div className="relative left-24 top-20">
             <h1 className="text-white font-bold text-6xl leading-66 tracking-wider font-sans">
@@ -27,18 +27,18 @@ export const SingIn = () => {
           <img src="/image1.webp" alt="img" width={600} />
         </div>
       </div>
-      <div className="w-1/2 h-full ">
+      <div className="w-full lg:w-1/2 h-full ">
         <div className="flex justify-center items-center flex-col">
           <h2 className="font-bold text-6xl tracking-tight leading-1.19 font-sans text-base-02 mt-8">
             ¡Bienvenido!
           </h2>
-          <p className="font-normal text-lg leading-1.67 font-sans text-gray-500 mt-10 w-3/4">
+          <p className="font-normal text-lg font-sans text-gray-500 mt-10 w-4/5 lg:w-3/4 ">
             Bienvenido a nuestra plataforma de gestión de eventos. Por favor,
             ingresa tus credenciales para acceder a tu cuenta.
           </p>
         </div>
-        <div className="mt-20 w-full ">
-          <div className="flex my-10 mx-32 relative left-20">
+        <div className="mt-10 lg:mt-20 w-full ">
+          <div className="flex lg:my-10 lg:mx-32 relative left-10 lg:left-20">
             <div className="flex flex-col w-full ">
               <label htmlFor="" className="font-bold">
                 Correo electronico:
@@ -51,7 +51,7 @@ export const SingIn = () => {
             </div>
           </div>
 
-          <div className="flex my-10 mx-32 relative left-20">
+          <div className="flex  mt-5 lg:mt-0 lg:my-10 lg:mx-32 relative left-10 lg:left-20">
             <div className="flex flex-col w-full ">
               <label htmlFor="" className="font-bold">
                 Contraseña:
@@ -63,7 +63,7 @@ export const SingIn = () => {
               />
             </div>
           </div>
-          <div className="relative left-96 w-60">
+          <div className="relative mt-5 left-36 lg:mt-0 lg:left-1/2 w-60">
             <p className="font-sans font-normal text-lg leading-6 flex items-center relative left-24 text-purple-600">
               <Link to="" className="hover:underline">
                 ¿Se te olvidó la contaseña?
@@ -72,18 +72,18 @@ export const SingIn = () => {
           </div>
 
           <div className="footer my-20 mx-20 flex flex-col justify-center items-center ">
-            <div className="flex lg:gap-28 xl:gap-16">
-              <button className=" p-4 w-80 h-14   bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold">
+            <div className="flex gap-2 lg:gap-28 xl:gap-16">
+              <button className=" p-4 w-56 h-14   bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold">
                 Iniciar Sesion
               </button>
-              <button className=" p-4 w-80 h-14  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-9">
-                <p className="text-2xl pl-7">
+              <button className=" p-4 w-56 h-14  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-4">
+                <p className="text-2xl pl-3">
                   <FcGoogle />
                 </p>
                 <p>Iniciar con Google</p>
               </button>
             </div>
-            <div className="mt-24 flex justify-center items-center flex-col">
+            <div className="mt-16 lg:mt-24 flex justify-center items-center flex-col">
               <p className="font-sans font-normal text-xl leading-6 flex items-center text-gray-500">
                 ¿No tienes cuenta?
                 <strong className="text-purple-600 ml-3">
@@ -94,7 +94,7 @@ export const SingIn = () => {
               </p>
 
               <Link
-                className=" p-4 w-40 h-14 mt-10 bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center"
+                className=" p-4 w-40 h-14 mt-10 bg-purple-900 hover:bg-purple-600 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center"
                 to="/">
                 Volver
               </Link>

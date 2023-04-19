@@ -15,7 +15,7 @@ export const NavBarHome = (props) => {
       onMouseEnter={toggleNavBar}
       onMouseLeave={toggleNavBar}
       className={`bg-zinc-900 h-screen ${
-        openNavBar ? "w-72" : "w-32"
+        openNavBar ? "w-72 absolute z-50" : "w-32"
       }  items-center flex flex-col `}>
       <div className="header flex flex-row justify-center items-center my-8">
         <div className="rounded-full w-20 h-20 ml-4">
