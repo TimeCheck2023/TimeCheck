@@ -4,6 +4,7 @@ import { SingUp } from "./pages/SingUp/SingUp";
 import { SingIn } from "./pages/SingIn/SingIn";
 import { Contact } from "./pages/Contact/Contact";
 import { AboutUs } from "./pages/AboutUs/AboutUs";
+import { Events } from "./pages/Events/Events";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/SingIn" element={<SingIn />} />
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/ContactUs" element={<Contact />} />
+          <Route path="/Events" element={<Events/>} />
         </Routes>
       </Router>
     </>

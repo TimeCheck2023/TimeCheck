@@ -15,24 +15,25 @@ export const NavBarHome = (props) => {
       onMouseEnter={toggleNavBar}
       onMouseLeave={toggleNavBar}
       className={`bg-zinc-900 h-screen ${
-        openNavBar ? "w-72" : "w-32"
+        openNavBar ? "w-72 absolute z-50" : "w-32"
       }  items-center flex flex-col `}>
-      <div className="header flex flex-row justify-center items-center my-8">
-        <div className="rounded-full w-20 h-20 ml-4">
-          <div className="h-16 w-16 bg-slate-600 rounded-full"></div>
-        </div>
-        {openNavBar ? (
-          <div className="pb-5">
-            <h2 className="font-sans font-bold text-3xl leading-10 text-purple-600">
-              Time Check
-            </h2>
+      <div className="header flex flex-row justify-center items-center my-4">
+      {openNavBar ? (
+          <div className="relative right-5">
+           <Link to={"/"}>
+           <img src="/LOGO TIME CHECK A COLOR.webp" alt="" width={180} height={50}/>
+           </Link>
           </div>
         ) : (
-          <div></div>
+        <div className="rounded-full w-20 h-20 ml-4">
+          <Link to={"/"}>
+          <img src="/LOGOTIPO TIME CHECK.webp" alt="Logotipo TimeCheck" width={70} height={50}/>
+          </Link>
+        </div>
         )}
       </div>
       <div className="menu text-white">
-        <div className="relative top-20">
+        <div className="relative top-24">
           <h3
             className={`${
               openNavBar ? "text-slate-300 px-4" : "text-slate-300"
