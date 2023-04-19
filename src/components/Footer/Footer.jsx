@@ -9,7 +9,7 @@ import {
 
 export const Footer = () => {
   return (
-    <div className="bg-zinc-300 h-96 w-full flex flex-col justify-center mt-20 md:mt-0">
+    <div className="bg-zinc-300 h-96 md:h-72 lg:h-40 w-full flex flex-col justify-center mt-20 md:mt-0">
       <div className="flex flex-col lg:flex-row justify-between">
         <div className="relative md:left-14 flex justify-center items-center">
           <span className="text-purple-600 text-4xl font-bold">Time Check</span>

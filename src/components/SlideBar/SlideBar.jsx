@@ -1,43 +1,136 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { CgOpenCollective } from "react-icons/cg";
-import { BiGroup,BiLogOut } from "react-icons/bi";
+import { BiGroup, BiLogOut } from "react-icons/bi";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import { AiOutlineSetting } from "react-icons/ai";
+import { AiOutlineSetting,AiOutlineCaretUp,AiOutlineCaretDown } from "react-icons/ai";
 
 export const SlideBar = () => {
+  const [openNavBar, setOpenNavBar] = useState(false);
+  const [lower, setLower] = useState(false);
+  // const [isDarkModeOn, setIsDarkModeOn] = useState(false);
+
+  const toggleNavBar = () => setOpenNavBar(!openNavBar);
+
+  const lowerGroup = () => {
+    setLower(!lower);
+  };
+
+  useEffect(() => {
+    if (!openNavBar) {
+      setLower(false);
+    }
+  }, [openNavBar]);
+
   return (
-    <div className="h-full bg-slate-50 w-24 fixed border-r border-black">
+    <div
+      onMouseEnter={toggleNavBar}
+      onMouseLeave={toggleNavBar}
+      className={`h-full bg-slate-50 fixed border-r border-black ${
+        openNavBar
+          ? " w-72 transition-all duration-500 ease-in-out"
+          : "w-24 transition-all duration-300 ease-in"
+      }`}>
       <div className="h-30 mb-14  w-full flex justify-center items-center ">
-        <Link to={"/Events"}>
-          <img
-            src="/LOGOTIPO TIME CHECK.webp"
-            alt="logotipo TimeCheck"
-            width={70}
-          />
+        <Link to={"/Events"} className={`${openNavBar && "mb-20"}`}>
+          {openNavBar ? (
+            <img
+              src="/LOGO TIME CHECK A COLOR.webp"
+              alt="logotipo TimeCheck"
+              width={300}
+              className="absolute bottom-3/4 mb-24 left-1"
+            />
+          ) : (
+            <img
+              src="/LOGOTIPO TIME CHECK.webp"
+              alt="logotipo TimeCheck"
+              width={70}
+            />
+          )}
         </Link>
       </div>
-      <div className="flex flex-col  items-center h-3/5 mt-4 gap-8">
+      <div
+        className={`flex flex-col h-3/5 w-full mt-4 gap-8 ${
+          openNavBar ? "items-start text-right mx-7" : "items-center"
+        }`}>
         <p className="text-slate-500 text-base">Menú</p>
-        <div className="flex justify-between flex-col h-full">
-          <div className="flex flex-col gap-10 text-2xl">
-            <div className="bg-slate-300 p-2 rounded-md">
+        <div
+          className={`flex justify-between flex-col h-full ${
+            openNavBar && "w-full"
+          }`}>
+          <div className="flex flex-col gap-10 text-2xl justify-start">
+            <div
+              className={`bg-slate-300 p-2 rounded-md flex flex-row gap-3 ${
+                openNavBar
+                  ? "w-4/5 justify-start items-start"
+                  : "justify-center items-center"
+              }`}>
               <RxDashboard />
+              {openNavBar ? <p className="text-lg font-medium">Eventos</p> : ""}
             </div>
-            <div className="hover:bg-neutral-300 p-2 rounded-md">
+            <div
+              className={`hover:bg-neutral-300 p-2 rounded-md flex flex-row gap-3 text-lef ${
+                openNavBar
+                  ? "w-4/5 justify-start items-start"
+                  : "justify-center items-center"
+              }`}>
               <CgOpenCollective />
+              {openNavBar ? (
+                <p className="text-lg font-medium">Estadisticas</p>
+              ) : (
+                ""
+              )}
             </div>
-            <div className="hover:bg-neutral-300 p-2 rounded-md">
+            <div
+              onClick={lowerGroup}
+              className={`hover:cursor-pointer p-2 rounded-md flex flex-col gap-3 text-lef ${!lower && 'hover:bg-neutral-300'} ${
+                openNavBar
+                  ? "w-4/5 justify-start items-start"
+                  : "justify-center items-center"
+              }`}>
+              <div className="flex flex-row gap-3">
               <BiGroup />
+              {openNavBar ? <p className="text-lg font-medium flex flex-row justify-center items-center gap-24">Grupos {!lower ? <AiOutlineCaretDown/> : <AiOutlineCaretUp/>} </p> : ""}
+              </div>
+              {lower && (
+                <div className="flex flex-col items-start text-left font-normal text-base ml-2 pl-7 border-l border-black gap-4">
+                  <ul className="flex flex-col gap-3">
+                    <li className="hover:bg-neutral-300 px-3 rounded-sm">Desarrolladores</li>
+                    <li className="hover:bg-neutral-300 px-3 rounded-sm">Administradores</li>
+                    <li className="hover:bg-neutral-300 px-3 rounded-sm">Gerencia</li>
+                  </ul>{" "}
+                  <button className="bg-purple-600 hover:bg-purple-900 px-8 py-1 rounded-sm text-white font-semibold">Agregar</button>
+                </div>
+              )}
             </div>
           </div>
           <div className="text-2xl flex flex-col gap-2">
-            <div className="hover:bg-neutral-300 p-2 rounded-md">
+            <div
+              className={`hover:bg-neutral-300 p-2 rounded-md flex flex-row gap-3 text-lef ${
+                openNavBar
+                  ? "w-4/5 justify-start items-start"
+                  : "justify-center items-center"
+              }`}>
               <IoIosNotificationsOutline />
+              {openNavBar ? (
+                <p className="text-lg font-medium">Notificaciones</p>
+              ) : (
+                ""
+              )}
             </div>
-            <div className="hover:bg-neutral-300 p-2 rounded-md">
+            <div
+              className={`hover:bg-neutral-300 p-2 rounded-md flex flex-row gap-3 text-lef ${
+                openNavBar
+                  ? "w-4/5 justify-start items-start"
+                  : "justify-center items-center"
+              }`}>
               <AiOutlineSetting />
+              {openNavBar ? (
+                <p className="text-lg font-medium">Configuraciones</p>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
@@ -47,7 +140,7 @@ export const SlideBar = () => {
         <p className="text-slate-500 text-base ">Cuenta</p>
         <div className="w-12 h-12 bg-slate-400 rounded-full mb-4"></div>
         <div className="hover:bg-neutral-300 p-2 rounded-md mb-4 text-2xl">
-              <BiLogOut />
+          <BiLogOut />
         </div>
         <div className="w-5 h-5 bg-yellow-300 rounded-full"></div>
       </div>

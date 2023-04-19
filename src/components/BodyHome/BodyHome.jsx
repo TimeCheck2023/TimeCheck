@@ -47,7 +47,7 @@ export const BodyHome = () => {
             </p>
           </div>
         </div>
-        <div className="imagenes flex flex-col md:flex-row  justify-end relative md:right-20  gap-20 md:gap-5 bottom-0 ">
+        <div className="imagenes flex flex-col md:flex-row  justify-end relative xl:right-5 md:right-20  gap-20 md:gap-5 bottom-0 ">
           {isLoading && (
             <Suspense fallback={<LoadingCard />}>
               <ImageEventsInfo

@@ -15,7 +15,7 @@ export const NavBarHome = (props) => {
       onMouseEnter={toggleNavBar}
       onMouseLeave={toggleNavBar}
       className={`bg-zinc-900 h-screen ${
-        openNavBar ? "w-72 absolute z-50" : "w-32"
+        openNavBar ? "w-72 absolute z-50 transition-all duration-300 ease-in-out " : "transition-all duration-300 ease-in w-32"
       }  items-center flex flex-col `}>
       <div className="header flex flex-row justify-center items-center my-4">
       {openNavBar ? (
@@ -41,12 +41,12 @@ export const NavBarHome = (props) => {
             Menú
           </h3>
           <div className="my-5 relative xl:top-10 top-3">
-            <div className={`${openNavBar ? "px-4" : ""}`}>
+            <div className={`${openNavBar ? " transition-all duration-100 ease-out px-4" : ""}`}>
               <Link to="/" aria-label="Ir al inicio principal">
                 <div
                   className={`my-5 xl:my-0 gap-4 flex items-center ${
-                    props.homeActive ? "bg-neutral-700" : "hover:bg-neutral-800"
-                  } ${openNavBar ? "w-60" : "w-full "} py-2 pl-2 rounded-sm`}>
+                    props.homeActive ? "bg-neutral-700" : "hover:bg-neutral-800 "
+                  } ${openNavBar ? "w-60" : " w-full "} py-2 pl-2 rounded-sm`}>
                   <div className="text-2xl">
                     <AiFillHome />
                   </div>
