@@ -27,7 +27,7 @@ export const SlideBar = () => {
     <div
       onMouseEnter={toggleNavBar}
       onMouseLeave={toggleNavBar}
-      className={`h-full bg-slate-50 fixed border-r border-black ${
+      className={`h-full hidden lg:block z-50 bg-slate-50 fixed border-r border-black ${
         openNavBar
           ? " w-72 transition-all duration-500 ease-in-out"
           : "w-24 transition-all duration-300 ease-in"
