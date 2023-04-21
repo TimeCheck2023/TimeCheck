@@ -5,6 +5,7 @@ import { SingIn } from "./pages/SingIn/SingIn";
 import { Contact } from "./pages/Contact/Contact";
 import { AboutUs } from "./pages/AboutUs/AboutUs";
 import { Events } from "./pages/Events/Events";
+import { Statistics } from "./pages/Statistics/Statistics";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/ContactUs" element={<Contact />} />
           <Route path="/Events" element={<Events/>} />
+          <Route path="/Statistics" element={<Statistics/>} />
         </Routes>
       </Router>
     </>

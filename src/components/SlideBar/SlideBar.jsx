@@ -4,14 +4,24 @@ import { RxDashboard } from "react-icons/rx";
 import { CgOpenCollective } from "react-icons/cg";
 import { BiGroup, BiLogOut } from "react-icons/bi";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import { AiOutlineSetting,AiOutlineCaretUp,AiOutlineCaretDown } from "react-icons/ai";
+import {
+  AiOutlineSetting,
+  AiOutlineCaretUp,
+  AiOutlineCaretDown,
+} from "react-icons/ai";
 
-export const SlideBar = () => {
+export const SlideBar = ({activeEvent,activeStats,activeGroup,activeNotify,activeConfig}) => {
   const [openNavBar, setOpenNavBar] = useState(false);
   const [lower, setLower] = useState(false);
-  // const [isDarkModeOn, setIsDarkModeOn] = useState(false);
+   const [isDarkModeOn, setIsDarkModeOn] = useState(false);
 
-  const toggleNavBar = () => setOpenNavBar(!openNavBar);
+  const toggleNavBar = () => {
+    setIsDarkModeOn(false)
+    setOpenNavBar(!openNavBar)}
+
+  const toggleDarkMode = () =>{
+    setIsDarkModeOn(!isDarkModeOn)
+  }
 
   const lowerGroup = () => {
     setLower(!lower);
@@ -27,7 +37,7 @@ export const SlideBar = () => {
     <div
       onMouseEnter={toggleNavBar}
       onMouseLeave={toggleNavBar}
-      className={`h-full hidden lg:block z-50 bg-slate-50 fixed border-r border-black ${
+      className={`h-full hidden lg:block z-50 bg-slate-50 fixed border-r border-neutral-400 ${
         openNavBar
           ? " w-72 transition-all duration-500 ease-in-out"
           : "w-24 transition-all duration-300 ease-in"
@@ -61,53 +71,73 @@ export const SlideBar = () => {
           }`}>
           <div className="flex flex-col gap-10 text-2xl justify-start">
             <div
-              className={`bg-slate-300 p-2 rounded-md flex flex-row gap-3 ${
+              className={`${activeEvent ? "bg-slate-300" : "hover:bg-neutral-300"} p-2 rounded-md flex flex-row gap-3 ${
                 openNavBar
                   ? "w-4/5 justify-start items-start"
                   : "justify-center items-center"
               }`}>
+             <Link to={"/Events"} className="flex gap-3">
               <RxDashboard />
-              {openNavBar ? <p className="text-lg font-medium">Eventos</p> : ""}
+              {openNavBar ? <p className="text-lg font-medium">Eventos</p> : ""}</Link>
             </div>
             <div
-              className={`hover:bg-neutral-300 p-2 rounded-md flex flex-row gap-3 text-lef ${
+              className={`${activeStats ? "bg-slate-300" : "hover:bg-neutral-300"} p-2 rounded-md flex flex-row gap-3 text-lef ${
                 openNavBar
                   ? "w-4/5 justify-start items-start"
                   : "justify-center items-center"
               }`}>
-              <CgOpenCollective />
+             <Link to="/Statistics" className="flex flex-row gap-3">
+             <CgOpenCollective />
               {openNavBar ? (
                 <p className="text-lg font-medium">Estadisticas</p>
               ) : (
                 ""
               )}
+              </Link>
             </div>
             <div
               onClick={lowerGroup}
-              className={`hover:cursor-pointer p-2 rounded-md flex flex-col gap-3 text-lef ${!lower && 'hover:bg-neutral-300'} ${
+              className={`${activeGroup ? "bg-slate-300" : "hover:bg-neutral-300"} hover:cursor-pointer p-2 rounded-md flex flex-col gap-3 text-lef ${
+                !lower && "hover:bg-neutral-300"
+              } ${
                 openNavBar
                   ? "w-4/5 justify-start items-start"
                   : "justify-center items-center"
               }`}>
               <div className="flex flex-row gap-3">
-              <BiGroup />
-              {openNavBar ? <p className="text-lg font-medium flex flex-row justify-center items-center gap-24">Grupos {!lower ? <AiOutlineCaretDown/> : <AiOutlineCaretUp/>} </p> : ""}
+                <BiGroup />
+                {openNavBar ? (
+                  <p className="text-lg font-medium flex flex-row justify-center items-center gap-24">
+                    Grupos{" "}
+                    {!lower ? <AiOutlineCaretDown /> : <AiOutlineCaretUp />}{" "}
+                  </p>
+                ) : (
+                  ""
+                )}
               </div>
               {lower && (
                 <div className="flex flex-col items-start text-left font-normal text-base ml-2 pl-7 border-l border-black gap-4">
                   <ul className="flex flex-col gap-3">
-                    <li className="hover:bg-neutral-300 px-3 rounded-sm">Desarrolladores</li>
-                    <li className="hover:bg-neutral-300 px-3 rounded-sm">Administradores</li>
-                    <li className="hover:bg-neutral-300 px-3 rounded-sm">Gerencia</li>
+                    <li className="hover:bg-neutral-300 px-3 rounded-sm">
+                      Desarrolladores
+                    </li>
+                    <li className="hover:bg-neutral-300 px-3 rounded-sm">
+                      Administradores
+                    </li>
+                    <li className="hover:bg-neutral-300 px-3 rounded-sm">
+                      Gerencia
+                    </li>
                   </ul>{" "}
-                  <button className="bg-purple-600 hover:bg-purple-900 px-8 py-1 rounded-sm text-white font-semibold">Agregar</button>
+                  <button className="bg-purple-600 hover:bg-purple-900 px-8 py-1 rounded-sm text-white font-semibold">
+                    Agregar
+                  </button>
                 </div>
               )}
             </div>
           </div>
           <div className="text-2xl flex flex-col gap-2">
             <div
-              className={`hover:bg-neutral-300 p-2 rounded-md flex flex-row gap-3 text-lef ${
+              className={`${activeNotify ? "bg-slate-300" : "hover:bg-neutral-300"} p-2 rounded-md flex flex-row gap-3 text-lef ${
                 openNavBar
                   ? "w-4/5 justify-start items-start"
                   : "justify-center items-center"
@@ -120,7 +150,7 @@ export const SlideBar = () => {
               )}
             </div>
             <div
-              className={`hover:bg-neutral-300 p-2 rounded-md flex flex-row gap-3 text-lef ${
+              className={`${activeConfig ? "bg-slate-300" : "hover:bg-neutral-300"} p-2 rounded-md flex flex-row gap-3 text-lef ${
                 openNavBar
                   ? "w-4/5 justify-start items-start"
                   : "justify-center items-center"
@@ -136,13 +166,36 @@ export const SlideBar = () => {
         </div>
       </div>
       <hr className="mx-4 my-5 border-neutral-600" />
-      <div className="flex flex-col items-center justify-around h-48">
+      <div
+        className={`flex flex-col justify-around h-48 ${
+          openNavBar ? "items-start px-6" : "items-center"
+        }`}>
         <p className="text-slate-500 text-base ">Cuenta</p>
-        <div className="w-12 h-12 bg-slate-400 rounded-full mb-4"></div>
-        <div className="hover:bg-neutral-300 p-2 rounded-md mb-4 text-2xl">
-          <BiLogOut />
+        <div className={`flex flex-row ${openNavBar && "gap-3"}`}>
+          <div className="w-12 h-12 bg-slate-400 rounded-full mb-4"></div>
+          <div>
+            {openNavBar && <p className="font-semibold truncate">Alcaldia - Armenia</p>}
+            {openNavBar && (
+              <p className="transition-all duration-500 ease-in-out font-medium text-sm text-slate-400 truncate ">
+                alcaldiaarmenia@gmail.com
+              </p>
+            )}
+          </div>
         </div>
-        <div className="w-5 h-5 bg-yellow-300 rounded-full"></div>
+        <div
+          className={`hover:bg-neutral-300 p-2 flex justify-center items-center rounded-md mb-4 ${
+            openNavBar &&
+            "flex flex-row gap-3 justify-center items-center text-center relative left-8 px-5 font-semibold"
+          }`}>
+          <BiLogOut className="text-2xl" />
+          {openNavBar && <p>Cerrar Sesión</p>}
+        </div>
+        <div className={`${openNavBar && 'flex justify-center items-center pl-20'}`} onClick={toggleDarkMode}>
+          {openNavBar && (
+            <label className="block bg-cl1 w-20 h-8 rounded-full shadow-inner cursor-pointer"></label>
+          )}
+          <div className={`w-5 h-5 bg-cl2 rounded-full ${openNavBar && 'absolute bottom-6 left-28 shadow-xl cursor-pointer'} ${isDarkModeOn ? 'transition duration-500 translate-x-10' : 'transition duration-500 translate-x-0'}`}></div>
+        </div>
       </div>
     </div>
   );
