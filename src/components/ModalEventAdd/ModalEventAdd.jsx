@@ -1,16 +1,94 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 
 export const ModalEventAdd = ({ handleCloseModal }) => {
-
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       handleCloseModal();
     }
   };
 
+  const [state, setState] = useState({
+    nombreEvento: "",
+    descripcion: "",
+    imagen: "https://cdn-icons-png.flaticon.com/512/219/219254.png",
+    fechaInicio: "",
+    fechaFinal: "",
+    lugar: "",
+    aforo: 0,
+    suborganizacionId: 1,
+    tipoEventoId: 1,
+  });
+
+  const handleInputsChange = (e) => {
+    const { name, value } = e.target;
+    setState((prevValues) => ({ ...prevValues, [name]: value }));
+  };
+
+  //Funcion para subir la imagen a cloudinary y guardar el url en el state
+  const handleSelectImage = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "time_check");
+    formData.append("cloud_name", "centroconveciones");
+    try {
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/centroconveciones/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+        }
+      );
+      const data = await res.json();
+      setState((prevValues) => ({ ...prevValues, imagen: data.secure_url }));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //Funcion para enviar todos los datos al backend para guardarlo en la DB
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Preparar datos para enviar en la solicitud POST
+    const data = {
+      nombreEvento: state.nombreEvento,
+      descripcion: state.descripcion,
+      imagen: state.imagen,
+      fecha_inicio: state.fechaInicio,
+      fecha_final: state.fechaFinal,
+      lugar: state.lugar,
+      aforo: state.aforo,
+      id_suborganizacion: state.suborganizacionId,
+      id_tipo_evento: state.tipoEventoId,
+    };
+
+    const params = new URLSearchParams();
+    for (const [key, value] of Object.entries(data)) {
+      params.append(key, value);
+    }
+
+    // Enviar solicitud POST al endpoint
+    fetch("https://localhost:7025/api/Event/Send?" + params.toString(), {
+      method: "POST",
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Evento guardado con éxito");
+          handleCloseModal();
+        } else {
+          throw new Error(response.Message);
+        }
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+
   return (
-    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 w-full" onClick={handleBackdropClick}>
-      <div className="bg-white rounded-md shadow-md w-1/2 h-3/4 flex flex-col">
+    <div
+      className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 w-full"
+      onClick={handleBackdropClick}>
+      <div className="bg-white rounded-md shadow-md w-1/2 h-3/4 xl:h-5/6 flex flex-col">
         <div className="flex justify-end px-4 py-2 rounded-t-md bg-neutral-100">
           <button
             className="text-gray-500 hover:text-gray-700 focus:outline-none"
@@ -30,18 +108,30 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
         </div>
         <div className="h-full">
           <div className="w-full h-full px-4">
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center mb-8">
               <h2 className="font-bold text-4xl text-purple-700">
                 Crear Evento
               </h2>
             </div>
             <div className="w-full flex gap-20">
-              <div>
-                <img className="ml-10" src="https://icons.veryicon.com/png/o/miscellaneous/1em/add-image.png" alt="img" width={200} />
-                <p className="pl-12 pt-1">
-                  <strong className="text-purple-600">Agregar</strong> imagen
-                  del evento
-                </p>
+              <div className="w-64">
+                <img
+                  className="ml-10 w-full bg-cover object-cover max-h-64"
+                  src={state.imagen}
+                  alt="default"
+                />
+                <div className="relative left-20">
+                  <label htmlFor="input-file" className="cursor-pointer">
+                    <strong className="text-purple-600">Agregar</strong> imagen
+                    del evento
+                  </label>
+                  <input
+                    id="input-file"
+                    type="file"
+                    className="hidden"
+                    name="imagen"
+                    onChange={handleSelectImage}></input>
+                </div>
               </div>
               <div className="flex flex-col w-1/2 relative top-8 gap-10">
                 <div className="flex flex-col">
@@ -51,23 +141,32 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
                     className="border border-slate-200 py-1 px-3 rounded-md"
                     type="text"
                     placeholder="Nombre del evento..."
+                    name="nombreEvento"
+                    value={state.nombreEvento}
+                    onChange={handleInputsChange}
                   />
                 </div>
-                <div className="flex flex-row w-full gap-36">
+                <div className="flex flex-row w-full gap-10">
                   <div className="flex flex-col gap-1">
                     <label htmlFor="date_initial">Fecha Inicial</label>
                     <input
                       id="date_initial"
-                      type="date"
+                      type="datetime-local"
                       className="text-slate-400 border border-slate-200 py-1 px-3 rounded-md w-full"
+                      name="fechaInicio"
+                      value={state.fechaInicio}
+                      onChange={handleInputsChange}
                     />
                   </div>
                   <div className="flex flex-col gap-1">
                     <label htmlFor="date_finish">Fecha Final</label>
                     <input
                       id="date_finish"
-                      type="date"
+                      type="datetime-local"
                       className="text-slate-400 border border-slate-200 py-1 px-3 rounded-md w-full"
+                      name="fechaFinal"
+                      value={state.fechaFinal}
+                      onChange={handleInputsChange}
                     />
                   </div>
                 </div>
@@ -79,18 +178,26 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
                 <textarea
                   className="border resize-none border-slate-200 px-3 rounded-md"
                   placeholder="Descripción..."
-                  name=""
                   id=""
-                  rows="4"></textarea>
+                  rows="4"
+                  name="descripcion"
+                  value={state.descripcion}
+                  onChange={handleInputsChange}
+                />
               </div>
               <div className="flex justify-between px-16">
                 <div className="flex flex-col">
-                  <label htmlFor="amount_of_people">Cantidad de personas:</label>
+                  <label htmlFor="amount_of_people">
+                    Cantidad de personas:
+                  </label>
                   <input
                     id="amount_of_people"
                     className="w-72 border border-slate-200 py-1 px-3 rounded-md"
                     type="number"
                     placeholder="100"
+                    name="aforo"
+                    value={state.aforo}
+                    onChange={handleInputsChange}
                   />
                 </div>
                 <div className="flex flex-col">
@@ -98,15 +205,48 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
                   <input
                     id="cost_event"
                     className="w-72 border border-slate-200 py-1 px-3 rounded-md"
-                    type="text"
+                    type="number"
                   />
                 </div>
               </div>
-              <div className="flex justify-center mt-5">
-              <div className="border  w-52 flex justify-center items-center gap-8 border-slate-200 py-2 px-3 rounded-md">
-                <p>Evento privado</p>
-                <input type="checkbox" className="appearance-none border border-neutral-400 p-2 rounded-full checked:bg-purple-600"/>
+              <div className="flex justify-between px-16">
+                <div className="flex flex-col mt-3">
+                  <label htmlFor="amount_of_people">
+                    Lugar/Dirección del evento
+                  </label>
+                  <input
+                    id="amount_of_people"
+                    className="w-72 border border-slate-200 py-1 px-3 rounded-md"
+                    type="text"
+                    placeholder="100"
+                    name="lugar"
+                    value={state.lugar}
+                    onChange={handleInputsChange}
+                  />
+                </div>
+                <div className="flex flex-col mt-3">
+                  <label htmlFor="">Tipo de evento:</label>
+                  <select
+                    id="type_event"
+                    className="w-72 border border-slate-200 py-1 px-3 rounded-md"
+                    name="tipoEventoId"
+                    value={state.tipoEventoId}
+                    onChange={handleInputsChange}>
+                    <option value="1">Charla</option>
+                    <option value="2">Deportivo</option>
+                    <option value="3">Teatro</option>
+                    <option value="4">Politico</option>
+                  </select>
+                </div>
               </div>
+              <div className="flex justify-center mt-5">
+                <div className="border  w-52 flex justify-center items-center gap-8 border-slate-200 py-2 px-3 rounded-md">
+                  <p>Evento privado</p>
+                  <input
+                    type="checkbox"
+                    className="appearance-none border border-neutral-400 p-2 rounded-full checked:bg-purple-600"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -116,7 +256,9 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
               onClick={handleCloseModal}>
               Volver
             </button>
-            <button className="hover:bg-purple-700 bg-purple-500 text-white font-bold py-2 px-8 rounded">
+            <button
+              onClick={handleSubmit}
+              className="hover:bg-purple-700 bg-purple-500 text-white font-bold py-2 px-8 rounded">
               Guardar
             </button>
           </div>
