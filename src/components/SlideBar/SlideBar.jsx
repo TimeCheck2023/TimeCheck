@@ -190,12 +190,6 @@ export const SlideBar = ({activeEvent,activeStats,activeGroup,activeNotify,activ
           <BiLogOut className="text-2xl" />
           {openNavBar && <p>Cerrar Sesión</p>}
         </div>
-        <div className={`${openNavBar && 'flex justify-center items-center pl-20'}`} onClick={toggleDarkMode}>
-          {openNavBar && (
-            <label className="block bg-cl1 w-20 h-8 rounded-full shadow-inner cursor-pointer"></label>
-          )}
-          <div className={`w-5 h-5 bg-cl2 rounded-full ${openNavBar && 'absolute bottom-6 left-28 shadow-xl cursor-pointer'} ${isDarkModeOn ? 'transition duration-500 translate-x-10' : 'transition duration-500 translate-x-0'}`}></div>
-        </div>
       </div>
     </div>
   );

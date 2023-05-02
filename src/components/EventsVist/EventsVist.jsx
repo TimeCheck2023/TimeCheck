@@ -5,15 +5,17 @@ import { ImPlus } from "react-icons/im";
 import { CardEventAdmin } from "../CardEventAdmin/CardEventAdmin";
 import { Footer } from "../Footer/Footer";
 import { ModalEventAdd } from "../ModalEventAdd/ModalEventAdd";
+import NoEventsMessage from "../NotEventsMessage/NotEventsMessage";
 
 const PAGE_SIZE = 4;
 
 export const EventsVist = () => {
   const [events, setEvents] = useState([]);
   const [page, setPage] = useState(0);
+  const [categoria, setCategoria] = useState(false)
 
   useEffect(() => {
-    fetch("https://localhost:7025/api/Event/List")
+    fetch("http://timecheck.somee.com/api/Event/List")
       .then((response) => response.json())
       .then((data) => setEvents(data.response));
   }, []);
@@ -32,6 +34,8 @@ export const EventsVist = () => {
     setPage(newPage);
   };
 
+
+
   const totalPages = Math.ceil(events.length / PAGE_SIZE);
   const startIndex = page * PAGE_SIZE;
   const endIndex = startIndex + PAGE_SIZE;
@@ -44,9 +48,12 @@ export const EventsVist = () => {
         </h1>
       </div>
       <div className="w-full flex justify-center">
-        <button className="flex justify-center items-center gap-2 px-4 py-2 bg-purple-600 rounded-l-md font-normal text-white">
+        <button onClick={()=>{setCategoria(!categoria)}} className="flex justify-center items-center gap-2 px-4 py-2 bg-purple-600 rounded-l-md font-normal text-white">
           Caregorias <BiChevronDown className="text-2xl" />
         </button>
+        {
+          
+        }
         <input
           type="text"
           className="bg-slate-300 cursor-pointer py-2 focus:outline-none focus:border focus:border-gray-400 rounded-r-md w-1/4 text-zinc-500 text-base px-4"
@@ -57,7 +64,7 @@ export const EventsVist = () => {
         </div>
       </div>
       <div className="w-full h-full flex justify-center gap-12 mb-2">
-        {visibleEvents.map((event) => (
+      {events.length == 0 ? <NoEventsMessage/> : <> {visibleEvents.map((event) => (
           <CardEventAdmin
             key={event.idEvento}
             price={event.valorTotalEvento}
@@ -65,15 +72,15 @@ export const EventsVist = () => {
             description={event.descripcionEvento}
             aforo={event.aforoEvento}
             image={event.imagenEvento}
-            tipo_evento={event.idTipoEvento}
+            tipo_evento={event.tipoEvento}
             fecha_final={event.fechaFinalEvento}
             fecha_inicio={event.fechaInicioEvento}
             lugar={event.lugarEvento}
           />
-        ))}
+        ))}</>}
       </div>
       {totalPages > 1 && (
-        <div className="flex gap-2 mt-4">
+        <div className="flex gap-2 mt-0">
           {[...Array(totalPages)].map((_, i) => (
             <button
               key={i}

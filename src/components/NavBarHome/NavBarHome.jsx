@@ -108,37 +108,6 @@ export const NavBarHome = (props) => {
           </div>
         </div>
       </div>
-      <div className="footer relative top-60 lg:top-96 my-8 right-3 ">
-        <div className="flex item-center justify-center">
-          <div className="relative ">
-            <input
-              type="checkbox"
-              className="sr-only"
-              id="toggle"
-              checked={isDarkModeOn}
-              onChange={() => setIsDarkModeOn(!isDarkModeOn)}
-            />
-
-            {openNavBar ? (
-              <label
-                htmlFor="toggle"
-                className="block bg-gray-600 w-16 h-8 rounded-full dark:bg-gray-400"></label>
-            ) : (
-              <></>
-            )}
-
-            {openNavBar ? (
-              <div
-                className={`dot absolute left-2 top-1 bg-white w-6 h-6 rounded-full transition ${
-                  isDarkModeOn ? "transform translate-x-full" : ""
-                }`}></div>
-            ) : (
-              <div
-                className={`dot absolute top-1 bg-white w-6 h-6 rounded-full transition`}></div>
-            )}
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

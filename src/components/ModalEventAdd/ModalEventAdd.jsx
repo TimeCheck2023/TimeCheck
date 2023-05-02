@@ -70,7 +70,7 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
     }
 
     // Enviar solicitud POST al endpoint
-    fetch("https://localhost:7025/api/Event/Send?" + params.toString(), {
+    fetch("http://timecheck.somee.com/api/Event/Send?" + params.toString(), {
       method: "POST",
     })
       .then((response) => {
@@ -232,14 +232,25 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
                     name="tipoEventoId"
                     value={state.tipoEventoId}
                     onChange={handleInputsChange}>
-                    <option value="1">Charla</option>
-                    <option value="2">Deportivo</option>
-                    <option value="3">Teatro</option>
-                    <option value="4">Politico</option>
+                    <option value="1">Cultural</option>
+                    <option value="2">Musical</option>
+                    <option value="3">Deportivo</option>
+                    <option value="4">Festival</option>
+                    <option value="4">Ferias</option>
+                    <option value="4">Religioso</option>
+                    <option value="4">Educativo</option>
+                    {/* -Eventos sociales
+-Eventos culturales
+-Eventos musicales
+-Eventos deportivos
+-festivales
+-Ferias
+-congresos
+- exposiciones */}
                   </select>
                 </div>
               </div>
-              <div className="flex justify-center mt-5">
+              {/* <div className="flex justify-center mt-5">
                 <div className="border  w-52 flex justify-center items-center gap-8 border-slate-200 py-2 px-3 rounded-md">
                   <p>Evento privado</p>
                   <input
@@ -247,7 +258,7 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
                     className="appearance-none border border-neutral-400 p-2 rounded-full checked:bg-purple-600"
                   />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="footer flex relative bottom-14  justify-center items-center w-full">
