@@ -18,12 +18,12 @@ export const BodyHome = () => {
   }, []);
 
   return (
-    <div className="w-full lg:ml-24 h-screen">
+    <div className="w-full sm:ml-24 h-screen">
       <div
         className={`bg-cover bg-center h-80 md:h-80 w-full ${
           !isLoading ? "bg-gray-400 animate-pulse" : styles.img
         }`}>
-        <div className="text-white font-bold text-3xl md:text-5xl font-sans relative left-5 md:left-20 top-16 w-full md:w-2/3">
+        <div className="text-white font-bold text-3xl md:text-5xl font-sans relative left-5 md:left-20 top-16 w-4/5 md:w-2/3">
           <h1>Los Mejores Eventos</h1>
         </div>
         <div className="text-slate-100 relative font-sans left-5 md:left-20 top-20 w-96  md:w-1/3">
@@ -47,7 +47,7 @@ export const BodyHome = () => {
             </p>
           </div>
         </div>
-        <div className="imagenes flex flex-col md:flex-row  justify-end relative xl:right-14 md:right-20  gap-20 md:gap-5 bottom-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 md:content-center md:place-items-center gap-32 md:gap-20 lg:grid-cols-4 lg:mt-48 lg:gap-0">
           {isLoading && (
             <Suspense fallback={<LoadingCard />}>
               <ImageEventsInfo
