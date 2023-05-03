@@ -2,10 +2,12 @@ import React from "react";
 import { LabelBtn } from "../../components/LabelBtn/LabelBtn";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { NavbarMobile } from "../../components/NavbarMobile/NavbarMobile";
 
 export const SingIn = () => {
   return (
     <div className="w-screen h-screen flex flex-row">
+      <NavbarMobile />
       <div className="hidden lg:block w-1/2 h-full bg-violet-700">
         <div>
           <div className="relative left-24 top-20">
@@ -37,9 +39,9 @@ export const SingIn = () => {
             ingresa tus credenciales para acceder a tu cuenta.
           </p>
         </div>
-        <div className="mt-10 lg:mt-20 w-full ">
-          <div className="flex lg:my-10 lg:mx-32 relative left-10 lg:left-20">
-            <div className="flex flex-col w-full ">
+        <div className="mt-10 lg:mt-20 w-full flex flex-col justify-center items-center">
+          <div className="flex lg:my-10 lg:mx-32 relative left-10 lg:left-20 w-5/6 sm:w-full">
+            <div className="flex flex-col w-full">
               <label htmlFor="" className="font-bold">
                 Correo electronico:
               </label>
@@ -51,8 +53,8 @@ export const SingIn = () => {
             </div>
           </div>
 
-          <div className="flex  mt-5 lg:mt-0 lg:my-10 lg:mx-32 relative left-10 lg:left-20">
-            <div className="flex flex-col w-full ">
+          <div className="flex  mt-5 lg:mt-0 lg:my-10 lg:mx-32 relative left-10 lg:left-20 w-5/6">
+            <div className="flex flex-col  w-full sm:w-full">
               <label htmlFor="" className="font-bold">
                 Contraseña:
               </label>
@@ -64,7 +66,7 @@ export const SingIn = () => {
             </div>
           </div>
           <div className="relative mt-5 left-36 lg:mt-0 lg:left-1/2 w-60">
-            <p className="font-sans font-normal text-lg leading-6 flex items-center relative left-24 text-purple-600">
+            <p className="font-sans font-normal text-lg leading-6 flex items-center relative right-14 text-purple-600">
               <Link to="" className="hover:underline">
                 ¿Se te olvidó la contaseña?
               </Link>

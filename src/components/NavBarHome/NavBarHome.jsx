@@ -14,22 +14,34 @@ export const NavBarHome = (props) => {
     <div
       onMouseEnter={toggleNavBar}
       onMouseLeave={toggleNavBar}
-      className={`bg-zinc-900 h-screen ${
-        openNavBar ? "w-72 absolute z-50 transition-all duration-300 ease-in-out " : "transition-all duration-300 ease-in w-32"
+      className={`bg-zinc-900 hidden sm:flex h-screen fixed ${
+        openNavBar
+          ? "w-72 z-50 transition-all duration-300 ease-in-out "
+          : "transition-all duration-300 ease-in w-32"
       }  items-center flex flex-col `}>
       <div className="header flex flex-row justify-center items-center my-4">
-      {openNavBar ? (
+        {openNavBar ? (
           <div className="relative right-5">
-           <Link to={"/"}>
-           <img src="/LOGO TIME CHECK A COLOR.webp" alt="" width={180} height={50}/>
-           </Link>
+            <Link to={"/"}>
+              <img
+                src="/LOGO TIME CHECK A COLOR.webp"
+                alt=""
+                width={180}
+                height={50}
+              />
+            </Link>
           </div>
         ) : (
-        <div className="rounded-full w-20 h-20 ml-4">
-          <Link to={"/"}>
-          <img src="/LOGOTIPO TIME CHECK.webp" alt="Logotipo TimeCheck" width={70} height={50}/>
-          </Link>
-        </div>
+          <div className="rounded-full w-20 h-20 ml-4">
+            <Link to={"/"}>
+              <img
+                src="/LOGOTIPO TIME CHECK.webp"
+                alt="Logotipo TimeCheck"
+                width={70}
+                height={50}
+              />
+            </Link>
+          </div>
         )}
       </div>
       <div className="menu text-white">
@@ -41,11 +53,16 @@ export const NavBarHome = (props) => {
             Menú
           </h3>
           <div className="my-5 relative xl:top-10 top-3">
-            <div className={`${openNavBar ? " transition-all duration-100 ease-out px-4" : ""}`}>
+            <div
+              className={`flex flex-col gap-5${
+                openNavBar ? " transition-all duration-100 ease-out px-4" : ""
+              }`}>
               <Link to="/" aria-label="Ir al inicio principal">
                 <div
                   className={`my-5 xl:my-0 gap-4 flex items-center ${
-                    props.homeActive ? "bg-neutral-700" : "hover:bg-neutral-800 "
+                    props.homeActive
+                      ? "bg-neutral-700"
+                      : "hover:bg-neutral-800 "
                   } ${openNavBar ? "w-60" : " w-full "} py-2 pl-2 rounded-sm`}>
                   <div className="text-2xl">
                     <AiFillHome />

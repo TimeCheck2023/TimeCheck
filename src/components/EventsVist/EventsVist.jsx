@@ -6,21 +6,25 @@ import { CardEventAdmin } from "../CardEventAdmin/CardEventAdmin";
 import { Footer } from "../Footer/Footer";
 import { ModalEventAdd } from "../ModalEventAdd/ModalEventAdd";
 import NoEventsMessage from "../NotEventsMessage/NotEventsMessage";
+import { LoaderEventsGet } from "../LoaderEventsGet/LoaderEventsGet";
 
 const PAGE_SIZE = 4;
 
 export const EventsVist = () => {
   const [events, setEvents] = useState([]);
   const [page, setPage] = useState(0);
-  const [categoria, setCategoria] = useState(false)
+  const [openModal, setOpenModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [openCategoria, setOpenCategoria] = useState(true);
 
   useEffect(() => {
     fetch("http://timecheck.somee.com/api/Event/List")
       .then((response) => response.json())
-      .then((data) => setEvents(data.response));
+      .then((data) => {
+        setEvents(data.response);
+        setLoading(false);
+      });
   }, []);
-
-  const [openModal, setOpenModal] = useState(false);
 
   const handleOpenModal = () => {
     setOpenModal(!openModal);
@@ -48,15 +52,51 @@ export const EventsVist = () => {
         </h1>
       </div>
       <div className="w-full flex justify-center">
-        <button onClick={()=>{setCategoria(!categoria)}} className="flex justify-center items-center gap-2 px-4 py-2 bg-purple-600 rounded-l-md font-normal text-white">
-          Caregorias <BiChevronDown className="text-2xl" />
-        </button>
-        {
-          
-        }
+        <div className="flex flex-col">
+          <button
+            onClick={() => {
+              setOpenCategoria(!openCategoria);
+            }}
+            className="flex justify-center items-center gap-2 px-4 py-2 w-40 bg-purple-600 hover:bg-purple-700 font-normal text-white">
+            Caregorias <BiChevronDown className="text-2xl" />
+          </button>
+          {!openCategoria && (
+            <div className="absolute mt-10 w-40 px-4 py-2 z-50 bg-purple-600 text-white">
+              <ul className="flex flex-col gap-2">
+                <li className="hover:bg-purple-900 px-4 py-2 rounded-sm border-y border-white">
+                  Educativo
+                </li>
+                <li className="hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white">
+                  Religioso
+                </li>
+                <li className="hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white">
+                  Social
+                </li>
+                <li className="hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white">
+                  Cultural
+                </li>
+                <li className="hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white">
+                  Musical
+                </li>
+                <li className="hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white">
+                  Deportivo
+                </li>
+                <li className="hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white">
+                  Festival
+                </li>
+                <li className="hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white">
+                  Feria
+                </li>
+                <li className="hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white">
+                  Exposición
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
         <input
           type="text"
-          className="bg-slate-300 cursor-pointer py-2 focus:outline-none focus:border focus:border-gray-400 rounded-r-md w-1/4 text-zinc-500 text-base px-4"
+          className="bg-slate-300 cursor-pointer py-2 focus:outline-none focus:border focus:border-gray-400 h-10 rounded-r-md w-1/4 text-zinc-500 text-base px-4"
           placeholder="Busca un evento"
         />
         <div className="absolute right-1/3 mr-5 top-28 mt-1 text-lg">
@@ -64,7 +104,15 @@ export const EventsVist = () => {
         </div>
       </div>
       <div className="w-full h-full flex justify-center gap-12 mb-2">
-      {events.length == 0 ? <NoEventsMessage/> : <> {visibleEvents.map((event) => (
+      {loading ? (
+  <LoaderEventsGet />
+) : (
+  <>
+    {events.length === 0 ? (
+      <NoEventsMessage/>
+    ) : (
+      <>
+        {visibleEvents.map((event) => (
           <CardEventAdmin
             key={event.idEvento}
             price={event.valorTotalEvento}
@@ -77,7 +125,12 @@ export const EventsVist = () => {
             fecha_inicio={event.fechaInicioEvento}
             lugar={event.lugarEvento}
           />
-        ))}</>}
+        ))}
+      </>
+    )}
+  </>
+)}
+
       </div>
       {totalPages > 1 && (
         <div className="flex gap-2 mt-0">
