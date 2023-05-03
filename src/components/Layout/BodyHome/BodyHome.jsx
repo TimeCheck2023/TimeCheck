@@ -2,7 +2,7 @@ import React, { useState, useEffect, lazy, Suspense } from "react";
 import styles from "./BodyHome.module.css";
 import { Servicios } from "../Servicios/Servicios";
 import { Footer } from "../Footer/Footer";
-import { LoadingCard } from "../LoadingCard/LoadingCard";
+import { LoadingCard } from "../../UI/LoadingCard/LoadingCard";
 
 const ImageEventsInfo = lazy(() =>
   delayForDemo(import("../ImageEventsInfo/ImageEventsInfo"))

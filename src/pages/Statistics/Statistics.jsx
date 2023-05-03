@@ -1,6 +1,6 @@
 import React from 'react'
-import { SlideBar } from '../../components/SlideBar/SlideBar'
-import { StatisticsView } from '../../components/StatisticsView/StatisticsView'
+import { SlideBar } from '../../components/Layout/SlideBar/SlideBar'
+import { StatisticsView } from '../../components/UI/StatisticsView/StatisticsView'
 
 export const Statistics = () => {
   return (

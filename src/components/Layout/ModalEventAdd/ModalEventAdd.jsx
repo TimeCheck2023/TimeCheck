@@ -267,7 +267,7 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
               </div> */}
             </div>
           </div>
-          <div className="footer flex relative bottom-14 xl:bottom-24  justify-center items-center w-full">
+          <div className="footer flex relative bottom-14 xl:bottom-24  2xl:bottom-14 justify-center items-center w-full">
             <button
               className="hover:bg-purple-700 bg-purple-500 text-white font-bold py-2 px-8 rounded mr-4"
               onClick={handleCloseModal}>

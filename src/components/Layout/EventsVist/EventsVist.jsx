@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiChevronDown } from "react-icons/bi";
 import { ImPlus } from "react-icons/im";
-import { CardEventAdmin } from "../CardEventAdmin/CardEventAdmin";
+import { CardEventAdmin } from "../../UI/CardEventAdmin/CardEventAdmin";
 import { Footer } from "../Footer/Footer";
 import { ModalEventAdd } from "../ModalEventAdd/ModalEventAdd";
-import NoEventsMessage from "../NotEventsMessage/NotEventsMessage";
-import { LoaderEventsGet } from "../LoaderEventsGet/LoaderEventsGet";
+import NoEventsMessage from "../../UI/NotEventsMessage/NotEventsMessage";
+import { LoaderEventsGet } from "../../UI/LoaderEventsGet/LoaderEventsGet";
 
 const PAGE_SIZE = 4;
 
@@ -58,7 +58,7 @@ export const EventsVist = () => {
               setOpenCategoria(!openCategoria);
             }}
             className="flex justify-center items-center gap-2 px-4 py-2 w-40 bg-purple-600 hover:bg-purple-700 font-normal text-white">
-            Caregorias <BiChevronDown className="text-2xl" />
+            Categorias <BiChevronDown className="text-2xl" />
           </button>
           {!openCategoria && (
             <div className="absolute mt-10 w-40 px-4 py-2 z-50 bg-purple-600 text-white">

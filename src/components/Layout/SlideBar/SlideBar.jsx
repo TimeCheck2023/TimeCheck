@@ -44,7 +44,7 @@ export const SlideBar = ({
     <div
       onMouseEnter={toggleNavBar}
       onMouseLeave={toggleNavBar}
-      className={`h-full hidden lg:block z-50 bg-slate-50 fixed border-r border-neutral-400 ${
+      className={`h-full hidden md:block z-50 bg-slate-50 fixed border-r border-neutral-400 ${
         openNavBar
           ? " w-72 transition-all duration-500 ease-in-out"
           : "w-24 transition-all duration-300 ease-in"
@@ -85,7 +85,7 @@ export const SlideBar = ({
                   ? "w-4/5 justify-start items-start"
                   : "justify-center items-center"
               }`}>
-              <Link to={"/Events"} className="flex gap-3">
+              <Link to={"/Dashboard"} className="flex gap-3">
                 <RxDashboard />
                 {openNavBar ? (
                   <p className="text-lg font-medium">Eventos</p>
@@ -165,21 +165,6 @@ export const SlideBar = ({
               <IoIosNotificationsOutline />
               {openNavBar ? (
                 <p className="text-lg font-medium">Notificaciones</p>
-              ) : (
-                ""
-              )}
-            </div>
-            <div
-              className={`${
-                activeConfig ? "bg-slate-300" : "hover:bg-neutral-300"
-              } p-2 rounded-md flex flex-row gap-3 text-lef ${
-                openNavBar
-                  ? "w-4/5 justify-start items-start"
-                  : "justify-center items-center"
-              }`}>
-              <AiOutlineSetting />
-              {openNavBar ? (
-                <p className="text-lg font-medium">Configuraciones</p>
               ) : (
                 ""
               )}

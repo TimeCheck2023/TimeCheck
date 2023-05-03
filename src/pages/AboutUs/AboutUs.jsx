@@ -1,7 +1,7 @@
 import React from "react";
-import { NavBarHome } from "../../components/NavBarHome/NavBarHome";
-import { BodyAboutUs } from "../../components/BodyAboutUs/BodyAboutUs";
-import { NavbarMobile } from "../../components/NavbarMobile/NavbarMobile";
+import { NavBarHome } from "../../components/Layout/NavBarHome/NavBarHome";
+import { BodyAboutUs } from "../../components/Layout/BodyAboutUs/BodyAboutUs";
+import { NavbarMobile } from "../../components/Layout/NavbarMobile/NavbarMobile";
 
 export const AboutUs = () => {
   return (

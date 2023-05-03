@@ -17,19 +17,28 @@ export const BodyAboutUs = () => {
           morbi sem viverra diam lectus odio orci...{" "}
         </p>
       </div>
-      <div className="flex flex-col lg:flex-row w-full mb-96 lg:mb-80'">
-        <div className="flex flex-col w-full lg:w-1/2 gap-5 text-center p-6 relative  lg:top-20">
-          <h2 className="text-4xl font-semibold text-purple-600 w-80">
-            Nuestra Misión
-          </h2>
-          <p className="text-xl  w-full lg:w-8/12 text-justify lg:pl-9">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, elit
-            nibh et nisl, pellentesque scelerisque faucibus facilisis at.
-            Placerat morbi sem viverra diam lectus odio orciorem ipsum dolor sit
-            amet, consectetur adipiscing elit. Purus, elit nibh et nisl,
-            pellentesque scelerisque faucibus facilisis at. Placerat morbi sem
-            viverra diam lectus odio orci...
-          </p>
+      <div className="flex flex-col lg:flex-row w-full mb-0 lg:mb-0 2xl:mt-10 2xl:mb-32">
+        <div className="flex flex-col w-2/3 gap-40">
+          <div className="flex flex-col w-full 2xl:w-4/5 gap-5 text-center pl-6 ">
+            <h2 className="text-4xl font-semibold text-purple-600 w-80">
+              Nuestra Misión
+            </h2>
+            <p className="text-xl  w-full 2xl:w-full text-justify lg:pl-9">
+              Proporcionar una herramienta eficaz y eficiente para la gestión de
+              eventos que permita a los organizadores llevar un registro de los
+              asistentes de manera automatizada, en línea y en tiempo real. Nos
+              esforzamos por ofrecer un servicio de calidad, innovador y
+              confiable para garantizar la satisfacción de nuestros clientes.
+            </p>
+          </div>
+          <div className="flex flex-col w-full 2xl:w-4/5 gap-5 text-center pl-6 ">
+            <h2 className="text-4xl font-semibold text-purple-600 w-80">
+              Nuestra Visión
+            </h2>
+            <p className="text-xl  w-full 2xl:w-full text-justify lg:pl-9">
+            Ser la herramienta de gestión de eventos en línea más reconocida y confiable a nivel mundial, ofreciendo la mejor experiencia de usuario y tecnología avanzada en la gestión de eventos. Queremos ayudar a los organizadores de eventos a simplificar el proceso de registro y seguimiento de asistencia, logrando que sus eventos sean más exitosos y satisfactorios para los asistentes.
+            </p>
+          </div>
         </div>
 
         <div class="w-full lg:w-1/2 mb-60 lg:mb-0">

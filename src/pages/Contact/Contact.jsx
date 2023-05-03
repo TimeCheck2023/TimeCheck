@@ -1,7 +1,7 @@
 import React from "react";
-import { NavBarHome } from "../../components/NavBarHome/NavBarHome";
-import { BodyContactUs } from "../../components/BodyContactUs/BodyContactUs";
-import { NavbarMobile } from "../../components/NavbarMobile/NavbarMobile";
+import { NavBarHome } from "../../components/Layout/NavBarHome/NavBarHome";
+import { BodyContactUs } from "../../components/Layout/BodyContactUs/BodyContactUs";
+import { NavbarMobile } from "../../components/Layout/NavbarMobile/NavbarMobile";
 
 export const Contact = () => {
   return (

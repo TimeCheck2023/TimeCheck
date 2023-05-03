@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiFillLike } from "react-icons/ai";
-import { ModalEventEdit } from "../ModalEventEdit/ModalEventEdit";
+import { ModalEventEdit } from "../../Layout/ModalEventEdit/ModalEventEdit";
 
 export const CardEventAdmin = (props) => {
   const [openModal, setOpenModal] = useState(false);

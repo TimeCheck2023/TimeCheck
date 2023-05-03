@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { LabelBtn } from "../../components/LabelBtn/LabelBtn";
+import { LabelBtn } from "../../components/UI/LabelBtn/LabelBtn";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
-import { NavbarMobile } from "../../components/NavbarMobile/NavbarMobile";
+import { NavbarMobile } from "../../components/Layout/NavbarMobile/NavbarMobile";
 
 export const SingUp = () => {
   const [selectedOption, setSelectedOption] = useState("Personal");
