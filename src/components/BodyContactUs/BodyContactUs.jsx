@@ -12,7 +12,7 @@ export const BodyContactUs = () => {
   }, []);
 
   return (
-    <div className="w-full overflow-scroll h-full bg-slate-100">
+    <div className="w-full h-full bg-slate-100 sm:ml-24">
       <div className="w-full h-full flex flex-row">
         <div
           className={`w-1/2 bg-cover bg-center ${

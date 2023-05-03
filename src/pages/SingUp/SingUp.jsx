@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { LabelBtn } from "../../components/LabelBtn/LabelBtn";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { NavbarMobile } from "../../components/NavbarMobile/NavbarMobile";
 
 export const SingUp = () => {
   const [selectedOption, setSelectedOption] = useState("Personal");
@@ -10,6 +11,7 @@ export const SingUp = () => {
   };
   return (
     <div className="w-screen h-screen flex flex-row">
+      <NavbarMobile />
       <div className="hidden lg:block w-1/2 h-full bg-violet-700">
         <div>
           <div className="relative left-24 top-20">

@@ -18,7 +18,7 @@ export const BodyHome = () => {
   }, []);
 
   return (
-    <div className="w-full overflow-scroll h-full bg-slate-100">
+    <div className="w-full lg:ml-24 h-screen">
       <div
         className={`bg-cover bg-center h-80 md:h-80 w-full ${
           !isLoading ? "bg-gray-400 animate-pulse" : styles.img
@@ -47,7 +47,7 @@ export const BodyHome = () => {
             </p>
           </div>
         </div>
-        <div className="imagenes flex flex-col md:flex-row  justify-end relative xl:right-5 md:right-20  gap-20 md:gap-5 bottom-0 ">
+        <div className="imagenes flex flex-col md:flex-row  justify-end relative xl:right-14 md:right-20  gap-20 md:gap-5 bottom-0">
           {isLoading && (
             <Suspense fallback={<LoadingCard />}>
               <ImageEventsInfo

@@ -5,7 +5,7 @@ import { Footer } from "../Footer/Footer";
 
 export const BodyAboutUs = () => {
   return (
-    <div className="w-full overflow-scroll h-full bg-slate-100">
+    <div className="w-full h-full bg-slate-100 sm:ml-24">
       <div
         className={`bg-slate-400 font-sans w-full h-96 flex flex-col justify-center items-center pt-10 lg:pt-0 gap-3 lg:gap-16 pb-20 bg-cover bg-center  ${styles.img1}`}>
         <h1 className="font-bold  text-white text-4xl lg:text-5xl p-4 lg:p-0">

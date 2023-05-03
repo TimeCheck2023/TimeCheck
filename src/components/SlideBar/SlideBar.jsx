@@ -10,18 +10,25 @@ import {
   AiOutlineCaretDown,
 } from "react-icons/ai";
 
-export const SlideBar = ({activeEvent,activeStats,activeGroup,activeNotify,activeConfig}) => {
+export const SlideBar = ({
+  activeEvent,
+  activeStats,
+  activeGroup,
+  activeNotify,
+  activeConfig,
+}) => {
   const [openNavBar, setOpenNavBar] = useState(false);
   const [lower, setLower] = useState(false);
-   const [isDarkModeOn, setIsDarkModeOn] = useState(false);
+  const [isDarkModeOn, setIsDarkModeOn] = useState(false);
 
   const toggleNavBar = () => {
-    setIsDarkModeOn(false)
-    setOpenNavBar(!openNavBar)}
+    setIsDarkModeOn(false);
+    setOpenNavBar(!openNavBar);
+  };
 
-  const toggleDarkMode = () =>{
-    setIsDarkModeOn(!isDarkModeOn)
-  }
+  const toggleDarkMode = () => {
+    setIsDarkModeOn(!isDarkModeOn);
+  };
 
   const lowerGroup = () => {
     setLower(!lower);
@@ -71,33 +78,44 @@ export const SlideBar = ({activeEvent,activeStats,activeGroup,activeNotify,activ
           }`}>
           <div className="flex flex-col gap-10 text-2xl justify-start">
             <div
-              className={`${activeEvent ? "bg-slate-300" : "hover:bg-neutral-300"} p-2 rounded-md flex flex-row gap-3 ${
+              className={`${
+                activeEvent ? "bg-slate-300" : "hover:bg-neutral-300"
+              } p-2 rounded-md flex flex-row gap-3 ${
                 openNavBar
                   ? "w-4/5 justify-start items-start"
                   : "justify-center items-center"
               }`}>
-             <Link to={"/Events"} className="flex gap-3">
-              <RxDashboard />
-              {openNavBar ? <p className="text-lg font-medium">Eventos</p> : ""}</Link>
+              <Link to={"/Events"} className="flex gap-3">
+                <RxDashboard />
+                {openNavBar ? (
+                  <p className="text-lg font-medium">Eventos</p>
+                ) : (
+                  ""
+                )}
+              </Link>
             </div>
             <div
-              className={`${activeStats ? "bg-slate-300" : "hover:bg-neutral-300"} p-2 rounded-md flex flex-row gap-3 text-lef ${
+              className={`${
+                activeStats ? "bg-slate-300" : "hover:bg-neutral-300"
+              } p-2 rounded-md flex flex-row gap-3 text-lef ${
                 openNavBar
                   ? "w-4/5 justify-start items-start"
                   : "justify-center items-center"
               }`}>
-             <Link to="/Statistics" className="flex flex-row gap-3">
-             <CgOpenCollective />
-              {openNavBar ? (
-                <p className="text-lg font-medium">Estadisticas</p>
-              ) : (
-                ""
-              )}
+              <Link to="/Statistics" className="flex flex-row gap-3">
+                <CgOpenCollective />
+                {openNavBar ? (
+                  <p className="text-lg font-medium">Estadisticas</p>
+                ) : (
+                  ""
+                )}
               </Link>
             </div>
             <div
               onClick={lowerGroup}
-              className={`${activeGroup ? "bg-slate-300" : "hover:bg-neutral-300"} hover:cursor-pointer p-2 rounded-md flex flex-col gap-3 text-lef ${
+              className={`${
+                activeGroup ? "bg-slate-300" : "hover:bg-neutral-300"
+              } hover:cursor-pointer p-2 rounded-md flex flex-col gap-3 text-lef ${
                 !lower && "hover:bg-neutral-300"
               } ${
                 openNavBar
@@ -137,7 +155,9 @@ export const SlideBar = ({activeEvent,activeStats,activeGroup,activeNotify,activ
           </div>
           <div className="text-2xl flex flex-col gap-2">
             <div
-              className={`${activeNotify ? "bg-slate-300" : "hover:bg-neutral-300"} p-2 rounded-md flex flex-row gap-3 text-lef ${
+              className={`${
+                activeNotify ? "bg-slate-300" : "hover:bg-neutral-300"
+              } p-2 rounded-md flex flex-row gap-3 text-lef ${
                 openNavBar
                   ? "w-4/5 justify-start items-start"
                   : "justify-center items-center"
@@ -150,7 +170,9 @@ export const SlideBar = ({activeEvent,activeStats,activeGroup,activeNotify,activ
               )}
             </div>
             <div
-              className={`${activeConfig ? "bg-slate-300" : "hover:bg-neutral-300"} p-2 rounded-md flex flex-row gap-3 text-lef ${
+              className={`${
+                activeConfig ? "bg-slate-300" : "hover:bg-neutral-300"
+              } p-2 rounded-md flex flex-row gap-3 text-lef ${
                 openNavBar
                   ? "w-4/5 justify-start items-start"
                   : "justify-center items-center"
@@ -174,7 +196,9 @@ export const SlideBar = ({activeEvent,activeStats,activeGroup,activeNotify,activ
         <div className={`flex flex-row ${openNavBar && "gap-3"}`}>
           <div className="w-12 h-12 bg-slate-400 rounded-full mb-4"></div>
           <div>
-            {openNavBar && <p className="font-semibold truncate">Alcaldia - Armenia</p>}
+            {openNavBar && (
+              <p className="font-semibold truncate">Alcaldia - Armenia</p>
+            )}
             {openNavBar && (
               <p className="transition-all duration-500 ease-in-out font-medium text-sm text-slate-400 truncate ">
                 alcaldiaarmenia@gmail.com
@@ -189,12 +213,6 @@ export const SlideBar = ({activeEvent,activeStats,activeGroup,activeNotify,activ
           }`}>
           <BiLogOut className="text-2xl" />
           {openNavBar && <p>Cerrar Sesión</p>}
-        </div>
-        <div className={`${openNavBar && 'flex justify-center items-center pl-20'}`} onClick={toggleDarkMode}>
-          {openNavBar && (
-            <label className="block bg-cl1 w-20 h-8 rounded-full shadow-inner cursor-pointer"></label>
-          )}
-          <div className={`w-5 h-5 bg-cl2 rounded-full ${openNavBar && 'absolute bottom-6 left-28 shadow-xl cursor-pointer'} ${isDarkModeOn ? 'transition duration-500 translate-x-10' : 'transition duration-500 translate-x-0'}`}></div>
         </div>
       </div>
     </div>
