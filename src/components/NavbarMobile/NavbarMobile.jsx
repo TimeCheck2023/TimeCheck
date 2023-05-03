@@ -28,7 +28,7 @@ export const NavbarMobile = () => {
 
   return (
     <div>
-      <div className="w-full h-20 bg-white fixed bottom-0 z-50 flex justify-between px-16 items-center">
+      <div className="w-full md:hidden h-20 bg-white fixed bottom-0 z-50 flex justify-between px-16 items-center">
         <Link
           to="/SingIn"
           className="text-center flex-col text-purple-600 flex justify-center items-center">
