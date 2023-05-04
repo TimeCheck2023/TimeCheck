@@ -61,7 +61,7 @@ export const NavbarMobileUser = () => {
               <MdOutlineContactMail />
             </Link>
             <Link
-              to="/"
+              to="/Dashboard"
               className="bg-purple-600 rounded-full h-16 w-16 mx-2 mb-16 text-center flex justify-center items-center text-3xl">
               <AiFillHome className="text-white" />
             </Link>

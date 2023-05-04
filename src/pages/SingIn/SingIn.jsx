@@ -29,7 +29,7 @@ export const SingIn = () => {
           <h2 className="font-bold text-5xl md:text-6xl tracking-tight leading-1.19 font-sans text-base-02">
             ¡Bienvenido!
           </h2>
-          <p className="font-normal text-lg font-sans text-gray-500 pt-6 md:pt-14 w-4/5 lg:w-3/4 2xl:text-2xl">
+          <p className="font-normal text-lg font-sans text-gray-500 pt- md:pt-14 w-4/5 lg:w-3/4 2xl:text-2xl">
             Bienvenido a nuestra plataforma de gestión de eventos. Por favor,
             ingresa tus credenciales para acceder a tu cuenta.
           </p>

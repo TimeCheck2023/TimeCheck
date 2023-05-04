@@ -38,8 +38,6 @@ export const EventsVist = () => {
     setPage(newPage);
   };
 
-
-
   const totalPages = Math.ceil(events.length / PAGE_SIZE);
   const startIndex = page * PAGE_SIZE;
   const endIndex = startIndex + PAGE_SIZE;
@@ -104,33 +102,32 @@ export const EventsVist = () => {
         </div>
       </div>
       <div className="w-full h-full flex justify-center gap-12 mb-2">
-      {loading ? (
-  <LoaderEventsGet />
-) : (
-  <>
-    {events.length === 0 ? (
-      <NoEventsMessage/>
-    ) : (
-      <>
-        {visibleEvents.map((event) => (
-          <CardEventAdmin
-            key={event.idEvento}
-            price={event.valorTotalEvento}
-            title={event.nombreEvento}
-            description={event.descripcionEvento}
-            aforo={event.aforoEvento}
-            image={event.imagenEvento}
-            tipo_evento={event.tipoEvento}
-            fecha_final={event.fechaFinalEvento}
-            fecha_inicio={event.fechaInicioEvento}
-            lugar={event.lugarEvento}
-          />
-        ))}
-      </>
-    )}
-  </>
-)}
-
+        {loading ? (
+          <LoaderEventsGet />
+        ) : (
+          <>
+            {events.length === 0 ? (
+              <NoEventsMessage />
+            ) : (
+              <>
+                {visibleEvents.map((event) => (
+                  <CardEventAdmin
+                    key={event.idEvento}
+                    price={event.valorTotalEvento}
+                    title={event.nombreEvento}
+                    description={event.descripcionEvento}
+                    aforo={event.aforoEvento}
+                    image={event.imagenEvento}
+                    tipo_evento={event.tipoEvento}
+                    fecha_final={event.fechaFinalEvento}
+                    fecha_inicio={event.fechaInicioEvento}
+                    lugar={event.lugarEvento}
+                  />
+                ))}
+              </>
+            )}
+          </>
+        )}
       </div>
       {totalPages > 1 && (
         <div className="flex gap-2 mt-0">
