@@ -10,6 +10,7 @@ export const LabelBtn = (props) => {
         id={props.id}
         className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 w-${props.width} p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
         type="text"
+        placeholder={`${props.label}...`}
       />
     </div>
   );

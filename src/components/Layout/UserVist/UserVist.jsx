@@ -6,7 +6,7 @@ import { Footer } from "../Footer/Footer";
 
 export const UserVist = () => {
   return (
-    <div className='pl-20'>
+    <div className='sm:pl-20'>
       <div className='flex justify-center py-5 px-8'>
         <input className='border border-slate-400 shadow-lg px-3 py-0.5 shadow-neutral-300 rounded-xl w-full 2xl:w-1/3' type="search" placeholder='Buscar...'/>
         <button className='absolute right-10 2xl:right-1/3 top-6'>

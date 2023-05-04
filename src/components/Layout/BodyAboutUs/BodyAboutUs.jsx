@@ -57,7 +57,7 @@ export const BodyAboutUs = () => {
         </div>
       </div>
       <div className="w-full ">
-        <div className="flex flex-col w-full justify-center items-center gap-3">
+        <div className="flex flex-col mt-80 md:mt-0 w-full justify-center items-center gap-3">
           <h2 className="text-3xl lg:text-4xl font-bold text-purple-600">
             Conoce a Nuestro Equipo{" "}
           </h2>

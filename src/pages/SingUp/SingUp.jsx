@@ -35,7 +35,7 @@ export const SingUp = () => {
       </div>
       <div className="w-full lg:w-1/2 h-full ">
         <div className="flex justify-center items-center flex-col">
-          <h2 className="font-bold text-center lg:text-left text-6xl tracking-tight leading-1.19 font-sans text-base-02 mt-8">
+          <h2 className="font-bold text-center lg:text-left text-5xl xl:text-6xl tracking-tight leading-1.19 font-sans text-base-02 mt-8">
             ¡Crear una cuenta {selectedOption}!
           </h2>
           <p className="font-normal text-lg leading-1.67 font-sans text-gray-500 relative mt-5 px-5 lg:px-0">
@@ -58,10 +58,17 @@ export const SingUp = () => {
             </select>
           </div>
           <div className="flex flex-col lg:flex-row gap-5 mb-6 lg:mb-0 lg:my-10 lg:mx-20 justify-between">
-            <LabelBtn label="Nombre" width="70" id="name" />
-            <LabelBtn label="Primer Apellido" width="70" id="firstname" />
-            <LabelBtn label="Segundo Apellido" width="70" id="secondname" />
-          </div>
+          <div className="flex flex-col w-full ">
+                <label htmlFor="" className="font-bold">
+                  Nombre Completo<strong className="text-red-600">*</strong>
+                </label>
+                <input
+                  id=""
+                  className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 lg:w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
+                  type="text"
+                  placeholder="Nombre Completo..."
+                />
+              </div>          </div>
           <div className="flex lg:my-10 flex-col lg:flex-row gap-5 justify-between w-full">
             <div className="flex relative lg:left-20 w-full">
               <div className="flex flex-col w-full ">
@@ -72,6 +79,7 @@ export const SingUp = () => {
                   id=""
                   className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 lg:w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
                   type="email"
+                  placeholder="correo@corre.com"
                 />
               </div>
             </div>{" "}
@@ -84,6 +92,7 @@ export const SingUp = () => {
                   id=""
                   className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 lg:w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
                   type="number"
+                  placeholder="3211234567"
                 />
               </div>
             </div>
@@ -98,6 +107,7 @@ export const SingUp = () => {
                   id=""
                   className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 lg:w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
                   type="password"
+                  placeholder="Contraseña..."
                 />
               </div>
             </div>
@@ -111,13 +121,14 @@ export const SingUp = () => {
                   id=""
                   className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 lg:w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
                   type="password"
+                  placeholder="Confirmar contraseña..."
                 />
               </div>
             </div>
           </div>
           <div className="footer mt-10 lg:mt-0 lg:my-20 mx-20 flex flex-col justify-center items-center ">
-            <div className="flex gap-5 lg:gap-56 xl:gap-40">
-              <button className=" p-4 w-40 lg:w-80 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold">
+            <div className="flex flex-col md:flex-row gap-5 lg:gap-56 xl:gap-40">
+              <button className=" p-4 w-72 md:w-40 lg:w-80 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold">
                 Registrarse
               </button>
               <button className=" p-4 w-72 lg:w-80 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex  gap-5 lg:gap-9">
@@ -137,7 +148,7 @@ export const SingUp = () => {
                 </Link>
               </strong>
               <Link
-                className=" w-40 h-14 my-5 lg:my-0 lg:mt-10 bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center"
+                className=" w-40 h-14 my-5 mb-28 lg:my-0 lg:mt-10 bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center"
                 to="/">
                 Volver
               </Link>

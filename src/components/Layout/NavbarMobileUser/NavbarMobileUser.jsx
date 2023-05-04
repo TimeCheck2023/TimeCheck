@@ -5,10 +5,11 @@ import {
   MdOutlineContactMail,
   MdOutlineContentPasteSearch,
 } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
 // import "./navbarMobile.css"; // importar archivo CSS con estilos personalizados
 
-export const NavbarMobile = () => {
+export const NavbarMobileUser = () => {
   const [openNav, setOpenNav] = useState(false);
   const menuRef = useRef(null); // Crear una referencia para el menú
 
@@ -28,25 +29,25 @@ export const NavbarMobile = () => {
 
   return (
     <div>
-      <div className="w-full sm:hidden h-20 bg-white fixed bottom-0 z-50 flex justify-between px-7 sm:px-16 items-center">
+      <div className="w-full md:hidden h-20 bg-white fixed bottom-0 z-50 flex justify-between  px-8 sm:px-16 items-center">
         <Link
-          to="/SingIn"
+          to="/"
           className="text-center flex-col text-purple-600 flex justify-center items-center">
           <FiLogIn className="text-4xl" />
-          <p className="text-sm">Iniciar Sesión</p>
+          <p className="text-sm">Cerrar sesión</p>
         </Link>
           <div
             onClick={() => {
               setOpenNav(!openNav);
             }}
-            className="text-center flex flex-col text-white h-16 w-16 mr-5 justify-center items-center rounded-full bg-purple-600 ">
+            className="text-center flex-col text-white p-3 mr-9 rounded-full bg-purple-600 flex justify-center items-center">
             <AiOutlineMenu className="text-4xl" />
           </div>
         <Link
           to="/SingUp"
           className="text-center flex-col text-purple-600 flex justify-center items-center">
-          <AiOutlineUserSwitch className="text-4xl" />
-          <p className="text-sm">Registrate</p>
+          <CgProfile className="text-4xl" />
+          <p className="text-sm">Perfil</p>
         </Link>
       </div>
       {openNav && (
