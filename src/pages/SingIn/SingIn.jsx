@@ -77,7 +77,7 @@ export const SingIn = () => {
           </div>
           <div className="mt-10 lg:mt-20 w-full flex flex-col justify-center items-center">
             <div className="flex lg:my-10 lg:mx-32 relative justify-center items-center lg:left-20 w-5/6 2xl:w-5/6">
-              <div className="flex flex-col items-center md:items-start w-full gap-3">
+              <div className="flex flex-col items-center md:items-start w-full 2xl:w-11/12 gap-3">
                 <label htmlFor="email" className="font-bold text-left">
                   Correo electronico:
                 </label>
@@ -93,8 +93,8 @@ export const SingIn = () => {
               </div>
             </div>
 
-            <div className="flex  mt-5 lg:mt-0 lg:my-10 lg:mx-32 relative lg:left-20 w-5/6">
-              <div className="flex flex-col items-center md:items-start w-full gap-3">
+            <div className="flex lg:mx-32 relative justify-center items-center lg:left-20 w-5/6 2xl:w-5/6">
+              <div className="flex flex-col items-center md:items-start w-full 2xl:w-11/12 gap-2">
                 <label htmlFor="password" className="font-bold">
                   Contraseña:
                 </label>
@@ -111,7 +111,7 @@ export const SingIn = () => {
                 )}
               </div>
             </div>
-            <div className="relative mt-5 text-center left-16 lg:mt-0 lg:left-1/2 xl:left-72 w-60 2xl:left-72">
+            <div className="relative mt-5 text-center left-16 lg:mt-0 lg:left-1/2 xl:left-72 w-60 2xl:left-72 2xl:mt-3">
               <p className="font-sans font-normal text-lg leading-6 flex items-center relative right-14 text-purple-600">
                 <Link to="" className="hover:underline">
                   ¿Se te olvidó la contaseña?

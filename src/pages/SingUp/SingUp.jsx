@@ -109,7 +109,7 @@ export const SingUp = () => {
             </p>
           </div>
           <div className="px-10 lg:px-0">
-            <div className="flex flex-col my-16 mx-0 lg:mx-20">
+            <div className="flex flex-col my-16 mx-0 lg:mx-20 2xl:my-5">
               <label htmlFor="type_user" className="font-bold">
                 Tipo de cuenta <strong className="text-red-600">*</strong>
               </label>

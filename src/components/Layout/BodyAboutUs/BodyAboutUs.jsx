@@ -18,7 +18,7 @@ export const BodyAboutUs = () => {
         </p>
       </div>
       <div className="flex flex-col lg:flex-row w-full mb-0 lg:mb-0 2xl:mt-10 2xl:mb-32 xl:mb-40">
-        <div className="flex flex-col px-16 md:w-2/3 gap-20 md:gap-32 justify-center items-center mt-5 md:mt-0 xl:my-14">
+        <div className="flex flex-col px-16 md:w-2/3  gap-20 md:gap-32 2xl:gap-20 justify-center items-center mt-5 md:mt-0 xl:my-14 2xl:my-8">
           <div className="flex flex-col w-full 2xl:w-4/5 gap-5 justify-center items-center text-center">
             <h2 className="text-4xl font-semibold text-purple-600 w-80">
               Nuestra Misión
@@ -80,7 +80,7 @@ export const BodyAboutUs = () => {
           <div className="flex flex-col lg:flex-row w-1/2 justify-center items-center">
             <ContactTeam name="Jose Daniel Aldana" />
             <ContactTeam name="Yvette Daniela Campo" />
-            <ContactTeam name="Mateo Hernandez Mahecha" />
+            <ContactTeam name="Mateo H. Mahecha" />
           </div>
           <div className="flex flex-col lg:flex-row w-1/2 justify-center items-center">
             <ContactTeam name="Sara Valentina Russi" />
