@@ -23,10 +23,10 @@ export const BodyHome = () => {
         className={`bg-cover bg-center h-80 md:h-80 w-full ${
           !isLoading ? "bg-gray-400 animate-pulse" : styles.img
         }`}>
-        <div className="text-white font-bold text-3xl md:text-5xl font-sans relative left-5 md:left-20 top-16 w-4/5 md:w-2/3">
+        <div className="text-white font-bold text-3xl md:text-5xl font-sans relative left-2 md:left-20 top-16 w-4/5 md:w-2/3">
           <h1>Los Mejores Eventos</h1>
         </div>
-        <div className="text-slate-100 relative font-sans left-5 md:left-20 top-20 w-96  md:w-1/3">
+        <div className="text-slate-100 relative font-sans left-2 md:left-20 top-20 w-96  md:w-1/3">
           <p className="text-xl">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, elit
             nibh et nisl, pellentesque scelerisque faucibus facilisis at.
