@@ -15,21 +15,20 @@ export const CardEventAdmin = (props) => {
 
   return (
     <>
-      <div className="w-80 xl:h-5/6 2xl:h-full lg:h-full border border-black hover:shadow-xl hover:shadow-neutral-500 rounded-md transform transition-transform hover:scale-110">
+      <div className="w-80 xl:h-5/6 2xl:max-h-full  lg:h-full border border-black hover:shadow-xl hover:shadow-neutral-500 rounded-md transform transition-transform hover:scale-105">
         <div>
           <img
             src={props.image}
             alt="event"
-            className="rounded-t-md"
-            width={320}
+            className="rounded-t-md w-full object-cover bg-cover max-h-64" 
           />
         </div>
         <div className="px-3 py-5">
-          <p className="font-bold text-xl">{props.title}</p>
+          <p className="font-bold text-xl truncate">{props.title}</p>
           <p className="font-semibold text-slate-600 ">{props.tipo_evento}</p>
         </div>
         <div>
-          <p className="px-3 text-sm">{props.description}</p>
+          <p className="px-3 text-sm  truncate line-clamp-0">{props.description}</p>
         </div>
         <div className="flex justify-between px-3 py-6">
           <p className="text-slate-400 font-normal">
@@ -37,7 +36,7 @@ export const CardEventAdmin = (props) => {
           </p>
           <p className="text-slate-400 font-normal">{`0/${props.aforo}`}</p>
         </div>
-        <div className="flex justify-between px-3 gap-4 mt-2 mb-4">
+        <div className="flex justify-between px-3 gap-4 mt-2 mb-4 2xl:mb-32">
           <button className="flex items-center px-3 bg-slate-100 rounded-md font-bold text-xl text-purple-600 gap-2">
             <AiFillLike className="text-purple-600" />
             10
@@ -45,7 +44,6 @@ export const CardEventAdmin = (props) => {
           <button
             onClick={handleOpenModal}
             className="hover:bg-purple-800 px-14 bg-purple-600 text-white font-medium py-1 rounded-md shadow-lg">
-            {" "}
             EDITAR
           </button>
         </div>

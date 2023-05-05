@@ -17,7 +17,7 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
     lugar: "",
     aforo: 0,
     suborganizacionId: 1,
-    tipoEventoId: 1,
+    tipoEventoId: 9,
   });
 
   const handleInputsChange = (e) => {
@@ -244,15 +244,15 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
                     name="tipoEventoId"
                     value={state.tipoEventoId}
                     onChange={handleInputsChange}>
-                    <option value="1">Educativo</option>
-                    <option value="2">Religioso</option>
-                    <option value="3">Social</option>
-                    <option value="4">Musical</option>
-                    <option value="5">Deportivo</option>
-                    <option value="6">Festival</option>
-                    <option value="7">Feria</option>
-                    <option value="8">Exposiciones</option>
-                    <option value="9">Cultural</option>
+                    <option value="9">Educativo</option>
+                    <option value="10">Religioso</option>
+                    <option value="11">Social</option>
+                    <option value="12">Cultural</option>
+                    <option value="13">Musical</option>
+                    <option value="14">Deportivo</option>
+                    <option value="15">Festival</option>
+                    <option value="16">Feria</option>
+                    <option value="17">Exposiciones</option>
                   </select>
                 </div>
               </div>
