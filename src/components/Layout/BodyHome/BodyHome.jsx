@@ -20,14 +20,14 @@ export const BodyHome = () => {
   return (
     <div className="w-full sm:ml-24 h-screen">
       <div
-        className={`bg-cover bg-center h-80 md:h-80 w-full ${
+        className={`bg-cover bg-center h-80 md:h-80 w-full flex flex-col items-center md:items-start ${
           !isLoading ? "bg-gray-400 animate-pulse" : styles.img
         }`}>
-        <div className="text-white font-bold text-3xl md:text-5xl font-sans relative left-2 md:left-20 top-16 w-4/5 md:w-2/3">
+        <div className="text-white font-bold text-3xl md:text-5xl font-sans relative md:left-20 top-16 w-72 md:w-2/3">
           <h1>Los Mejores Eventos</h1>
         </div>
-        <div className="text-slate-100 relative font-sans left-2 md:left-20 top-20 w-96  md:w-1/3">
-          <p className="text-xl">
+        <div className="text-slate-100 relative font-sans md:left-20 top-20 w-80 text-justify  md:w-1/3">
+          <p className="text-lg md:text-xl">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, elit
             nibh et nisl, pellentesque scelerisque faucibus facilisis at.
             Placerat morbi sem viverra diam lectus odio orci...

@@ -21,9 +21,9 @@ export const ModalEventInfo = ({
 
   return (
     <div
-      className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 w-full pt-5 pb-10 mb-14 2xl:h-full"
+      className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 xl:h-full w-full pt-5 pb-10 mb-14 2xl:h-full"
       onClick={handleBackdropClick}>
-      <div className="bg-white rounded-md shadow-md w-11/12 2xl:w-1/3 overflow-y-scroll 2xl:overflow-auto h-full xl:h-4/5 flex flex-col">
+      <div className="bg-white rounded-md shadow-md w-11/12 xl:w-1/2 2xl:w-1/3 overflow-y-scroll xl:overflow-auto 2xl:overflow-auto h-full xl:h-4/5 flex flex-col">
         <div className="flex justify-end px-4 py-2 rounded-t-md bg-neutral-100">
           <button
             className="text-gray-500 hover:text-gray-700 focus:outline-none"
@@ -44,11 +44,15 @@ export const ModalEventInfo = ({
         <div className="text-center my-2">
           <h1 className="text-2xl text-purple-600">{title}</h1>
         </div>
-        <div className="flex flex-col justify-center my-5 gap-10">
-          <img src={image} alt="" className="p-3 max-h-64 object-cover" />
-          <p className="text-sm px-4">{description}</p>
+        <div className="flex flex-col justify-center items-center my-5 gap-10 xl:gap-4">
+          <img
+            src={image}
+            alt=""
+            className="p-3 max-h-64 object-cover xl:max-h-72 xl:max-w-sm"
+          />
+          <p className="text-lg px-4">{description}</p>
         </div>
-        <div className="grid px-4 grid-cols-1 gap-1 my-2 2xl:grid-cols-2 2xl:gap-5">
+        <div className="grid px-4 grid-cols-1 gap-4 my-2 xl:grid-cols-2 2xl:grid-cols-2 2xl:gap-5 xl:gap-5">
           <BtnModalInfo text={tipo_evento}></BtnModalInfo>
           <BtnModalInfo text={lugar}></BtnModalInfo>
           <BtnModalInfo text={fecha_inicio}></BtnModalInfo>
@@ -60,13 +64,15 @@ export const ModalEventInfo = ({
             {valor_total !== 0 ? `$${valor_total}` : "GRATIS"}
           </p>
         </div>
-        <div className="flex flex-row justify-between px-10 mt-3 mb-10">
-        <button onClick={handleCloseModal} className="bg-purple-600 text-white px-7 2xl:px-20 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold">
-          Volver
-        </button>
-        <button className="bg-purple-600 text-white px-7 2xl:px-20 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold">
-          Asistir
-        </button>
+        <div className="flex flex-row justify-between px-10 mt-3 mb-10 xl:px-40">
+          <button
+            onClick={handleCloseModal}
+            className="bg-purple-600 text-white px-7 xl:px-24 xl:py-3 2xl:px-20 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold">
+            Volver
+          </button>
+          <button className="bg-purple-600 text-white px-7 xl:px-24 xl:py-3 2xl:px-20 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold">
+            Asistir
+          </button>
         </div>
       </div>
     </div>

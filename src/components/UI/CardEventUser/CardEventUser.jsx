@@ -22,15 +22,15 @@ export const CardEventUser = (props) => {
         <img
           src={props.image}
           alt="imagen"
-          className="rounded-md w-64 h-40 object-cover"
+          className="rounded-md max-w-md max-h-52 object-cover"
         />
       </div>
       <div className="px-3 py-3">
-        <p className="text-sm text-purple-600 font-bold">{props.title}</p>
+        <p className="text-base text-purple-600 font-bold">{props.title}</p>
         <p className="text-xs truncate">{props.description}</p>
       </div>
       <div className="flex flex-row justify-between px-8 py-4">
-        <button className="flex flex-row items-center border px-4 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1">
+        <button className="flex flex-row items-center border px-4 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-2">
           <AiOutlineLike className=" text-xl" />
           <p className="font-bold">10</p>
         </button>
@@ -38,7 +38,7 @@ export const CardEventUser = (props) => {
           onClick={() => {
             setOpenModal(!openModal);
           }}
-          className="flex flex-row items-center border px-4 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
+          className="flex flex-row items-center border px-4 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
           <p>Ver más</p>
         </button>
       </div>

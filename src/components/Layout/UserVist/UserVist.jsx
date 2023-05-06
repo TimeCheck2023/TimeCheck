@@ -48,7 +48,7 @@ export const UserVist = () => {
   // const shouldShowPaginator = visibleEvents.length > PAGE_SIZE && events.length > PAGE_SIZE;
 
   return (
-    <div className="sm:pl-20 flex flex-col 2xl:gap-14">
+    <div className="sm:pl-20 flex flex-col gap-10 2xl:gap-14 xl:gap-24">
       <div className="w-full flex justify-center mt-10">
         <div className="flex flex-col">
           <button
@@ -157,14 +157,14 @@ export const UserVist = () => {
         </div>
         <input
           type="text"
-          className="bg-slate-300 cursor-pointer py-2 focus:outline-none focus:border focus:border-gray-400 h-10 rounded-r-md w-1/4 text-zinc-500 text-base px-4"
+          className="bg-slate-300 cursor-pointer py-2 focus:outline-none focus:border focus:border-gray-400 h-10 rounded-r-md md:w-1/4 w-1/2 text-zinc-500 text-base px-4"
           placeholder="Busca un evento"
         />
-        <div className="absolute right-1/3 mr-5 top-28 2xl:top-12 2xl:right-80 2xl:mr-72 2xl:pr-2 mt-1 text-lg">
+        <div className="absolute right-10 mr-5 top-12 xl:top-12 2xl:top-12 2xl:right-80 2xl:mr-72 2xl:pr-2 xl:right-1/3 xl:mr-0 mt-1 text-lg">
           <AiOutlineSearch />
         </div>
       </div>
-      <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 place-items-center content-center center gap-5 pb-10">
+      <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 place-items-center content-center justify-center items-center place-content-center  gap-5 pb-10">
         {loading ? (
           <LoaderEventsGet />
         ) : (
