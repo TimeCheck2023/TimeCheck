@@ -53,7 +53,7 @@ export const SingIn = () => {
             ¡Bienvenidos a nuestra plataforma!
           </h1>
         </div>
-        <div className="flex flex-col items-center justify-center gap-5 py-10">
+        <div className="flex flex-col items-center justify-center gap-5 py-10 lg:py-0">
           <p className="text-white font-sans text-justify text-xl px-24 mt-7">
             Si eres un usuario que va a asistir a eventos, podrás ver todos los
             eventos a los que estás registrado y confirmar tu asistencia. Si
@@ -61,7 +61,11 @@ export const SingIn = () => {
             eventos, gestionar la información del evento, enviar invitaciones y
             hacer un seguimiento de la asistencia de tus invitados.
           </p>
-          <img src="/image1.webp" alt="img" className="w-3/5 h-96 my-20 " />
+          <img
+            src="/image1.webp"
+            alt="img"
+            className="w-3/5 lg:h-72 object-cover xl:h-96 my-20 "
+          />
         </div>
       </div>
       <div className="w-full lg:w-1/2 h-full ">
@@ -75,9 +79,9 @@ export const SingIn = () => {
               ingresa tus credenciales para acceder a tu cuenta.
             </p>
           </div>
-          <div className="mt-10 lg:mt-20 w-full flex flex-col justify-center items-center">
-            <div className="flex lg:my-10 lg:mx-32 relative justify-center items-center lg:left-20 w-5/6 2xl:w-5/6">
-              <div className="flex flex-col items-center md:items-start w-full 2xl:w-11/12 gap-3">
+          <div className="mt-10 lg:mt-10 xl:mt-20 w-full flex flex-col justify-center items-center">
+            <div className="flex lg:my-10 lg:mx-32 relative justify-center items-center lg:left-14 xl:w-4/5 w-5/6 2xl:w-5/6">
+              <div className="flex flex-col items-center md:items-start w-full lg:w-11/12 2xl:w-11/12 gap-3">
                 <label htmlFor="email" className="font-bold text-left">
                   Correo electronico:
                 </label>
@@ -93,8 +97,8 @@ export const SingIn = () => {
               </div>
             </div>
 
-            <div className="flex lg:mx-32 relative justify-center items-center lg:left-20 w-5/6 2xl:w-5/6">
-              <div className="flex flex-col items-center md:items-start w-full 2xl:w-11/12 gap-2">
+            <div className="flex lg:mx-32 relative justify-center items-center lg:left-14 xl:w-4/5 w-5/6 2xl:w-5/6">
+              <div className="flex flex-col items-center md:items-start w-full lg:w-11/12 2xl:w-11/12 gap-2">
                 <label htmlFor="password" className="font-bold">
                   Contraseña:
                 </label>
@@ -111,7 +115,7 @@ export const SingIn = () => {
                 )}
               </div>
             </div>
-            <div className="relative mt-5 text-center left-16 lg:mt-0 lg:left-1/2 xl:left-72 w-60 2xl:left-72 2xl:mt-3">
+            <div className="relative mt-5 text-center left-16 lg:mt-0 lg:left-1/4 xl:left-60 w-60 xl:my-7 2xl:left-72 2xl:mt-3">
               <p className="font-sans font-normal text-lg leading-6 flex items-center relative right-14 text-purple-600">
                 <Link to="" className="hover:underline">
                   ¿Se te olvidó la contaseña?
@@ -138,7 +142,7 @@ export const SingIn = () => {
                   <p>Iniciar con Google</p>
                 </button>
               </div>
-              <div className="mt-16 lg:mt-24 flex justify-center items-center flex-col">
+              <div className="mt-16 lg:mt-6 xl:mt-16 flex justify-center items-center flex-col">
                 <p className="font-sans font-normal text-xl leading-6 flex flex-col md:flex-row gap-1 items-center text-gray-500">
                   ¿No tienes cuenta?
                   <strong className="text-purple-600 ml-3">
@@ -149,7 +153,7 @@ export const SingIn = () => {
                 </p>
 
                 <Link
-                  className=" p-4 w-40 h-14 mt-10 mb-20 md:mb-0 bg-purple-900 hover:bg-purple-600 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center"
+                  className=" p-4 w-40 h-14 mt-6 xl:mt-12 mb-20 md:mb-0 bg-purple-900 hover:bg-purple-600 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center"
                   to="/">
                   Volver
                 </Link>

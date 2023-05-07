@@ -94,7 +94,11 @@ export const SingUp = () => {
           </div>
         </div>
         <div className="relative left-24 top-40">
-          <img src="/image1.webp" alt="img" width={600} />
+          <img
+            src="/image1.webp"
+            alt="img"
+            className="w-4/5 lg:h-80 object-cover xl:h-96"
+          />
         </div>
       </div>
       <div className="w-full lg:w-1/2 h-full ">
@@ -220,8 +224,8 @@ export const SingUp = () => {
                 </div>
               </div>
             </div>
-            <div className="footer mt-10 lg:mt-0 lg:my-20 mx-20 flex flex-col justify-center items-center ">
-              <div className="flex flex-col md:flex-row gap-5 lg:gap-56 xl:gap-40">
+            <div className="footer mt-10 lg:mt-0 xl:mt-20 lg:my-20 mx-20 flex flex-col justify-center items-center ">
+              <div className="flex flex-col md:flex-row gap-5 lg:gap-10 xl:gap-40">
                 <button className=" p-4 w-72 md:w-40 lg:w-80 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold">
                   Registrarse
                 </button>
@@ -232,17 +236,20 @@ export const SingUp = () => {
                   <p>Registrate con Google</p>
                 </button>
               </div>
-              <div className="mt-10 gap-5 flex justify-center items-center flex-col">
-                <p className="font-sans font-normal text-xl leading-6 flex items-center text-gray-500">
-                  ¿Ya tines cuenta?{" "}
-                </p>
-                <strong className="text-purple-600 ml-3">
-                  <Link className="hover:underline text-xl" to="/SingIn">
-                    ¡Inicia sesión!
-                  </Link>
-                </strong>
+              <div className="mt-8 xl:mt-20 gap-5 flex justify-center items-center flex-col ">
+                <div className="flex flex-row">
+                  {" "}
+                  <p className="font-sans font-normal text-xl leading-6 flex items-center text-gray-500">
+                    ¿Ya tines cuenta?{" "}
+                  </p>
+                  <strong className="text-purple-600 ml-3">
+                    <Link className="hover:underline text-xl" to="/SingIn">
+                      ¡Inicia sesión!
+                    </Link>
+                  </strong>
+                </div>
                 <Link
-                  className=" w-40 h-14 my-5 mb-28 lg:my-0 lg:mt-10 bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center"
+                  className=" w-40 h-14 my-5 mb-28 lg:my-0 lg:mt-0 xl:mt-10 bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center"
                   to="/">
                   Volver
                 </Link>
