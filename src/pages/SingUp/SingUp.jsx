@@ -1,78 +1,200 @@
-import React, { useState } from "react";
-import { LabelBtn } from "../../components/UI/LabelBtn/LabelBtn";
+import React, { useState, useRef } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { NavbarMobile } from "../../components/Layout/NavbarMobile/NavbarMobile";
+import { FormUser } from "../../components/Layout/FormUser/FormUser";
+import { FormOrg } from "../../components/Layout/FormOrg/FormOrg";
 
 export const SingUp = () => {
-  const [formValues, setFormValues] = useState({
+  const [valueSelect, setValueSelect] = useState("personal");
+
+  //estado para controlar los input
+  const [values_us, setValues_us] = useState({
+    documentType: "",
+    documentNumber: "",
     fullName: "",
-    email: "",
-    phone: "",
+    emailAddress: "",
     password: "",
-    confirmPassword: "",
-    userType: "personal",
   });
+
+  const [values_org, setValues_org] = useState({
+    fullName: "",
+    address: "",
+    emailAddress: "",
+    password: "",
+  });
+
+  const selectRef = useRef(null);
+
   const [errors, setErrors] = useState({
     fullName: "",
-    email: "",
+    documentNumber: "",
+    emailAddress: "",
     phone: "",
     password: "",
     confirmPassword: "",
+  });
+
+  const [errorsOrg, setErrorsOrg] = useState({
+    fullName: "",
+    address: "",
+    emailAddress: "",
+    password: "",
+    confirmPassword: "",
+    phone: "",
   });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormValues({ ...formValues, [name]: value });
+    setValues_us({ ...values_us, [name]: value });
   };
 
+  const handleInputChangeOrg = (e) => {
+    const { name, value } = e.target;
+    setValues_org({ ...values_org, [name]: value });
+  };
+
+  //Función para validar los campos del formulario de org
+
+  function validateFormOrg(values) {
+    const errorsO = {};
+
+    if (!values.fullName) {
+      errorsO.fullName = "Debe de ingresar el nombre de la organización";
+    }
+
+    if (!values.address) {
+      errorsO.address = "Debe de ingresar una dirección de residencia";
+    }
+
+    if (!values.emailAddress) {
+      errorsO.emailAddress = "Debe de ingresar un correo electrónico!";
+    } else if (!/\S+@\S+\.\S+/.test(values.emailAddress)) {
+      errorsO.emailAddress = "El correo electrónico no es valido!";
+    }
+
+    if (!values.phone) {
+      errorsO.phone = "Debe ingresar su número de teléfono";
+    } else if (!/^[0-9]+$/.test(values.phone)) {
+      errorsO.phone = "El número de teléfono debe contener solo números";
+    }
+
+    if (!values.password) {
+      errorsO.password = "Debe ingresar una contraseña";
+    } else if (values.password.length < 6) {
+      errorsO.password = "La contraseña debe tener al menos 6 caracteres";
+    }
+
+    if (!values.confirmPassword) {
+      errorsO.confirmPassword = "Debe confirmar la contraseña";
+    } else if (values.password !== values.confirmPassword) {
+      errorsO.confirmPassword = "Las contraseñas no coinciden";
+    }
+
+    return errorsO;
+  }
+
+  //Función para validar los campos del formulario de usuario
+  function validateFormUser(values) {
+    const errors = {};
+
+    if (!values.fullName) {
+      errors.fullName = "Debe ingresar su nombre completo";
+    }
+
+    if (!values.documentNumber) {
+      errors.documentNumber = "Debe ingresar un número de documento!";
+    } else if (!/^[0-9]+$/.test(values.documentNumber)) {
+      errors.documentNumber = "Debe de ingresar un número de documento valido!";
+    }
+
+    if (!values.emailAddress) {
+      errors.emailAddress = "Debe ingresar su correo electrónico";
+    } else if (!/\S+@\S+\.\S+/.test(values.emailAddress)) {
+      errors.emailAddress = "El correo electrónico no es válido";
+    }
+
+    if (!values.phone) {
+      errors.phone = "Debe ingresar su número de teléfono";
+    } else if (!/^[0-9]+$/.test(values.phone)) {
+      errors.phone = "El número de teléfono debe contener solo números";
+    }
+
+    if (!values.password) {
+      errors.password = "Debe ingresar una contraseña";
+    } else if (values.password.length < 6) {
+      errors.password = "La contraseña debe tener al menos 6 caracteres";
+    }
+
+    if (!values.confirmPassword) {
+      errors.confirmPassword = "Debe confirmar la contraseña";
+    } else if (values.password !== values.confirmPassword) {
+      errors.confirmPassword = "Las contraseñas no coinciden";
+    }
+
+    return errors;
+  }
+
+  //Función que se ejecuta al enviar el formulario usuario/organización
   const handleSubmit = (event) => {
     event.preventDefault();
     // Validaciones
-    const newErrors = {};
-    if (!formValues.fullName) {
-      newErrors.fullName = "Debe ingresar su nombre completo";
-    }
-    if (!formValues.email) {
-      newErrors.email = "Debe ingresar su correo electrónico";
-    } else if (!/\S+@\S+\.\S+/.test(formValues.email)) {
-      newErrors.email = "El correo electrónico no es válido";
-    }
-    if (!formValues.phone) {
-      newErrors.phone = "Debe ingresar su número de teléfono";
-    } else if (!/^[0-9]+$/.test(formValues.phone)) {
-      newErrors.phone = "El número de teléfono debe contener solo números";
-    }
-    if (!formValues.password) {
-      newErrors.password = "Debe ingresar una contraseña";
-    } else if (formValues.password.length < 6) {
-      newErrors.password = "La contraseña debe tener al menos 6 caracteres";
-    }
-    if (!formValues.confirmPassword) {
-      newErrors.confirmPassword = "Debe confirmar la contraseña";
-    } else if (formValues.password !== formValues.confirmPassword) {
-      newErrors.confirmPassword = "Las contraseñas no coinciden";
-    }
-    setErrors(newErrors);
-    if (
-      newErrors.fullName ||
-      newErrors.email ||
-      newErrors.phone ||
-      newErrors.password ||
-      newErrors.confirmPassword
-    ) {
-      console.log(newErrors); // o mostrarlos de otra manera
+    if (valueSelect == "personal") {
+      const errorsUser = validateFormUser(values_us);
+      setErrors(errorsUser);
+
+      if (Object.keys(errorsUser).length > 0) {
+        console.log(errorsUser);
+      } else {
+        console.log(values_us);
+        // Aquí puedes enviar el formulario a través de una solicitud HTTP o hacer cualquier otra cosa que necesites hacer con los datos del formulario
+        fetch(
+          "https://timecheckbacknodejs-production.up.railway.app/user/register",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              documentType: values_us.documentType,
+              documentNumber: values_us.documentNumber,
+              fullName: values_us.fullName,
+              emailAddress: values_us.emailAddress,
+              password: values_us.password,
+            }),
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Respuesta del servidor:", data);
+          })
+          .catch((error) => {
+            console.error("Error al enviar la solicitud:", error);
+          });
+      }
+    } else if (valueSelect == "organizacion") {
+      const errorOrg = validateFormOrg(values_org);
+      setErrorsOrg(errorOrg);
+      if (Object.keys(errorOrg).length > 0) {
+        console.log(errorOrg);
+      } else {
+        console.log(values_org);
+        // Aquí puedes enviar el formulario a través de una solicitud HTTP o hacer cualquier otra cosa que necesites hacer con los datos del formulario
+        
+      }
     } else {
-      console.log("El formulario es válido");
-      console.log(formValues);
-      // Aquí puedes enviar el formulario a través de una solicitud HTTP o hacer cualquier otra cosa que necesites hacer con los datos del formulario
+      console.log("error");
     }
   };
 
   const handleSelectChange = (event) => {
-    const { value } = event.target;
-    setFormValues({ ...formValues, userType: value });
+    // const { value } = event.target;
+    // setValues_us({ ...values_us, userType: value });
+    // setFormValuesOrganizacion({ ...formValuesOrganizacion, userType: value });
+    const selectedValue = selectRef.current.value;
+    setValueSelect(selectedValue);
   };
+
   return (
     <div className="w-screen h-screen flex flex-row">
       <NavbarMobile />
@@ -105,7 +227,7 @@ export const SingUp = () => {
         <form action="" onSubmit={handleSubmit}>
           <div className="flex justify-center items-center flex-col">
             <h2 className="font-bold text-center lg:text-left text-5xl xl:text-6xl tracking-tight leading-1.19 font-sans text-base-02 mt-8">
-              ¡Crear una cuenta {formValues.userType}!
+              ¡Crear una cuenta {valueSelect}!
             </h2>
             <p className="font-normal text-lg leading-1.67 font-sans text-gray-500 relative mt-5 px-5 lg:px-0">
               ¡Únete a nuestra comunidad de organizadores y asistentes de
@@ -117,7 +239,9 @@ export const SingUp = () => {
               <label htmlFor="type_user" className="font-bold">
                 Tipo de cuenta <strong className="text-red-600">*</strong>
               </label>
+
               <select
+                ref={selectRef}
                 onChange={handleSelectChange}
                 id="type_user"
                 name="type_user"
@@ -126,105 +250,16 @@ export const SingUp = () => {
                 <option value="organizacion">Organización</option>
               </select>
             </div>
-            <div className="flex flex-col lg:flex-row gap-5 mb-6 lg:mb-0 lg:my-10 lg:mx-20 justify-between">
-              <div className="flex flex-col w-full ">
-                <label htmlFor="fullName" className="font-bold">
-                  Nombre Completo<strong className="text-red-600">*</strong>
-                </label>
-                <input
-                  onChange={handleInputChange}
-                  id="fullName"
-                  name="fullName"
-                  className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 lg:w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
-                  type="text"
-                  placeholder="Nombre Completo..."
-                />
-                {errors.fullName && (
-                  <p className="text-red-600 font-bold">{errors.fullName}</p>
-                )}
-              </div>{" "}
-            </div>
-            <div className="flex lg:my-10 flex-col lg:flex-row gap-5 justify-between w-full">
-              <div className="flex relative lg:left-20 w-full">
-                <div className="flex flex-col w-full ">
-                  <label htmlFor="email" className="font-bold">
-                    Correo electronico
-                    <strong className="text-red-600">*</strong>
-                  </label>
-                  <input
-                    onChange={handleInputChange}
-                    id="email"
-                    name="email"
-                    className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 lg:w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
-                    type="email"
-                    placeholder="correo@corre.com"
-                  />
-                  {errors.email && (
-                    <p className="text-red-600 font-bold">{errors.email}</p>
-                  )}
-                </div>
-              </div>{" "}
-              <div className="flex w-full">
-                <div className="flex flex-col w-full ">
-                  <label htmlFor="phone" className="font-bold">
-                    Telefono<strong className="text-red-600">*</strong>
-                  </label>
-                  <input
-                    onChange={handleInputChange}
-                    id="phone"
-                    name="phone"
-                    className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 lg:w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
-                    type="number"
-                    placeholder="3211234567"
-                  />
-                  {errors.phone && (
-                    <p className="text-red-600 font-bold">{errors.phone}</p>
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col gap-5 lg:gap-0 lg:flex-row mt-6 lg:mt-0 lg:my-10 lg:mx-20 justify-between">
-              <div className="flex w-full">
-                <div className="flex flex-col w-full ">
-                  <label htmlFor="password" className="font-bold">
-                    Contraseña<strong className="text-red-600">*</strong>
-                  </label>
-                  <input
-                    onChange={handleInputChange}
-                    id="password"
-                    name="password"
-                    className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 lg:w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
-                    type="password"
-                    placeholder="Contraseña..."
-                  />
-                  {errors.password && (
-                    <p className="text-red-600 font-bold">{errors.password}</p>
-                  )}
-                </div>
-              </div>
-              <div className="flex w-full">
-                <div className="flex flex-col w-full ">
-                  <label htmlFor="confirmPassword" className="font-bold">
-                    Confirmar contraseña
-                    <strong className="text-red-600">*</strong>
-                  </label>
-                  <input
-                    onChange={handleInputChange}
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 lg:w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
-                    type="password"
-                    placeholder="Confirmar contraseña..."
-                  />
-                  {errors.confirmPassword && (
-                    <p className="text-red-600 font-bold">
-                      {errors.confirmPassword}
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="footer mt-10 lg:mt-0 xl:mt-20 lg:my-20 mx-20 flex flex-col justify-center items-center ">
+            {valueSelect == "personal" ? (
+              <FormUser handleInputChange={handleInputChange} errors={errors} />
+            ) : (
+              <FormOrg
+                handleInputChange={handleInputChangeOrg}
+                errors={errorsOrg}
+                handleInputChangeS={handleSelectChangeDocumentType}
+              />
+            )}
+            <div className="footer mt-10 lg:mt-0 xl:mt-20 2xl:mt-10 lg:my-20 mx-20 flex flex-col justify-center items-center ">
               <div className="flex flex-col md:flex-row gap-5 lg:gap-10 xl:gap-40">
                 <button className=" p-4 w-72 md:w-40 lg:w-80 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold">
                   Registrarse
@@ -236,11 +271,11 @@ export const SingUp = () => {
                   <p>Registrate con Google</p>
                 </button>
               </div>
-              <div className="mt-8 xl:mt-20 gap-5 flex justify-center items-center flex-col ">
+              <div className="mt-8 xl:mt-20 2xl:mt-10 gap-5 flex justify-center items-center flex-col ">
                 <div className="flex flex-row">
                   {" "}
                   <p className="font-sans font-normal text-xl leading-6 flex items-center text-gray-500">
-                    ¿Ya tines cuenta?{" "}
+                    ¿Ya tienes cuenta?{" "}
                   </p>
                   <strong className="text-purple-600 ml-3">
                     <Link className="hover:underline text-xl" to="/SingIn">

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { NavbarMobile } from "../../components/Layout/NavbarMobile/NavbarMobile";
 
 export const SingIn = () => {
-  const [email, setEmail] = useState("");
+  const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -12,7 +12,7 @@ export const SingIn = () => {
 
   const handleEmailChange = (e) => {
     // Actualiza el estado del correo electrónico
-    setEmail(e.target.value);
+    setEmailAddress(e.target.value);
     // Verifica si el valor es un correo electrónico válido
     const validEmailRegex = /\S+@\S+\.\S+/;
     if (!validEmailRegex.test(e.target.value)) {
@@ -26,22 +26,37 @@ export const SingIn = () => {
     // Actualiza el estado de la contraseña
     setPassword(e.target.value);
     // Verifica si la contraseña es válida (tiene al menos 8 caracteres)
-    if (e.target.value.length < 8) {
-      setPasswordError("La contraseña debe tener al menos 8 caracteres");
-    } else {
-      setPasswordError("");
-    }
+   
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!email || !password) {
+    if (!emailAddress || !password) {
       setFormError("Por favor, completa todos los campos");
     } else if (emailError || passwordError) {
       setFormError("Por favor, corrige los errores en el formulario");
     } else {
       setFormError("");
-      console.log("enviando...");
+      fetch(
+        "https://timecheckbacknodejs-production.up.railway.app/Auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            emailAddress: emailAddress,
+            password: password,
+          }),
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Respuesta del servidor:", data.message.token);
+        })
+        .catch((error) => {
+          console.error("Error al enviar la solicitud:", error);
+        });
     }
   };
   return (
@@ -82,15 +97,15 @@ export const SingIn = () => {
           <div className="mt-10 lg:mt-10 xl:mt-20 w-full flex flex-col justify-center items-center">
             <div className="flex lg:my-10 lg:mx-32 relative justify-center items-center lg:left-14 xl:w-4/5 w-5/6 2xl:w-5/6">
               <div className="flex flex-col items-center md:items-start w-full lg:w-11/12 2xl:w-11/12 gap-3">
-                <label htmlFor="email" className="font-bold text-left">
+                <label htmlFor="emailAddress" className="font-bold text-left">
                   Correo electronico:
                 </label>
                 <input
-                  id="email"
-                  name="email"
+                  id="emailAddress"
+                  name="emailAddress"
                   className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
-                  type="email"
-                  value={email}
+                  type="emailAddress"
+                  value={emailAddress}
                   onChange={handleEmailChange}
                 />
                 {emailError && <p className="text-red-500">{emailError}</p>}
