@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const SingUp = () => {
   const [valueSelect, setValueSelect] = useState("personal");
+  const [loading, setLoading] = useState(false)
   const url = import.meta.env.VITE_URL;
   // console.log(url);
 
