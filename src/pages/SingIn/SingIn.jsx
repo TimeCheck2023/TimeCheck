@@ -10,6 +10,9 @@ export const SingIn = () => {
   const [passwordError, setPasswordError] = useState("");
   const [formError, setFormError] = useState("");
 
+  const url = import.meta.env.VITE_URL;
+  // console.log(url);
+
   const handleEmailChange = (e) => {
     // Actualiza el estado del correo electrónico
     setEmailAddress(e.target.value);
@@ -53,7 +56,7 @@ export const SingIn = () => {
         .then((data) => {
           // console.log("Respuesta del servidor:", data.message.token);
           localStorage.setItem("token_login", data.message.token);
-          window.location.href = "/Dashboard";
+          window.location.href = `${url}/Dashboard`;
         })
         .catch((error) => {
           console.error("Error al enviar la solicitud:", error);

@@ -2,11 +2,15 @@ import React from "react";
 import { BiLogOut } from "react-icons/bi";
 
 export const BtnLogout = ({ openNavBar }) => {
+
+  const url = import.meta.env.VITE_URL;
+  // console.log(url);
+
   const handleLogout = () => {
     // Eliminar el token de sesión del almacenamiento local
     localStorage.removeItem("token_login");
     // Redirigir al usuario a la página de inicio de sesión
-    window.location.href = "/";
+    window.location.href = `${url}/`;
   };
   return (
     <div

@@ -9,7 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const SingUp = () => {
   const [valueSelect, setValueSelect] = useState("personal");
-  const [loading, setLoading] = useState(false);
+  const url = import.meta.env.VITE_URL;
+  // console.log(url);
 
   //estado para controlar los input
   const [values_us, setValues_us] = useState({
@@ -205,7 +206,7 @@ export const SingUp = () => {
                   progress: false,
                   onClose: () => {
                     setTimeout(() => {
-                      window.location.href = "/SingIn";
+                      window.location.href = `${url}/SingIn`;
                     }, 5000); // Redireccionar después de 2 segundos (2000 milisegundos)
                   },
                 }

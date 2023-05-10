@@ -9,6 +9,8 @@ import jwtDecode from "jwt-decode";
 export const Dashboard = () => {
   const [userType, setUserType] = useState(null);
 
+
+
   useEffect(() => {
     const token = localStorage.getItem("token_login");
     if (!token) {
@@ -22,6 +24,7 @@ export const Dashboard = () => {
   if (userType === 1) {
     return (
       <div className="w-full h-screen">
+        
         <SlideBarUser
           activeHome={true}
           activeAboutUs={false}
