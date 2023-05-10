@@ -111,7 +111,7 @@ export const SlideBarUser = ({
                   ? "w-4/5 justify-start items-start"
                   : "justify-center items-center"
               }`}>
-              <Link to="/Statistics" className="flex flex-row gap-3">
+              <Link to="/AboutUs" className="flex flex-row gap-3">
                 <MdGroups />
                 {openNavBar ? (
                   <p className="text-lg font-medium">Sobre nosotros</p>
@@ -128,7 +128,7 @@ export const SlideBarUser = ({
                   ? "w-4/5 justify-start items-start"
                   : "justify-center items-center"
               }`}>
-              <Link to="/Statistics" className="flex flex-row gap-3">
+              <Link to="/ContactUs" className="flex flex-row gap-3">
                 <MdContactSupport />
                 {openNavBar ? (
                   <p className="text-lg font-medium">Contáctanos</p>

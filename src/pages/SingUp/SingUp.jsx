@@ -227,6 +227,67 @@ export const SingUp = () => {
       } else {
         console.log(values_org);
         // Aquí puedes enviar el formulario a través de una solicitud HTTP o hacer cualquier otra cosa que necesites hacer con los datos del formulario
+              // Muestra una notificación mientras se carga el formulario
+              toast.info("Cargando...", {
+                position: "top-right",
+                autoClose: 1300,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+              });
+      
+              // Aquí puedes enviar el formulario a través de una solicitud HTTP o hacer cualquier otra cosa que necesites hacer con los datos del formulario
+              fetch(
+                "https://timecheckbacknodejs-production.up.railway.app/Org/register",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    organization_name: values_org.fullName,
+                    address_organization: values_org.address,
+                    email_organization: values_org.emailAddress,
+                    organization_password: values_org.password,
+                  }),
+                }
+              )
+                .then((response) => response.json())
+                .then((data) => {
+                  if (data.error) {
+                    toast.error(`Error: ${data.error}`, {
+                      position: "bottom-center",
+                      autoClose: 3000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "dark",
+                    });
+                  } else {
+                    toast.success(
+                      "¡Bienvenido! tu organización ha sido creada con éxito.",
+                      {
+                        position: "top-center",
+                        theme: "dark",
+                        hideProgressBar: false,
+                        progress: false,
+                        onClose: () => {
+                          setTimeout(() => {
+                            navigate("/SingIn");
+                          }, 5000); // Redireccionar después de 2 segundos (2000 milisegundos)
+                        },
+                      }
+                    );
+                  }
+                })
+                .catch((error) => {
+                  console.error("Error al enviar la solicitud:", error);
+                });
       }
     } else {
       console.log("error");
@@ -313,7 +374,7 @@ export const SingUp = () => {
                   <p>Registrate con Google</p>
                 </button>
               </div>
-              <div className="mt-8 xl:mt-20 2xl:mt-10 gap-5 flex justify-center items-center flex-col ">
+              <div className="mt-8 xl:mt-20 2xl:mt-5 gap-5 flex justify-center items-center flex-col ">
                 <div className="flex flex-row">
                   {" "}
                   <p className="font-sans font-normal text-xl leading-6 flex items-center text-gray-500">
@@ -326,7 +387,7 @@ export const SingUp = () => {
                   </strong>
                 </div>
                 <Link
-                  className=" w-40 h-14 my-5 mb-28 lg:my-0 lg:mt-0 xl:mt-10 bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center"
+                  className=" w-40 h-14 my-5 2xl:mt-5 mb-28 lg:my-0 lg:mt-0 xl:mt-10 bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center"
                   to="/">
                   Volver
                 </Link>

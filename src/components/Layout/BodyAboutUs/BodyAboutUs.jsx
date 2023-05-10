@@ -46,7 +46,7 @@ export const BodyAboutUs = () => {
           </div>
         </div>
 
-        <div class="w-full lg:w-1/2 mb-60 lg:mb-0">
+        <div className="w-full lg:w-1/2 mb-60 lg:mb-0">
           <div className="flex flex-col w-full gap-10 h-80 p-20">
             <div className="w-full flex flex-col lg:flex-row gap-10">
               <div

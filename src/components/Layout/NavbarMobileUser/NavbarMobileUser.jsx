@@ -44,7 +44,7 @@ export const NavbarMobileUser = () => {
             <AiOutlineMenu className="text-4xl" />
           </div>
         <Link
-          to="/SingUp"
+          to="/Profile"
           className="text-center flex-col text-purple-600 flex justify-center items-center">
           <CgProfile className="text-4xl" />
           <p className="text-sm">Perfil</p>

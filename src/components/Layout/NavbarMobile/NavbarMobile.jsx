@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 // import "./navbarMobile.css"; // importar archivo CSS con estilos personalizados
 
 export const NavbarMobile = () => {
+  const user = localStorage.getItem("token_login");
+
   const [openNav, setOpenNav] = useState(false);
   const menuRef = useRef(null); // Crear una referencia para el menú
 
@@ -35,13 +37,13 @@ export const NavbarMobile = () => {
           <FiLogIn className="text-4xl" />
           <p className="text-sm">Iniciar Sesión</p>
         </Link>
-          <div
-            onClick={() => {
-              setOpenNav(!openNav);
-            }}
-            className="text-center flex flex-col text-white h-16 w-16 mr-5 justify-center items-center rounded-full bg-purple-600 ">
-            <AiOutlineMenu className="text-4xl" />
-          </div>
+        <div
+          onClick={() => {
+            setOpenNav(!openNav);
+          }}
+          className="text-center flex flex-col text-white h-16 w-16 mr-5 justify-center items-center rounded-full bg-purple-600 ">
+          <AiOutlineMenu className="text-4xl" />
+        </div>
         <Link
           to="/SingUp"
           className="text-center flex-col text-purple-600 flex justify-center items-center">
@@ -59,11 +61,19 @@ export const NavbarMobile = () => {
               className="bg-purple-600 rounded-full h-16 w-16 mx-2 text-center flex justify-center items-center text-3xl text-white">
               <MdOutlineContactMail />
             </Link>
-            <Link
-              to="/"
-              className="bg-purple-600 rounded-full h-16 w-16 mx-2 mb-16 text-center flex justify-center items-center text-3xl">
-              <AiFillHome className="text-white" />
-            </Link>
+            {user ? (
+              <Link
+                to="/Dashboard"
+                className="bg-purple-600 rounded-full h-16 w-16 mx-2 mb-16 text-center flex justify-center items-center text-3xl">
+                <AiFillHome className="text-white" />
+              </Link>
+            ) : (
+              <Link
+                to="/"
+                className="bg-purple-600 rounded-full h-16 w-16 mx-2 mb-16 text-center flex justify-center items-center text-3xl">
+                <AiFillHome className="text-white" />
+              </Link>
+            )}
             <Link
               to="/AboutUs"
               className="bg-purple-600 rounded-full h-16 w-16 mx-2 text-center flex justify-center items-center text-3xl text-white">

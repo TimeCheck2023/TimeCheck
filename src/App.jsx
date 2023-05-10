@@ -7,6 +7,7 @@ import { AboutUs } from "./pages/AboutUs/AboutUs";
 import { Dashboard } from "./pages/Dashboard/Dashboard";
 import { Statistics } from "./pages/Statistics/Statistics";
 import { ToastContainer } from "react-toastify";
+import { ProfileUser } from "./components/Layout/ProfileUser/ProfileUser";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/ContactUs" element={<Contact />} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Statistics" element={<Statistics />} />
+          <Route path="/Profile" element={<ProfileUser />} />
         </Routes>
       </Router>
     </>

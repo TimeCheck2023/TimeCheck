@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, Navigate,useNavigate } from "react-router-dom";
 import { NavbarMobile } from "../../components/Layout/NavbarMobile/NavbarMobile";
+import { toast } from "react-toastify";
 
 export const SingIn = () => {
   const [emailAddress, setEmailAddress] = useState("");
@@ -56,9 +57,26 @@ export const SingIn = () => {
       )
         .then((response) => response.json())
         .then((data) => {
+          if (data.error) {+
+            console.log(data)
+            toast.error(`Error: correo o contraseña incorrecta!`, {
+              position: "bottom-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+          } else {
+            console.log(data)
+            localStorage.setItem("hasShownToast", false)
+            localStorage.setItem("token_login", data.message.token);
+            navigate(`/Dashboard`);
+          }
           // console.log("Respuesta del servidor:", data.message.token);
-          localStorage.setItem("token_login", data.message.token);
-          navigate(`/Dashboard`);
+
         })
         .catch((error) => {
           console.error("Error al enviar la solicitud:", error);

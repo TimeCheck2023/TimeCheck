@@ -13,6 +13,7 @@ export const BtnLogout = ({ openNavBar }) => {
   const handleLogout = () => {
     // Eliminar el token de sesión del almacenamiento local
     localStorage.removeItem("token_login");
+    localStorage.removeItem("hasShownToast");
     // Redirigir al usuario a la página de inicio de sesión
     navigate(`/`);
   };

@@ -6,9 +6,11 @@ import { SlideBarUser } from "../../components/Layout/SlideBarUser/SlideBarUser"
 import React, { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
 import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const Dashboard = () => {
   const [userType, setUserType] = useState(null);
+  const [showToast, setShowToast] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,8 +20,23 @@ export const Dashboard = () => {
     } else {
       const decoded = jwtDecode(token);
       setUserType(decoded.payload.esUsuario);
+      const hasShownToast = localStorage.getItem("hasShownToast");
+      if (hasShownToast) {
+        setShowToast(true);
+        localStorage.setItem("hasShownToast", "true");
+      }
     }
   }, [navigate]);
+
+  useEffect(() => {
+    if (showToast) {
+      toast.success("¡Bienvenido de nuevo! Has iniciado sesión correctamente.",{
+        theme: "dark"
+      });
+      localStorage.removeItem("hasShownToast")
+      setShowToast(false);
+    }
+  }, [showToast]);
 
   if (userType === 1) {
     return (
@@ -37,7 +54,8 @@ export const Dashboard = () => {
   } else if (userType === 2) {
     return (
       <div className="w-full h-screen">
-        <h2>Vista de organización</h2>
+        <SlideBar activeConfig={false} activeEvent={true} activeGroup={false} activeNotify={false} activeStats={false}/>
+        <EventsVist />
       </div>
     );
   } else {
