@@ -26,7 +26,6 @@ export const SingIn = () => {
     // Actualiza el estado de la contraseña
     setPassword(e.target.value);
     // Verifica si la contraseña es válida (tiene al menos 8 caracteres)
-   
   };
 
   const handleSubmit = (e) => {
@@ -52,7 +51,9 @@ export const SingIn = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log("Respuesta del servidor:", data.message.token);
+          // console.log("Respuesta del servidor:", data.message.token);
+          localStorage.setItem("token_login", data.message.token);
+          window.location.href = "/Dashboard";
         })
         .catch((error) => {
           console.error("Error al enviar la solicitud:", error);

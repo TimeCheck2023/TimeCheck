@@ -4,13 +4,16 @@ import { Link } from "react-router-dom";
 import { NavbarMobile } from "../../components/Layout/NavbarMobile/NavbarMobile";
 import { FormUser } from "../../components/Layout/FormUser/FormUser";
 import { FormOrg } from "../../components/Layout/FormOrg/FormOrg";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const SingUp = () => {
   const [valueSelect, setValueSelect] = useState("personal");
+  const [loading, setLoading] = useState(false);
 
   //estado para controlar los input
   const [values_us, setValues_us] = useState({
-    documentType: "",
+    documentType: "Cédula de ciudadania",
     documentNumber: "",
     fullName: "",
     emailAddress: "",
@@ -138,6 +141,8 @@ export const SingUp = () => {
   //Función que se ejecuta al enviar el formulario usuario/organización
   const handleSubmit = (event) => {
     event.preventDefault();
+    setLoading(true); // Mostrar loader al enviar el formulario
+
     // Validaciones
     if (valueSelect == "personal") {
       const errorsUser = validateFormUser(values_us);
@@ -147,6 +152,19 @@ export const SingUp = () => {
         console.log(errorsUser);
       } else {
         console.log(values_us);
+
+        // Muestra una notificación mientras se carga el formulario
+        toast.info("Cargando...", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+
         // Aquí puedes enviar el formulario a través de una solicitud HTTP o hacer cualquier otra cosa que necesites hacer con los datos del formulario
         fetch(
           "https://timecheckbacknodejs-production.up.railway.app/user/register",
@@ -166,7 +184,33 @@ export const SingUp = () => {
         )
           .then((response) => response.json())
           .then((data) => {
-            console.log("Respuesta del servidor:", data);
+            if (data.error) {
+              toast.error(`Error: ${data.error}`, {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+              });
+            } else {
+              toast.success(
+                "¡Bienvenido! tu cuenta ha sido creada con éxito.",
+                {
+                  position: "top-center",
+                  theme: "dark",
+                  hideProgressBar: false,
+                  progress: false,
+                  onClose: () => {
+                    setTimeout(() => {
+                      window.location.href = "/SingIn";
+                    }, 5000); // Redireccionar después de 2 segundos (2000 milisegundos)
+                  },
+                }
+              );
+            }
           })
           .catch((error) => {
             console.error("Error al enviar la solicitud:", error);
@@ -180,7 +224,6 @@ export const SingUp = () => {
       } else {
         console.log(values_org);
         // Aquí puedes enviar el formulario a través de una solicitud HTTP o hacer cualquier otra cosa que necesites hacer con los datos del formulario
-        
       }
     } else {
       console.log("error");
@@ -188,9 +231,6 @@ export const SingUp = () => {
   };
 
   const handleSelectChange = (event) => {
-    // const { value } = event.target;
-    // setValues_us({ ...values_us, userType: value });
-    // setFormValuesOrganizacion({ ...formValuesOrganizacion, userType: value });
     const selectedValue = selectRef.current.value;
     setValueSelect(selectedValue);
   };
@@ -256,7 +296,6 @@ export const SingUp = () => {
               <FormOrg
                 handleInputChange={handleInputChangeOrg}
                 errors={errorsOrg}
-                handleInputChangeS={handleSelectChangeDocumentType}
               />
             )}
             <div className="footer mt-10 lg:mt-0 xl:mt-20 2xl:mt-10 lg:my-20 mx-20 flex flex-col justify-center items-center ">

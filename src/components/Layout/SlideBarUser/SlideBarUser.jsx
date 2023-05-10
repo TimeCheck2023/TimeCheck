@@ -13,6 +13,8 @@ import {
   AiOutlineCaretUp,
   AiOutlineCaretDown,
 } from "react-icons/ai";
+import jwtDecode from "jwt-decode";
+import { BtnLogout } from "../../UI/BtnLogout/BtnLogout";
 
 export const SlideBarUser = ({
   activeHome,
@@ -23,6 +25,10 @@ export const SlideBarUser = ({
   const [openNavBar, setOpenNavBar] = useState(false);
   const [lower, setLower] = useState(false);
   const [isDarkModeOn, setIsDarkModeOn] = useState(false);
+
+  const token = localStorage.getItem("token_login");
+  const decoded = jwtDecode(token);
+  const emailUser = decoded.payload.correo;
 
   const toggleNavBar = () => {
     setIsDarkModeOn(false);
@@ -165,19 +171,12 @@ export const SlideBarUser = ({
             )}
             {openNavBar && (
               <p className="transition-all duration-500 ease-in-out font-medium text-sm text-slate-400 truncate ">
-                alcaldiaarmenia@gmail.com
+                {emailUser}
               </p>
             )}
           </div>
         </div>
-        <div
-          className={`hover:bg-neutral-300 p-2 flex justify-center items-center rounded-md mb-4 ${
-            openNavBar &&
-            "flex flex-row gap-3 justify-center items-center text-center relative left-8 px-5 font-semibold"
-          }`}>
-          <BiLogOut className="text-2xl" />
-          {openNavBar && <p>Cerrar Sesión</p>}
-        </div>
+        <BtnLogout openNavBar={openNavBar} />
       </div>
     </div>
   );
