@@ -1,7 +1,11 @@
 import React from "react";
 import { BiLogOut } from "react-icons/bi";
+import {Navigate, useNavigate } from "react-router-dom";
 
 export const BtnLogout = ({ openNavBar }) => {
+
+  const navigate = useNavigate();
+
 
   const url = import.meta.env.VITE_URL;
   // console.log(url);
@@ -10,7 +14,7 @@ export const BtnLogout = ({ openNavBar }) => {
     // Eliminar el token de sesión del almacenamiento local
     localStorage.removeItem("token_login");
     // Redirigir al usuario a la página de inicio de sesión
-    window.location.href = `${url}/`;
+    navigate(`/`);
   };
   return (
     <div

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, Navigate,useNavigate } from "react-router-dom";
 import { NavbarMobile } from "../../components/Layout/NavbarMobile/NavbarMobile";
 
 export const SingIn = () => {
@@ -12,6 +12,8 @@ export const SingIn = () => {
 
   const url = import.meta.env.VITE_URL;
   // console.log(url);
+
+  const navigate = useNavigate()
 
   const handleEmailChange = (e) => {
     // Actualiza el estado del correo electrónico
@@ -56,7 +58,7 @@ export const SingIn = () => {
         .then((data) => {
           // console.log("Respuesta del servidor:", data.message.token);
           localStorage.setItem("token_login", data.message.token);
-          window.location.href = `${url}/Dashboard`;
+          navigate(`/Dashboard`);
         })
         .catch((error) => {
           console.error("Error al enviar la solicitud:", error);
@@ -78,7 +80,7 @@ export const SingIn = () => {
             eventos a los que estás registrado y confirmar tu asistencia. Si
             eres un usuario que va a crear eventos, podrás agregar nuevos
             eventos, gestionar la información del evento, enviar invitaciones y
-            hacer un seguimiento de la asistencia de tus invitados.
+            hacer un seguimiento de la asistencia de tus invitados!
           </p>
           <img
             src="/image1.webp"

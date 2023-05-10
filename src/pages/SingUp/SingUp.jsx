@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { NavbarMobile } from "../../components/Layout/NavbarMobile/NavbarMobile";
 import { FormUser } from "../../components/Layout/FormUser/FormUser";
 import { FormOrg } from "../../components/Layout/FormOrg/FormOrg";
@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 export const SingUp = () => {
   const [valueSelect, setValueSelect] = useState("personal");
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
   const url = import.meta.env.VITE_URL;
   // console.log(url);
 
@@ -207,7 +208,7 @@ export const SingUp = () => {
                   progress: false,
                   onClose: () => {
                     setTimeout(() => {
-                      window.location.href = `${url}/SingIn`;
+                      navigate("/SingIn");
                     }, 5000); // Redireccionar después de 2 segundos (2000 milisegundos)
                   },
                 }

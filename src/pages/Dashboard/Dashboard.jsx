@@ -5,26 +5,25 @@ import { NavbarMobileUser } from "../../components/Layout/NavbarMobileUser/Navba
 import { SlideBarUser } from "../../components/Layout/SlideBarUser/SlideBarUser";
 import React, { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const Dashboard = () => {
   const [userType, setUserType] = useState(null);
-
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token_login");
     if (!token) {
-      window.location.href = "/"; // Redirigir al usuario a la página de inicio de sesión
+      navigate("/"); // Redirigir al usuario a la página de inicio de sesión
     } else {
       const decoded = jwtDecode(token);
       setUserType(decoded.payload.esUsuario);
     }
-  }, [history]);
+  }, [navigate]);
 
   if (userType === 1) {
     return (
       <div className="w-full h-screen">
-        
         <SlideBarUser
           activeHome={true}
           activeAboutUs={false}
