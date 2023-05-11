@@ -15,12 +15,12 @@ export const CardEventAdmin = (props) => {
 
   return (
     <>
-      <div className="w-80 xl:h-5/6 2xl:max-h-full  lg:h-full border border-black hover:shadow-xl hover:shadow-neutral-500 rounded-md transform transition-transform hover:scale-105">
+      <div className="w-80 xl:h-full 2xl:max-h-full  lg:h-full border border-black hover:shadow-xl hover:shadow-neutral-500 rounded-md transform transition-transform hover:scale-105 justify-between flex flex-col">
         <div>
           <img
             src={props.image}
             alt="event"
-            className="rounded-t-md w-full object-cover bg-cover max-h-64" 
+            className="rounded-t-md w-full object-cover bg-cover max-h-64"
           />
         </div>
         <div className="px-3 py-5">
@@ -28,7 +28,9 @@ export const CardEventAdmin = (props) => {
           <p className="font-semibold text-slate-600 ">{props.tipo_evento}</p>
         </div>
         <div>
-          <p className="px-3 text-sm  truncate line-clamp-0">{props.description}</p>
+          <p className="px-3 text-sm truncate whitespace-pre-wrap line-clamp-0 text-justify">
+            {props.description}
+          </p>
         </div>
         <div className="flex justify-between px-3 py-6">
           <p className="text-slate-400 font-normal">

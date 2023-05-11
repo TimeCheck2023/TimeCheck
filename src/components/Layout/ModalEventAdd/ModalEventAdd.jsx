@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
+import { toast } from "react-toastify";
 
-export const ModalEventAdd = ({ handleCloseModal }) => {
+export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       handleCloseModal();
@@ -8,6 +9,9 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
   };
 
   const [isUploading, setIsUploading] = useState();
+  const [isDateValid, setIsDateValid] = useState(true);
+  const [isStartDateValid, setIsStartDateValid] = useState(true);
+
   const [state, setState] = useState({
     nombreEvento: "",
     descripcion: "",
@@ -20,10 +24,30 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
     tipoEventoId: 9,
   });
 
+  const maxCharacters = 150;
+
   const handleInputsChange = (e) => {
     const { name, value } = e.target;
+
+    // Validación de fechas
+    if (name === "fechaInicio") {
+      const startDate = new Date(value);
+      const endDate = new Date(state.fechaFinal);
+      const curerntDate = new Date();
+      setIsDateValid(startDate <= endDate);
+      const isStartDateValid = startDate >= curerntDate;
+      setIsStartDateValid(isStartDateValid);
+    } else if (name === "fechaFinal") {
+      const startDate = new Date(state.fechaInicio);
+      const endDate = new Date(value);
+      setIsDateValid(startDate <= endDate);
+    }
+
     setState((prevValues) => ({ ...prevValues, [name]: value }));
   };
+
+  const remainingCharacters = maxCharacters - state.descripcion.length;
+  const isMaxLengthReached = remainingCharacters === 0;
 
   //Funcion para subir la imagen a cloudinary y guardar el url en el state
   const handleSelectImage = async (e) => {
@@ -83,13 +107,28 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
     )
       .then((response) => {
         if (response.ok) {
-          console.log("Evento guardado con éxito");
+          // Evento guardado con éxito
+          toast.success("Evento guardado con éxito", {
+            theme: "dark",
+          });
           handleCloseModal();
+          fetchEvents();
         } else {
-          throw new Error(response.Message);
+          response.text().then((errorMessage) => {
+            // Mostrar el mensaje de error en Toastify
+            toast.error(errorMessage, {
+              theme: "dark",
+            });
+          });
         }
       })
-      .catch((error) => console.error("Error:", error));
+      .catch((error) => {
+        console.error("Error:", error);
+        // Error de red u otro tipo de error
+        toast.error("Se produjo un error al procesar la solicitud", {
+          theme: "dark",
+        });
+      });
   };
 
   return (
@@ -115,7 +154,7 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
           </button>
         </div>
         <div className="h-full">
-          <div className="w-full h-full px-4">
+          <div className="w-full h-full px-4 flex flex-col">
             <div className="flex items-center justify-center mb-8">
               <h2 className="font-bold text-4xl text-purple-700">
                 Crear Evento
@@ -167,22 +206,38 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
                     <input
                       id="date_initial"
                       type="datetime-local"
-                      className="text-slate-400 border border-slate-200 py-1 px-3 rounded-md w-full"
+                      className={`text-slate-400 border border-slate-200 py-1 px-3 rounded-md w-full ${
+                        !isStartDateValid ? "border-red-500" : ""
+                      }`}
                       name="fechaInicio"
                       value={state.fechaInicio}
                       onChange={handleInputsChange}
                     />
+                    {!isStartDateValid && (
+                      <p className="text-red-500 text-sm">
+                        La fecha de inicio no puede ser anterior a la fecha
+                        actual.
+                      </p>
+                    )}
                   </div>
+
                   <div className="flex flex-col gap-1">
                     <label htmlFor="date_finish">Fecha Final</label>
                     <input
                       id="date_finish"
                       type="datetime-local"
-                      className="text-slate-400 border border-slate-200 py-1 px-3 rounded-md w-full"
+                      className={`text-slate-400 border border-slate-200 py-1 px-3 rounded-md w-full ${
+                        !isDateValid ? "border-red-500" : ""
+                      }`}
                       name="fechaFinal"
                       value={state.fechaFinal}
                       onChange={handleInputsChange}
                     />
+                    {!isDateValid && (
+                      <p className="text-red-500 text-sm">
+                        La fecha final no puede ser anterior a la fecha inicial.
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -191,14 +246,20 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
               <div className="flex  flex-col px-16 py-5">
                 <label>Descripción del evento</label>
                 <textarea
-                  className="border resize-none border-slate-200 px-3 rounded-md"
+                  className={`border resize-none border-slate-200 px-3 rounded-md text-lg`}
                   placeholder="Descripción..."
-                  id=""
-                  rows="4"
+                  rows="2"
                   name="descripcion"
                   value={state.descripcion}
                   onChange={handleInputsChange}
+                  maxLength={maxCharacters}
                 />
+                <div
+                  className={`text-sm ${
+                    isMaxLengthReached ? "text-red-500" : "text-gray-500"
+                  }`}>
+                  Caracteres restantes: {remainingCharacters}
+                </div>
               </div>
               <div className="flex justify-between px-16">
                 <div className="flex flex-col">
@@ -260,15 +321,6 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
                   </select>
                 </div>
               </div>
-              {/* <div className="flex justify-center mt-5">
-                <div className="border  w-52 flex justify-center items-center gap-8 border-slate-200 py-2 px-3 rounded-md">
-                  <p>Evento privado</p>
-                  <input
-                    type="checkbox"
-                    className="appearance-none border border-neutral-400 p-2 rounded-full checked:bg-purple-600"
-                  />
-                </div>
-              </div> */}
             </div>
           </div>
           <div className="footer flex relative bottom-14 xl:bottom-24  2xl:bottom-14 justify-center items-center w-full">
