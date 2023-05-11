@@ -67,16 +67,16 @@ export const EventsVist = () => {
         </h1>
       </div>
       <div className="w-full flex justify-center">
-        <div className="flex flex-col mb-96 sm:mb-0">
+        <div className="flex flex-col md:mb-0 sm:mb-0">
           <button
             onClick={() => {
               setOpenCategoria(!openCategoria);
             }}
-            className="flex justify-center items-center gap-2 px-4 py-2 w-40 bg-purple-600 hover:bg-purple-700 font-normal text-white">
+            className="flex justify-center items-center gap-2 px-4 py-2 w-36 md:w-40 bg-purple-600 hover:bg-purple-700 font-normal text-white">
             Categorias <BiChevronDown className="text-2xl" />
           </button>
           {!openCategoria && (
-            <div className="absolute mt-10 w-40 px-4 py-2 z-50 bg-purple-600 text-white">
+            <div className="absolute mt-10 w-36 md:w-40 px-4 py-2 z-50 bg-purple-600 text-white">
               <ul className="flex flex-col gap-2">
                 <li
                   className={`${
@@ -174,14 +174,14 @@ export const EventsVist = () => {
         </div>
         <input
           type="text"
-          className="bg-slate-300 cursor-pointer py-2 focus:outline-none focus:border focus:border-gray-400 h-10 rounded-r-md w-1/4 text-zinc-500 text-base px-4"
+          className="bg-slate-300 cursor-pointer py-2 focus:outline-none focus:border focus:border-gray-400 h-10 rounded-r-md w-1/2 md:w-1/4 text-zinc-500 text-base px-4"
           placeholder="Busca un evento"
         />
-        <div className="absolute right-1/3 mr-5 top-28 mt-1 text-lg">
+        <div className="absolute right-5 top-24 md:right-1/3 mr-5 md:top-28 mt-1 text-lg">
           <AiOutlineSearch />
         </div>
       </div>
-      <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 place-items-center content-center justify-center items-center place-content-center  gap-y-5 pb-10  xl:mt-0 xl:mb-0 lg:ml-0">
+      <div className="w-full grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 place-items-center gap-y-5 pb-10 xl:mt-0 xl:mb-0 lg:ml-0 mb-0 sm:mb-0">
         {loading ? (
           <LoaderEventsGet />
         ) : (
@@ -202,15 +202,21 @@ export const EventsVist = () => {
                     fecha_final={event.fechaFinalEvento}
                     fecha_inicio={event.fechaInicioEvento}
                     lugar={event.lugarEvento}
+                    
                   />
                 ))}
+              <div
+                onClick={handleOpenModal}
+                className="fixed bottom-10 rounded-full bg-slate-200 p-5 text-2xl text-purple-600  right-10 transform transition-transform hover:scale-125 hover:bg-slate-300">
+                <ImPlus />
+              </div>
               </>
             )}
           </>
         )}
       </div>
       {totalPages > 1 && (
-        <div className="flex gap-2 mt-80 sm:mt-0">
+        <div className="flex gap-2 md:pt-0 sm:mt-0">
           {[...Array(totalPages)].map((_, i) => (
             <button
               key={i}
@@ -226,12 +232,7 @@ export const EventsVist = () => {
           ))}
         </div>
       )}
-      <div className="h-full absolute right-10 bottom-80 lg:relative lg:bottom-0 lg:left-1/2">
-        <div
-          onClick={handleOpenModal}
-          className="absolute rounded-full bg-slate-200 p-5 text-2xl text-purple-600 bottom-0 right-10 transform transition-transform hover:scale-125 hover:bg-slate-300">
-          <ImPlus />
-        </div>
+      <div className="h-full lg:relative lg:bottom-0 lg:left-1/2">
       </div>
       {openModal && (
         <ModalEventAdd
@@ -239,7 +240,7 @@ export const EventsVist = () => {
           fetchEvents={fetchEvents}
         />
       )}
-      <div className="pl-14 w-full">
+      <div className=" md:pl-14 w-full">
         <Footer />
       </div>
     </div>
