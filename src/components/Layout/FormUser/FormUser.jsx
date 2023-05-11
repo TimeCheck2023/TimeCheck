@@ -3,7 +3,7 @@ import React from "react";
 export const FormUser = ({ handleInputChange, errors }) => {
   return (
     <>
-      <div className="flex flex-col 2xl:mb-0 2xl:my-0 lg:flex-row gap-5 mb-6 lg:mb-0 lg:my-10 lg:mx-20 justify-between">
+      <div className="flex flex-col 2xl:mb-0 2xl:my-0 lg:flex-row gap-5 mb-6 lg:mb-0 lg:my-5 lg:mx-20 justify-between">
         <div className="flex flex-col w-full ">
           <label htmlFor="fullName" className="font-bold">
             Nombre Completo<strong className="text-red-600">*</strong>
@@ -21,7 +21,7 @@ export const FormUser = ({ handleInputChange, errors }) => {
           )}
         </div>{" "}
       </div>
-      <div className="flex lg:my-10 2xl:my-7 flex-col lg:flex-row gap-5 justify-between w-full">
+      <div className="flex lg:my-3 xl:my-10 2xl:my-7 flex-col lg:flex-row gap-5 justify-between w-full">
         <div className="flex relative lg:left-20 w-full">
           <div className="flex flex-col w-full ">
             <label htmlFor="documentType" className="font-bold">
@@ -61,7 +61,7 @@ export const FormUser = ({ handleInputChange, errors }) => {
           </div>
         </div>
       </div>
-      <div className="flex lg:my-10 2xl:my-7 flex-col lg:flex-row gap-5 justify-between w-full">
+      <div className="flex lg:my-3 xl:my-10 2xl:my-7 flex-col lg:flex-row gap-5 justify-between w-full">
         <div className="flex relative lg:left-20 w-full">
           <div className="flex flex-col w-full ">
             <label htmlFor="emailAddress" className="font-bold">
@@ -100,7 +100,7 @@ export const FormUser = ({ handleInputChange, errors }) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col 2xl:mt-0 gap-5 lg:gap-0 lg:flex-row mt-6 lg:mt-0 lg:my-10 lg:mx-20 justify-between">
+      <div className="flex flex-col 2xl:mt-0 gap-5 lg:gap-0 lg:flex-row mt-6 lg:mt-0 lg:my-5 lg:ml-20 justify-between">
         <div className="flex w-full">
           <div className="flex flex-col w-full ">
             <label htmlFor="password" className="font-bold">

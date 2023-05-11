@@ -16,7 +16,7 @@ export const UserVist = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
-    fetch("http://timecheck.somee.com/api/Event/List")
+    fetch("https://time-check.azurewebsites.net/api/Event/List")
       .then((response) => response.json())
       .then((data) => {
         setEvents(data.response);
@@ -160,7 +160,7 @@ export const UserVist = () => {
           className="bg-slate-300 cursor-pointer py-2 focus:outline-none focus:border focus:border-gray-400 h-10 rounded-r-md md:w-1/4 w-1/2 text-zinc-500 text-base px-4"
           placeholder="Busca un evento"
         />
-        <div className="absolute right-10 mr-5 top-12 xl:top-12 2xl:top-12 2xl:right-80 2xl:mr-72 2xl:pr-2 xl:right-1/3 xl:mr-0 mt-1 text-lg">
+        <div className="absolute right-10 mr-6 top-12 xl:top-12 2xl:top-12 2xl:right-80 2xl:mr-72 2xl:pr-2 xl:right-1/3 xl:mr-0 lg:right-1/4 lg:mr-24 md:right-1/4 md:mr-16 sm:mr-28 mt-1 text-lg">
           <AiOutlineSearch />
         </div>
       </div>

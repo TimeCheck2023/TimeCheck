@@ -19,7 +19,7 @@
     const [selectedCategory, setSelectedCategory] = useState(null);
 
     useEffect(() => {
-      fetch("http://timecheck.somee.com/api/Event/List")
+      fetch("https://time-check.azurewebsites.net/api/Event/List")
         .then((response) => response.json())
         .then((data) => {
           setEvents(data.response);

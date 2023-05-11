@@ -74,9 +74,13 @@ export const ModalEventAdd = ({ handleCloseModal }) => {
     }
 
     // Enviar solicitud POST al endpoint
-    fetch("http://timecheck.somee.com/api/Event/Send?" + params.toString(), {
-      method: "POST",
-    })
+    fetch(
+      "https://time-check.azurewebsites.net/api/Event/Send?" +
+        params.toString(),
+      {
+        method: "POST",
+      }
+    )
       .then((response) => {
         if (response.ok) {
           console.log("Evento guardado con éxito");

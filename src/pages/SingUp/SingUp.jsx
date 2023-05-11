@@ -9,8 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const SingUp = () => {
   const [valueSelect, setValueSelect] = useState("personal");
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const url = import.meta.env.VITE_URL;
   // console.log(url);
 
@@ -227,10 +227,40 @@ export const SingUp = () => {
       } else {
         console.log(values_org);
         // Aquí puedes enviar el formulario a través de una solicitud HTTP o hacer cualquier otra cosa que necesites hacer con los datos del formulario
-              // Muestra una notificación mientras se carga el formulario
-              toast.info("Cargando...", {
-                position: "top-right",
-                autoClose: 1300,
+        // Muestra una notificación mientras se carga el formulario
+        toast.info("Cargando...", {
+          position: "top-right",
+          autoClose: 1300,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+
+        // Aquí puedes enviar el formulario a través de una solicitud HTTP o hacer cualquier otra cosa que necesites hacer con los datos del formulario
+        fetch(
+          "https://timecheckbacknodejs-production.up.railway.app/Org/register",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              organization_name: values_org.fullName,
+              address_organization: values_org.address,
+              email_organization: values_org.emailAddress,
+              organization_password: values_org.password,
+            }),
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.error) {
+              toast.error(`Error: ${data.error}`, {
+                position: "bottom-center",
+                autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -238,56 +268,26 @@ export const SingUp = () => {
                 progress: undefined,
                 theme: "dark",
               });
-      
-              // Aquí puedes enviar el formulario a través de una solicitud HTTP o hacer cualquier otra cosa que necesites hacer con los datos del formulario
-              fetch(
-                "https://timecheckbacknodejs-production.up.railway.app/Org/register",
+            } else {
+              toast.success(
+                "¡Bienvenido! tu organización ha sido creada con éxito.",
                 {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
+                  position: "top-center",
+                  theme: "dark",
+                  hideProgressBar: false,
+                  progress: false,
+                  onClose: () => {
+                    setTimeout(() => {
+                      navigate("/SingIn");
+                    }, 5000); // Redireccionar después de 2 segundos (2000 milisegundos)
                   },
-                  body: JSON.stringify({
-                    organization_name: values_org.fullName,
-                    address_organization: values_org.address,
-                    email_organization: values_org.emailAddress,
-                    organization_password: values_org.password,
-                  }),
                 }
-              )
-                .then((response) => response.json())
-                .then((data) => {
-                  if (data.error) {
-                    toast.error(`Error: ${data.error}`, {
-                      position: "bottom-center",
-                      autoClose: 3000,
-                      hideProgressBar: false,
-                      closeOnClick: true,
-                      pauseOnHover: true,
-                      draggable: true,
-                      progress: undefined,
-                      theme: "dark",
-                    });
-                  } else {
-                    toast.success(
-                      "¡Bienvenido! tu organización ha sido creada con éxito.",
-                      {
-                        position: "top-center",
-                        theme: "dark",
-                        hideProgressBar: false,
-                        progress: false,
-                        onClose: () => {
-                          setTimeout(() => {
-                            navigate("/SingIn");
-                          }, 5000); // Redireccionar después de 2 segundos (2000 milisegundos)
-                        },
-                      }
-                    );
-                  }
-                })
-                .catch((error) => {
-                  console.error("Error al enviar la solicitud:", error);
-                });
+              );
+            }
+          })
+          .catch((error) => {
+            console.error("Error al enviar la solicitud:", error);
+          });
       }
     } else {
       console.log("error");
@@ -330,16 +330,16 @@ export const SingUp = () => {
       <div className="w-full lg:w-1/2 h-full ">
         <form action="" onSubmit={handleSubmit}>
           <div className="flex justify-center items-center flex-col">
-            <h2 className="font-bold text-center lg:text-left text-5xl xl:text-6xl tracking-tight leading-1.19 font-sans text-base-02 mt-8">
+            <h2 className="font-bold text-center lg:text-left text-5xl lg:text-4xl xl:text-6xl tracking-tight font-sans text-base-02 mt-8 lg:mt-2">
               ¡Crear una cuenta {valueSelect}!
             </h2>
-            <p className="font-normal text-lg leading-1.67 font-sans text-gray-500 relative mt-5 px-5 lg:px-0">
+            <p className="font-normal text-lg leading-1.67 font-sans text-gray-500 relative mt-5 lg:mt-1 px-5 lg:px-0">
               ¡Únete a nuestra comunidad de organizadores y asistentes de
               eventos hoy mismo!
             </p>
           </div>
           <div className="px-10 lg:px-0">
-            <div className="flex flex-col my-10 mx-0 lg:mx-20 2xl:my-5">
+            <div className="flex flex-col my-10 mx-0 lg:my-3 lg:mx-20 2xl:my-5">
               <label htmlFor="type_user" className="font-bold">
                 Tipo de cuenta <strong className="text-red-600">*</strong>
               </label>
@@ -362,19 +362,19 @@ export const SingUp = () => {
                 errors={errorsOrg}
               />
             )}
-            <div className="footer mt-10 lg:mt-0 xl:mt-20 2xl:mt-10 lg:my-20 mx-20 flex flex-col justify-center items-center ">
+            <div className="footer mt-10 lg:mt-0 xl:mt-14 2xl:mt-10 lg:my-20 mx-20 flex flex-col justify-center items-center ">
               <div className="flex flex-col md:flex-row gap-5 lg:gap-10 xl:gap-40">
-                <button className=" p-4 w-72 md:w-40 lg:w-80 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold">
+                <button className=" p-4 w-72 md:w-40 lg:w-72 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold">
                   Registrarse
                 </button>
-                <button className=" p-4 w-72 lg:w-80 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex  gap-5 lg:gap-9">
+                <button className=" p-4 w-72 lg:w-72 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex  gap-5 lg:gap-4">
                   <p className="text-2xl pl-7">
                     <FcGoogle />
                   </p>
                   <p>Registrate con Google</p>
                 </button>
               </div>
-              <div className="mt-8 xl:mt-20 2xl:mt-5 gap-5 flex justify-center items-center flex-col ">
+              <div className="mt-8 xl:mt-16 2xl:mt-5 gap-5 flex justify-center items-center flex-col ">
                 <div className="flex flex-row">
                   {" "}
                   <p className="font-sans font-normal text-xl leading-6 flex items-center text-gray-500">
