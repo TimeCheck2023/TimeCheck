@@ -202,14 +202,13 @@ export const EventsVist = () => {
                     fecha_final={event.fechaFinalEvento}
                     fecha_inicio={event.fechaInicioEvento}
                     lugar={event.lugarEvento}
-                    
                   />
                 ))}
-              <div
-                onClick={handleOpenModal}
-                className="fixed bottom-10 rounded-full bg-slate-200 p-5 text-2xl text-purple-600  right-10 transform transition-transform hover:scale-125 hover:bg-slate-300">
-                <ImPlus />
-              </div>
+                <div
+                  onClick={handleOpenModal}
+                  className="fixed bottom-40 rounded-full bg-slate-200 p-5 text-2xl text-purple-600  right-5 md:right-10 transform transition-transform hover:scale-125 hover:bg-slate-300">
+                  <ImPlus />
+                </div>
               </>
             )}
           </>
@@ -232,8 +231,7 @@ export const EventsVist = () => {
           ))}
         </div>
       )}
-      <div className="h-full lg:relative lg:bottom-0 lg:left-1/2">
-      </div>
+      <div className="h-full lg:relative lg:bottom-0 lg:left-1/2"></div>
       {openModal && (
         <ModalEventAdd
           handleCloseModal={handleCloseModal}

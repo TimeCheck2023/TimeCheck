@@ -15,10 +15,12 @@ export const Dashboard = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token_login");
+
     if (!token) {
       navigate("/"); // Redirigir al usuario a la página de inicio de sesión
     } else {
       const decoded = jwtDecode(token);
+
       setUserType(decoded.payload.esUsuario);
       const hasShownToast = localStorage.getItem("hasShownToast");
       if (hasShownToast) {
@@ -30,10 +32,13 @@ export const Dashboard = () => {
 
   useEffect(() => {
     if (showToast) {
-      toast.success("¡Bienvenido de nuevo! Has iniciado sesión correctamente.",{
-        theme: "dark"
-      });
-      localStorage.removeItem("hasShownToast")
+      toast.success(
+        "¡Bienvenido de nuevo! Has iniciado sesión correctamente.",
+        {
+          theme: "dark",
+        }
+      );
+      localStorage.removeItem("hasShownToast");
       setShowToast(false);
     }
   }, [showToast]);
@@ -54,8 +59,15 @@ export const Dashboard = () => {
   } else if (userType === 2) {
     return (
       <div className="w-full h-screen">
-        <SlideBar activeConfig={false} activeEvent={true} activeGroup={false} activeNotify={false} activeStats={false}/>
+        <SlideBar
+          activeConfig={false}
+          activeEvent={true}
+          activeGroup={false}
+          activeNotify={false}
+          activeStats={false}
+        />
         <EventsVist />
+        <NavbarMobileUser />
       </div>
     );
   } else {

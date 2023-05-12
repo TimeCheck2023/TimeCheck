@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import { BtnModalInfo } from "../../UI/BtnModalInfo/BtnModalInfo";
+import moment from "moment";
+import "moment/locale/es";
 
 export const ModalEventInfo = ({
   handleCloseModal,
@@ -18,6 +20,8 @@ export const ModalEventInfo = ({
       handleCloseModal();
     }
   };
+
+  moment.locale("es"); // aca ya esta en es
 
   return (
     <div
@@ -55,8 +59,10 @@ export const ModalEventInfo = ({
         <div className="grid px-4 grid-cols-1 gap-4 my-2 xl:grid-cols-2 2xl:grid-cols-2 2xl:gap-5 xl:gap-5">
           <BtnModalInfo text={tipo_evento}></BtnModalInfo>
           <BtnModalInfo text={lugar}></BtnModalInfo>
-          <BtnModalInfo text={fecha_inicio}></BtnModalInfo>
-          <BtnModalInfo text={fecha_final}></BtnModalInfo>
+          <BtnModalInfo
+            text={moment(fecha_inicio).format("LLLL")}></BtnModalInfo>
+          <BtnModalInfo
+            text={moment(fecha_final).format("LLLL")}></BtnModalInfo>
         </div>
         <div className="flex flex-row justify-between px-5 py-5">
           <p className="text-slate-400 font-normal">{`0/${aforo}`}</p>

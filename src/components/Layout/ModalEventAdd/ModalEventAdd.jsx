@@ -160,7 +160,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                 Crear Evento
               </h2>
             </div>
-            <div className="w-full flex flex-col gap-5 md:gap-20">
+            <div className="w-full flex flex-col md:flex-row gap-5 md:gap-20">
               <div className="w-full md:w-64 flex flex-col xl:relative xl:bottom-8">
                 {isUploading ? (
                   <div class=" inset-0 z-50 flex items-center justify-center w-full ml-10 h-60 flex-col bg-black opacity-75">
@@ -174,7 +174,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                     alt="default"
                   />
                 )}
-                <div className="md:relative md:left-20 flex justify-center my-5">
+                <div className="md:relative md:left-10 text-lg md:w-72 flex justify-center my-5">
                   <label htmlFor="input-file" className="cursor-pointer">
                     <strong className="text-purple-600">Agregar</strong> imagen
                     del evento
@@ -200,13 +200,13 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                     onChange={handleInputsChange}
                   />
                 </div>
-                <div className="flex flex-col w-full gap-10">
+                <div className="flex flex-col md:flex-row w-full gap-10">
                   <div className="flex flex-col gap-1">
                     <label htmlFor="date_initial">Fecha Inicial</label>
                     <input
                       id="date_initial"
                       type="datetime-local"
-                      className={`text-slate-400 border border-slate-200 py-1 px-3 rounded-md w-full ${
+                      className={`md:w-72 text-slate-400 border border-slate-200 py-1 px-3 rounded-md w-full ${
                         !isStartDateValid ? "border-red-500" : ""
                       }`}
                       name="fechaInicio"
@@ -226,7 +226,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                     <input
                       id="date_finish"
                       type="datetime-local"
-                      className={`text-slate-400 border border-slate-200 py-1 px-3 rounded-md w-full ${
+                      className={`md:w-72 text-slate-400 border border-slate-200 py-1 px-3 rounded-md w-full ${
                         !isDateValid ? "border-red-500" : ""
                       }`}
                       name="fechaFinal"
@@ -320,18 +320,18 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                     <option value="17">Exposiciones</option>
                   </select>
                 </div>
-                <div className="footer flex md:relative md:bottom-14 xl:bottom-24  2xl:bottom-14 justify-center items-center w-full my-10">
-                  <button
-                    className="hover:bg-purple-700 bg-purple-500 text-white font-bold py-2 px-8 rounded mr-4"
-                    onClick={handleCloseModal}>
-                    Volver
-                  </button>
-                  <button
-                    onClick={handleSubmit}
-                    className="hover:bg-purple-700 bg-purple-500 text-white font-bold py-2 px-8 rounded">
-                    Guardar
-                  </button>
-                </div>
+              </div>
+              <div className="footer flex md:relative md:bottom-14 xl:bottom-0  2xl:bottom-14 justify-center items-center w-full my-10">
+                <button
+                  className="hover:bg-purple-700 bg-purple-500 text-white font-bold py-2 px-8 rounded mr-4"
+                  onClick={handleCloseModal}>
+                  Volver
+                </button>
+                <button
+                  onClick={handleSubmit}
+                  className="hover:bg-purple-700 bg-purple-500 text-white font-bold py-2 px-8 rounded">
+                  Guardar
+                </button>
               </div>
             </div>
           </div>
