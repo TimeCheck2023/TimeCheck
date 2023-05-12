@@ -22,8 +22,9 @@ export const UserVist = () => {
         setEvents(data.response);
         setLoading(false);
       });
-  }, [events]);
+  }, []);
 
+  console.log(events);
   const handleOpenModal = () => {
     setOpenModal(!openModal);
   };
@@ -185,6 +186,7 @@ export const UserVist = () => {
                     fecha_final={event.fechaFinalEvento}
                     fecha_inicio={event.fechaInicioEvento}
                     lugar={event.lugarEvento}
+                    idEvento={event.idEvento}
                   />
                 ))}
               </>

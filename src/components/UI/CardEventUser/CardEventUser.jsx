@@ -54,6 +54,7 @@ export const CardEventUser = (props) => {
           aforo={props.aforo}
           valor_total={props.price}
           tipo_evento={props.tipo_evento}
+          idEvento={props.idEvento}
         />
       )}
     </div>

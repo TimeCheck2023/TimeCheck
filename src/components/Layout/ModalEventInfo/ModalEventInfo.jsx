@@ -1,7 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { BtnModalInfo } from "../../UI/BtnModalInfo/BtnModalInfo";
 import moment from "moment";
 import "moment/locale/es";
+import jwtDecode from "jwt-decode";
+import { toast } from "react-toastify";
 
 export const ModalEventInfo = ({
   handleCloseModal,
@@ -14,6 +16,7 @@ export const ModalEventInfo = ({
   aforo,
   valor_total,
   tipo_evento,
+  idEvento,
 }) => {
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -21,6 +24,77 @@ export const ModalEventInfo = ({
     }
   };
 
+  const [correoUser, setCorreoUser] = useState();
+  const [attendance, setAttendance] = useState();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token_login");
+    const decoded = jwtDecode(token);
+
+    const email = decoded.payload.correo;
+
+    setCorreoUser(email);
+
+    const data = {
+      idEvento: idEvento,
+      correo: email,
+    };
+
+    const params = new URLSearchParams();
+    for (const [key, value] of Object.entries(data)) {
+      params.append(key, value);
+    }
+
+    fetch(
+      `https://localhost:7025/api/Attendance/CheckAttendance?${params.toString()}`,
+      {
+        method: "GET",
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setAttendance(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const handleSubmitAttendance = (e) => {
+    e.preventDefault();
+
+    const requestBody = {
+      eventId: idEvento,
+      userEmail: correoUser,
+    };
+
+    fetch("https://time-check.azurewebsites.net/api/Attendance/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    })
+      .then((response) => response.text()) // Obtener la respuesta como texto
+      .then((data) => {
+        toast.success("Tu asistencia ha sido exitosa!", {
+          theme: "dark",
+        });
+        handleCloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const handleDeleteAttendace = (e) => {
+    e.preventDefault();
+    
+  };
+
+  console.log(correoUser);
+
+  // console.log(correoUser);
   moment.locale("es"); // aca ya esta en es
 
   return (
@@ -76,9 +150,19 @@ export const ModalEventInfo = ({
             className="bg-purple-600 text-white px-7 xl:px-24 xl:py-3 2xl:px-20 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold">
             Volver
           </button>
-          <button className="bg-purple-600 text-white px-7 xl:px-24 xl:py-3 2xl:px-20 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold">
-            Asistir
-          </button>
+          {attendance ? (
+            <button
+              onClick={handleDeleteAttendace}
+              className="bg-purple-600 text-white px-7 xl:px-24 xl:py-3 2xl:px-20 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold text-sm">
+              Caneclar asistencia
+            </button>
+          ) : (
+            <button
+              onClick={handleSubmitAttendance}
+              className="bg-purple-600 text-white px-7 xl:px-24 xl:py-3 2xl:px-20 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold">
+              Asistir
+            </button>
+          )}{" "}
         </div>
       </div>
     </div>
