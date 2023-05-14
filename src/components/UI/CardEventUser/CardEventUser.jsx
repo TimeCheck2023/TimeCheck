@@ -15,7 +15,9 @@ export const CardEventUser = (props) => {
   return (
     <div className="w-4/5 h-full border border-slate-300 rounded-lg ">
       <div className="flex justify-between px-2 py-1 text-sm">
-        <p className="font-bold">Organización</p>
+        <p className="font-bold">
+          {props.cuposDisponibles}/{props.aforo}
+        </p>
         <p className="text-slate-400 font-medium">{props.tipo_evento}</p>
       </div>
       <div className="p-3 flex justify-center">
@@ -32,13 +34,13 @@ export const CardEventUser = (props) => {
       <div className="flex flex-row justify-between px-8 py-4">
         <button className="flex flex-row items-center border px-4 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-2">
           <AiOutlineLike className=" text-xl" />
-          <p className="font-bold">10</p>
+          <p className="font-bold">{props.likes}</p>
         </button>
         <button
           onClick={() => {
             setOpenModal(!openModal);
           }}
-          className="flex flex-row items-center border px-4 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
+          className="flex flex-row items-center border px-4 lg:px-5 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
           <p>Ver más</p>
         </button>
       </div>
@@ -55,6 +57,7 @@ export const CardEventUser = (props) => {
           valor_total={props.price}
           tipo_evento={props.tipo_evento}
           idEvento={props.idEvento}
+          cuposDisponibles={props.cuposDisponibles}
         />
       )}
     </div>

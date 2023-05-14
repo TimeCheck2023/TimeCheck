@@ -24,23 +24,16 @@ export const SlideBarUser = ({
 }) => {
   const [openNavBar, setOpenNavBar] = useState(false);
   const [lower, setLower] = useState(false);
-  const [isDarkModeOn, setIsDarkModeOn] = useState(false);
 
   const token = localStorage.getItem("token_login");
   const decoded = jwtDecode(token);
   const emailUser = decoded.payload.correo;
 
   const toggleNavBar = () => {
-    setIsDarkModeOn(false);
-    setOpenNavBar(!openNavBar);
+    setTimeout(() => setOpenNavBar(!openNavBar), 450);
   };
-
-  const toggleDarkMode = () => {
-    setIsDarkModeOn(!isDarkModeOn);
-  };
-
-  const lowerGroup = () => {
-    setLower(!lower);
+  const toggleNavBarClose = () => {
+    setTimeout(() => setOpenNavBar(!openNavBar), 10);
   };
 
   useEffect(() => {
@@ -52,7 +45,7 @@ export const SlideBarUser = ({
   return (
     <div
       onMouseEnter={toggleNavBar}
-      onMouseLeave={toggleNavBar}
+      onMouseLeave={toggleNavBarClose}
       className={`h-full hidden md:block z-50 bg-slate-50 fixed border-r border-neutral-400 ${
         openNavBar
           ? " w-72 transition-all duration-500 ease-in-out"
@@ -86,41 +79,40 @@ export const SlideBarUser = ({
             openNavBar && "w-full"
           }`}>
           <div className="flex flex-col gap-10 text-2xl justify-start">
-            <div
+            <Link
+              to={"/Dashboard"}
               className={`${
                 activeHome ? "bg-slate-300" : "hover:bg-neutral-300"
-              } p-2 rounded-md flex flex-row gap-3 ${
+              } p-2 rounded-md flex flex-row gap-3 cursor-pointer ${
                 openNavBar
                   ? "w-4/5 justify-start items-start"
                   : "justify-center items-center"
               }`}>
-              <Link to={"/Dashboard"} className="flex gap-3">
+              <div className="flex gap-3">
                 <AiFillHome />
                 {openNavBar ? (
                   <p className="text-lg font-medium">Inicio</p>
-                ) : (
-                  ""
-                )}
-              </Link>
-            </div>
-            <div
+                ) : null}
+              </div>
+            </Link>
+            <Link
+              to="/AboutUs"
               className={`${
                 activeAboutUs ? "bg-slate-300" : "hover:bg-neutral-300"
-              } p-2 rounded-md flex flex-row gap-3 text-lef ${
+              } p-2 rounded-md flex flex-row gap-3 text-lef cursor-pointer ${
                 openNavBar
                   ? "w-4/5 justify-start items-start"
                   : "justify-center items-center"
               }`}>
-              <Link to="/AboutUs" className="flex flex-row gap-3">
+              <div className="flex flex-row gap-3">
                 <MdGroups />
                 {openNavBar ? (
                   <p className="text-lg font-medium">Sobre nosotros</p>
-                ) : (
-                  ""
-                )}
-              </Link>
-            </div>
-            <div
+                ) : null}
+              </div>
+            </Link>
+            <Link
+              to="/ContactUs"
               className={`${
                 activeContactUs ? "bg-slate-300" : "hover:bg-neutral-300"
               } p-2 rounded-md flex flex-row gap-3 text-lef ${
@@ -128,15 +120,13 @@ export const SlideBarUser = ({
                   ? "w-4/5 justify-start items-start"
                   : "justify-center items-center"
               }`}>
-              <Link to="/ContactUs" className="flex flex-row gap-3">
+              <div className="flex flex-row gap-3">
                 <MdContactSupport />
                 {openNavBar ? (
                   <p className="text-lg font-medium">Contáctanos</p>
-                ) : (
-                  ""
-                )}
-              </Link>
-            </div>
+                ) : null}
+              </div>
+            </Link>
           </div>
           <div className="text-2xl flex flex-col gap-2">
             <div
@@ -150,9 +140,7 @@ export const SlideBarUser = ({
               <IoIosNotificationsOutline />
               {openNavBar ? (
                 <p className="text-lg font-medium">Notificaciones</p>
-              ) : (
-                ""
-              )}
+              ) : null}
             </div>
           </div>
         </div>

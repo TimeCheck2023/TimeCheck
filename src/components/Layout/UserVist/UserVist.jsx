@@ -4,6 +4,7 @@ import { BiChevronDown } from "react-icons/bi";
 import { CardEventUser } from "../../UI/CardEventUser/CardEventUser";
 import { Footer } from "../Footer/Footer";
 import { LoaderEventsGet } from "../../UI/LoaderEventsGet/LoaderEventsGet";
+import NoEventsMessage from "../../UI/NotEventsMessage/NotEventsMessage";
 
 const PAGE_SIZE = 8;
 
@@ -49,7 +50,7 @@ export const UserVist = () => {
   // const shouldShowPaginator = visibleEvents.length > PAGE_SIZE && events.length > PAGE_SIZE;
 
   return (
-    <div className="sm:pl-20 flex flex-col gap-10 2xl:gap-14 xl:gap-24">
+    <div className="sm:pl-20 flex flex-col gap-10 2xl:gap-14 xl:gap-16">
       <div className="w-full flex justify-center mt-10">
         <div className="flex flex-col">
           <button
@@ -165,7 +166,7 @@ export const UserVist = () => {
           <AiOutlineSearch />
         </div>
       </div>
-      <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 place-items-center content-center justify-center items-center place-content-center  gap-5 pb-10">
+      <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 place-items-center content-center justify-center items-center place-content-center  gap-5 pb-10 xl:mb-0">
         {loading ? (
           <LoaderEventsGet />
         ) : (
@@ -187,6 +188,8 @@ export const UserVist = () => {
                     fecha_inicio={event.fechaInicioEvento}
                     lugar={event.lugarEvento}
                     idEvento={event.idEvento}
+                    cuposDisponibles={event.cuposDisponibles}
+                    likes={event.likes}
                   />
                 ))}
               </>
@@ -195,7 +198,7 @@ export const UserVist = () => {
         )}
       </div>
       {totalPages > 1 && (
-        <div className="flex gap-2 mt-0 justify-center items-center my-10">
+        <div className="flex gap-2 mt-0 justify-center items-center my-10 xl:my-0">
           {[...Array(totalPages)].map((_, i) => (
             <button
               key={i}

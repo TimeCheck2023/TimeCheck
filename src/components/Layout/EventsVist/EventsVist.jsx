@@ -204,13 +204,13 @@ export const EventsVist = () => {
                     lugar={event.lugarEvento}
                   />
                 ))}
-                <div
-                  onClick={handleOpenModal}
-                  className="fixed bottom-40 rounded-full bg-slate-200 p-5 text-2xl text-purple-600  right-5 md:right-10 transform transition-transform hover:scale-125 hover:bg-slate-300">
-                  <ImPlus />
-                </div>
               </>
             )}
+            <div
+              onClick={handleOpenModal}
+              className="fixed bottom-40 rounded-full bg-slate-200 p-5 text-2xl text-purple-600  right-5 md:right-10 transform transition-transform hover:scale-125 hover:bg-slate-300">
+              <ImPlus />
+            </div>
           </>
         )}
       </div>

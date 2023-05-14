@@ -2,7 +2,7 @@ import React from "react";
 
 export const LoaderEventsGet = () => {
   return (
-    <div className="flex justify-center items-center w-full h-full">
+    <div className="absolute">
       <svg className="animate-spin h-8 w-8 text-purple-600" viewBox="0 0 24 24">
         <circle
           className="opacity-25"

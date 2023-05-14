@@ -9,10 +9,12 @@ import {
 
 export const Footer = () => {
   return (
-    <div className="bg-slate-100 h-96 md:h-72 lg:h-36 w-full pb-10 sm:pb-0 flex flex-col justify-center">
+    <div className="bg-slate-100 h-96 md:h-72 lg:h-36 w-full pb-10 sm:pb-0 flex flex-col justify-center ">
       <div className="flex flex-col lg:flex-row justify-between">
         <div className="relative md:left-14 flex justify-center items-center">
-          <span className="text-purple-600 text-3xl sm:text-4xl font-bold">Time Check</span>
+          <span className="text-purple-600 text-3xl sm:text-4xl font-bold">
+            Time Check
+          </span>
         </div>
         <div className="mt-5 md:mt-2">
           <ul className="flex flex-col md:flex-row gap-4 sm:gap-10 md:relative md:left-8 lg:gap-20 text-base font-semibold justify-center items-center lg:justify-normal lg:items-start">

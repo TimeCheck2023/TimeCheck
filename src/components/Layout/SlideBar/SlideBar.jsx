@@ -16,23 +16,20 @@ export const SlideBar = ({
   activeEvent,
   activeStats,
   activeGroup,
-  activeNotify
+  activeNotify,
 }) => {
   const [openNavBar, setOpenNavBar] = useState(false);
   const [lower, setLower] = useState(false);
-  const [isDarkModeOn, setIsDarkModeOn] = useState(false);
 
   const token = localStorage.getItem("token_login");
   const decoded = jwtDecode(token);
   const emailUser = decoded.payload.correo;
 
   const toggleNavBar = () => {
-    setIsDarkModeOn(false);
-    setOpenNavBar(!openNavBar);
+    setTimeout(() => setOpenNavBar(!openNavBar), 450);
   };
-
-  const toggleDarkMode = () => {
-    setIsDarkModeOn(!isDarkModeOn);
+  const toggleNavBarClose = () => {
+    setTimeout(() => setOpenNavBar(!openNavBar), 10);
   };
 
   const lowerGroup = () => {
@@ -48,7 +45,7 @@ export const SlideBar = ({
   return (
     <div
       onMouseEnter={toggleNavBar}
-      onMouseLeave={toggleNavBar}
+      onMouseLeave={toggleNavBarClose}
       className={`h-full hidden md:block z-50 bg-slate-50 fixed border-r border-neutral-400 ${
         openNavBar
           ? " w-72 transition-all duration-500 ease-in-out"
@@ -191,7 +188,7 @@ export const SlideBar = ({
             )}
             {openNavBar && (
               <p className="transition-all duration-500 ease-in-out font-medium text-sm text-slate-400 truncate ">
-               {emailUser}
+                {emailUser}
               </p>
             )}
           </div>
