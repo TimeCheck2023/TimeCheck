@@ -12,8 +12,8 @@ export const BodyContactUs = () => {
   }, []);
 
   return (
-    <div>
-      <div className="w-full h-full flex flex-row bg-slate-100 sm:ml-24">
+    <div className="sm:ml-24">
+      <div className="w-full h-full flex flex-row bg-slate-100 ">
         {/* <div
           className={`w-1/2 h-full bg-cover bg-black hidden md:block bg-center ${
             isLoading ? "bg-black" : "bg-black"

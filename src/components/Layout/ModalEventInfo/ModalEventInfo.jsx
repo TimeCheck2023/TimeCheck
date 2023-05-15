@@ -175,7 +175,7 @@ export const ModalEventInfo = ({
           <BtnModalInfo
             text={moment(fecha_inicio).format("LLLL")}></BtnModalInfo>
           <BtnModalInfo
-            text={moment(fecha_final).format("LLLL")}></BtnModalInfo>
+            text={moment(fecha_final).format("YYYYMMDD")}></BtnModalInfo>
         </div>
         <div className="flex flex-row justify-between px-5 xl:px-12 py-5">
           <p className="text-slate-400 font-normal">{`${cuposDisponibles}/${aforo}`}</p>
@@ -183,7 +183,7 @@ export const ModalEventInfo = ({
             {valor_total !== 0 ? `$${valor_total}` : "GRATIS"}
           </p>
         </div>
-        <div className="flex flex-row justify-between px-10 mt-3 mb-10 xl:px-40">
+        <div className="flex flex-row justify-between px-10 mt-3 mb-10 xl:px-40 2xl:px-20">
           <button
             onClick={handleCloseModal}
             className="bg-purple-600 text-white px-7 xl:px-16 xl:py-3 2xl:px-20 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold">
@@ -202,7 +202,7 @@ export const ModalEventInfo = ({
             attendance.exists && (
               <button
                 onClick={handleDeleteAttendance}
-                className="bg-purple-600 text-white px-7 xl:px-5 xl:py-3 2xl:px-20 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold">
+                className="bg-purple-600 text-white px-7 xl:px-5 xl:py-3 2xl:px-8 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold">
                 Cancelar asistencia
               </button>
             )

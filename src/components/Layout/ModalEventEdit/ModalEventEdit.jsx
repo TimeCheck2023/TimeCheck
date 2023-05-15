@@ -65,7 +65,7 @@ export const ModalEventEdit = ({
                   alt="default"
                   width={200}
                 />
-                <div className="relative left-20">
+                <div className="relative text-center md:left-20 2xl:left-10 2xl:text-sm">
                   <label for="input-file" class="cursor-pointer">
                     <strong className="text-purple-600">Agregar</strong> imagen
                     del evento
@@ -169,7 +169,7 @@ export const ModalEventEdit = ({
                 </div>
               </div>
             </div>
-            <div className="footer flex md:relative md:bottom-14 xl:bottom-0  2xl:bottom-14 justify-center items-center w-full my-10 mb-40">
+            <div className="footer flex md:relative md:bottom-14 xl:bottom-0  2xl:bottom-14  justify-center items-center w-full my-44 md:my-10 mb-40 2xl:my-0 2xl:mb-0">
               <button
                 className="hover:bg-purple-700 mb-10 bg-purple-500 text-white font-bold py-2 px-8 rounded mr-4"
                 onClick={handleCloseModal}>

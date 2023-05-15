@@ -61,8 +61,8 @@ export const EventsVist = () => {
   // const shouldShowPaginator = visibleEvents.length > PAGE_SIZE && events.length > PAGE_SIZE;
   return (
     <div className="w-full h-full flex items-center flex-col gap-12">
-      <div className="mt-2">
-        <h1 className="pl-20 text-2xl lg:text-5xl font-semibold">
+      <div className="mt-2 text-center">
+        <h1 className=" md:pl-20 text-2xl lg:text-5xl font-semibold">
           Historial de Eventos
         </h1>
       </div>
@@ -193,6 +193,7 @@ export const EventsVist = () => {
                 {visibleEvents.map((event) => (
                   <CardEventAdmin
                     key={event.idEvento}
+                    id={event.idEvento}
                     price={event.valorTotalEvento}
                     title={event.nombreEvento}
                     description={event.descripcionEvento}
@@ -202,6 +203,7 @@ export const EventsVist = () => {
                     fecha_final={event.fechaFinalEvento}
                     fecha_inicio={event.fechaInicioEvento}
                     lugar={event.lugarEvento}
+                    cupos_disponibles={event.cuposDisponibles}
                   />
                 ))}
               </>

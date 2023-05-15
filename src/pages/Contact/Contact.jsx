@@ -13,6 +13,7 @@ export const Contact = () => {
       {user ? <SlideBarUser activeContactUs={true} /> : <NavBarHome />}
       {user ? <NavbarMobileUser /> : <NavbarMobile />}
       <BodyContactUs />
+      
     </div>
   );
 };

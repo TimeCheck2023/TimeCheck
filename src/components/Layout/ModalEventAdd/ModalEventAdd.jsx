@@ -160,7 +160,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                 Crear Evento
               </h2>
             </div>
-            <div className="w-full flex flex-col md:flex-row gap-5 md:gap-20">
+            <div className="w-full flex flex-col md:flex-row gap-5 md:gap-20 2xl:gap-4">
               <div className="w-full md:w-64 flex flex-col xl:relative xl:bottom-8">
                 {isUploading ? (
                   <div class=" inset-0 z-50 flex items-center justify-center w-full ml-10 h-60 flex-col bg-black opacity-75">
@@ -169,12 +169,12 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                   </div>
                 ) : (
                   <img
-                    className="md:ml-10 w-full bg-cover object-cover max-h-80 md:max-h-64"
+                    className="md:ml-10 2xl:ml-1 w-full bg-cover object-cover max-h-80 md:max-h-64"
                     src={state.imagen}
                     alt="default"
                   />
                 )}
-                <div className="md:relative md:left-10 text-lg md:w-72 flex justify-center my-5">
+                <div className="md:relative md:left-10 2xl:left-0 text-lg md:w-72 flex justify-center my-5">
                   <label htmlFor="input-file" className="cursor-pointer">
                     <strong className="text-purple-600">Agregar</strong> imagen
                     del evento
@@ -243,7 +243,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
               </div>
             </div>
             <div className="w-full h-1/2">
-              <div className="flex  flex-col md:px-16 py-5">
+              <div className="flex  flex-col md:px-16 2xl:py-0 py-5">
                 <label>Descripción del evento</label>
                 <textarea
                   className={`border resize-none border-slate-200 px-3 rounded-md text-lg`}
@@ -321,7 +321,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                   </select>
                 </div>
               </div>
-              <div className="footer flex md:relative md:bottom-14 xl:bottom-0  2xl:bottom-14 justify-center items-center w-full my-10">
+              <div className="footer flex md:relative md:bottom-14 xl:bottom-0  2xl:bottom-0 2xl:mt-10 justify-center items-center w-full my-10 2xl:my-0">
                 <button
                   className="hover:bg-purple-700 bg-purple-500 text-white font-bold py-2 px-8 rounded mr-4"
                   onClick={handleCloseModal}>

@@ -45,7 +45,7 @@ export const NavBarHome = (props) => {
         )}
       </div>
       <div className="menu text-white">
-        <div className={`relative ${openNavBar ? "top-24" : "top-36"}`}>
+        <div className={`relative ${openNavBar ? "top-24 2xl:top-28" : "top-36"}`}>
           <h3
             className={`${
               openNavBar ? "text-slate-300 px-4" : "text-slate-300"
@@ -55,7 +55,7 @@ export const NavBarHome = (props) => {
           <div className="my-5 relative xl:top-10 top-3">
             <div
               className={`flex flex-col gap-5${
-                openNavBar ? " transition-all duration-100 ease-out px-4" : ""
+                openNavBar ? " transition-all duration-100 ease-linear px-4" : ""
               }`}>
               <Link to="/" aria-label="Ir al inicio principal">
                 <div

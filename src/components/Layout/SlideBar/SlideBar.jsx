@@ -148,9 +148,9 @@ export const SlideBar = ({
                       Gerencia
                     </li>
                   </ul>{" "}
-                  <button className="bg-purple-600 hover:bg-purple-900 px-8 py-1 rounded-sm text-white font-semibold">
+                  <Link to="/AddSubOrg" className="bg-purple-600 hover:bg-purple-900 px-8 py-1 rounded-sm text-white font-semibold">
                     Agregar
-                  </button>
+                  </Link>
                 </div>
               )}
             </div>

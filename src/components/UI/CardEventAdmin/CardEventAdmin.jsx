@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AiFillLike } from "react-icons/ai";
+import { AiFillLike, AiOutlineDelete } from "react-icons/ai";
 import { ModalEventEdit } from "../../Layout/ModalEventEdit/ModalEventEdit";
 
 export const CardEventAdmin = (props) => {
@@ -9,14 +9,20 @@ export const CardEventAdmin = (props) => {
     setOpenModal(!openModal);
   };
 
+  const handleDeleteEvent = ()=>{
+    console.log(`Eliminando el id ${props.id}`)
+  }
+
   const handleCloseModal = () => {
     setOpenModal(false);
   };
+  console.log(props)
 
   return (
     <>
       <div className="w-80 mx-auto xl:h-full 2xl:h-full lg:h-full border border-black hover:shadow-xl hover:shadow-neutral-500 rounded-md transform transition-transform hover:scale-105 justify-between flex flex-col">
         <div>
+          <p onClick={handleDeleteEvent} className="absolute right-0 text-red-600 font-bold p-3 cursor-pointer text-xl hover:scale-150"><AiOutlineDelete/></p>
           <img
             src={props.image}
             alt="event"
@@ -36,7 +42,7 @@ export const CardEventAdmin = (props) => {
           <p className="text-slate-400 font-normal">
             {props.price !== 0 ? `$${props.price}` : "GRATIS"}
           </p>
-          <p className="text-slate-400 font-normal">{`0/${props.aforo}`}</p>
+          <p className="text-slate-400 font-normal">{`${props.cupos_disponibles}/${props.aforo}`}</p>
         </div>
         <div className="flex justify-between px-3 gap-4 mt-2 mb-4 2xl:mb-4">
           <button className="flex items-center px-3 bg-slate-100 rounded-md font-bold text-xl text-purple-600 gap-2">

@@ -4,6 +4,7 @@ import { SingUp } from "./pages/SingUp/SingUp";
 import { SingIn } from "./pages/SingIn/SingIn";
 import { Contact } from "./pages/Contact/Contact";
 import { AboutUs } from "./pages/AboutUs/AboutUs";
+import { AddSubOrg } from "./pages/AddSubOrg/AddSubOrg"
 import { Dashboard } from "./pages/Dashboard/Dashboard";
 import { Statistics } from "./pages/Statistics/Statistics";
 import { ToastContainer } from "react-toastify";
@@ -23,6 +24,7 @@ function App() {
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Statistics" element={<Statistics />} />
           <Route path="/Profile" element={<ProfileUser />} />
+          <Route path="/AddSubOrg" element={<AddSubOrg/>} />
         </Routes>
       </Router>
     </>
