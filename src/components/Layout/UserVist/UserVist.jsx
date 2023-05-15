@@ -25,7 +25,6 @@ export const UserVist = () => {
       });
   }, []);
 
-  console.log(events);
   const handleOpenModal = () => {
     setOpenModal(!openModal);
   };

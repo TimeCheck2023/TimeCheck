@@ -55,6 +55,7 @@ export const ModalEventInfo = ({
       .then((response) => response.json())
       .then((data) => {
         setAttendance(data);
+        console.log(data);
       })
       .catch((error) => {
         console.log(error);
@@ -82,6 +83,9 @@ export const ModalEventInfo = ({
           theme: "dark",
         });
         handleCloseModal();
+        setTimeout(() => {
+          window.location.reload(); // Reiniciar la página después de 1 segundo
+        }, 2000);
       })
       .catch((error) => {
         console.error(error);
@@ -91,28 +95,32 @@ export const ModalEventInfo = ({
   const handleDeleteAttendance = (e) => {
     e.preventDefault();
 
-    const requestBody = {
-      eventId: 40,
-      userEmail: "yuliamwow@gmail.com",
+    const data = {
+      correoUsuario: correoUser,
+      idEvento: idEvento,
     };
 
+    const params = new URLSearchParams();
+    for (const [key, value] of Object.entries(data)) {
+      params.append(key, value);
+    }
+
     fetch(
-      "https://time-check.azurewebsites.net/api/Attendance/CancelAttendance",
+      `https://time-check.azurewebsites.net/api/Attendance/CancelAttendance?${params.toString()}`,
       {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
       }
     )
       .then((response) => {
         console.log(response);
         if (response.ok) {
-          // La solicitud se completó con éxito
-          // Realizar las acciones necesarias después de eliminar la asistencia
-          console.log(response.ok);
-          console.log(response);
+          toast.success("Se canceló la asistencia con éxito!", {
+            theme: "dark",
+          });
+          handleCloseModal();
+          setTimeout(() => {
+            window.location.reload(); // Reiniciar la página después de 1 segundo
+          }, 2000);
         } else {
           // Hubo un error en la solicitud
           throw new Error("Error al eliminar la asistencia");
@@ -124,7 +132,6 @@ export const ModalEventInfo = ({
       });
   };
 
-  console.log(correoUser);
 
   // console.log(correoUser);
   moment.locale("es"); // aca ya esta en es
@@ -182,22 +189,24 @@ export const ModalEventInfo = ({
             className="bg-purple-600 text-white px-7 xl:px-16 xl:py-3 2xl:px-20 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold">
             Volver
           </button>
-          {attendance ? (
-            (console.log(attendance),
-            (
+          {(attendance && attendance.tipoAsistencia === "cancelado") ||
+          !attendance?.exists ? (
+            <button
+              onClick={handleSubmitAttendance}
+              className="bg-purple-600 text-white px-7 xl:px-16 xl:py-3 2xl:px-20 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold">
+              Asistir
+            </button>
+          ) : (
+            attendance &&
+            attendance.tipoAsistencia === "pendiente" &&
+            attendance.exists && (
               <button
                 onClick={handleDeleteAttendance}
                 className="bg-purple-600 text-white px-7 xl:px-5 xl:py-3 2xl:px-20 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold">
-                Caneclar asistencia
+                Cancelar asistencia
               </button>
-            ))
-          ) : (
-            <button
-              onClick={handleSubmitAttendance}
-              className="bg-purple-600 text-white px-7 xl:px-24 xl:py-3 2xl:px-20 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold">
-              Asistir
-            </button>
-          )}{" "}
+            )
+          )}
         </div>
       </div>
     </div>

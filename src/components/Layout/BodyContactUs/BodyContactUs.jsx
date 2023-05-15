@@ -12,19 +12,20 @@ export const BodyContactUs = () => {
   }, []);
 
   return (
-    <div className="w-full h-full bg-slate-100 sm:ml-24">
-      <div className="w-full h-full flex flex-row">
-        <div
-          className={`w-1/2 bg-cover bg-center ${
-            isLoading ? "bg-black" : styles.img1
-          } h-full`}></div>
-        <div className="w-3/5 h-full">
+    <div>
+      <div className="w-full h-full flex flex-row bg-slate-100 sm:ml-24">
+        {/* <div
+          className={`w-1/2 h-full bg-cover bg-black hidden md:block bg-center ${
+            isLoading ? "bg-black" : "bg-black"
+          } h-full`}></div> */}
+        <div className="w-1/2 h-screen bg-black"></div>
+        <div className="w-full md:w-3/5 h-full">
           <div className="w-full h-80 ">
-            <div className="p-10 flex flex-col gap-5 items-center">
+            <div className="md:p-10 flex flex-col gap-5 items-center">
               <h1 className="text-bold text-5xl text-purple-600">
                 Contáctanos{" "}
               </h1>
-              <p className="text-xl w-4/5">
+              <p className="text-xl px-5 md:px-0 md:w-4/5 ">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus,
                 elit nibh et nisl, pellentesque scelerisque faucibus facilisis
                 at. Placerat morbi sem viverra diam lectus odio orci...{" "}
@@ -45,7 +46,7 @@ export const BodyContactUs = () => {
                 <div className="flex flex-col w-full items-center">
                   <label htmlFor="name">Nombre Completo</label>
                   <input
-                    className="border bg-gray-100 border-gray-300 rounded-md p-2 w-2/5 focus:outline-none focus:ring focus:ring-purple-800"
+                    className="border bg-gray-100 border-gray-300 rounded-md p-2 w-4/5 md:w-2/5 focus:outline-none focus:ring focus:ring-purple-800"
                     type="text"
                     id="name"
                     placeholder="Ingrese su nombre completo..."
@@ -54,7 +55,7 @@ export const BodyContactUs = () => {
                 <div className="flex flex-col w-full items-center">
                   <label htmlFor="email">Correo Electronico:</label>
                   <input
-                    className="border bg-gray-100 border-gray-300 rounded-md p-2 w-2/5 focus:outline-none focus:ring focus:ring-purple-800"
+                    className="border bg-gray-100 border-gray-300 rounded-md p-2 w-4/5 md:w-2/5 focus:outline-none focus:ring focus:ring-purple-800"
                     type="email"
                     id="email"
                     placeholder="Ingrese su correo electronico..."
@@ -63,7 +64,7 @@ export const BodyContactUs = () => {
                 <div className="flex flex-col w-full items-center">
                   <label htmlFor="mensaje">Mensaje:</label>
                   <textarea
-                    className="h-40 px-4 py-2 bg-gray-100 border w-2/5 border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-purple-800"
+                    className="h-40 px-4 py-2 bg-gray-100 border w-4/5 md:w-2/5 border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-purple-800"
                     placeholder="Escribe tu mensaje aquí"
                     name="mensaje"
                     id="mensaje"
@@ -78,7 +79,6 @@ export const BodyContactUs = () => {
               </form>
             </div>
           </div>
-          <div className="w-full h-72 "></div>
         </div>
       </div>
       <Footer />

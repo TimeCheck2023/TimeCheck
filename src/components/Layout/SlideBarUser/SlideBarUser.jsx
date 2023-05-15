@@ -21,6 +21,7 @@ export const SlideBarUser = ({
   activeAboutUs,
   activeContactUs,
   activeNotify,
+  activeProfile,
 }) => {
   const [openNavBar, setOpenNavBar] = useState(false);
   const [lower, setLower] = useState(false);
@@ -30,7 +31,7 @@ export const SlideBarUser = ({
   const emailUser = decoded.payload.correo;
 
   const toggleNavBar = () => {
-    setTimeout(() => setOpenNavBar(!openNavBar), 450);
+    setTimeout(() => setOpenNavBar(!openNavBar), 500);
   };
   const toggleNavBarClose = () => {
     setTimeout(() => setOpenNavBar(!openNavBar), 10);
@@ -150,20 +151,27 @@ export const SlideBarUser = ({
         className={`flex flex-col justify-around h-48 ${
           openNavBar ? "items-start px-6" : "items-center"
         }`}>
-        <p className="text-slate-500 text-base ">Cuenta</p>
-        <div className={`flex flex-row ${openNavBar && "gap-3"}`}>
-          <div className="w-12 h-12 bg-slate-400 rounded-full mb-4"></div>
-          <div>
-            {openNavBar && (
-              <p className="font-semibold truncate">Alcaldia - Armenia</p>
-            )}
-            {openNavBar && (
-              <p className="transition-all duration-500 ease-in-out font-medium text-sm text-slate-400 truncate ">
-                {emailUser}
-              </p>
-            )}
+        <Link
+          to={"/Profile"}
+          className={`${
+            activeProfile ? "bg-slate-300" : "hover:bg-neutral-300"
+          } rounded-md px-4`}>
+          {" "}
+          <p className="text-slate-500 text-base ">Cuenta</p>
+          <div className={`flex flex-row ${openNavBar && "gap-3"}`}>
+            <div className="w-12 h-12 bg-slate-400 rounded-full mb-4"></div>
+            <div>
+              {openNavBar && (
+                <p className="font-semibold truncate">Alcaldia - Armenia</p>
+              )}
+              {openNavBar && (
+                <p className="transition-all duration-500 ease-in-out font-medium text-sm text-slate-400 truncate ">
+                  {emailUser}
+                </p>
+              )}
+            </div>
           </div>
-        </div>
+        </Link>
         <BtnLogout openNavBar={openNavBar} />
       </div>
     </div>

@@ -6,18 +6,12 @@ import { SlideBarUser } from "../../components/Layout/SlideBarUser/SlideBarUser"
 import { NavbarMobileUser } from "../../components/Layout/NavbarMobileUser/NavbarMobileUser";
 
 export const Contact = () => {
-  const user = localStorage.getItem("token_login")
-
-  console.log(user)
+  const user = localStorage.getItem("token_login");
 
   return (
     <div className="flex w-full h-full">
-      {
-        user ? <SlideBarUser activeContactUs={true}/> : <NavBarHome/>
-      }
-            {
-        user ? <NavbarMobileUser/> : <NavbarMobile/>
-      }
+      {user ? <SlideBarUser activeContactUs={true} /> : <NavBarHome />}
+      {user ? <NavbarMobileUser /> : <NavbarMobile />}
       <BodyContactUs />
     </div>
   );

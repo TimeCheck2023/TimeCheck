@@ -19,13 +19,12 @@ export const ProfileUser = () => {
 
   const user = localStorage.getItem("token_login");
 
-  console.log(user);
   return (
     <div className="flex w-full h-full">
-      <SlideBarUser activeContactUs={true} />
+      <SlideBarUser activeProfile={true} />
 
       <NavbarMobileUser />
-      <BodyProfileUser/>
+      <BodyProfileUser />
     </div>
   );
 };

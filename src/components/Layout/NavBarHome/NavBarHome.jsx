@@ -16,7 +16,7 @@ export const NavBarHome = (props) => {
       onMouseLeave={toggleNavBar}
       className={`bg-zinc-900 hidden sm:flex h-screen fixed ${
         openNavBar
-          ? "w-72 z-50 transition-all duration-300 ease-in-out "
+          ? "w-72 z-50 transition-all duration-200 ease-in "
           : "transition-all duration-300 ease-in w-32"
       }  items-center flex flex-col `}>
       <div className="header flex flex-row justify-center items-center my-4">
@@ -45,7 +45,7 @@ export const NavBarHome = (props) => {
         )}
       </div>
       <div className="menu text-white">
-        <div className="relative top-24">
+        <div className={`relative ${openNavBar ? "top-24" : "top-36"}`}>
           <h3
             className={`${
               openNavBar ? "text-slate-300 px-4" : "text-slate-300"

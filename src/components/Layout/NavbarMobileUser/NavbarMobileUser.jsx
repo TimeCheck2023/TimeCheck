@@ -37,19 +37,19 @@ export const NavbarMobileUser = () => {
     }
   }, [navigate]);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setOpenNav(false); // cerrar menú si se hace clic fuera de él
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (menuRef.current && !menuRef.current.contains(event.target)) {
+  //       setOpenNav(false); // cerrar menú si se hace clic fuera de él
+  //     }
+  //   };
 
-    document.addEventListener("mousedown", handleClickOutside);
+  //   document.addEventListener("mousedown", handleClickOutside);
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [menuRef]);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [menuRef]);
 
   const handleLogout = () => {
     // Eliminar el token de sesión del almacenamiento local
