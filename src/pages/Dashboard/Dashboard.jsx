@@ -20,8 +20,8 @@ export const Dashboard = () => {
       navigate("/"); // Redirigir al usuario a la página de inicio de sesión
     } else {
       const decoded = jwtDecode(token);
-
-      setUserType(decoded.payload.esUsuario);
+      console.log(decoded )
+      setUserType(decoded.payload.EsUsuario);
       const hasShownToast = localStorage.getItem("hasShownToast");
       if (hasShownToast) {
         setShowToast(true);

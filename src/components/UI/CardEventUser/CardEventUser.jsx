@@ -24,7 +24,7 @@ export const CardEventUser = (props) => {
         <img
           src={props.image}
           alt="imagen"
-          className="rounded-md max-w-md max-h-52 object-cover"
+          className="rounded-md max-w-xs max-h-52 object-cover"
         />
       </div>
       <div className="px-3 py-3">

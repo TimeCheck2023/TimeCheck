@@ -8,7 +8,7 @@ import NoEventsMessage from "../../UI/NotEventsMessage/NotEventsMessage";
 
 const PAGE_SIZE = 8;
 
-export const UserVist = () => {
+export const  UserVist = () => {
   const [events, setEvents] = useState([]);
   const [page, setPage] = useState(0);
   const [openModal, setOpenModal] = useState(false);

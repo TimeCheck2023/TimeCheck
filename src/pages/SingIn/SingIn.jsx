@@ -70,9 +70,10 @@ export const SingIn = () => {
               theme: "dark",
             });
           } else {
-            console.log(data)
+            // console.log(data)
             localStorage.setItem("hasShownToast", false)
-            localStorage.setItem("token_login", data.message.token);
+            localStorage.setItem("token_login", data.message);
+
             navigate(`/Dashboard`);
           }
           // console.log("Respuesta del servidor:", data.message.token);
