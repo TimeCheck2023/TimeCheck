@@ -168,7 +168,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                 Crear Evento
               </h2>
             </div>
-            <div className="w-full flex flex-col md:flex-row gap-5 md:gap-20 2xl:gap-4">
+            <div className="w-full flex flex-col md:flex-row gap-5 md:gap-20 2xl:gap-20">
               <div className="w-full md:w-64 flex flex-col xl:relative xl:bottom-8">
                 {isUploading ? (
                   <div class=" inset-0 z-50 flex items-center justify-center w-full ml-10 h-60 flex-col bg-black opacity-75">
@@ -177,12 +177,12 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                   </div>
                 ) : (
                   <img
-                    className="md:ml-10 2xl:ml-1 w-full bg-cover object-cover max-h-80 md:max-h-64"
+                    className="md:ml-10 2xl:ml-14 w-full bg-cover object-cover max-h-80 md:max-h-64"
                     src={state.imagen}
                     alt="default"
                   />
                 )}
-                <div className="md:relative md:left-10 2xl:left-0 text-lg md:w-72 flex justify-center my-5">
+                <div className="md:relative md:left-10 2xl:left-10 text-lg md:w-72 flex justify-center my-5">
                   <label htmlFor="input-file" className="cursor-pointer">
                     <strong className="text-purple-600">Agregar</strong> imagen
                     del evento
@@ -200,7 +200,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                   <label htmlFor="title">Nombre del Evento</label>
                   <input
                     id="title"
-                    className="border border-slate-200 py-1 px-3 xl:full rounded-md"
+                    className="border border-slate-200 py-1 px-3 xl:full rounded-md 2xl:w-11/12"
                     type="text"
                     placeholder="Nombre del evento..."
                     name="nombreEvento"
@@ -208,7 +208,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                     onChange={handleInputsChange}
                   />
                 </div>
-                <div className="flex flex-col md:flex-row w-full gap-10 xl:gap-2">
+                <div className="flex flex-col md:flex-row w-full gap-10 xl:gap-2 2xl:gap-10">
                   <div className="flex flex-col gap-1">
                     <label htmlFor="date_initial">Fecha Inicial</label>
                     <input

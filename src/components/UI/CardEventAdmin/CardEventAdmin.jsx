@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiFillLike, AiOutlineDelete } from "react-icons/ai";
 import { ModalEventEdit } from "../../Layout/ModalEventEdit/ModalEventEdit";
+import { toast } from "react-toastify";
 
 export const CardEventAdmin = (props) => {
   const [openModal, setOpenModal] = useState(false);
@@ -10,7 +11,31 @@ export const CardEventAdmin = (props) => {
   };
 
   const handleDeleteEvent = ()=>{
-    console.log(`Eliminando el id ${props.id}`)
+    fetch(`https://localhost:7025/api/Event/Delete/${props.id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (response.ok) {
+          // El evento se eliminó correctamentec
+          console.log(response)
+          console.log(response.ok)
+          toast.success('El evento se eliminó correctamente',{
+            theme:"dark"
+          });
+          props.fetchEvents(); // Llamar a la función fetchEvents
+          // Realizar cualquier otra acción necesaria, como actualizar la lista de eventos
+        } else {
+          console.log(response)
+          // Manejar el caso en que la eliminación no fue exitosa
+          toast.error('Error al eliminar el evento',{
+            theme:"dark"
+          });
+        }
+      })
+      .catch((error) => {
+        // Manejar errores de red u otros errores de solicitud
+        console.error('Error en la solicitud:', error);
+      });
   }
 
   const handleCloseModal = () => {
@@ -59,15 +84,15 @@ export const CardEventAdmin = (props) => {
       {openModal && (
         <ModalEventEdit
           handleCloseModal={handleCloseModal}
-          title={props.title}
-          description={props.description}
-          image={props.image}
-          fecha_inicio={props.fecha_inicio}
-          fecha_final={props.fecha_final}
-          lugar={props.lugar}
-          aforo={props.aforo}
-          valor_total={props.price}
-          tipo_evento={props.tipo_evento}
+          initialTitle={props.title}
+          initialDescription={props.description}
+          initialImage={props.image}
+          initialFechaInicio={props.fecha_inicio}
+          initialFechaFinal={props.fecha_final}
+          initialLugar={props.lugar}
+          initialAforo={props.aforo}
+          initialValorTotal={props.price}
+          initialTipoEvento={props.tipo_evento}
         />
       )}
     </>
