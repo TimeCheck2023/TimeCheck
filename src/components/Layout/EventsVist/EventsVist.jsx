@@ -17,16 +17,19 @@ export const EventsVist = () => {
   const [loading, setLoading] = useState(true);
   const [openCategoria, setOpenCategoria] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const totalPages = Math.ceil(events.length / PAGE_SIZE);
+  const filteredEvents = events.filter(
+    (event) =>
+      (selectedCategory === null || event.tipoEvento === selectedCategory) &&
+      (searchQuery === "" ||
+        event.nombreEvento.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
+
+  const totalPages = Math.ceil(filteredEvents.length / PAGE_SIZE);
   const startIndex = page * PAGE_SIZE;
   const endIndex = startIndex + PAGE_SIZE;
-  const visibleEvents = events
-    .filter(
-      (event) =>
-        selectedCategory === null || event.tipoEvento === selectedCategory
-    )
-    .slice(startIndex, endIndex);
+  const visibleEvents = filteredEvents.slice(startIndex, endIndex);
 
   const fetchEvents = () => {
     fetch("https://time-check.azurewebsites.net/api/Event/List")
@@ -45,6 +48,10 @@ export const EventsVist = () => {
         setLoading(false);
       });
   }, []);
+
+  const handleSearchQueryChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
   const handleOpenModal = () => {
     setOpenModal(!openModal);
@@ -174,8 +181,10 @@ export const EventsVist = () => {
         </div>
         <input
           type="text"
-          className="bg-slate-300 cursor-pointer py-2 focus:outline-none focus:border focus:border-gray-400 h-10 rounded-r-md w-1/2 md:w-1/4 text-zinc-500 text-base px-4"
+          className="bg-neutral-300 cursor-pointer py-2 focus:outline-none focus:border focus:border-gray-400 h-10 rounded-r-md w-1/2 md:w-1/4 text-zinc-500 text-base px-4"
           placeholder="Busca un evento"
+          value={searchQuery}
+          onChange={handleSearchQueryChange}
         />
         <div className="absolute right-5 top-24 md:right-1/3 mr-5 md:top-28 mt-1 text-lg">
           <AiOutlineSearch />

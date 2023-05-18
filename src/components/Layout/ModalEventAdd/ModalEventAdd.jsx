@@ -11,6 +11,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
   const [isUploading, setIsUploading] = useState();
   const [isDateValid, setIsDateValid] = useState(true);
   const [isStartDateValid, setIsStartDateValid] = useState(true);
+  const [isNumberValid, setIsNumberValid] = useState(true);
 
   const [state, setState] = useState({
     nombreEvento: "",
@@ -28,6 +29,13 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
 
   const handleInputsChange = (e) => {
     const { name, value } = e.target;
+
+    // Verificar si el input es de tipo number y el valor ingresado es negativo
+    if (e.target.type === "number" && Number(value) < 0) {
+      setIsNumberValid(false);
+    } else {
+      setIsNumberValid(true);
+    }
 
     // Validación de fechas
     if (name === "fechaInicio") {
@@ -192,7 +200,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                   <label htmlFor="title">Nombre del Evento</label>
                   <input
                     id="title"
-                    className="border border-slate-200 py-1 px-3 rounded-md"
+                    className="border border-slate-200 py-1 px-3 xl:full rounded-md"
                     type="text"
                     placeholder="Nombre del evento..."
                     name="nombreEvento"
@@ -200,13 +208,13 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                     onChange={handleInputsChange}
                   />
                 </div>
-                <div className="flex flex-col md:flex-row w-full gap-10">
+                <div className="flex flex-col md:flex-row w-full gap-10 xl:gap-2">
                   <div className="flex flex-col gap-1">
                     <label htmlFor="date_initial">Fecha Inicial</label>
                     <input
                       id="date_initial"
                       type="datetime-local"
-                      className={`md:w-72 text-slate-400 border border-slate-200 py-1 px-3 rounded-md w-full ${
+                      className={`md:w-72 xl:w-full text-slate-400 border border-slate-200 py-1 px-3 rounded-md w-full ${
                         !isStartDateValid ? "border-red-500" : ""
                       }`}
                       name="fechaInicio"
@@ -226,7 +234,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                     <input
                       id="date_finish"
                       type="datetime-local"
-                      className={`md:w-72 text-slate-400 border border-slate-200 py-1 px-3 rounded-md w-full ${
+                      className={`md:w-72 xl:w-full text-slate-400 border border-slate-200 py-1 px-3 rounded-md w-full ${
                         !isDateValid ? "border-red-500" : ""
                       }`}
                       name="fechaFinal"
@@ -243,10 +251,10 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
               </div>
             </div>
             <div className="w-full h-1/2">
-              <div className="flex  flex-col md:px-16 2xl:py-0 py-5">
+              <div className="flex flex-col md:px-16 2xl:py-0 pb-5">
                 <label>Descripción del evento</label>
                 <textarea
-                  className={`border resize-none border-slate-200 px-3 rounded-md text-lg`}
+                  className={`border resize-none border-slate-200 px-3 py-1 rounded-md text-lg`}
                   placeholder="Descripción..."
                   rows="2"
                   name="descripcion"
@@ -275,6 +283,11 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                     value={state.aforo}
                     onChange={handleInputsChange}
                   />
+                  {!isNumberValid && (
+                    <p className="text-red-500 text-sm">
+                      No se puede ingresar números negativos!
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-col">
                   <label htmlFor="cost_event">Precio del evento:</label>

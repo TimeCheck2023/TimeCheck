@@ -8,13 +8,14 @@ import NoEventsMessage from "../../UI/NotEventsMessage/NotEventsMessage";
 
 const PAGE_SIZE = 8;
 
-export const  UserVist = () => {
+export const UserVist = () => {
   const [events, setEvents] = useState([]);
   const [page, setPage] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [openCategoria, setOpenCategoria] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     fetch("https://time-check.azurewebsites.net/api/Event/List")
@@ -37,15 +38,21 @@ export const  UserVist = () => {
     setPage(newPage);
   };
 
-  const totalPages = Math.ceil(events.length / PAGE_SIZE);
+  const handleSearchQueryChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredEvents = events.filter(
+    (event) =>
+      (selectedCategory === null || event.tipoEvento === selectedCategory) &&
+      (searchQuery === "" ||
+        event.nombreEvento.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
+
+  const totalPages = Math.ceil(filteredEvents.length / PAGE_SIZE);
   const startIndex = page * PAGE_SIZE;
   const endIndex = startIndex + PAGE_SIZE;
-  const visibleEvents = events
-    .filter(
-      (event) =>
-        selectedCategory === null || event.tipoEvento === selectedCategory
-    )
-    .slice(startIndex, endIndex);
+  const visibleEvents = filteredEvents.slice(startIndex, endIndex);
   // const shouldShowPaginator = visibleEvents.length > PAGE_SIZE && events.length > PAGE_SIZE;
 
   return (
@@ -157,9 +164,11 @@ export const  UserVist = () => {
           )}
         </div>
         <input
-          type="text"
+          type="search"
           className="bg-slate-300 cursor-pointer py-2 focus:outline-none focus:border focus:border-gray-400 h-10 rounded-r-md md:w-1/4 w-1/2 text-zinc-500 text-base px-4"
           placeholder="Busca un evento"
+          value={searchQuery}
+          onChange={handleSearchQueryChange}
         />
         <div className="absolute right-10 mr-6 top-12 xl:top-12 2xl:top-12 2xl:right-80 2xl:mr-72 2xl:pr-2 xl:right-1/3 xl:mr-0 lg:right-1/4 lg:mr-24 md:right-1/4 md:mr-16 sm:mr-28 mt-1 text-lg">
           <AiOutlineSearch />
