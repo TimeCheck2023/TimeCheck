@@ -3,6 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { NavbarMobile } from "../../components/Layout/NavbarMobile/NavbarMobile";
 import { toast } from "react-toastify";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 
 export const SingIn = () => {
   const [emailAddress, setEmailAddress] = useState("");
@@ -10,6 +11,7 @@ export const SingIn = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [formError, setFormError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const url = import.meta.env.VITE_URL;
   // console.log(url);
@@ -83,6 +85,9 @@ export const SingIn = () => {
         });
     }
   };
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <div className="w-full h-screen flex flex-row">
       <NavbarMobile />
@@ -144,11 +149,22 @@ export const SingIn = () => {
                 <input
                   id="password"
                   name="password"
-                  className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
-                  type="password"
+                  className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 w-4/5 p-2  ${
+                    passwordError ? "border-red-500" : ""
+                  }`}
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={handlePasswordChange}
                 />
+                <div
+                  className="absolute  inset-y-12 right-12 cursor-pointer"
+                  onClick={toggleShowPassword}>
+                  {showPassword ? (
+                    <BsEyeSlashFill className="text-gray-400" />
+                  ) : (
+                    <BsEyeFill className="text-gray-400" />
+                  )}
+                </div>
                 {passwordError && (
                   <p className="text-red-500">{passwordError}</p>
                 )}
@@ -174,12 +190,12 @@ export const SingIn = () => {
                   value={"Iniciar Sesión"}>
                   Iniciar sesión
                 </button>
-                <button className=" p-4 w-56 h-14  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-4">
+                {/* <button className=" p-4 w-56 h-14  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-4">
                   <p className="text-2xl pl-3">
                     <FcGoogle />
                   </p>
                   <p>Iniciar con Google</p>
-                </button>
+                </button> */}
               </div>
               <div className="mt-16 lg:mt-6 xl:mt-16 flex justify-center items-center flex-col">
                 <p className="font-sans font-normal text-xl leading-6 flex flex-col md:flex-row gap-1 items-center text-gray-500">

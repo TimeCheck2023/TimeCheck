@@ -5,16 +5,14 @@ import { Footer } from "../Footer/Footer";
 
 export const BodyAboutUs = () => {
   return (
-    <div className="w-full h-full bg-slate-100 sm:ml-24">
+    <div className="w-full h-full bg-white sm:ml-24">
       <div
-        className={`bg-slate-400 font-sans w-full h-96 flex flex-col justify-center items-center pt-10 lg:pt-0 gap-3 lg:gap-16 pb-20 bg-cover bg-center  ${styles.img1}`}>
+        className={` font-sans w-full h-96 flex flex-col justify-center items-center pt-16 lg:pt-0 gap-3 lg:gap-16 pb-20 bg-cover bg-center  ${styles.img1}`}>
         <h1 className="font-bold  text-white text-4xl lg:text-5xl p-4 lg:p-0">
           Sobre Nosotros
         </h1>
-        <p className="font-semibold text-white text-lg w-4/5 text-justify lg:w-5/12 lg:text-center">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, elit
-          nibh et nisl, pellentesque scelerisque faucibus facilisis at. Placerat
-          morbi sem viverra diam lectus odio orci...{" "}
+        <p className="font-semibold text-white text-lg w-4/5 text-justify xl:text-justify lg:w-5/12 lg:text-center">
+        TimeCheck es una innovadora herramienta en línea diseñada para facilitar la gestión de eventos y mejorar la experiencia para los organizadores como para los participantes. Nuestra plataforma ofrece un sistema automatizado de registro de asistentes que permite a los organizadores llevar un control eficiente de la asistencia en tiempo real.
         </p>
       </div>
       <div className="flex flex-col lg:flex-row w-full mb-0 lg:mb-0 2xl:mt-10 2xl:mb-32 xl:mb-40">
@@ -66,10 +64,6 @@ export const BodyAboutUs = () => {
           <h2 className="text-3xl lg:text-4xl font-bold text-purple-600">
             Conoce a Nuestro Equipo{" "}
           </h2>
-          <p className="text-lg lg:text-xl pl-8 font-normal">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, elit
-            nibh et nisl, pellentesque scelerisque faucibus facilisis at.{" "}
-          </p>
         </div>
         <div className="flex flex-col justify-center items-center">
           <div className="flex flex-col lg:flex-row w-1/2 justify-center items-center">

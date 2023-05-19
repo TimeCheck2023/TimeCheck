@@ -11,7 +11,7 @@ export const CardEventAdmin = (props) => {
   };
 
   const handleDeleteEvent = () => {
-    fetch(`https://localhost:7025/api/Event/Delete/${props.id}`, {
+    fetch(`https://time-check.azurewebsites.net/api/Event/Delete/${props.id}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -94,8 +94,9 @@ export const CardEventAdmin = (props) => {
           initialAforo={props.aforo}
           initialValorTotal={props.price}
           initialTipoEvento={props.tipo_evento}
+          fetchEvents={props.fetchEvents}
         />
       )}
     </>
-  );
+  ); 
 };

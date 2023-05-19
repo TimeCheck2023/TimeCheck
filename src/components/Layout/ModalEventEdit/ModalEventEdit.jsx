@@ -13,6 +13,7 @@ export const ModalEventEdit = ({
   initialAforo,
   initialValorTotal,
   initialTipoEvento,
+  fetchEvents
 }) => {
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -42,12 +43,13 @@ export const ModalEventEdit = ({
     fetch("https://time-check.azurewebsites.net/api/Event/get_event_types")
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         setEventTypes(data.response.map((type) => type.tipoEvento));
       });
   }, []);
 
   // console.log(idEvent);
-  console.log(selectedImage);
+  // console.log(selectedImage);
 
   const handleSelectImage = async (e) => {
     setIsUploading(true);
@@ -58,25 +60,25 @@ export const ModalEventEdit = ({
     formData.append("cloud_name", "centroconveciones");
 
     // Eliminar imagen anterior en Cloudinary
-    if (selectedImage) {
-      try {
-        const publicId = extractPublicIdFromUrl(selectedImage);
-        if (publicId) {
-          await fetch(
-            `https://api.cloudinary.com/v1_1/centroconveciones/delete_by_token`,
-            {
-              method: "POST",
-              body: JSON.stringify({ public_id: publicId }),
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
+    // if (selectedImage) {
+    //   try {
+    //     const publicId = extractPublicIdFromUrl(selectedImage);
+    //     if (publicId) {
+    //       await fetch(
+    //         `https://api.cloudinary.com/v1_1/centroconveciones/delete_by_token`,
+    //         {
+    //           method: "POST",
+    //           body: JSON.stringify({ public_id: publicId }),
+    //           headers: {
+    //             "Content-Type": "application/json",
+    //           },
+    //         }
+    //       );
+    //     }
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // }
 
     try {
       const res = await fetch(
@@ -95,6 +97,8 @@ export const ModalEventEdit = ({
       setIsUploading(false);
     }
   };
+
+  console.log(tipoEvento)
 
   const extractPublicIdFromUrl = (url) => {
     const regex = /\/upload\/([^/]+)\//;
@@ -183,25 +187,31 @@ export const ModalEventEdit = ({
 
     // Realizar la solicitud PUT al endpoint de actualización
     fetch(
-      `https://localhost:7025/api/Event/Update/${idEvent}?${params.toString()}`,
+      `https://time-check.azurewebsites.net/api/Event/Update/${idEvent}?${params.toString()}`,
       {
         method: "PUT",
       }
     )
-      .then((response) => response.json())
       .then((data) => {
+       if(data.ok){
         console.log(data);
         // Manejar la respuesta del servidor
         // Hacer algo con la respuesta, por ejemplo, mostrar un mensaje de éxito
-        toast.success("El evento se actualizó con exito!", {
+        toast.success("El evento se actualizó con éxito!", {
           theme: "dark",
         });
+        handleCloseModal()
+        fetchEvents();
+       }else{
+        toast.error(`Error ${data.statusText}`)
+       }
       })
       .catch((error) => {
         // Manejar errores
         console.error(error);
         toast.error(`Hubo un error: ${error}`);
       });
+    
   };
 
   return (
@@ -359,6 +369,7 @@ export const ModalEventEdit = ({
                     id="type_event"
                     onChange={handleInputChange}
                     value={tipoEvento} // Asegúrate de establecer el valor seleccionado correctamente
+                    defaultValue={tipoEvento}
                     className="md:w-72 border border-slate-200 py-1 px-3 rounded-md">
                     {eventTypes.map((type, index) => (
                       <option key={type} value={index + 9}>

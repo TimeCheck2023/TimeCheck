@@ -127,8 +127,8 @@ export const SlideBar = ({
               <div className="flex flex-row gap-3">
                 <BiGroup />
                 {openNavBar ? (
-                  <p className="text-lg font-medium flex flex-row justify-center items-center gap-24">
-                    Grupos{" "}
+                  <p className="text-lg font-medium flex flex-row justify-center items-center gap-2">
+                    Suborganizaciones{" "}
                     {!lower ? <AiOutlineCaretDown /> : <AiOutlineCaretUp />}{" "}
                   </p>
                 ) : (
@@ -137,7 +137,7 @@ export const SlideBar = ({
               </div>
               {lower && (
                 <div className="flex flex-col items-start text-left font-normal text-base ml-2 pl-7 border-l border-black gap-4">
-                  <ul className="flex flex-col gap-3">
+                  {/* <ul className="flex flex-col gap-3">
                     <li className="hover:bg-neutral-300 px-3 rounded-sm">
                       Desarrolladores
                     </li>
@@ -147,8 +147,8 @@ export const SlideBar = ({
                     <li className="hover:bg-neutral-300 px-3 rounded-sm">
                       Gerencia
                     </li>
-                  </ul>{" "}
-                  <Link to="/AddSubOrg" className="bg-purple-600 hover:bg-purple-900 px-8 py-1 rounded-sm text-white font-semibold">
+                  </ul>{" "} */}
+                  <Link to="/AddSubOrg" className="bg-purple-600 rounded-md hover:bg-purple-900 px-8 py-1 text-white font-semibold">
                     Agregar
                   </Link>
                 </div>

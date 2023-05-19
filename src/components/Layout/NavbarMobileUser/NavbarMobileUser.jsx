@@ -28,8 +28,9 @@ export const NavbarMobileUser = () => {
       navigate("/"); // Redirigir al usuario a la página de inicio de sesión
     } else {
       const decoded = jwtDecode(token);
+      console.log(decoded)
 
-      setUserType(decoded.payload.esUsuario);
+      setUserType(decoded.payload.EsUsuario);
       const hasShownToast = localStorage.getItem("hasShownToast");
       if (hasShownToast) {
         localStorage.setItem("hasShownToast", "true");
@@ -58,6 +59,8 @@ export const NavbarMobileUser = () => {
     // Redirigir al usuario a la página de inicio de sesión
     navigate(`/`);
   };
+
+  console.log(userType)
 
   return (
     <div>
@@ -113,7 +116,7 @@ export const NavbarMobileUser = () => {
               </Link>
             ) : (
               <Link
-                to="/AboutUs"
+                to="/AddSubOrg"
                 className="bg-purple-600 rounded-full h-16 w-16 mx-2 text-center flex justify-center items-center text-3xl text-white">
                 <BiGroup />
               </Link>

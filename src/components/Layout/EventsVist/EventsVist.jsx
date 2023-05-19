@@ -181,18 +181,18 @@ export const EventsVist = () => {
         </div>
         <input
           type="text"
-          className="bg-neutral-300 cursor-pointer py-2 focus:outline-none focus:border focus:border-gray-400 h-10 rounded-r-md w-1/2 md:w-1/4 text-zinc-500 text-base px-4"
+          className="bg-neutral-800 cursor-pointer text-slate-200 py-2 focus:outline-none focus:border focus:border-gray-400 h-10 rounded-r-md w-1/2 md:w-1/4  text-base px-4"
           placeholder="Busca un evento"
           value={searchQuery}
           onChange={handleSearchQueryChange}
         />
-        <div className="absolute right-5 top-24 md:right-1/3 mr-5 md:top-28 mt-1 text-lg">
+        <div className="absolute text-white right-5 top-24 md:right-1/3 mr-5 md:top-28 mt-1 text-lg">
           <AiOutlineSearch />
         </div>
       </div>
       <div
         className={`w-full grid ${
-          events.length <= 1
+          events.length <= 1 
             ? ""
             : "grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3"
         } place-items-center gap-y-5 pb-10 xl:mt-0 xl:mb-0 lg:ml-0 mb-0 sm:mb-0`}>

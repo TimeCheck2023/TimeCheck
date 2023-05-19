@@ -23,14 +23,15 @@ export const BodyHome = () => {
         className={`bg-cover bg-center h-80 md:h-80 w-full flex flex-col items-center md:items-start ${
           !isLoading ? "bg-gray-400 animate-pulse" : styles.img
         }`}>
-        <div className="text-white font-bold text-3xl md:text-5xl font-sans relative md:left-20 top-16 w-72 md:w-2/3">
-          <h1>Los Mejores Eventos</h1>
+        <div className="text-white text-center md:text-left font-bold text-2xl md:text-5xl font-sans relative md:left-20 top-16 w-80 md:w-2/3">
+          <h1>¡Bienvenidos a timecheck!</h1>
         </div>
         <div className="text-slate-100 relative font-sans md:left-20 top-20 w-80 text-justify  md:w-1/3">
           <p className="text-lg md:text-xl">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, elit
-            nibh et nisl, pellentesque scelerisque faucibus facilisis at.
-            Placerat morbi sem viverra diam lectus odio orci...
+            TimeCheck es una herramienta en línea que facilita el registro
+            automatizado de asistentes a eventos. Simplifica la
+            gestión de eventos y mejora la experiencia para los
+            organizadores como para los participantes.
           </p>
         </div>
       </div>
@@ -39,12 +40,21 @@ export const BodyHome = () => {
           <div className="text-purple-600 text-center  md:text-left text-3xl xl:text-4xl relative left-4 md:left-0 font-bold font-sans">
             <h1>Algunos de Nuestros Eventos</h1>
           </div>
-          <div className="xl:w-2/5 w-full mb-60 lg:mb-0 lg:w-1/3 relative left-4 md:left-0 lg:left-0 top-5">
-            <p className="font-sans text-lg text-justify lg:text-left">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus,
-              elit nibh et nisl, pellentesque scelerisque faucibus facilisis at.
-              Placerat morbi sem viverra diam lectus odio orci...{" "}
-            </p>
+          <div className="xl:w-2/5 w-full mb-52 lg:mb-0 lg:w-1/3 relative left-4 md:left-0 lg:left-0 top-5">
+            {/* <p className="font-sans text-lg text-justify lg:text-left">
+              Conferencias y seminarios: Eventos educativos y de capacitación
+              que reúnen a expertos y profesionales para compartir conocimientos
+              y experiencias. Ferias y exposiciones: Eventos en los que las
+              empresas y organizaciones muestran y promocionan sus productos,
+              servicios o proyectos. Convenciones y ferias comerciales:
+              Reuniones que se centran en un tema o industria específica, donde
+              los profesionales pueden establecer contactos y explorar
+              oportunidades de negocio. Eventos corporativos: Reuniones,
+              conferencias o celebraciones organizadas por empresas para sus
+              empleados, clientes o socios comerciales. Eventos deportivos:
+              Competencias deportivas, carreras, torneos o partidos donde los
+              participantes pueden registrarse y los organiza…
+            </p> */}
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 md:content-center md:place-items-center gap-32 md:gap-20 lg:grid-cols-4 lg:mt-48 lg:gap-0">

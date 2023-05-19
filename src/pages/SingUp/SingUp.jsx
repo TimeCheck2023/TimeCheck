@@ -367,12 +367,12 @@ export const SingUp = () => {
                 <button className=" p-4 w-72 md:w-40 lg:w-72 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold">
                   Registrarse
                 </button>
-                <button className=" p-4 w-72 lg:w-72 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex  gap-5 lg:gap-4">
+                {/* <button className=" p-4 w-72 lg:w-72 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex  gap-5 lg:gap-4">
                   <p className="text-2xl pl-7">
                     <FcGoogle />
                   </p>
                   <p>Registrate con Google</p>
-                </button>
+                </button> */}
               </div>
               <div className="mt-8 xl:mt-16 2xl:mt-5 gap-5 flex justify-center items-center flex-col ">
                 <div className="flex flex-row">
