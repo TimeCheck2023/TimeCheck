@@ -55,10 +55,9 @@ export const ModalEventInfo = ({
       .then((response) => response.json())
       .then((data) => {
         setAttendance(data);
-        console.log(data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(error);
       });
   }, []);
 
@@ -112,7 +111,7 @@ export const ModalEventInfo = ({
       }
     )
       .then((response) => {
-        console.log(response);
+
         if (response.ok) {
           toast.success("Se canceló la asistencia con éxito!", {
             theme: "dark",
@@ -131,7 +130,6 @@ export const ModalEventInfo = ({
         console.error(error);
       });
   };
-
 
   // console.log(correoUser);
   moment.locale("es"); // aca ya esta en es

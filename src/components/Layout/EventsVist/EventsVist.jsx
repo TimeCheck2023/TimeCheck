@@ -190,7 +190,12 @@ export const EventsVist = () => {
           <AiOutlineSearch />
         </div>
       </div>
-      <div className={`w-full grid ${events.length <= 1 ? '' : 'grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3'} place-items-center gap-y-5 pb-10 xl:mt-0 xl:mb-0 lg:ml-0 mb-0 sm:mb-0`}>
+      <div
+        className={`w-full grid ${
+          events.length <= 1
+            ? ""
+            : "grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3"
+        } place-items-center gap-y-5 pb-10 xl:mt-0 xl:mb-0 lg:ml-0 mb-0 sm:mb-0`}>
         {loading ? (
           <LoaderEventsGet />
         ) : (
@@ -215,6 +220,7 @@ export const EventsVist = () => {
                     fecha_inicio={event.fechaInicioEvento}
                     lugar={event.lugarEvento}
                     cupos_disponibles={event.cuposDisponibles}
+                    likes={event.likes}
                     fetchEvents={fetchEvents}
                   />
                 ))}

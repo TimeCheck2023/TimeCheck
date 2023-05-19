@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 
 export const ModalEventEdit = ({
   handleCloseModal,
+  idEvent,
   initialTitle,
   initialDescription,
   initialImage,
@@ -19,7 +20,7 @@ export const ModalEventEdit = ({
     }
   };
 
-  const [eventTypes, setEventTypes] = useState([])
+  const [eventTypes, setEventTypes] = useState([]);
   const [title, setTitle] = useState(initialTitle);
   const [description, setDescription] = useState(initialDescription);
   const [image, setImage] = useState(initialImage);
@@ -37,31 +38,78 @@ export const ModalEventEdit = ({
 
   const [selectedImage, setSelectedImage] = useState(image);
 
-  function handleSelectImage(event) {
-    if (event.target.files && event.target.files[0]) {
-      setSelectedImage(URL.createObjectURL(event.target.files[0]));
-    } else {
-      setSelectedImage(image);
-    }
-  }
-
-
   useEffect(() => {
     fetch("https://time-check.azurewebsites.net/api/Event/get_event_types")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.response.map(type=> type.tipoEvento))
-        setEventTypes(data.response.map(type=> type.tipoEvento));
+        setEventTypes(data.response.map((type) => type.tipoEvento));
       });
-  
-  }, [])
-  
+  }, []);
+
+  // console.log(idEvent);
+  console.log(selectedImage);
+
+  const handleSelectImage = async (e) => {
+    setIsUploading(true);
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "time_check");
+    formData.append("cloud_name", "centroconveciones");
+
+    // Eliminar imagen anterior en Cloudinary
+    if (selectedImage) {
+      try {
+        const publicId = extractPublicIdFromUrl(selectedImage);
+        if (publicId) {
+          await fetch(
+            `https://api.cloudinary.com/v1_1/centroconveciones/delete_by_token`,
+            {
+              method: "POST",
+              body: JSON.stringify({ public_id: publicId }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    try {
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/centroconveciones/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+          // No se necesita "X-Requested-With" en las últimas versiones de Fetch API
+        }
+      );
+      const data = await res.json();
+      setSelectedImage(data.secure_url);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const extractPublicIdFromUrl = (url) => {
+    const regex = /\/upload\/([^/]+)\//;
+    const match = url.match(regex);
+    if (match && match.length > 1) {
+      return match[1];
+    }
+    return null;
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
     // Verificar si el input es de tipo number y el valor ingresado es negativo
-    if (e.target.type === "number" && Number(value) < 0) {
+    if (event.target.type === "number" && Number(value) < 0) {
       setIsNumberValid(false);
     } else {
       setIsNumberValid(true);
@@ -70,16 +118,18 @@ export const ModalEventEdit = ({
     // Validación de fechas
     if (name === "fechaInicio") {
       const startDate = new Date(value);
-      const endDate = new Date(state.fechaFinal);
+      const endDate = new Date(fechaFinal); // Modificar aquí
       const curerntDate = new Date();
       setIsDateValid(startDate <= endDate);
       const isStartDateValid = startDate >= curerntDate;
       setIsStartDateValid(isStartDateValid);
     } else if (name === "fechaFinal") {
-      const startDate = new Date(state.fechaInicio);
+      const startDate = new Date(fechaInicio); // Modificar aquí
       const endDate = new Date(value);
       setIsDateValid(startDate <= endDate);
     }
+
+    console.log(name);
 
     switch (name) {
       case "title":
@@ -88,22 +138,22 @@ export const ModalEventEdit = ({
       case "description":
         setDescription(value);
         break;
-      case "fecha_inicio":
+      case "date_initial":
         setFechaInicio(value);
         break;
-      case "fecha_final":
+      case "date_finish":
         setFechaFinal(value);
         break;
-      case "lugar":
+      case "place":
         setLugar(value);
         break;
-      case "aforo":
+      case "amount_of_people":
         setAforo(value);
         break;
-      case "valor_total":
+      case "cost_event":
         setValorTotal(value);
         break;
-      case "tipo_evento":
+      case "type_event":
         setTipoEvento(value);
         break;
       default:
@@ -111,27 +161,38 @@ export const ModalEventEdit = ({
     }
   };
 
-  const handleUpdateEvent = () => {
-    // Construir objeto FormData con los datos del evento
-    const formData = new FormData();
-    formData.append("nombreEvento", title);
-    formData.append("descripcion", description);
-    formData.append("imagen", selectedImage);
-    formData.append("fecha_inicio", fecha_inicio);
-    formData.append("fecha_final", fecha_final);
-    formData.append("lugar", lugar);
-    formData.append("aforo", aforo);
-    formData.append("id_tipo_evento", tipo_evento);
+  const handleUpdateEvent = (e) => {
+    e.preventDefault();
+
+    //
+    const data = {
+      nombreEvento: title,
+      descripcion: description,
+      imagen: selectedImage,
+      fecha_inicio: fechaInicio,
+      fecha_final: fechaFinal,
+      lugar: lugar,
+      aforo: aforo,
+      id_tipo_evento: tipoEvento,
+    };
+
+    const params = new URLSearchParams();
+    for (const [key, value] of Object.entries(data)) {
+      params.append(key, value);
+    }
 
     // Realizar la solicitud PUT al endpoint de actualización
-    fetch(`/api/Update/${eventId}`, {
-      method: "PUT",
-      body: formData,
-    })
+    fetch(
+      `https://localhost:7025/api/Event/Update/${idEvent}?${params.toString()}`,
+      {
+        method: "PUT",
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         // Manejar la respuesta del servidor
-        console.log(data); // Hacer algo con la respuesta, por ejemplo, mostrar un mensaje de éxito
+        // Hacer algo con la respuesta, por ejemplo, mostrar un mensaje de éxito
         toast.success("El evento se actualizó con exito!", {
           theme: "dark",
         });
@@ -172,7 +233,7 @@ export const ModalEventEdit = ({
                 Editar Evento
               </h2>
             </div>
-            <div className="w-full flex flex-col md:flex-row gap-5 md:gap-20">
+            <div className="w-full flex flex-col md:flex-row gap-5 md:gap-14 2xl:gap-20">
               <div className="w-full md:w-64 flex flex-col xl:relative xl:bottom-8">
                 {isUploading ? (
                   <div class=" inset-0 z-50 flex items-center justify-center w-full ml-10 h-60 flex-col bg-black opacity-75">
@@ -204,11 +265,12 @@ export const ModalEventEdit = ({
                   <label htmlFor="title">Nombre del evento</label>
                   <input
                     id="title"
+                    name="title"
                     className="border border-slate-200 py-1 px-3 xl:full rounded-md 2xl:w-11/12"
                     type="text"
                     placeholder="Conferencia QA"
-                    value={title}
                     onChange={handleInputChange}
+                    value={title}
                   />
                 </div>
                 <div className="flex flex-col md:flex-row w-full gap-10 xl:gap-2 2xl:gap-10">
@@ -216,6 +278,7 @@ export const ModalEventEdit = ({
                     <label htmlFor="date_initial">Fecha Inicial</label>
                     <input
                       id="date_initial"
+                      name="date_initial"
                       type="datetime-local"
                       className={`md:w-72 xl:w-full text-slate-400 border border-slate-200 py-1 px-3 rounded-md w-full ${
                         !isStartDateValid ? "border-red-500" : ""
@@ -228,6 +291,7 @@ export const ModalEventEdit = ({
                     <label htmlFor="date_finish">Fecha Final</label>
                     <input
                       id="date_finish"
+                      name="date_finish"
                       type="datetime-local"
                       className="md:w-72 text-slate-400 border border-slate-200 py-1 px-3 rounded-md w-full"
                       value={fechaFinal}
@@ -239,12 +303,11 @@ export const ModalEventEdit = ({
             </div>
             <div className="w-full h-1/2 mb-20 md:mb-0">
               <div className="flex  flex-col md:px-16 py-5">
-                <label>Descripción del evento</label>
+                <label htmlFor="description">Descripción del evento</label>
                 <textarea
                   className="border resize-none border-slate-300 px-3 py-2 rounded-md text-lg"
-                  placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde placeat rerum expedita! Necessitatibus in maiores laborum ipsam corporis accusantium quia quae voluptates totam? Deleniti ratione consequuntur laboriosam, cum laborum tempora!"
-                  name=""
-                  id=""
+                  name="description"
+                  id="description"
                   rows="2"
                   defaultValue={description}
                   onChange={handleInputChange}></textarea>
@@ -255,6 +318,7 @@ export const ModalEventEdit = ({
                     Cantidad de personas:
                   </label>
                   <input
+                    name="amount_of_people"
                     id="amount_of_people"
                     className="md:w-72 border border-slate-200 py-1 px-3 rounded-md"
                     type="number"
@@ -266,6 +330,7 @@ export const ModalEventEdit = ({
                 <div className="flex flex-col">
                   <label htmlFor="cost_event">Precio del evento:</label>
                   <input
+                    name="cost_event"
                     id="cost_event"
                     className="md:w-72 border border-slate-200 py-1 px-3 rounded-md"
                     type="text"
@@ -276,11 +341,10 @@ export const ModalEventEdit = ({
               </div>
               <div className="flex justify-between md:px-16 flex-col md:flex-row gap-5 md:gap-0 ">
                 <div className="flex flex-col mt-3">
-                  <label htmlFor="amount_of_people">
-                    Lugar/Dirección del evento
-                  </label>
+                  <label htmlFor="place">Lugar/Dirección del evento</label>
                   <input
-                    id="amount_of_people"
+                    id="place"
+                    name="place"
                     className="md:w-72 border border-slate-200 py-1 px-3 rounded-md"
                     type="text"
                     placeholder="100"
@@ -289,29 +353,31 @@ export const ModalEventEdit = ({
                   />
                 </div>
                 <div className="flex flex-col mt-3">
-                  <label htmlFor="">Tipo evento:</label>
+                  <label htmlFor="type_event">Tipo evento:</label>
                   <select
-                    name="tipe_event"
+                    name="type_event"
                     id="type_event"
                     onChange={handleInputChange}
                     value={tipoEvento} // Asegúrate de establecer el valor seleccionado correctamente
                     className="md:w-72 border border-slate-200 py-1 px-3 rounded-md">
-                    {eventTypes.map((type) => (
-    <option key={type} value={type}>
-      {type}
-    </option>
-  ))}
+                    {eventTypes.map((type, index) => (
+                      <option key={type} value={index + 9}>
+                        {type}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
             </div>
-            <div className="footer flex md:relative md:bottom-14 xl:bottom-0  2xl:bottom-14  justify-center items-center w-full my-44 md:my-10 mb-40 2xl:my-0 2xl:mb-0">
+            <div className="footer flex md:relative md:bottom-14 xl:bottom-10  2xl:bottom-14  justify-center items-center w-full my-44 md:my-10 mb-40 2xl:my-0 2xl:mb-0">
               <button
                 className="hover:bg-purple-700 mb-10 bg-purple-500 text-white font-bold py-2 px-8 rounded mr-4"
                 onClick={handleCloseModal}>
                 Volver
               </button>
-              <button className="hover:bg-purple-700 mb-10 bg-purple-500 text-white font-bold py-2 px-8 rounded">
+              <button
+                className="hover:bg-purple-700 mb-10 bg-purple-500 text-white font-bold py-2 px-8 rounded"
+                onClick={handleUpdateEvent}>
                 Guardar
               </button>
             </div>

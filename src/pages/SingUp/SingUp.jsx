@@ -225,7 +225,7 @@ export const SingUp = () => {
       if (Object.keys(errorOrg).length > 0) {
         console.log(errorOrg);
       } else {
-        console.log(values_org);
+        // console.log(values_org);
         // Aquí puedes enviar el formulario a través de una solicitud HTTP o hacer cualquier otra cosa que necesites hacer con los datos del formulario
         // Muestra una notificación mientras se carga el formulario
         toast.info("Cargando...", {

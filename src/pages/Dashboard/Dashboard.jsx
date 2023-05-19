@@ -20,7 +20,6 @@ export const Dashboard = () => {
       navigate("/"); // Redirigir al usuario a la página de inicio de sesión
     } else {
       const decoded = jwtDecode(token);
-      console.log(decoded)
       setUserType(decoded.payload.EsUsuario);
       const hasShownToast = localStorage.getItem("hasShownToast");
       if (hasShownToast) {
@@ -43,7 +42,7 @@ export const Dashboard = () => {
     }
   }, [showToast]);
 
-  if (userType === 1 ) {
+  if (userType === 1) {
     return (
       <div className="w-full h-screen">
         <SlideBarUser
