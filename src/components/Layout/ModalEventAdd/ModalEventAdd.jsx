@@ -21,7 +21,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
     fechaFinal: "",
     lugar: "",
     aforo: 0,
-    suborganizacionId: 1,
+    suborganizacionId: 26,
     tipoEventoId: 9,
   });
 
@@ -123,6 +123,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
           fetchEvents();
         } else {
           response.text().then((errorMessage) => {
+            console.log(errorMessage);
             // Mostrar el mensaje de error en Toastify
             toast.error(errorMessage, {
               theme: "dark",

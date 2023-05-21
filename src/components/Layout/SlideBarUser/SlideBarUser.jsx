@@ -130,7 +130,8 @@ export const SlideBarUser = ({
             </Link>
           </div>
           <div className="text-2xl flex flex-col gap-2">
-            <div
+            <Link
+              to={"/Notifications"}
               className={`${
                 activeNotify ? "bg-slate-300" : "hover:bg-neutral-300"
               } p-2 rounded-md flex flex-row gap-3 text-lef ${
@@ -142,7 +143,7 @@ export const SlideBarUser = ({
               {openNavBar ? (
                 <p className="text-lg font-medium">Notificaciones</p>
               ) : null}
-            </div>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,8 +1,8 @@
-import React from 'react'
-import { SlideBar } from '../../components/Layout/SlideBar/SlideBar'
-import { StatisticsView } from '../../components/UI/StatisticsView/StatisticsView'
-import { NavbarMobileUser } from '../../components/Layout/NavbarMobileUser/NavbarMobileUser'
-import { BodyAddSubOrg } from '../../components/Layout/BodyAddSubOrg/BodyAddSubOrg'
+import React from "react";
+import { SlideBar } from "../../components/Layout/SlideBar/SlideBar";
+import { StatisticsView } from "../../components/UI/StatisticsView/StatisticsView";
+import { NavbarMobileUser } from "../../components/Layout/NavbarMobileUser/NavbarMobileUser";
+import { BodyAddSubOrg } from "../../components/Layout/BodyAddSubOrg/BodyAddSubOrg";
 
 export const AddSubOrg = () => {
   return (
@@ -14,8 +14,8 @@ export const AddSubOrg = () => {
         activeNotify={false}
         activeStats={false}
       />
-      <BodyAddSubOrg/>
+      <BodyAddSubOrg />
       <NavbarMobileUser />
     </div>
-  )
-}
+  );
+};

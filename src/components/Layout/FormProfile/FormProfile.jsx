@@ -83,8 +83,8 @@ export const FormProfile = () => {
           placeholder="3218604426"
         />
       </div>
-      <div className="flex justify-center mt-4 mb-80">
-        <button className="px-20 py-2 bg-purple-600 text-white font-semibold rounded-md mb-24 hover:bg-purple-700">
+      <div className="flex justify-center mt-4 mb-32">
+        <button className="px-20 py-2 bg-purple-600 text-white font-semibold rounded-md  hover:bg-purple-700">
           Actualizar
         </button>
       </div>

@@ -26,6 +26,7 @@ export const SingUp = () => {
   const [values_org, setValues_org] = useState({
     fullName: "",
     address: "",
+    numero_telefono: 0,
     emailAddress: "",
     password: "",
   });
@@ -252,6 +253,7 @@ export const SingUp = () => {
               address_organization: values_org.address,
               email_organization: values_org.emailAddress,
               organization_password: values_org.password,
+              numero_telefono: values_org.numero_telefono,
             }),
           }
         )

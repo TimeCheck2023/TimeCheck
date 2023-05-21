@@ -10,7 +10,10 @@ import { toast } from "react-toastify";
 
 export const Dashboard = () => {
   const [userType, setUserType] = useState(null);
+  const [idOrg, setIdOrg] = useState(null);
   const [showToast, setShowToast] = useState(false);
+  const [rol, setRol] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,7 +23,10 @@ export const Dashboard = () => {
       navigate("/"); // Redirigir al usuario a la página de inicio de sesión
     } else {
       const decoded = jwtDecode(token);
+      console.log(decoded);
       setUserType(decoded.payload.EsUsuario);
+      setRol(decoded.payload.rol);
+
       const hasShownToast = localStorage.getItem("hasShownToast");
       if (hasShownToast) {
         setShowToast(true);
@@ -43,18 +49,35 @@ export const Dashboard = () => {
   }, [showToast]);
 
   if (userType === 1) {
-    return (
-      <div className="w-full h-screen">
-        <SlideBarUser
-          activeHome={true}
-          activeAboutUs={false}
-          activeContactUs={false}
-          activeNotify={false}
-        />
-        <UserVist />
-        <NavbarMobileUser />
-      </div>
-    );
+    if (rol === 0) {
+      return (
+        <div className="w-full h-screen">
+          <SlideBar
+            activeConfig={false}
+            activeEvent={true}
+            activeGroup={false}
+            activeNotify={false}
+            activeStats={false}
+            userType={userType}
+          />
+          <EventsVist />
+          <NavbarMobileUser />
+        </div>
+      );
+    } else {
+      return (
+        <div className="w-full h-screen">
+          <SlideBarUser
+            activeHome={true}
+            activeAboutUs={false}
+            activeContactUs={false}
+            activeNotify={false}
+          />
+          <UserVist />
+          <NavbarMobileUser />
+        </div>
+      );
+    }
   } else if (userType === 2) {
     return (
       <div className="w-full h-screen">
@@ -64,6 +87,7 @@ export const Dashboard = () => {
           activeGroup={false}
           activeNotify={false}
           activeStats={false}
+          idOrg={idOrg}
         />
         <EventsVist />
         <NavbarMobileUser />

@@ -4,6 +4,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { NavbarMobile } from "../../components/Layout/NavbarMobile/NavbarMobile";
 import { toast } from "react-toastify";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
+import { AiOutlineLoading } from "react-icons/ai";
 
 export const SingIn = () => {
   const [emailAddress, setEmailAddress] = useState("");
@@ -12,6 +13,7 @@ export const SingIn = () => {
   const [passwordError, setPasswordError] = useState("");
   const [formError, setFormError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const url = import.meta.env.VITE_URL;
   // console.log(url);
@@ -44,6 +46,8 @@ export const SingIn = () => {
       setFormError("Por favor, corrige los errores en el formulario");
     } else {
       setFormError("");
+      setIsLoading(true); // Activar el estado de carga
+
       fetch(
         "https://timecheckbacknodejs-production.up.railway.app/Auth/login",
         {
@@ -59,8 +63,9 @@ export const SingIn = () => {
       )
         .then((response) => response.json())
         .then((data) => {
+          setIsLoading(false); // Desactivar el estado de carga
+
           if (data.error) {
-            // console.log(data)
             toast.error(`Error: correo o contraseña incorrecta!`, {
               position: "bottom-center",
               autoClose: 3000,
@@ -72,22 +77,23 @@ export const SingIn = () => {
               theme: "dark",
             });
           } else {
-            // console.log(data)
             localStorage.setItem("hasShownToast", false);
             localStorage.setItem("token_login", data.message);
 
             navigate(`/Dashboard`);
           }
-          // console.log("Respuesta del servidor:", data.message.token);
         })
         .catch((error) => {
+          setIsLoading(false); // Desactivar el estado de carga
           console.error("Error al enviar la solicitud:", error);
         });
     }
   };
+
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
   return (
     <div className="w-full h-screen flex flex-row">
       <NavbarMobile />
@@ -127,7 +133,7 @@ export const SingIn = () => {
             <div className="flex lg:my-10 lg:mx-32 relative justify-center items-center lg:left-14 xl:w-4/5 w-5/6 2xl:w-5/6">
               <div className="flex flex-col items-center md:items-start w-full lg:w-11/12 2xl:w-11/12 gap-3">
                 <label htmlFor="emailAddress" className="font-bold text-left">
-                  Correo electronico:
+                  Correo electrónico:
                 </label>
                 <input
                   id="emailAddress"
@@ -157,7 +163,7 @@ export const SingIn = () => {
                   onChange={handlePasswordChange}
                 />
                 <div
-                  className="absolute  inset-y-12 right-12 cursor-pointer"
+                  className="absolute  inset-y-12 right-12 xl:right-44 cursor-pointer"
                   onClick={toggleShowPassword}>
                   {showPassword ? (
                     <BsEyeSlashFill className="text-gray-400" />
@@ -173,11 +179,11 @@ export const SingIn = () => {
             <div className="relative mt-5 text-center left-16 lg:mt-0 lg:left-1/4 xl:left-60 w-60 xl:my-7 2xl:left-72 2xl:mt-3">
               <p className="font-sans font-normal text-lg leading-6 flex items-center relative right-14 text-purple-600">
                 <Link to="" className="hover:underline">
-                  ¿Se te olvidó la contaseña?
+                  ¿Olvidaste tu contraseña?
                 </Link>
               </p>
             </div>
-            {setFormError && (
+            {formError && (
               <p className="text-red-500 font-bold mt-2">{formError}</p>
             )}
 
@@ -185,10 +191,15 @@ export const SingIn = () => {
               <div className="flex gap-2 lg:gap-28 xl:gap-16 flex-col md:flex-row">
                 <button
                   type="submit"
-                  className=" p-4 w-56 h-14 bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold"
+                  className="p-4 w-56 h-14 flex justify-center bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold"
                   placeholder="Iniciar Sesión"
-                  value={"Iniciar Sesión"}>
-                  Iniciar sesión
+                  value={"Iniciar Sesión"}
+                  disabled={isLoading}>
+                  {isLoading ? (
+                    <AiOutlineLoading className="animate-spin mr-2 text-2xl" />
+                  ) : (
+                    "Iniciar sesión"
+                  )}
                 </button>
                 {/* <button className=" p-4 w-56 h-14  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-4">
                   <p className="text-2xl pl-3">
@@ -208,7 +219,7 @@ export const SingIn = () => {
                 </p>
 
                 <Link
-                  className=" p-4 w-40 h-14 mt-6 xl:mt-12 mb-20 md:mb-0 bg-purple-900 hover:bg-purple-600 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center"
+                  className="p-4 w-40 h-14 mt-6 xl:mt-12 mb-20 md:mb-0 bg-purple-900 hover:bg-purple-600 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center"
                   to="/">
                   Volver
                 </Link>

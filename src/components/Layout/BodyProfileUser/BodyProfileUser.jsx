@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormProfile } from "../FormProfile/FormProfile";
+import { SubOrganizations } from "../SubOrganizations/SubOrganizations";
+// import { ChangePassword } from "../ChangePassword/ChangePassword";
+// import { Suborganizations } from "../Suborganizations/Suborganizations";
 
 export const BodyProfileUser = () => {
+  const [activeTab, setActiveTab] = useState("profile");
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
+
+  const renderContent = () => {
+    if (activeTab === "profile") {
+      return <FormProfile />;
+    } else if (activeTab === "changePassword") {
+      return "holac";
+    } else if (activeTab === "suborganizations") {
+      return <SubOrganizations />;
+    }
+  };
+
   return (
     <div className="flex w-full flex-row justify-center ">
-      <div className="w-full h-40 bg-purple-600"></div>
+      <div className="w-full h-40 bg-purple-900"></div>
       <div className="w-11/12 h-5/6 flex flex-col md:flex-row z-30 gap-5 absolute md:ml-24 center mt-16 ">
         <div className=" w-full md:w-1/4 bg-slate-50 h-5/6 md:h-full shadow-lg shadow-neutral-500">
           <div className="flex justify-center items-center flex-col py-8">
@@ -33,19 +52,31 @@ export const BodyProfileUser = () => {
             </div>
           </div>
         </div>
-        <div className="pt-1 border w-full h-full md:w-4/5  bg-slate-50 shadow-lg shadow-neutral-500 ">
-          <div className="flex  justify-around border-b border-neutral-300 py-2 text-sm">
-            <button className="px-4 py-2 bg-slate-200 rounded-md">
+        <div className="pt-1 border w-full h-screen xl:h-full md:w-4/5 bg-slate-50 shadow-lg  shadow-neutral-500">
+          <div className="flex justify-around border-b  border-neutral-300 py-2 text-sm">
+            <button
+              className={`px-4 py-2 rounded-md hover:bg-slate-100  ${
+                activeTab === "profile" ? "bg-slate-200" : ""
+              }`}
+              onClick={() => handleTabChange("profile")}>
               Configuración
             </button>
-            <button className="px-4 py-2 hover:bg-slate-200 rounded-md">
+            <button
+              className={`px-4 py-2 rounded-md hover:bg-slate-100  ${
+                activeTab === "changePassword" ? "bg-slate-200" : ""
+              }`}
+              onClick={() => handleTabChange("changePassword")}>
               Cambiar clave
             </button>
-            <button className="px-4 py-2 hover:bg-slate-200 rounded-md">
+            <button
+              className={`px-4 py-2 rounded-md hover:bg-slate-100  ${
+                activeTab === "suborganizations" ? "bg-slate-200" : ""
+              }`}
+              onClick={() => handleTabChange("suborganizations")}>
               Suborganizaciones
             </button>
           </div>
-          <FormProfile />
+          {renderContent()}
         </div>
       </div>
     </div>
