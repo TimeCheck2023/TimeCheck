@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
 import {
   AiFillTwitterCircle,
   AiFillInstagram,
@@ -8,6 +9,9 @@ import {
 } from "react-icons/ai";
 
 export const Footer = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   return (
     <div className="bg-slate-100 h-96 md:h-72 lg:h-36 w-full pb-10 sm:pb-0 flex flex-col justify-center ">
       <div className="flex flex-col lg:flex-row justify-between">
@@ -19,10 +23,24 @@ export const Footer = () => {
         <div className="mt-5 md:mt-2">
           <ul className="flex flex-col md:flex-row gap-4 sm:gap-10 md:relative md:left-8 lg:gap-20 text-base font-semibold justify-center items-center lg:justify-normal lg:items-start">
             <li className="hover:text-slate-600">
-              <Link>Terminos y Condiciones</Link>
+              <Link
+                className="hover:underline"
+                to={{
+                  pathname: "/Terminos y Condiciones",
+                  state: { prevLocation: location },
+                }}>
+                Terminos y Condiciones
+              </Link>
             </li>
             <li className="hover:text-slate-600">
-              <Link>Politicas de Privacidad</Link>
+              <Link
+                className="hover:underline"
+                to={{
+                  pathname: "/Politicas de Privacidad",
+                  state: { prevLocation: location },
+                }}>
+                Politicas de Privacidad
+              </Link>
             </li>
           </ul>
         </div>

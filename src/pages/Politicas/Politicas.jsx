@@ -1,7 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export const Politicas = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
   return (
     <div className="flex flex-col justify-center items-center px-20 text-justify gap-10">
       <h1 className="py-5 font-bold text-4xl">
@@ -79,11 +85,11 @@ export const Politicas = () => {
         puedes contactarnos a través de los canales proporcionados en la
         aplicación.
       </p>
-      <Link
-        to={"/SingUp"}
+      <button
+        onClick={handleGoBack}
         className=" text-center w-60 mb-16 rounded-md bg-purple-600 hover:bg-purple-950 text-white font-semibold px-4 py-2">
         Volver
-      </Link>
+      </button>
     </div>
   );
 };
