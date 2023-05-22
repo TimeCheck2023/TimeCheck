@@ -10,6 +10,8 @@ import { Statistics } from "./pages/Statistics/Statistics";
 import { ToastContainer } from "react-toastify";
 import { ProfileUser } from "./components/Layout/ProfileUser/ProfileUser";
 import { Notifications } from "./pages/Notifications/Notifications";
+import { Terminos } from "./pages/Terminos/Terminos";
+import { Politicas } from "./pages/Politicas/Politicas";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
           <Route path="/Profile" element={<ProfileUser />} />
           <Route path="/AddSubOrg" element={<AddSubOrg />} />
           <Route path="/Notifications" element={<Notifications />} />
+          <Route path="/Terminos y Condiciones" element={<Terminos />} />
+          <Route path="/Politicas de Privacidad" element={<Politicas />} />
         </Routes>
       </Router>
     </>

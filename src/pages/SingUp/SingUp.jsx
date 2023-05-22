@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { NavbarMobile } from "../../components/Layout/NavbarMobile/NavbarMobile";
@@ -10,28 +10,47 @@ import "react-toastify/dist/ReactToastify.css";
 export const SingUp = () => {
   const [valueSelect, setValueSelect] = useState("personal");
   const [loading, setLoading] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
   const navigate = useNavigate();
   const url = import.meta.env.VITE_URL;
   // console.log(url);
 
-  //estado para controlar los input
-  const [values_us, setValues_us] = useState({
-    documentType: "Cédula de ciudadania",
-    documentNumber: "",
-    fullName: "",
-    emailAddress: "",
-    password: "",
+  // Estado para controlar los input
+  const [values_us, setValues_us] = useState(() => {
+    const storedValues = localStorage.getItem("values_us");
+    return storedValues
+      ? JSON.parse(storedValues)
+      : {
+          documentType: "Cédula de ciudadania",
+          documentNumber: "",
+          fullName: "",
+          emailAddress: "",
+          password: "",
+        };
   });
 
-  const [values_org, setValues_org] = useState({
-    fullName: "",
-    address: "",
-    numero_telefono: 0,
-    emailAddress: "",
-    password: "",
+  const [values_org, setValues_org] = useState(() => {
+    const storedValues = localStorage.getItem("values_org");
+    return storedValues
+      ? JSON.parse(storedValues)
+      : {
+          fullName: "",
+          address: "",
+          numero_telefono: 0,
+          emailAddress: "",
+          password: "",
+        };
   });
-
   const selectRef = useRef(null);
+
+  useEffect(() => {
+    localStorage.setItem("values_us", JSON.stringify(1));
+  }, [values_us]);
+
+  useEffect(() => {
+    localStorage.setItem("values_org", JSON.stringify(values_org));
+  }, [values_org]);
 
   const [errors, setErrors] = useState({
     fullName: "",
@@ -62,7 +81,6 @@ export const SingUp = () => {
   };
 
   //Función para validar los campos del formulario de org
-
   function validateFormOrg(values) {
     const errorsO = {};
 
@@ -214,6 +232,8 @@ export const SingUp = () => {
                   },
                 }
               );
+              localStorage.removeItem("values_us");
+              localStorage.removeItem("values_org");
             }
           })
           .catch((error) => {
@@ -364,7 +384,24 @@ export const SingUp = () => {
                 errors={errorsOrg}
               />
             )}
-            <div className="footer mt-10 lg:mt-0 xl:mt-14 2xl:mt-10 lg:my-20 mx-20 flex flex-col justify-center items-center ">
+            <div className="footer mt-10 lg:mt-0 xl:mt-0 2xl:mt-3 lg:my-20 mx-20 flex flex-col justify-center items-center ">
+              <div className="flex items-center gap-2 justify-center my-3">
+                <input type="checkbox" name="tp" id="tp" />
+                <label htmlFor="tp">
+                  He leido y acepto los{" "}
+                  <Link
+                    to={"/Terminos y Condiciones"}
+                    className="font-bold text-purple-800 hover:underline">
+                    Términos y Condiciones
+                  </Link>{" "}
+                  y la
+                  <Link
+                    to={"/Politicas de Privacidad"}
+                    className="ml-1 font-bold text-purple-800 hover:underline">
+                    Politíca de privacidad
+                  </Link>
+                </label>
+              </div>
               <div className="flex flex-col md:flex-row gap-5 lg:gap-10 xl:gap-40">
                 <button className=" p-4 w-72 md:w-40 lg:w-72 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold">
                   Registrarse
