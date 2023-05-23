@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { AiFillPlusCircle, AiFillDelete, AiOutlineEdit } from "react-icons/ai";
+import {
+  AiFillPlusCircle,
+  AiFillDelete,
+  AiOutlineEdit,
+  AiOutlineCaretLeft,
+} from "react-icons/ai";
 import { toast } from "react-toastify";
 import jwtDecode from "jwt-decode";
 
@@ -16,11 +21,8 @@ export const SubOrgView = () => {
 
   const [availableMembers, setAvailableMembers] = useState([]);
   const [filteredMembers, setFilteredMembers] = useState([]);
-  const [members, setMembers] = useState([
-    { id: 1, name: "John Doe", email: "john@example.com", role: "Admin" },
-    { id: 2, name: "Jane Smith", email: "jane@example.com", role: "Miembro" },
-    // Agrega más miembros si es necesario
-  ]);
+  const [members, setMembers] = useState([]);
+  const [selectedMembers, setSelectedMembers] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token_login");
@@ -55,14 +57,18 @@ export const SubOrgView = () => {
   };
   useEffect(() => {
     // Obtener los miembros de la suborganización
-    // fetch(
-    //   `https://time-check.azurewebsites.net/api/User/MiembrosSuborganizacion/${id}`
-    // )
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setMembers(data);
-    //   })
-    //   .catch((error) => console.log(error));
+    fetch(
+      `https://timecheckbacknodejs-production.up.railway.app/user/SubOrgMiembro/${id}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          console.log(data.error);
+        } else {
+          setMembers(data.message);
+        }
+      })
+      .catch((error) => console.log(error));
 
     // Obtener los miembros que no están en la suborganización
     fetch(
@@ -75,12 +81,12 @@ export const SubOrgView = () => {
       .catch((error) => console.log(error));
   }, [id]);
 
-  const handleSelectAll = () => {
-    // Lógica para seleccionar todos los miembros
+  const handleDeleteMember = (id) => {
+    console.log(id);
   };
 
-  const handleDeleteMember = (id) => {
-    // Lógica para eliminar un miembro
+  const handleEditMember = (id) => {
+    console.log(id);
   };
 
   const handleOpenModal = () => {
@@ -103,6 +109,27 @@ export const SubOrgView = () => {
         return fullName.includes(query) || email.includes(query);
       });
       setFilteredMembers(filteredMembers);
+    }
+  };
+
+  const handleMemberSelect = (member) => {
+    if (selectedMembers.includes(member.nro_documento_usuario)) {
+      setSelectedMembers((prevSelectedMembers) =>
+        prevSelectedMembers.filter((id) => id !== member.nro_documento_usuario)
+      );
+    } else {
+      setSelectedMembers((prevSelectedMembers) => [
+        ...prevSelectedMembers,
+        member.nro_documento_usuario,
+      ]);
+    }
+  };
+
+  const handleSelectAll = () => {
+    if (selectedMembers.length === members.length) {
+      setSelectedMembers([]); // Deseleccionar todos los miembros
+    } else {
+      setSelectedMembers(members.map((member) => member.nro_documento_usuario)); // Seleccionar todos los miembros
     }
   };
 
@@ -167,74 +194,104 @@ export const SubOrgView = () => {
       </h2>
 
       {typeUser === 2 && (
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between my-6">
           <div>
-            <input
-              type="checkbox"
-              onChange={handleSelectAll}
-              className="mr-2"
-            />
-            <span className="font-semibold">Seleccionar todo</span>
+            <button
+              onClick={handleGoBack}
+              className="flex items-center justify-center rounded-full bg-purple-600 text-white w-11 py-2 hover:bg-purple-900">
+              <AiOutlineCaretLeft className="text-2xl" />
+            </button>
           </div>
 
           <button
             onClick={handleOpenModal}
-            className="flex items-center gap-1 bg-purple-600 text-white px-3 py-1 rounded-md hover:bg-purple-900">
-            <AiFillPlusCircle />
+            className="flex items-center gap-3 bg-purple-600 text-white px-5 py-2 rounded-md hover:bg-purple-900">
+            <AiFillPlusCircle className="text-lg" />
             <span>Agregar miembro</span>
           </button>
         </div>
       )}
 
       <div className="overflow-x-auto">
-        <table className="w-full bg-white border border-gray-300">
-          <thead>
-            <tr>
-              {typeUser === 2 && <th className="bg-gray-100 px-4 py-2">x</th>}
-              <th className="bg-gray-100 px-4 py-2">Nombre</th>
-              <th className="bg-gray-100 px-4 py-2">Correo</th>
-              <th className="bg-gray-100 px-4 py-2">Rol</th>
-              {typeUser === 2 && (
-                <th className="bg-gray-100 px-4 py-2">Acciones</th>
-              )}
-            </tr>
-          </thead>
-          <tbody>
-            {members.map((member) => (
-              <tr key={member.idUsuario}>
+        {members.length === 0 ? (
+          <div className="flex items-center justify-center h-full flex-col mt-52">
+            <p className="text-gray-500 text-2xl">
+              No hay miembros en la suborganización.
+            </p>
+            <img
+              src="/notFoundEvents.svg"
+              alt="NotFoundMembers"
+              className="w-52"
+            />
+          </div>
+        ) : (
+          <table className="w-full bg-white border border-gray-300">
+            <thead>
+              <tr>
                 {typeUser === 2 && (
-                  <td className="border px-4 py-2">
-                    <input type="checkbox" className="mr-2" />
-                  </td>
+                  <th className="bg-gray-100 px-4 py-2">
+                    {" "}
+                    <input
+                      type="checkbox"
+                      checked={selectedMembers.length === members.length}
+                      onChange={handleSelectAll}
+                    />
+                  </th>
                 )}
-                <td className="border px-4 py-2">{member.name}</td>
-                <td className="border px-4 py-2">{member.email}</td>
-                <td className="border px-4 py-2">{member.role}</td>
+                <th className="bg-gray-100 px-4 py-2">Nombre</th>
+                <th className="bg-gray-100 px-4 py-2">Correo</th>
+                <th className="bg-gray-100 px-4 py-2">Rol</th>
                 {typeUser === 2 && (
-                  <td className="border px-4 py-2">
-                    <div className="flex gap-2 justify-around">
-                      <button
-                        onClick={() => handleDeleteMember(member.idUsuario)}
-                        className="text-red-600 hover:text-red-800 text-xl">
-                        <AiFillDelete />
-                      </button>
-                      <button className="text-purple-600 hover:text-purple-800 text-xl">
-                        <AiOutlineEdit />
-                      </button>
-                    </div>
-                  </td>
+                  <th className="bg-gray-100 px-4 py-2">Acciones</th>
                 )}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {members.map((member) => (
+                <tr key={member.idUsuario}>
+                  {typeUser === 2 && (
+                    <td className="border px-4 py-2 text-center">
+                      <input
+                        type="checkbox"
+                        checked={selectedMembers.includes(
+                          member.nro_documento_usuario
+                        )}
+                        onChange={() => handleMemberSelect(member)}
+                        key={`${member.nro_documento_usuario}`}
+                      />
+                    </td>
+                  )}
+                  <td className="border px-4 py-2">
+                    {member.nombre_completo_usuario}
+                  </td>
+                  <td className="border px-4 py-2">{member.correo_usuario}</td>
+                  <td className="border px-4 py-2">{member.role}</td>
+                  {typeUser === 2 && (
+                    <td className="border px-4 py-2">
+                      <div className="flex gap-2 justify-around">
+                        <button
+                          onClick={() =>
+                            handleDeleteMember(member.nro_documento_usuario)
+                          }
+                          className="text-red-600 hover:text-red-800 text-xl">
+                          <AiFillDelete />
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleEditMember(member.nro_documento_usuario)
+                          }
+                          className="text-purple-600 hover:text-purple-800 text-xl">
+                          <AiOutlineEdit />
+                        </button>
+                      </div>
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
-
-      <button
-        onClick={handleGoBack}
-        className="bg-purple-600 text-white px-16 py-2 rounded-md mt-4 hover:bg-purple-900">
-        Volver
-      </button>
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
