@@ -33,7 +33,7 @@ export const ViewSubOrg = () => {
       setIsLoading(true); // Iniciar la carga
 
       fetch(
-        `https://timecheckbacknodejs-production.up.railway.app/SubOrg/${decoded.payload.id_organización}`
+        `https://timecheck.up.railway.app/SubOrg/${decoded.payload.id_organización}`
       )
         .then((response) => response.json())
         .then((data) => {

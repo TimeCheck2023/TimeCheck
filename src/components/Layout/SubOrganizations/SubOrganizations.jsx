@@ -10,7 +10,7 @@ export const SubOrganizations = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://timecheckbacknodejs-production.up.railway.app/SubOrg"
+          "https://timecheck.up.railway.app/SubOrg"
         );
         if (response.ok) {
           const data = await response.json();

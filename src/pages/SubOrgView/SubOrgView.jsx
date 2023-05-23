@@ -58,7 +58,7 @@ export const SubOrgView = () => {
   useEffect(() => {
     // Obtener los miembros de la suborganización
     fetch(
-      `https://timecheckbacknodejs-production.up.railway.app/user/SubOrgMiembro/${id}`
+      `https://timecheck.up.railway.app/user/SubOrgMiembro/${id}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -182,7 +182,7 @@ export const SubOrgView = () => {
           toast.error("Error al agregar el usuario: " + error.message);
           console.log(error);
         });
-    } else {
+    // } else {
       toast.error("Por favor selecciona un usuario y un rol");
     }
   };
@@ -193,7 +193,6 @@ export const SubOrgView = () => {
         Miembros de la suborganización
       </h2>
 
-      {typeUser === 2 && (
         <div className="flex items-center justify-between my-6">
           <div>
             <button
@@ -203,14 +202,15 @@ export const SubOrgView = () => {
             </button>
           </div>
 
+              {typeUser === 2 && (
           <button
             onClick={handleOpenModal}
             className="flex items-center gap-3 bg-purple-600 text-white px-5 py-2 rounded-md hover:bg-purple-900">
             <AiFillPlusCircle className="text-lg" />
             <span>Agregar miembro</span>
           </button>
+            )}
         </div>
-      )}
 
       <div className="overflow-x-auto">
         {members.length === 0 ? (

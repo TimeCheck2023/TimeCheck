@@ -32,7 +32,7 @@ export const SlideBar = ({
   if (userType !== 1) {
     useEffect(() => {
       fetch(
-        `https://timecheckbacknodejs-production.up.railway.app/SubOrg/${idOrg}`
+        `https://timecheck.up.railway.app/SubOrg/${idOrg}`
       )
         .then((response) => response.json())
         .then((data) => {

@@ -18,7 +18,7 @@ export const FormProfileOrg = ({ orgData }) => {
 
     try {
       const response = await fetch(
-        `https://timecheckbacknodejs-production.up.railway.app/org/update/${idOrg}`,
+        `https://timecheck.up.railway.app/org/update/${idOrg}`,
         {
           method: "PUT",
           headers: {

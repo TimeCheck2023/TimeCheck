@@ -49,7 +49,7 @@ export const SingIn = () => {
       setIsLoading(true); // Activar el estado de carga
 
       fetch(
-        "https://timecheckbacknodejs-production.up.railway.app/Auth/login",
+        "https://timecheck.up.railway.app/Auth/login",
         {
           method: "POST",
           headers: {
@@ -163,7 +163,7 @@ export const SingIn = () => {
                   onChange={handlePasswordChange}
                 />
                 <div
-                  className="absolute  inset-y-12 right-12 xl:right-44 cursor-pointer"
+                  className="absolute  inset-y-12 right-12 xl:right-44 2xl:right-48 cursor-pointer"
                   onClick={toggleShowPassword}>
                   {showPassword ? (
                     <BsEyeSlashFill className="text-gray-400" />
@@ -176,7 +176,7 @@ export const SingIn = () => {
                 )}
               </div>
             </div>
-            <div className="relative mt-5 text-center left-16 lg:mt-0 lg:left-1/4 xl:left-60 w-60 xl:my-7 2xl:left-72 2xl:mt-3">
+            <div className="relative mt-5 text-center left-16 lg:mt-0 lg:left-1/4 xl:left-60 w-60 xl:my-7 2xl:left-64 2xl:mt-3">
               <p className="font-sans font-normal text-lg leading-6 flex items-center relative right-14 text-purple-600">
                 <Link to="" className="hover:underline">
                   ¿Olvidaste tu contraseña?

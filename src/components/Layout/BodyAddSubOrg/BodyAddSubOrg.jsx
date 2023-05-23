@@ -32,7 +32,7 @@ export const BodyAddSubOrg = () => {
         description_organization: description,
       };
       fetch(
-        `https://timecheckbacknodejs-production.up.railway.app/SubOrg/register/${idOrg}`,
+        `https://timecheck.up.railway.app/SubOrg/register/${idOrg}`,
         {
           method: "POST",
           headers: {

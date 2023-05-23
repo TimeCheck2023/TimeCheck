@@ -16,7 +16,7 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
       const fetchUserData = async () => {
         try {
           const response = await fetch(
-            `https://timecheckbacknodejs-production.up.railway.app/user/${nroDocumento}`
+            `https://timecheck.up.railway.app/user/${nroDocumento}`
           );
           const data = await response.json();
           console.log(data.message);
@@ -37,7 +37,7 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
       const fetchOrgData = async () => {
         try {
           const response = await fetch(
-            `https://timecheckbacknodejs-production.up.railway.app/org/${idOrg}`
+            `https://timecheck.up.railway.app/org/${idOrg}`
           );
           const data = await response.json();
           console.log(data.message);

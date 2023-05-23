@@ -11,6 +11,8 @@ export const SingUp = () => {
   const [valueSelect, setValueSelect] = useState("personal");
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+
 
   const navigate = useNavigate();
   const url = import.meta.env.VITE_URL;
@@ -165,6 +167,25 @@ export const SingUp = () => {
     event.preventDefault();
     setLoading(true); // Mostrar loader al enviar el formulario
 
+    // Verificar si el checkbox está seleccionado
+    if (!acceptedTerms) {
+      toast.warn(
+        "Debes aceptar los términos y condiciones y la política de seguridad",
+        {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        }
+      );
+      setLoading(false);
+      return;
+    }
+
     // Validaciones
     if (valueSelect == "personal") {
       const errorsUser = validateFormUser(values_us);
@@ -189,7 +210,7 @@ export const SingUp = () => {
 
         // Aquí puedes enviar el formulario a través de una solicitud HTTP o hacer cualquier otra cosa que necesites hacer con los datos del formulario
         fetch(
-          "https://timecheckbacknodejs-production.up.railway.app/user/register",
+          "https://timecheck.up.railway.app/user/register",
           {
             method: "POST",
             headers: {
@@ -262,7 +283,7 @@ export const SingUp = () => {
 
         // Aquí puedes enviar el formulario a través de una solicitud HTTP o hacer cualquier otra cosa que necesites hacer con los datos del formulario
         fetch(
-          "https://timecheckbacknodejs-production.up.railway.app/Org/register",
+          "https://timecheck.up.railway.app/Org/register",
           {
             method: "POST",
             headers: {
@@ -386,7 +407,13 @@ export const SingUp = () => {
             )}
             <div className="footer mt-10 lg:mt-0 xl:mt-0 2xl:mt-3 lg:my-20 mx-20 flex flex-col justify-center items-center ">
               <div className="flex items-center gap-2 justify-center my-3">
-                <input type="checkbox" name="tp" id="tp" />
+                <input
+                  type="checkbox"
+                  name="tp"
+                  id="tp"
+                  checked={acceptedTerms}
+                  onChange={(event) => setAcceptedTerms(event.target.checked)}
+                />
                 <label htmlFor="tp">
                   He leido y acepto los{" "}
                   <Link

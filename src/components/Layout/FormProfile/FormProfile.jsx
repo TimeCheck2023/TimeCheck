@@ -36,7 +36,7 @@ export const FormProfile = ({ userData }) => {
     // Puedes usar las variables de estado fullName, tipoPoblacion, tipoDocumento, etc.
     try {
       const response = await fetch(
-        `https://timecheckbacknodejs-production.up.railway.app/user/update/${documentNumber}`,
+        `https://timecheck.up.railway.app/user/update/${documentNumber}`,
         {
           method: "PUT",
           headers: {
