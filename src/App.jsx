@@ -12,6 +12,8 @@ import { ProfileUser } from "./components/Layout/ProfileUser/ProfileUser";
 import { Notifications } from "./pages/Notifications/Notifications";
 import { Terminos } from "./pages/Terminos/Terminos";
 import { Politicas } from "./pages/Politicas/Politicas";
+import { ViewSubOrg } from "./pages/ViewSubOrg/ViewSubOrg";
+import { SubOrgView } from "./pages/SubOrgView/SubOrgView";
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
           <Route path="/Notifications" element={<Notifications />} />
           <Route path="/Terminos y Condiciones" element={<Terminos />} />
           <Route path="/Politicas de Privacidad" element={<Politicas />} />
+          <Route path="/ViewSubOrg" element={<ViewSubOrg />} />
+          <Route path="/Suborganization/:id" element={<SubOrgView />} />
         </Routes>
       </Router>
     </>

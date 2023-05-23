@@ -2,7 +2,10 @@ import React from "react";
 import { AiFillHome } from "react-icons/ai";
 import { BiGroup } from "react-icons/bi";
 import { CgOpenCollective } from "react-icons/cg";
-import { MdOutlineContactMail, MdOutlineContentPasteSearch } from "react-icons/md";
+import {
+  MdOutlineContactMail,
+  MdOutlineContentPasteSearch,
+} from "react-icons/md";
 import { Link } from "react-router-dom";
 
 export const BtnsNavMobile = ({ menuRef, userType }) => {
@@ -37,7 +40,7 @@ export const BtnsNavMobile = ({ menuRef, userType }) => {
           </Link>
         ) : (
           <Link
-            to="/AddSubOrg"
+            to="/ViewSubOrg"
             className="bg-purple-600 rounded-full h-16 w-16 mx-2 text-center flex justify-center items-center text-3xl text-white">
             <BiGroup />
           </Link>

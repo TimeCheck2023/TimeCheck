@@ -15,6 +15,7 @@ export const SubOrganizations = () => {
         if (response.ok) {
           const data = await response.json();
           setSubOrganizations(data.message);
+          console.log(data.message);
         } else {
           throw new Error("Failed to fetch data");
         }
@@ -44,9 +45,10 @@ export const SubOrganizations = () => {
         Suborganizaciones
       </h2>
       <div className="w-full h-full xl:h-1/2 grid place-items-center md:grid-cols-2 xl:grid-cols-3  ">
-        {currentCards.map((subOrg) => (
+        {currentCards.map((subOrg, index) => (
           <CardSubOrganization
-            key={subOrg.SUB_ORGANIZACION_ID}
+            key={index}
+            id={subOrg.SUB_ORGANIZACION_ID}
             title={subOrg.SUB_ORGANIZACION_NOMBRE}
             organization={subOrg.ORGANIZACION_NOMBRE}
             description={subOrg.SUB_ORGANIZACION_DESCRIPCION}

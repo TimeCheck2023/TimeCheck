@@ -96,46 +96,48 @@ export const SlideBar = ({
             openNavBar && "w-full"
           }`}>
           <div className="flex flex-col gap-10 text-2xl justify-start">
-            <div
+            <Link
+              to={"/Dashboard"}
               className={`${
                 activeEvent ? "bg-slate-300" : "hover:bg-neutral-300"
-              } p-2 rounded-md flex flex-row gap-3 ${
+              } p-2 rounded-md flex flex-row gap-3 cursor-pointer ${
                 openNavBar
                   ? "w-4/5 justify-start items-start"
                   : "justify-center items-center"
               }`}>
-              <Link to={"/Dashboard"} className="flex gap-3">
+              <div className="flex gap-3">
                 <RxDashboard />
                 {openNavBar ? (
                   <p className="text-lg font-medium">Eventos</p>
                 ) : (
                   ""
                 )}
-              </Link>
-            </div>
-            <div
+              </div>
+            </Link>
+            <Link
+              to="/Statistics"
               className={`${
                 activeStats ? "bg-slate-300" : "hover:bg-neutral-300"
-              } p-2 rounded-md flex flex-row gap-3 text-lef ${
+              } p-2 rounded-md flex flex-row gap-3 text-lef cursor-pointer ${
                 openNavBar
                   ? "w-4/5 justify-start items-start"
                   : "justify-center items-center"
               }`}>
-              <Link to="/Statistics" className="flex flex-row gap-3">
+              <div className="flex flex-row gap-3">
                 <CgOpenCollective />
                 {openNavBar ? (
                   <p className="text-lg font-medium">Estadisticas</p>
                 ) : (
                   ""
                 )}
-              </Link>
-            </div>
+              </div>
+            </Link>
             {!userType && (
-              <div
-                onClick={lowerGroup}
-                className={` hover:cursor-pointer p-2 rounded-md flex flex-col gap-3 text-lef ${
-                  !lower && "hover:bg-neutral-300"
-                } ${
+              <Link
+                to={"/ViewSubOrg"}
+                className={`${
+                  activeGroup ? "bg-slate-300" : "hover:bg-neutral-300"
+                } p-2 rounded-md flex flex-row gap-3 text-lef cur ${
                   openNavBar
                     ? "w-4/5 justify-start items-start"
                     : "justify-center items-center"
@@ -148,34 +150,12 @@ export const SlideBar = ({
                   {openNavBar ? (
                     <p className="text-lg font-medium flex flex-row justify-center items-center gap-2">
                       Suborganizaciones{" "}
-                      {!lower ? <AiOutlineCaretDown /> : <AiOutlineCaretUp />}{" "}
                     </p>
                   ) : (
                     ""
                   )}
                 </div>
-                {lower && (
-                  <div className="flex flex-col items-start text-left font-normal text-base ml-2 pl-7 border-l border-black gap-4">
-                    <ul className="flex flex-col gap-3">
-                      {subOrganizations.slice(0, 5).map((subOrg) => (
-                        <Link
-                          to="#"
-                          key={subOrg.id_suborganizacion}
-                          className="bg-white hover:bg-neutral-200 px-3 py-1 rounded-md">
-                          {subOrg.nombre_suborganizacion}
-                        </Link>
-                      ))}
-                    </ul>
-                    {subOrganizations.length < 5 && (
-                      <Link
-                        to="/AddSubOrg"
-                        className="bg-purple-600 rounded-md hover:bg-purple-900 px-8 py-1 text-white font-semibold">
-                        Agregar
-                      </Link>
-                    )}
-                  </div>
-                )}{" "}
-              </div>
+              </Link>
             )}
           </div>
           <div className="text-2xl flex flex-col gap-2">

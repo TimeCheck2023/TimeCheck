@@ -152,13 +152,15 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
               onClick={() => handleTabChange("changePassword")}>
               Cambiar clave
             </button>
-            <button
-              className={`px-4 py-2 rounded-md hover:bg-slate-100  ${
-                activeTab === "suborganizations" ? "bg-slate-200" : ""
-              }`}
-              onClick={() => handleTabChange("suborganizations")}>
-              Suborganizaciones
-            </button>
+            {typeUser !== 2 && (
+              <button
+                className={`px-4 py-2 rounded-md hover:bg-slate-100  ${
+                  activeTab === "suborganizations" ? "bg-slate-200" : ""
+                }`}
+                onClick={() => handleTabChange("suborganizations")}>
+                Suborganizaciones
+              </button>
+            )}
           </div>
           {renderContent()}
         </div>

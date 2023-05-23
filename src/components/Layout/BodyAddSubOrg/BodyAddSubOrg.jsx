@@ -3,6 +3,7 @@ import { RiErrorWarningLine } from "react-icons/ri";
 import { AiOutlineLoading } from "react-icons/ai";
 import { toast } from "react-toastify";
 import jwtDecode from "jwt-decode";
+import { Link, useNavigate } from "react-router-dom";
 
 export const BodyAddSubOrg = () => {
   const [name, setName] = useState("");
@@ -10,6 +11,7 @@ export const BodyAddSubOrg = () => {
   const [nameError, setNameError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Agregamos estado para controlar el estado de carga
+  const navigate = useNavigate(); // Agrega el hook useNavigate
 
   const token = localStorage.getItem("token_login");
   const decoded = jwtDecode(token);
@@ -46,6 +48,10 @@ export const BodyAddSubOrg = () => {
             // Reiniciar los valores del formulario si es necesario
             setName("");
             setDescription("");
+            // Establece el estado de redirección después de 2 segundos
+            setTimeout(() => {
+              navigate("/ViewSubOrg"); // Navegación a "/ViewSubOrg"
+            }, 2000);
           } else {
             // Manejar el error de la solicitud
             throw new Error("No se pudo crear la suborganización");
@@ -60,6 +66,7 @@ export const BodyAddSubOrg = () => {
           setIsLoading(false); // Desactivamos el estado de carga
         });
     }
+    
   };
 
   const handleNameChange = (e) => {
@@ -125,10 +132,10 @@ export const BodyAddSubOrg = () => {
               </p>
             )}
           </div>
-          <div className="flex items-center flex-col justify-center">
+          <div className="flex items-center flex-col justify-center gap-5">
             <button
               type="submit"
-              className="w-56 bg-purple-600 text-white flex justify-center py-2 text-center rounded-md font-semibold"
+              className="w-56 hover:bg-purple-950 bg-purple-600 text-white flex justify-center py-2 text-center rounded-md font-semibold"
               disabled={isLoading}>
               {isLoading ? (
                 <AiOutlineLoading className="animate-spin mr-2" />
@@ -136,6 +143,11 @@ export const BodyAddSubOrg = () => {
                 "Crear"
               )}
             </button>
+            <Link
+              to={"/ViewSubOrg"}
+              className="w-56 hover:bg-purple-950 bg-purple-600 text-white flex justify-center py-2 text-center rounded-md font-semibold">
+              Volver
+            </Link>
           </div>
         </form>
       </div>
