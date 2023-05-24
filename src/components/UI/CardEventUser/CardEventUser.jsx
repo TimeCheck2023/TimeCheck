@@ -32,10 +32,10 @@ export const CardEventUser = (props) => {
         <p className="text-xs truncate">{props.description}</p>
       </div>
       <div className="flex flex-row justify-between px-8 py-4">
-        <button className="flex flex-row items-center border px-4 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-2">
+        {/* <button className="flex flex-row items-center border px-4 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-2">
           <AiOutlineLike className=" text-xl" />
           <p className="font-bold">{props.likes}</p>
-        </button>
+        </button> */}
         <button
           onClick={() => {
             setOpenModal(!openModal);

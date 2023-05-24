@@ -70,10 +70,10 @@ export const CardEventAdmin = (props) => {
           <p className="text-slate-400 font-normal">{`${props.cupos_disponibles}/${props.aforo}`}</p>
         </div>
         <div className="flex justify-between px-3 gap-4 mt-2 mb-4 2xl:mb-4">
-          <button className="flex items-center px-3 bg-slate-100 rounded-md font-bold text-xl text-purple-600 gap-2">
+          {/* <button className="flex items-center px-3 bg-slate-100 rounded-md font-bold text-xl text-purple-600 gap-2">
             <AiFillLike className="text-purple-600" />
             {props.likes}
-          </button>
+          </button> */}
           <button
             onClick={handleOpenModal}
             className="hover:bg-purple-800 px-14 bg-purple-600 text-white font-medium py-1 rounded-md shadow-lg">

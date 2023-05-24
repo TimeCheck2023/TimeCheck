@@ -113,7 +113,7 @@ export const SlideBar = ({
                 )}
               </div>
             </Link>
-            <Link
+            {/* <Link
               to="/Statistics"
               className={`${
                 activeStats ? "bg-slate-300" : "hover:bg-neutral-300"
@@ -130,7 +130,7 @@ export const SlideBar = ({
                   ""
                 )}
               </div>
-            </Link>
+            </Link> */}
             {!userType && (
               <Link
                 to={"/ViewSubOrg"}
@@ -158,7 +158,7 @@ export const SlideBar = ({
             )}
           </div>
           <div className="text-2xl flex flex-col gap-2">
-            <div
+            {/* <div
               className={`${
                 activeNotify ? "bg-slate-300" : "hover:bg-neutral-300"
               } p-2 rounded-md flex flex-row gap-3 text-lef ${
@@ -172,7 +172,7 @@ export const SlideBar = ({
               ) : (
                 ""
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
