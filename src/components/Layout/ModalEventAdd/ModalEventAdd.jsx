@@ -21,7 +21,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
     fechaFinal: "",
     lugar: "",
     aforo: 0,
-    suborganizacionId: 26,
+    suborganizacionId: 41,
     tipoEventoId: 9,
   });
 
