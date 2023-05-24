@@ -77,7 +77,7 @@ export const CardEventAdmin = (props) => {
           <button
             onClick={handleOpenModal}
             className="hover:bg-purple-800 px-14 bg-purple-600 text-white font-medium py-1 rounded-md shadow-lg">
-            EDITAR
+            Ver más
           </button>
         </div>
       </div>
@@ -98,5 +98,5 @@ export const CardEventAdmin = (props) => {
         />
       )}
     </>
-  ); 
+  );
 };

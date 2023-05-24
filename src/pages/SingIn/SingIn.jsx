@@ -48,19 +48,16 @@ export const SingIn = () => {
       setFormError("");
       setIsLoading(true); // Activar el estado de carga
 
-      fetch(
-        "https://timecheck.up.railway.app/Auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            emailAddress: emailAddress,
-            password: password,
-          }),
-        }
-      )
+      fetch("https://timecheck.up.railway.app/Auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          emailAddress: emailAddress,
+          password: password,
+        }),
+      })
         .then((response) => response.json())
         .then((data) => {
           setIsLoading(false); // Desactivar el estado de carga
@@ -163,7 +160,7 @@ export const SingIn = () => {
                   onChange={handlePasswordChange}
                 />
                 <div
-                  className="absolute  inset-y-12 right-12 xl:right-44 2xl:right-48 cursor-pointer"
+                  className="absolute  inset-y-12 right-12 xl:right-48 2xl:right-48 cursor-pointer"
                   onClick={toggleShowPassword}>
                   {showPassword ? (
                     <BsEyeSlashFill className="text-gray-400" />

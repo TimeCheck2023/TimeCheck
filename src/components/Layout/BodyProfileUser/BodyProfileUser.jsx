@@ -59,6 +59,8 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
     setActiveTab(tab);
   };
 
+  console.log(typeUser);
+
   const renderContent = () => {
     if (loading) {
       return (
@@ -102,7 +104,7 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
       <div className="w-full h-40 bg-purple-900"></div>
       <div className="w-11/12 h-5/6 flex flex-col md:flex-row z-30 gap-5 absolute md:ml-24 center mt-16 ">
         <div className=" w-full md:w-1/4 bg-slate-50 h-5/6 md:h-full shadow-lg shadow-neutral-500">
-          <div className="flex justify-center items-center flex-col py-8">
+          <div className="flex justify-center items-center flex-col py-8 gap-5">
             <div className="h-36 w-36 bg-black rounded-full"></div>
             <p className="text-xl font-medium">
               {typeUser === 1
@@ -111,25 +113,30 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
             </p>
           </div>
           <div className="flex flex-col justify-between gap-28 mt-10">
-            <div className="flex flex-col">
-              <div className="border-y py-5 border-neutral-300 px-7 flex flex-row justify-between">
-                <p>Eventos asistidos</p>
-                <p className="text-green-600 font-bold">
-                  {userData.confirmados}
-                </p>
-              </div>
-              <div className="border-y py-5 border-neutral-300 px-7 flex flex-row justify-between">
+            {typeUser === 1 && (
+              <div className="flex flex-col">
+                <div className="border-y py-5 border-neutral-300 px-7 flex flex-row justify-between">
+                  <p>Eventos asistidos</p>
+                  <p className="text-green-600 font-bold">
+                    {userData.confirmados}
+                  </p>
+                </div>
+                {/* <div className="border-y py-5 border-neutral-300 px-7 flex flex-row justify-between">
                 <p>Eventos no asistidos</p>
                 <p className="text-red-600 font-bold">14</p>
+              </div> */}
+                <div className="border-y py-5 border-neutral-300 px-7 flex flex-row justify-between">
+                  <p>Eventos pendientes</p>
+                  <p className="text-purple-600 font-bold">
+                    {userData.pendientes}
+                  </p>
+                </div>
               </div>
-              <div className="border-y py-5 border-neutral-300 px-7 flex flex-row justify-between">
-                <p>Eventos pendientes</p>
-                <p className="text-purple-600 font-bold">
-                  {userData.pendientes}
-                </p>
-              </div>
-            </div>
-            <div className="flex justify-center items-center h-32 pb-32 md:pb-0">
+            )}
+            <div
+              className={`flex justify-center items-center h-32 pb-32 md:pb-0 ${
+                typeUser === 2 ? "mt-60 xl:mt-80" : null
+              }`}>
               <button className="hover:bg-slate-200 px-12 py-2 border border-slate-200 text-purple-500 font-bold bg-slate-100 shadow-md rounded-md">
                 Compartir perfil
               </button>

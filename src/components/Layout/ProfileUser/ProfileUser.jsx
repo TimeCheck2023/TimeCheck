@@ -18,6 +18,7 @@ export const ProfileUser = () => {
       navigate("/"); // Redirigir al usuario a la página de inicio de sesión
     } else {
       const decoded = jwtDecode(token);
+      console.log(decoded);
       setIdOrg(decoded.payload.id_organización);
       setNroDocumento(decoded.payload.nro_documento_usuario);
       setTypeUser(decoded.payload.EsUsuario);

@@ -29,15 +29,15 @@ export const BodyHome = () => {
         <div className="text-slate-100 relative font-sans md:left-20 top-20 w-80 text-justify  md:w-1/3">
           <p className="text-lg md:text-xl">
             TimeCheck es una herramienta en línea que facilita el registro
-            automatizado de asistentes a eventos. Simplifica la
-            gestión de eventos y mejora la experiencia para los
-            organizadores como para los participantes.
+            automatizado de asistentes a eventos. Simplifica la gestión de
+            eventos y mejora la experiencia para los organizadores como para los
+            participantes.
           </p>
         </div>
       </div>
       <div>
         <div className="relative left-5 md:left-20 top-28 w-4/5">
-          <div className="text-purple-600 text-center  md:text-left text-3xl xl:text-4xl relative left-4 md:left-0 font-bold font-sans">
+          <div className="text-purple-600 text-center  md:text-left text-3xl xl:text-4xl relative left-4 md:left-0 font-bold font-sans xl:mb-56">
             <h1>Algunos de Nuestros Eventos</h1>
           </div>
           <div className="xl:w-2/5 w-full mb-52 lg:mb-0 lg:w-1/3 relative left-4 md:left-0 lg:left-0 top-5">

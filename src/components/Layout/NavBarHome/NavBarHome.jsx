@@ -12,12 +12,11 @@ export const NavBarHome = (props) => {
   const toggleNavBar = () => setOpenNavBar(!openNavBar);
   return (
     <div
-      onMouseEnter={toggleNavBar}
-      onMouseLeave={toggleNavBar}
+      onClick={toggleNavBar}
       className={`bg-zinc-900 hidden sm:flex h-screen fixed ${
         openNavBar
           ? "w-72 z-50 transition-all duration-200 ease-in "
-          : "transition-all duration-300 ease-in w-32"
+          : "transition-all duration-300 ease-in-out w-32"
       }  items-center flex flex-col `}>
       <div className="header flex flex-row justify-center items-center my-4">
         {openNavBar ? (
@@ -45,7 +44,8 @@ export const NavBarHome = (props) => {
         )}
       </div>
       <div className="menu text-white">
-        <div className={`relative ${openNavBar ? "top-24 2xl:top-28" : "top-36"}`}>
+        <div
+          className={`relative ${openNavBar ? "top-24 2xl:top-28" : "top-36"}`}>
           <h3
             className={`${
               openNavBar ? "text-slate-300 px-4" : "text-slate-300"
@@ -55,7 +55,9 @@ export const NavBarHome = (props) => {
           <div className="my-5 relative xl:top-10 top-3">
             <div
               className={`flex flex-col gap-5${
-                openNavBar ? " transition-all duration-100 ease-linear px-4" : ""
+                openNavBar
+                  ? " transition-all duration-100 ease-linear px-4"
+                  : ""
               }`}>
               <Link to="/" aria-label="Ir al inicio principal">
                 <div

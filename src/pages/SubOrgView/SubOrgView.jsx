@@ -52,16 +52,29 @@ export const SubOrgView = () => {
       .then((response) => response.json())
       .then((data) => {
         setFilteredMembers([]);
-        setAvailableMembers(data);
       });
   };
-  useEffect(() => {
-    // Obtener los miembros de la suborganización
-    fetch(
-      `https://timecheck.up.railway.app/user/SubOrgMiembro/${id}`
-    )
+
+  const handleUsers = () => {
+    fetch(`https://timecheck.up.railway.app/user/SubOrgMiembro/${id}`)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
+        if (data.error) {
+          console.log(data.error);
+        } else {
+          setMembers(data.message);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    // Obtener los miembros de la suborganización
+    fetch(`https://timecheck.up.railway.app/user/SubOrgMiembro/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
         if (data.error) {
           console.log(data.error);
         } else {
@@ -95,7 +108,6 @@ export const SubOrgView = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setSelectedRole("");
   };
 
   const handleUserSearch = (searchQuery) => {
@@ -166,24 +178,15 @@ export const SubOrgView = () => {
         .then((data) => {
           setFilteredMembers([]);
           fetchUsersSinSubOrg();
+          handleUsers();
           toast.success("Se agregó correctamente el usuario!");
           handleCloseModal();
           // Actualizar la lista de miembros
-          // fetch(
-          //   `https://time-check.azurewebsites.net/api/User/MiembrosSuborganizacion/${id}`
-          // )
-          //   .then((response) => response.json())
-          //   .then((data) => {
-          //     setMembers(data);
-          //   })
-          //   .catch((error) => console.log(error));
         })
         .catch((error) => {
           toast.error("Error al agregar el usuario: " + error.message);
           console.log(error);
         });
-    // } else {
-      toast.error("Por favor selecciona un usuario y un rol");
     }
   };
 
@@ -193,24 +196,24 @@ export const SubOrgView = () => {
         Miembros de la suborganización
       </h2>
 
-        <div className="flex items-center justify-between my-6">
-          <div>
-            <button
-              onClick={handleGoBack}
-              className="flex items-center justify-center rounded-full bg-purple-600 text-white w-11 py-2 hover:bg-purple-900">
-              <AiOutlineCaretLeft className="text-2xl" />
-            </button>
-          </div>
+      <div className="flex items-center justify-between my-6">
+        <div>
+          <button
+            onClick={handleGoBack}
+            className="flex items-center justify-center rounded-full bg-purple-600 text-white w-11 py-2 hover:bg-purple-900">
+            <AiOutlineCaretLeft className="text-2xl" />
+          </button>
+        </div>
 
-              {typeUser === 2 && (
+        {typeUser === 2 && (
           <button
             onClick={handleOpenModal}
             className="flex items-center gap-3 bg-purple-600 text-white px-5 py-2 rounded-md hover:bg-purple-900">
             <AiFillPlusCircle className="text-lg" />
             <span>Agregar miembro</span>
           </button>
-            )}
-        </div>
+        )}
+      </div>
 
       <div className="overflow-x-auto">
         {members.length === 0 ? (
@@ -265,7 +268,9 @@ export const SubOrgView = () => {
                     {member.nombre_completo_usuario}
                   </td>
                   <td className="border px-4 py-2">{member.correo_usuario}</td>
-                  <td className="border px-4 py-2">{member.role}</td>
+                  <td className="border px-4 py-2">
+                    {member.rol === 0 ? "Administrador" : "Miembro"}
+                  </td>
                   {typeUser === 2 && (
                     <td className="border px-4 py-2">
                       <div className="flex gap-2 justify-around">

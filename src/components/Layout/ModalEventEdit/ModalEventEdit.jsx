@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { MdClose } from "react-icons/md";
 
 export const ModalEventEdit = ({
   handleCloseModal,
@@ -13,7 +16,7 @@ export const ModalEventEdit = ({
   initialAforo,
   initialValorTotal,
   initialTipoEvento,
-  fetchEvents
+  fetchEvents,
 }) => {
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -37,13 +40,16 @@ export const ModalEventEdit = ({
   const [isStartDateValid, setIsStartDateValid] = useState(true);
   const [isNumberValid, setIsNumberValid] = useState(true);
 
+  const [modalOpen, setModalOpen] = useState(false);
+
   const [selectedImage, setSelectedImage] = useState(image);
+  const [documento, setDocumento] = useState("");
 
   useEffect(() => {
     fetch("https://time-check.azurewebsites.net/api/Event/get_event_types")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
+        console.log(data);
         setEventTypes(data.response.map((type) => type.tipoEvento));
       });
   }, []);
@@ -58,27 +64,6 @@ export const ModalEventEdit = ({
     formData.append("file", file);
     formData.append("upload_preset", "time_check");
     formData.append("cloud_name", "centroconveciones");
-
-    // Eliminar imagen anterior en Cloudinary
-    // if (selectedImage) {
-    //   try {
-    //     const publicId = extractPublicIdFromUrl(selectedImage);
-    //     if (publicId) {
-    //       await fetch(
-    //         `https://api.cloudinary.com/v1_1/centroconveciones/delete_by_token`,
-    //         {
-    //           method: "POST",
-    //           body: JSON.stringify({ public_id: publicId }),
-    //           headers: {
-    //             "Content-Type": "application/json",
-    //           },
-    //         }
-    //       );
-    //     }
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // }
 
     try {
       const res = await fetch(
@@ -98,16 +83,7 @@ export const ModalEventEdit = ({
     }
   };
 
-  console.log(tipoEvento)
-
-  const extractPublicIdFromUrl = (url) => {
-    const regex = /\/upload\/([^/]+)\//;
-    const match = url.match(regex);
-    if (match && match.length > 1) {
-      return match[1];
-    }
-    return null;
-  };
+  console.log(tipoEvento);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -165,6 +141,43 @@ export const ModalEventEdit = ({
     }
   };
 
+  const handleClose = () => {
+    setModalOpen(false);
+  };
+
+  const handleConfirm = (e) => {
+    e.preventDefault();
+    if (documento.trim() === "") {
+      toast.error("Ingrese el número de documento");
+      return;
+    }
+
+    const params = new URLSearchParams({
+      nroDocumentoUsuario: documento,
+      idEvento: idEvent,
+    });
+
+    fetch(
+      `https://time-check.azurewebsites.net/api/Attendance/ConfirmAttendance?${params.toString()}`,
+      {
+        method: "POST",
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          toast.success("Asistencia confirmada correctamente");
+        } else {
+          throw new Error("Error en la solicitud");
+        }
+      })
+      .catch((error) => {
+        toast.error(`Hubo un error: ${error.message}`);
+      })
+      .finally(() => {
+        handleClose();
+      });
+  };
+
   const handleUpdateEvent = (e) => {
     e.preventDefault();
 
@@ -193,25 +206,24 @@ export const ModalEventEdit = ({
       }
     )
       .then((data) => {
-       if(data.ok){
-        console.log(data);
-        // Manejar la respuesta del servidor
-        // Hacer algo con la respuesta, por ejemplo, mostrar un mensaje de éxito
-        toast.success("El evento se actualizó con éxito!", {
-          theme: "dark",
-        });
-        handleCloseModal()
-        fetchEvents();
-       }else{
-        toast.error(`Error ${data.statusText}`)
-       }
+        if (data.ok) {
+          console.log(data);
+          // Manejar la respuesta del servidor
+          // Hacer algo con la respuesta, por ejemplo, mostrar un mensaje de éxito
+          toast.success("El evento se actualizó con éxito!", {
+            theme: "dark",
+          });
+          handleCloseModal();
+          fetchEvents();
+        } else {
+          toast.error(`Error ${data.statusText}`);
+        }
       })
       .catch((error) => {
         // Manejar errores
         console.error(error);
         toast.error(`Hubo un error: ${error}`);
       });
-    
   };
 
   return (
@@ -380,11 +392,19 @@ export const ModalEventEdit = ({
                 </div>
               </div>
             </div>
-            <div className="footer flex md:relative md:bottom-14 xl:bottom-10  2xl:bottom-14  justify-center items-center w-full my-44 md:my-10 mb-40 2xl:my-0 2xl:mb-0">
+            <div className="footer flex md:relative md:bottom-14 xl:bottom-10  2xl:bottom-14  justify-center items-center w-full my-44 md:my-10 mb-40 2xl:my-0 2xl:mb-0 xl:gap-4">
               <button
-                className="hover:bg-purple-700 mb-10 bg-purple-500 text-white font-bold py-2 px-8 rounded mr-4"
+                className="hover:bg-purple-700 mb-10 bg-purple-500 text-white font-bold py-2 px-8 rounded"
                 onClick={handleCloseModal}>
                 Volver
+              </button>
+              <button
+                type="button"
+                className="hover:bg-emerald-900 mb-10 bg-emerald-600 text-white font-bold py-2 px-8 rounded"
+                onClick={() => {
+                  setModalOpen(!modalOpen);
+                }}>
+                Confirmar assitencia
               </button>
               <button
                 className="hover:bg-purple-700 mb-10 bg-purple-500 text-white font-bold py-2 px-8 rounded"
@@ -395,6 +415,37 @@ export const ModalEventEdit = ({
           </div>
         </div>
       </form>
+      {modalOpen && (
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 w-full">
+          <div className="bg-white rounded-md shadow-md w-1/2">
+            <div className="flex justify-end px-4 py-2 rounded-t-md bg-neutral-100">
+              <button
+                className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                onClick={handleClose}>
+                <MdClose size={24} />
+              </button>
+            </div>
+            <div className="flex flex-col items-center px-4 py-6 w-full">
+              <h2 className="text-2xl font-bold mb-4">
+                Ingrese el número de documento para confirmar la asistencia
+              </h2>
+              <input
+                type="text"
+                value={documento}
+                onChange={(e) => setDocumento(e.target.value)}
+                className="border border-gray-300 rounded-md py-2 px-4 mb-4 w-1/2"
+                placeholder="Número de documento"
+              />
+              <button
+                type="button" // Cambia el tipo de "submit" a "button"
+                className="hover:bg-purple-700 mb-10 bg-purple-500 text-white font-bold py-2 px-8 rounded"
+                onClick={handleConfirm}>
+                Confirmar Asistencia
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

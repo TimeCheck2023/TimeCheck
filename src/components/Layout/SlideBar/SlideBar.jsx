@@ -23,30 +23,30 @@ export const SlideBar = ({
   const [openNavBar, setOpenNavBar] = useState(false);
   const [lower, setLower] = useState(false);
   const [subOrganizations, setSubOrganizations] = useState([]);
-  // const [idOrg, setIdOrg] = useState(null);
 
   const token = localStorage.getItem("token_login");
   const decoded = jwtDecode(token);
+  console.log(decoded);
   const emailUser = decoded.payload.correo;
   const idOrg = decoded.payload.id_organización;
-  if (userType !== 1) {
-    useEffect(() => {
-      fetch(
-        `https://timecheck.up.railway.app/SubOrg/${idOrg}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setSubOrganizations(data.message);
-          console.log(data.message);
-        });
-    }, []);
-  }
+  // if (userType !== 1) {
+  //   useEffect(() => {
+  //     console.log(idOrg);
+  //     fetch(`https://timecheck.up.railway.app/SubOrg/${idOrg}`)
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         setSubOrganizations(data.message);
+  //         console.log(data.message);
+  //       });
+  //   }, []);
+  // }
 
   const toggleNavBar = () => {
-    setTimeout(() => setOpenNavBar(!openNavBar), 450);
+    setOpenNavBar(!openNavBar);
   };
+
   const toggleNavBarClose = () => {
-    setTimeout(() => setOpenNavBar(!openNavBar), 10);
+    setOpenNavBar(false);
   };
 
   const lowerGroup = () => {
@@ -61,15 +61,14 @@ export const SlideBar = ({
 
   return (
     <div
-      onMouseEnter={toggleNavBar}
-      onMouseLeave={toggleNavBarClose}
+      onClick={toggleNavBar}
       className={`h-full hidden md:block z-50 bg-slate-50 fixed border-r border-neutral-400 ${
         openNavBar
           ? " w-72 transition-all duration-500 ease-in-out"
           : "w-24 transition-all duration-300 ease-in"
       }`}>
-      <div className="h-30 mb-14  w-full flex justify-center items-center ">
-        <Link to={"/Events"} className={`${openNavBar && "mb-20"}`}>
+      <div className="h-30 mb-14 w-full flex justify-center items-center">
+        <Link to={"/Dashboard"} className={`${openNavBar && "mb-20"}`}>
           {openNavBar ? (
             <img
               src="/LOGO TIME CHECK A COLOR.webp"

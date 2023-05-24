@@ -13,37 +13,27 @@ export const SingUp = () => {
   const [loaded, setLoaded] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
 
-
   const navigate = useNavigate();
   const url = import.meta.env.VITE_URL;
   // console.log(url);
 
   // Estado para controlar los input
-  const [values_us, setValues_us] = useState(() => {
-    const storedValues = localStorage.getItem("values_us");
-    return storedValues
-      ? JSON.parse(storedValues)
-      : {
-          documentType: "Cédula de ciudadania",
-          documentNumber: "",
-          fullName: "",
-          emailAddress: "",
-          password: "",
-        };
+  const [values_us, setValues_us] = useState({
+    documentType: "Cédula de ciudadania",
+    documentNumber: "",
+    fullName: "",
+    emailAddress: "",
+    password: "",
   });
 
-  const [values_org, setValues_org] = useState(() => {
-    const storedValues = localStorage.getItem("values_org");
-    return storedValues
-      ? JSON.parse(storedValues)
-      : {
-          fullName: "",
-          address: "",
-          numero_telefono: 0,
-          emailAddress: "",
-          password: "",
-        };
+  const [values_org, setValues_org] = useState({
+    fullName: "",
+    address: "",
+    numero_telefono: 0,
+    emailAddress: "",
+    password: "",
   });
+
   const selectRef = useRef(null);
 
   useEffect(() => {
@@ -209,22 +199,19 @@ export const SingUp = () => {
         });
 
         // Aquí puedes enviar el formulario a través de una solicitud HTTP o hacer cualquier otra cosa que necesites hacer con los datos del formulario
-        fetch(
-          "https://timecheck.up.railway.app/user/register",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              documentType: values_us.documentType,
-              documentNumber: values_us.documentNumber,
-              fullName: values_us.fullName,
-              emailAddress: values_us.emailAddress,
-              password: values_us.password,
-            }),
-          }
-        )
+        fetch("https://timecheck.up.railway.app/user/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            documentType: values_us.documentType,
+            documentNumber: values_us.documentNumber,
+            fullName: values_us.fullName,
+            emailAddress: values_us.emailAddress,
+            password: values_us.password,
+          }),
+        })
           .then((response) => response.json())
           .then((data) => {
             if (data.error) {
@@ -282,22 +269,19 @@ export const SingUp = () => {
         });
 
         // Aquí puedes enviar el formulario a través de una solicitud HTTP o hacer cualquier otra cosa que necesites hacer con los datos del formulario
-        fetch(
-          "https://timecheck.up.railway.app/Org/register",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              organization_name: values_org.fullName,
-              address_organization: values_org.address,
-              email_organization: values_org.emailAddress,
-              organization_password: values_org.password,
-              numero_telefono: values_org.numero_telefono,
-            }),
-          }
-        )
+        fetch("https://timecheck.up.railway.app/Org/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            organization_name: values_org.fullName,
+            address_organization: values_org.address,
+            email_organization: values_org.emailAddress,
+            organization_password: values_org.password,
+            numero_telefono: values_org.numero_telefono,
+          }),
+        })
           .then((response) => response.json())
           .then((data) => {
             if (data.error) {

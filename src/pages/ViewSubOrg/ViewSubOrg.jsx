@@ -22,6 +22,7 @@ export const ViewSubOrg = () => {
     } else {
       const decoded = jwtDecode(token);
       setIdOrg(decoded.payload.id_organización);
+      console.log(decoded);
       console.log(decoded.payload);
       setNameOrg(decoded.payload.correo);
 
@@ -37,9 +38,13 @@ export const ViewSubOrg = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          // Aquí puedes realizar cualquier operación con los datos obtenidos
-          setSubOrganizations(data.message);
-          console.log(data.message);
+          if (data.error) {
+            console.log(data);
+          } else {
+            // Aquí puedes realizar cualquier operación con los datos obtenidos
+            setSubOrganizations(data.message);
+            console.log(data.message);
+          }
         })
         .catch((error) => {
           // Manejo de errores en caso de que la solicitud falle

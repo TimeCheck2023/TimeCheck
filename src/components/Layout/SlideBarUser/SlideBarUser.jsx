@@ -45,15 +45,14 @@ export const SlideBarUser = ({
 
   return (
     <div
-      onMouseEnter={toggleNavBar}
-      onMouseLeave={toggleNavBarClose}
+      onClick={toggleNavBar}
       className={`h-full hidden md:block z-50 bg-slate-50 fixed border-r border-neutral-400 ${
         openNavBar
           ? " w-72 transition-all duration-500 ease-in-out"
           : "w-24 transition-all duration-300 ease-in"
       }`}>
       <div className="h-30 mb-14  w-full flex justify-center items-center ">
-        <Link to={"/Events"} className={`${openNavBar && "mb-20"}`}>
+        <Link to={"/Dashboard"} className={`${openNavBar && "mb-20"}`}>
           {openNavBar ? (
             <img
               src="/LOGO TIME CHECK A COLOR.webp"
