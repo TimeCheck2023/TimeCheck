@@ -191,9 +191,7 @@ export const SlideBar = ({
           <div className={`flex flex-row ${openNavBar && "gap-3"}`}>
             <div className="w-12 h-12 bg-slate-400 rounded-full mb-4"></div>
             <div>
-              {openNavBar && (
-                <p className="font-semibold truncate">Alcaldia - Armenia</p>
-              )}
+              {openNavBar && <p className="font-semibold truncate"></p>}
               {openNavBar && (
                 <p className="transition-all duration-500 ease-in-out font-medium text-sm text-slate-400 truncate ">
                   {emailUser}
