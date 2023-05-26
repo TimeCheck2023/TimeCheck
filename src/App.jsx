@@ -14,6 +14,7 @@ import { Terminos } from "./pages/Terminos/Terminos";
 import { Politicas } from "./pages/Politicas/Politicas";
 import { ViewSubOrg } from "./pages/ViewSubOrg/ViewSubOrg";
 import { SubOrgView } from "./pages/SubOrgView/SubOrgView";
+import Verificacion from "./pages/Verificacion/Verificacion";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/Politicas de Privacidad" element={<Politicas />} />
           <Route path="/ViewSubOrg" element={<ViewSubOrg />} />
           <Route path="/Suborganization/:id" element={<SubOrgView />} />
+          <Route path="/Verificacion/:codigo" element={<Verificacion />} />
         </Routes>
       </Router>
     </>

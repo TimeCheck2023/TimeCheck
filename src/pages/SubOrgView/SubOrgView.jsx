@@ -13,6 +13,7 @@ import { DeleteConfirmationModal } from "../../components/UI/DeleteConfirmationM
 
 export const SubOrgView = () => {
   const { id } = useParams(); // Obtener el ID de la suborganización desde la URL
+
   const navigate = useNavigate(); // Para navegar de vuelta a la página anterior
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,30 +52,8 @@ export const SubOrgView = () => {
     navigate(-1); // Navegar de vuelta a la página anterior
   };
 
-  const fetchUsersSinSubOrg = () => {
-    fetch(
-      `https://time-check.azurewebsites.net/api/User/UsuariosSinSuborganizacion/${id}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setFilteredMembers([]);
-      });
-  };
 
-  const handleUsers = () => {
-    fetch(`https://timecheck.up.railway.app/user/SubOrgMiembro/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        if (data.error) {
-          console.log(data.error);
-        } else {
-          setMembers(data.message);
-        }
-      })
-      .catch((error) => console.log(error));
-  };
-
+  
   useEffect(() => {
     // Obtener los miembros de la suborganización
     fetch(`https://timecheck.up.railway.app/user/SubOrgMiembro/${id}`)
@@ -101,23 +80,7 @@ export const SubOrgView = () => {
       .catch((error) => console.log(error));
   }, [id]);
 
-  const handleDeleteMember = (nro_documento, idSubOrg) => {
-    console.log(nro_documento);
-    console.log(idSubOrg);
-  };
-
-  const handleEditMember = (id) => {
-    console.log(id);
-  };
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
+  
   const handleUserSearch = (searchQuery) => {
     if (!searchQuery) {
       setFilteredMembers(availableMembers); // Mostrar todos los miembros si no hay una consulta de búsqueda
@@ -152,6 +115,14 @@ export const SubOrgView = () => {
       setSelectedMembers(members.map((member) => member.nro_documento_usuario)); // Seleccionar todos los miembros
     }
   };
+  
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   const handleUserSelect = (user) => {
     setSelectedUser(user.idUsuario);
@@ -161,16 +132,45 @@ export const SubOrgView = () => {
     setSelectedRole(role);
   };
 
+  const fetchUsersSinSubOrg = () => {
+    fetch(
+      `https://time-check.azurewebsites.net/api/User/UsuariosSinSuborganizacion/${id}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setFilteredMembers([]);
+        setAvailableMembers(data);
+  
+        // Realizar el fetch de los miembros de la organización después de obtener los miembros sin organización
+        handleUsers();
+      })
+      .catch((error) => console.log(error));
+  };
+  
+  const handleUsers = () => {
+    fetch(`https://timecheck.up.railway.app/user/SubOrgMiembro/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.error) {
+          console.log(data.error);
+        } else {
+          setMembers(data.message);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+  
   const handleAddMember = (e) => {
     e.preventDefault();
-
+  
     if (selectedUser && selectedRole) {
       const body = JSON.stringify({
         id_suborganizacion2: parseInt(id),
         nro_documento_usuario1: selectedUser,
         rol: selectedRole === "Admin" ? "0" : "1",
       });
-
+  
       fetch("https://time-check.azurewebsites.net/api/User/NuevoMiembro", {
         method: "POST",
         headers: {
@@ -186,7 +186,6 @@ export const SubOrgView = () => {
         .then((data) => {
           setFilteredMembers([]);
           fetchUsersSinSubOrg();
-          handleUsers();
           toast.success("Se agregó correctamente el usuario!");
           handleCloseModal();
           // Actualizar la lista de miembros
@@ -197,14 +196,10 @@ export const SubOrgView = () => {
         });
     }
   };
-
-  const handleCancelDelete = () => {
-    setIsModalDeleteOpen(false);
-  };
-
+  
   const onDeleteConfirm = (deleteMemberId, deleteSubOrgId) => {
     const url = `https://time-check.azurewebsites.net/api/Member/DeleteMember?nroDocumentoUsuario=${deleteMemberId}&idSuborganizacion=${deleteSubOrgId}`;
-
+  
     fetch(url, {
       method: "DELETE",
       headers: {
@@ -217,8 +212,8 @@ export const SubOrgView = () => {
         }
       })
       .then((data) => {
-        handleUsers();
         console.log(data);
+        fetchUsersSinSubOrg();
         toast.success(
           "Se eliminó correctamente el miembro de la suborganización!"
         );
@@ -230,6 +225,7 @@ export const SubOrgView = () => {
         console.log(error);
       });
   };
+  
 
   return (
     <div className="container mx-auto p-4">
