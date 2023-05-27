@@ -32,7 +32,7 @@ export const NavbarMobile = () => {
     <div>
       <div className="w-full sm:hidden h-20 bg-white fixed bottom-0 z-50 flex justify-between px-7 sm:px-16 items-center">
         <Link
-          to="/SingIn"
+          to="/SignIn"
           className="text-center flex-col text-purple-600 flex justify-center items-center">
           <FiLogIn className="text-4xl" />
           <p className="text-sm">Iniciar Sesión</p>

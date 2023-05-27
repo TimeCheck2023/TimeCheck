@@ -42,7 +42,7 @@ const Verificacion = () => {
             onClose: () => {
               setTimeout(() => {
                 navigate("/SignIn");
-              }, 3000); // Redireccionar después de 3 segundos (3000 milisegundos)
+              }, 2000); // Redireccionar después de 3 segundos (3000 milisegundos)
             },
           });
         }
