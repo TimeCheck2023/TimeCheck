@@ -1,59 +1,55 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Verificacion = () => {
   const { codigo } = useParams();
   const codigoNumero = codigo.split("=")[1];
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const verificarCorreo = async () => {
-      try {
-        const response = await fetch(
-          "https://timecheck.up.railway.app/Auth/verificacion",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ codigo: codigoNumero }),
-          }
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            if (data.error) {
-              toast.error(`Error: ${data.error}`, {
-                position: "bottom-center",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-              });
-            } else {
-              toast.success("Tu correo ha sido verificado exitosamente!", {
-                position: "top-center",
-                theme: "dark",
-                hideProgressBar: false,
-                progress: false,
-                onClose: () => {
-                  setTimeout(() => {
-                    navigate("/SingIn");
-                  }, 3000); // Redireccionar después de 3 segundos (3000 milisegundos)
-                },
-              });
-            }
-          });
-      } catch (error) {
-        console.log("Error al verificar el correo:", error);
-      }
-    };
+    fetch("https://timecheck.up.railway.app/Auth/verificacion", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ codigo: codigoNumero }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
 
-    verificarCorreo();
-    // console.log(codigoNumero); // Aquí se imprimirá el valor correcto de 'codigo'
+        if (data.error) {
+          setLoading(false);
+          toast.error(`Error: ${data.error}`, {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        } else {
+          setLoading(false);
+          toast.success("Tu correo ha sido verificado exitosamente!", {
+            position: "top-center",
+            theme: "dark",
+            hideProgressBar: false,
+            progress: false,
+            onClose: () => {
+              setTimeout(() => {
+                navigate("/SignIn");
+              }, 3000); // Redireccionar después de 3 segundos (3000 milisegundos)
+            },
+          });
+        }
+      })
+      .catch((error) => {
+        console.log("Error al verificar el correo:", error);
+      });
   }, [codigo]);
 
   return (
@@ -65,17 +61,19 @@ const Verificacion = () => {
           momento...
         </p>
         <div className="flex justify-center">
-          <svg
-            className="animate-spin h-10 w-10 text-purple-600"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24">
-            <path
-              className="opacity-80"
-              fill="#9333ea"
-              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8-8-3.59-8-8zm7-6h2v7h-2zm1 9h1v1h-1v-1zm-1-3h1v2h-0v-2z"
-            />
-          </svg>
+          {loading ? (
+            <svg
+              className="animate-spin h-10 w-10 text-purple-600"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24">
+              <path
+                className="opacity-80"
+                fill="#9333ea"
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8-8-3.59-8-8zm7-6h2v7h-2zm1 9h1v1h-1v-1zm-1-3h1v2h-0v-2z"
+              />
+            </svg>
+          ) : null}
         </div>
       </div>
     </div>

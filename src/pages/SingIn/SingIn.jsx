@@ -60,10 +60,11 @@ export const SingIn = () => {
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log(data.error);
           setIsLoading(false); // Desactivar el estado de carga
 
           if (data.error) {
-            toast.error(`Error: correo o contraseña incorrecta!`, {
+            toast.error(`Error: ${data.error}`, {
               position: "bottom-center",
               autoClose: 3000,
               hideProgressBar: false,
