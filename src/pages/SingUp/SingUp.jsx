@@ -205,15 +205,17 @@ export const SingUp = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            documentType: values_us.documentType,
             documentNumber: values_us.documentNumber,
+            documentType: values_us.documentType,
             fullName: values_us.fullName,
             emailAddress: values_us.emailAddress,
             password: values_us.password,
+            device: "pc",
           }),
         })
           .then((response) => response.json())
           .then((data) => {
+            console.log(data);
             if (data.error) {
               toast.error(`Error: ${data.error}`, {
                 position: "bottom-center",
@@ -280,10 +282,12 @@ export const SingUp = () => {
             email_organization: values_org.emailAddress,
             organization_password: values_org.password,
             numero_telefono: values_org.numero_telefono,
+            device: "pc",
           }),
         })
           .then((response) => response.json())
           .then((data) => {
+            console.log(data);
             if (data.error) {
               toast.error(`Error: ${data.error}`, {
                 position: "bottom-center",

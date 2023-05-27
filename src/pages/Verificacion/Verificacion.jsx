@@ -1,34 +1,58 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const Verificacion = () => {
   const { codigo } = useParams();
+  const codigoNumero = codigo.split("=")[1];
 
   useEffect(() => {
-    // const verificarCorreo = async () => {
-    //   try {
-    //     const response = await fetch('https://tu-api.com/verificar-correo', {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify({ codigo }),
-    //     });
+    const verificarCorreo = async () => {
+      try {
+        const response = await fetch(
+          "https://timecheck.up.railway.app/Auth/verificacion",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ codigo: codigoNumero }),
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            if (data.error) {
+              toast.error(`Error: ${data.error}`, {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+              });
+            } else {
+              toast.success("Tu correo ha sido verificado exitosamente!", {
+                position: "top-center",
+                theme: "dark",
+                hideProgressBar: false,
+                progress: false,
+                onClose: () => {
+                  setTimeout(() => {
+                    navigate("/SingIn");
+                  }, 3000); // Redireccionar después de 3 segundos (3000 milisegundos)
+                },
+              });
+            }
+          });
+      } catch (error) {
+        console.log("Error al verificar el correo:", error);
+      }
+    };
 
-    //     if (response.ok) {
-    //       // Correo verificado correctamente
-    //       console.log('Correo verificado');
-    //     } else {
-    //       // Error al verificar el correo
-    //       console.log('Error al verificar el correo');
-    //     }
-    //   } catch (error) {
-    //     console.log('Error al verificar el correo:', error);
-    //   }
-    // };
-
-    // verificarCorreo();
-    console.log(codigo); // Aquí se imprimirá el valor correcto de 'codigo'
+    verificarCorreo();
+    // console.log(codigoNumero); // Aquí se imprimirá el valor correcto de 'codigo'
   }, [codigo]);
 
   return (
@@ -44,8 +68,7 @@ const Verificacion = () => {
             className="animate-spin h-10 w-10 text-purple-600"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
-            viewBox="0 0 24 24"
-          >
+            viewBox="0 0 24 24">
             <path
               className="opacity-80"
               fill="#9333ea"
