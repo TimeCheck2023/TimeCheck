@@ -82,7 +82,12 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
         return <FormProfileOrg orgData={orgData} />;
       }
     } else if (activeTab === "changePassword") {
-      return <ChangePasswordForm />;
+      return (
+        <ChangePasswordForm
+          nroDocumento={userData.nro_documento_usuario}
+          typeUser={typeUser}
+        />
+      );
     } else if (activeTab === "suborganizations") {
       return <SubOrganizations />;
     }

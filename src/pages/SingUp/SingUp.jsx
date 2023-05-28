@@ -238,7 +238,7 @@ export const SingUp = () => {
                   onClose: () => {
                     setTimeout(() => {
                       navigate("/SignIn");
-                    }, 5000); // Redireccionar después de 2 segundos (2000 milisegundos)
+                    }, 2000); // Redireccionar después de 2 segundos (2000 milisegundos)
                   },
                 }
               );
@@ -310,7 +310,7 @@ export const SingUp = () => {
                   onClose: () => {
                     setTimeout(() => {
                       navigate("/SignIn");
-                    }, 5000); // Redireccionar después de 2 segundos (2000 milisegundos)
+                    }, 2000); // Redireccionar después de 2 segundos (2000 milisegundos)
                   },
                 }
               );

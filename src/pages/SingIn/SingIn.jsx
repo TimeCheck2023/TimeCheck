@@ -123,13 +123,20 @@ export const SingIn = () => {
             <h2 className="font-bold text-5xl md:text-6xl tracking-tight leading-1.19 font-sans text-base-02">
               ¡Bienvenido!
             </h2>
-            <p className="font-normal text-lg font-sans text-gray-500 pt-5 md:pt-14 pl-10 pr-7 w-full lg:w-3/4 2xl:text-2xl">
-              Bienvenido a nuestra plataforma de gestión de eventos. Por favor,
-              ingresa tus credenciales para acceder a tu cuenta.
+            <p className="font-normal text-lg lg:text-base xl:text-xl font-sans text-gray-500 pt-5 md:pt-14 pl-10 pr-7 w-full lg:w-11/12 2xl:text-2xl">
+              Para acceder a tu cuenta, por favor verifica tu correo
+              electrónico. Te hemos enviado un mensaje de verificación a tu
+              dirección de correo electrónico. Sigue las instrucciones en el
+              correo para completar el proceso de verificación.
+              <br />
+              <br />
+              Una vez que hayas verificado tu cuenta, podrás ingresar tus
+              credenciales y acceder a todas las funciones de nuestra plataforma
+              de gestión de eventos.
             </p>
           </div>
-          <div className="mt-10 lg:mt-10 xl:mt-20 w-full flex flex-col justify-center items-center">
-            <div className="flex lg:my-10 lg:mx-32 relative justify-center items-center lg:left-14 xl:w-4/5 w-5/6 2xl:w-5/6">
+          <div className="mt-10 lg:mt-0 xl:mt-5 w-full flex flex-col justify-center items-center">
+            <div className="flex lg:my-8 lg:mx-32 relative justify-center items-center lg:left-14 xl:w-4/5 w-5/6 2xl:w-5/6">
               <div className="flex flex-col items-center md:items-start w-full lg:w-11/12 2xl:w-11/12 gap-3">
                 <label htmlFor="emailAddress" className="font-bold text-left">
                   Correo electrónico:
@@ -147,7 +154,7 @@ export const SingIn = () => {
             </div>
 
             <div className="flex lg:mx-32 relative justify-center items-center lg:left-14 xl:w-4/5 w-5/6 2xl:w-5/6">
-              <div className="flex flex-col items-center md:items-start w-full lg:w-11/12 2xl:w-11/12 gap-2">
+              <div className="flex flex-col items-center md:items-start w-full mt-5 lg:mt-0 md:mt-0 lg:w-11/12 2xl:w-11/12 gap-2">
                 <label htmlFor="password" className="font-bold">
                   Contraseña:
                 </label>
@@ -162,7 +169,7 @@ export const SingIn = () => {
                   onChange={handlePasswordChange}
                 />
                 <div
-                  className="absolute  inset-y-12 right-12 xl:right-48 2xl:right-48 cursor-pointer"
+                  className="absolute  inset-y-16 right-14 lg:right-40 mt-1 md:mt-0 md:inset-y-12 xl:right-48 2xl:right-48 cursor-pointer"
                   onClick={toggleShowPassword}>
                   {showPassword ? (
                     <BsEyeSlashFill className="text-gray-400" />

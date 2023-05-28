@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { toast } from "react-toastify";
 
-const ChangePasswordForm = () => {
+const ChangePasswordForm = ({ nroDocumento, typeUser }) => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Nuevo estado para controlar el loader
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleCurrentPasswordChange = (e) => {
     setCurrentPassword(e.target.value);
@@ -24,17 +27,69 @@ const ChangePasswordForm = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Realizar las validaciones aquí
     if (newPassword !== confirmPassword) {
-      // Las contraseñas no coinciden, muestra una alerta o mensaje de error
+      toast.error("Las contraseñas deben coincidir");
+      setErrorMessage("Las contraseñas no coinciden");
       return;
     }
 
-    // Realizar la lógica de cambio de contraseña aquí
-    // Puedes usar las variables de estado currentPassword, newPassword, confirmPassword
+    try {
+      let url = "";
+      let requestBody = {};
+
+      // Validar el tipo de usuario y asignar la URL y el cuerpo de la solicitud en consecuencia
+      if (typeUser === 1) {
+        url =
+          "https://time-check.azurewebsites.net/api/password/UpdatePassword";
+        requestBody = {
+          id: nroDocumento,
+          contraseñaActual: currentPassword,
+          contraseñaNueva: newPassword,
+        };
+      } else if (typeUser === 2) {
+        url = "https://endpoint-usuario2.com/api/password/UpdatePassword";
+        requestBody = {
+          id: "54321",
+          currentPassword: currentPassword,
+          newPassword: newPassword,
+        };
+      }
+
+      setIsLoading(true); // Mostrar el loader
+
+      // Realizar la llamada al endpoint del backend para actualizar la contraseña
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      const data = await response.text();
+
+      if (!response.ok) {
+        toast.error(data);
+        setErrorMessage("");
+      } else {
+        // Contraseña actualizada correctamente
+        setConfirmPassword("");
+        setNewPassword("");
+        setCurrentPassword("");
+        setErrorMessage("");
+        toast.success(data);
+      }
+    } catch (error) {
+      // Error al actualizar la contraseña
+      console.error(error);
+      setErrorMessage("Error al actualizar la contraseña");
+    } finally {
+      setIsLoading(false); // Ocultar el loader
+    }
   };
 
   return (
@@ -97,11 +152,18 @@ const ChangePasswordForm = () => {
           required
         />
       </div>
+      {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
       <div className="flex justify-center">
         <button
           type="submit"
-          className="px-4 py-2 bg-purple-600 text-white font-semibold rounded-md hover:bg-purple-700">
-          Cambiar contraseña
+          disabled={isLoading} // Deshabilitar el botón mientras se realiza la petición
+          className="relative px-4 py-2 w-60 h-10 bg-purple-600 text-white font-semibold rounded-md hover:bg-purple-700">
+          {isLoading && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white" />
+            </div>
+          )}
+          {!isLoading && "Cambiar contraseña"}{" "}
         </button>
       </div>
     </form>
