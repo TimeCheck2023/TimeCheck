@@ -3,13 +3,14 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { toast } from "react-toastify";
 
-const ChangePasswordForm = ({ nroDocumento, typeUser }) => {
+const ChangePasswordForm = ({ nroDocumento, typeUser, correo }) => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Nuevo estado para controlar el loader
   const [errorMessage, setErrorMessage] = useState("");
+  console.log(correo);
 
   const handleCurrentPasswordChange = (e) => {
     setCurrentPassword(e.target.value);
@@ -44,18 +45,19 @@ const ChangePasswordForm = ({ nroDocumento, typeUser }) => {
       // Validar el tipo de usuario y asignar la URL y el cuerpo de la solicitud en consecuencia
       if (typeUser === 1) {
         url =
-          "https://time-check.azurewebsites.net/api/password/UpdatePassword";
+          "https://time-check.azurewebsites.net/api/password/UpdatePasswordUser";
         requestBody = {
           id: nroDocumento,
           contraseñaActual: currentPassword,
           contraseñaNueva: newPassword,
         };
       } else if (typeUser === 2) {
-        url = "https://endpoint-usuario2.com/api/password/UpdatePassword";
+        url =
+          "https://time-check.azurewebsites.net/api/password/UpdatePasswordOrg";
         requestBody = {
-          id: "54321",
-          currentPassword: currentPassword,
-          newPassword: newPassword,
+          Correo: correo,
+          contraseñaActual: currentPassword,
+          contraseñaNueva: newPassword,
         };
       }
 
@@ -74,6 +76,7 @@ const ChangePasswordForm = ({ nroDocumento, typeUser }) => {
 
       if (!response.ok) {
         toast.error(data);
+        console.log(data);
         setErrorMessage("");
       } else {
         // Contraseña actualizada correctamente

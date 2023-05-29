@@ -86,6 +86,7 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
         <ChangePasswordForm
           nroDocumento={userData.nro_documento_usuario}
           typeUser={typeUser}
+          correo={orgData.correo_organizacion}
         />
       );
     } else if (activeTab === "suborganizations") {
