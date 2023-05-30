@@ -140,7 +140,7 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
               </div>
             )}
             <div
-              className={`flex justify-center items-center h-32 pb-32 md:pb-0 ${
+              className={`flex justify-center items-center h-32 pb-32  lg:pb-96 md:pb-0 ${
                 typeUser === 2 ? "mt-60 xl:mt-80" : null
               }`}>
               <button className="hover:bg-slate-200 px-12 py-2 border border-slate-200 text-purple-500 font-bold bg-slate-100 shadow-md rounded-md">

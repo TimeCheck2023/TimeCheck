@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { NavbarMobile } from "../../components/Layout/NavbarMobile/NavbarMobile";
 import { toast } from "react-toastify";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { AiOutlineLoading } from "react-icons/ai";
+import jwtDecode from "jwt-decode";
 
 export const SingIn = () => {
   const [emailAddress, setEmailAddress] = useState("");
@@ -19,6 +20,17 @@ export const SingIn = () => {
   // console.log(url);
 
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    const token = localStorage.getItem("token_login");
+
+    if (token) {
+      navigate("/Dashboard"); // Redirigir al usuario a la página de inicio de sesión
+    } else {
+
+    }
+  }, [navigate]);
+
 
   const handleEmailChange = (e) => {
     // Actualiza el estado del correo electrónico
@@ -123,7 +135,7 @@ export const SingIn = () => {
             <h2 className="font-bold text-5xl md:text-6xl tracking-tight leading-1.19 font-sans text-base-02">
               ¡Bienvenido!
             </h2>
-            <p className="font-normal text-lg lg:text-base xl:text-xl font-sans text-gray-500 pt-5 md:pt-14 pl-10 pr-7 w-full lg:w-11/12 2xl:text-2xl">
+            <p className="font-normal text-lg lg:text-base xl:text-xl font-sans text-gray-500 pt-5 md:pt-14 pl-10 pr-7 w-full lg:w-11/12 2xl:text-xl">
               Para acceder a tu cuenta, por favor verifica tu correo
               electrónico. Te hemos enviado un mensaje de verificación a tu
               dirección de correo electrónico. Sigue las instrucciones en el

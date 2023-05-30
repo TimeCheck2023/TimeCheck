@@ -29,10 +29,13 @@ export const FormProfileOrg = ({ orgData }) => {
             address_organization: organizationAddress,
             email_organization: email,
             numero_telefono: phoneNumber,
+            device: "pc"
           }),
         }
       );
-      console.log(response);
+
+      const  data = await response.text();
+      console.log(data)
       if (response.ok) {
         toast.success(
           "Información de la organización actualizada exitosamente",

@@ -14,6 +14,15 @@ export const SingUp = () => {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token_login");
+
+    if (token) {
+      navigate("/Dashboard"); // Redirigir al usuario a la página de inicio de sesión
+    } else {
+
+    }
+  }, [navigate]);
   const url = import.meta.env.VITE_URL;
   // console.log(url);
 

@@ -16,6 +16,7 @@ export const UserVist = () => {
   const [openCategoria, setOpenCategoria] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     fetch("https://time-check.azurewebsites.net/api/Event/List")
@@ -24,6 +25,26 @@ export const UserVist = () => {
         setEvents(data.response);
         setLoading(false);
       });
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch(
+        "https://time-check.azurewebsites.net/api/Event/get_event_types"
+      );
+      const data = await response.json();
+      console.log(data.response);
+
+      setCategories(data.response); // Actualiza el estado con los tipos de eventos obtenidos
+      console.log(categories);
+    } catch (error) {
+      console.error("Error al obtener los tipos de eventos:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+    // console.log(categories.tipoEvento)
   }, []);
 
   const handleOpenModal = () => {
@@ -67,7 +88,7 @@ export const UserVist = () => {
             Categorias <BiChevronDown className="text-2xl" />
           </button>
           {!openCategoria && (
-            <div className="absolute mt-10 w-40 px-4 py-2 z-50 bg-purple-600 text-white">
+            <div className="absolute mt-10 w-36 md:w-40 px-4 py-2 z-50 bg-purple-600 text-white">
               <ul className="flex flex-col gap-2">
                 <li
                   className={`${
@@ -78,87 +99,20 @@ export const UserVist = () => {
                   }}>
                   Todos
                 </li>
-                <li
-                  className={`${
-                    selectedCategory === "Educativo" ? "bg-purple-900" : ""
-                  } hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white`}
-                  onClick={() => {
-                    setSelectedCategory("Educativo");
-                  }}>
-                  Educativo
-                </li>
-                <li
-                  className={`${
-                    selectedCategory === "Religioso" ? "bg-purple-900" : ""
-                  } hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white`}
-                  onClick={() => {
-                    setSelectedCategory("Religioso");
-                  }}>
-                  Religioso
-                </li>
-                <li
-                  className={`${
-                    selectedCategory === "Social" ? "bg-purple-900" : ""
-                  } hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white`}
-                  onClick={() => {
-                    setSelectedCategory("Social");
-                  }}>
-                  Social
-                </li>
-                <li
-                  className={`${
-                    selectedCategory === "Cultural" ? "bg-purple-900" : ""
-                  } hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white`}
-                  onClick={() => {
-                    setSelectedCategory("Cultural");
-                  }}>
-                  Cultural
-                </li>
-                <li
-                  className={`${
-                    selectedCategory === "Musical" ? "bg-purple-900" : ""
-                  } hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white`}
-                  onClick={() => {
-                    setSelectedCategory("Musical");
-                  }}>
-                  Musical
-                </li>
-                <li
-                  className={`${
-                    selectedCategory === "Deportivo" ? "bg-purple-900" : ""
-                  } hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white`}
-                  onClick={() => {
-                    setSelectedCategory("Deportivo");
-                  }}>
-                  Deportivo
-                </li>
-                <li
-                  className={`${
-                    selectedCategory === "Festival" ? "bg-purple-900" : ""
-                  } hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white`}
-                  onClick={() => {
-                    setSelectedCategory("Festival");
-                  }}>
-                  Festival
-                </li>
-                <li
-                  className={`${
-                    selectedCategory === "Feria" ? "bg-purple-900" : ""
-                  } hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white`}
-                  onClick={() => {
-                    setSelectedCategory("Feria");
-                  }}>
-                  Feria
-                </li>
-                <li
-                  className={`${
-                    selectedCategory === "Exposición" ? "bg-purple-900" : ""
-                  } hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white`}
-                  onClick={() => {
-                    setSelectedCategory("Exposición");
-                  }}>
-                  Exposición
-                </li>
+                {categories.map((category, index) => (
+                  <li
+                    key={index}
+                    className={`${
+                      selectedCategory === category.tipoEvento
+                        ? "bg-purple-900"
+                        : ""
+                    } hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white`}
+                    onClick={() => {
+                      setSelectedCategory(category.tipoEvento);
+                    }}>
+                    {category.tipoEvento}
+                  </li>
+                ))}
               </ul>
             </div>
           )}

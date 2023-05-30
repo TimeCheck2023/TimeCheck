@@ -81,7 +81,7 @@ export const BodyAddSubOrg = () => {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-3">
-      <h1 className="absolute -z-50 top-0 text-xl md:text-3xl md:text-purple-700 pt-10 md:my-10 mb-20 bg-purple-600 w-full text-center h-40 text-white md:bg-transparent">
+      <h1 className="absolute -z-50 top-0 text-xl md:text-3xl md:text-purple-700 pt-10 md:my-10 lg:pl-32 mb-20 bg-purple-600 w-full text-center h-40 text-white md:bg-transparent">
         Crear una nueva suborganización
       </h1>
       <div className="relative bg-white z-50 w-11/12 md:w-3/5 h-2/3 shadow-lg shadow-neutral-500 rounded-md border md:ml-24">
