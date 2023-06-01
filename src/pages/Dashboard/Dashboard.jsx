@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 export const Dashboard = () => {
   const [userType, setUserType] = useState(null);
-  const [idOrg, setIdOrg] = useState(null);
+  // const [idOrg, setIdOrg] = useState(null);
   const [showToast, setShowToast] = useState(false);
   const [rol, setRol] = useState(null);
 
@@ -88,7 +88,6 @@ export const Dashboard = () => {
           activeGroup={false}
           activeNotify={false}
           activeStats={false}
-          idOrg={idOrg}
         />
         <EventsVist />
         <NavbarMobileUser />

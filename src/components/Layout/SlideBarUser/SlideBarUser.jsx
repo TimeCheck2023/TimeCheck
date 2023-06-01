@@ -25,10 +25,17 @@ export const SlideBarUser = ({
 }) => {
   const [openNavBar, setOpenNavBar] = useState(false);
   const [lower, setLower] = useState(false);
+  const [nroUser, setNroUser] = useState(0);
+  const [nombreUsuario, setNombreUsuario] = useState("")
+
 
   const token = localStorage.getItem("token_login");
   const decoded = jwtDecode(token);
   const emailUser = decoded.payload.correo;
+  const nroUsuario = decoded.payload.nro_documento_usuario;
+
+  console.log(nroUsuario)
+
 
   const toggleNavBar = () => {
     setTimeout(() => setOpenNavBar(!openNavBar), 500);
@@ -38,10 +45,35 @@ export const SlideBarUser = ({
   };
 
   useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        if (nroUsuario) {
+          const response = await fetch(
+            `https://timecheck.up.railway.app/user/${nroUsuario}`
+          );
+          const data = await response.json();
+          console.log(data.message);
+          setNombreUsuario(data.message.nombre_completo_usuario);
+          // setLoading(false);
+        }
+      } catch (error) {
+        console.log(error);
+        // setLoading(false);
+      }
+    };
+  
+    fetchUserData();
+  }, [nroUsuario]);
+
+  useEffect(() => {
     if (!openNavBar) {
       setLower(false);
     }
   }, [openNavBar]);
+
+  // console.log(nombreUsuario)
+  const primerCaracterMayuscula = nombreUsuario.charAt(0).toUpperCase();
+
 
   return (
     <div
@@ -159,7 +191,7 @@ export const SlideBarUser = ({
           {" "}
           <p className="text-slate-500 text-base ">Cuenta</p>
           <div className={`flex flex-row ${openNavBar && "gap-3"}`}>
-            <div className="w-12 h-12 bg-slate-400 rounded-full mb-4"></div>
+            <div className="w-12 h-12 bg-purple-600 rounded-full mb-4 text-center flex items-center justify-center text-2xl font-semibold text-white">{primerCaracterMayuscula}</div>
             <div>
               {openNavBar && <p className="font-semibold truncate"></p>}
               {openNavBar && (

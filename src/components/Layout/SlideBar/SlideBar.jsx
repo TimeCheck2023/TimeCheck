@@ -23,23 +23,39 @@ export const SlideBar = ({
   const [openNavBar, setOpenNavBar] = useState(false);
   const [lower, setLower] = useState(false);
   const [subOrganizations, setSubOrganizations] = useState([]);
+  const [nameOrg, setNameOrg] = useState(null)
 
   const token = localStorage.getItem("token_login");
   const decoded = jwtDecode(token);
   console.log(decoded);
   const emailUser = decoded.payload.correo;
   const idOrg = decoded.payload.id_organización;
-  // if (userType !== 1) {
-  //   useEffect(() => {
-  //     console.log(idOrg);
-  //     fetch(`https://timecheck.up.railway.app/SubOrg/${idOrg}`)
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         setSubOrganizations(data.message);
-  //         console.log(data.message);
-  //       });
-  //   }, []);
-  // }
+
+  useEffect(() => {
+    const fetchOrgData = async () => {
+      try {
+        if (idOrg) {
+          const response = await fetch(
+            `https://timecheck.up.railway.app/org/${idOrg}`
+          );
+          const data = await response.json();
+          console.log(data.message);
+          setNameOrg(data.message.nombre_organizacion)
+          // setLoading(false);
+        }
+      } catch (error) {
+        console.log(error);
+        // setLoading(false);
+      }
+    };
+  
+    fetchOrgData();
+  }, [idOrg]);
+
+  const primerCaracterMayuscula = nameOrg.charAt(0).toUpperCase();
+
+
+  console.log(userType)
 
   const toggleNavBar = () => {
     setOpenNavBar(!openNavBar);
@@ -189,7 +205,7 @@ export const SlideBar = ({
           {" "}
           <p className="text-slate-500 text-base ">Cuenta</p>
           <div className={`flex flex-row ${openNavBar && "gap-3"}`}>
-            <div className="w-12 h-12 bg-slate-400 rounded-full mb-4"></div>
+          <div className="w-12 h-12 bg-purple-600 rounded-full mb-4 text-center flex items-center justify-center text-2xl font-semibold text-white">{primerCaracterMayuscula}</div>
             <div>
               {openNavBar && <p className="font-semibold truncate"></p>}
               {openNavBar && (

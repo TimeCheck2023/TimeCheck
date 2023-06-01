@@ -15,7 +15,6 @@ import { Politicas } from "./pages/Politicas/Politicas";
 import { ViewSubOrg } from "./pages/ViewSubOrg/ViewSubOrg";
 import { SubOrgView } from "./pages/SubOrgView/SubOrgView";
 import Verificacion from "./pages/Verificacion/Verificacion";
-
 function App() {
   return (
     <>
