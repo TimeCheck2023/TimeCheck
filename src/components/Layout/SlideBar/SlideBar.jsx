@@ -52,10 +52,11 @@ export const SlideBar = ({
     fetchOrgData();
   }, [idOrg]);
 
-  const primerCaracterMayuscula = nameOrg.charAt(0).toUpperCase();
+  const primerCaracterMayuscula = nameOrg?.charAt(0)?.toUpperCase();
+  // console.log(nameOrg)
 
 
-  console.log(userType)
+  // console.log(userType)
 
   const toggleNavBar = () => {
     setOpenNavBar(!openNavBar);

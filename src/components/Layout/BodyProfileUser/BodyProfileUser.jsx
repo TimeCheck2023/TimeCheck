@@ -19,7 +19,7 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
             `https://timecheck.up.railway.app/user/${nroDocumento}`
           );
           const data = await response.json();
-          console.log(data.message);
+          // console.log(data.message);
           setUserData(data.message);
           setLoading(false);
         } catch (error) {
@@ -40,7 +40,7 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
             `https://timecheck.up.railway.app/org/${idOrg}`
           );
           const data = await response.json();
-          console.log(data.message);
+          // console.log(data.message);
           setOrgData(data.message);
           setLoading(false);
         } catch (error) {
@@ -59,7 +59,7 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
     setActiveTab(tab);
   };
 
-  console.log(typeUser);
+  // console.log(typeUser);
 
   const renderContent = () => {
     if (loading) {

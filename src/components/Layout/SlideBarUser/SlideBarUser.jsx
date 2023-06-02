@@ -34,7 +34,7 @@ export const SlideBarUser = ({
   const emailUser = decoded.payload.correo;
   const nroUsuario = decoded.payload.nro_documento_usuario;
 
-  console.log(nroUsuario)
+  // console.log(nroUsuario)
 
 
   const toggleNavBar = () => {
@@ -52,7 +52,7 @@ export const SlideBarUser = ({
             `https://timecheck.up.railway.app/user/${nroUsuario}`
           );
           const data = await response.json();
-          console.log(data.message);
+          // console.log(data.message);
           setNombreUsuario(data.message.nombre_completo_usuario);
           // setLoading(false);
         }
@@ -72,7 +72,7 @@ export const SlideBarUser = ({
   }, [openNavBar]);
 
   // console.log(nombreUsuario)
-  const primerCaracterMayuscula = nombreUsuario.charAt(0).toUpperCase();
+  const primerCaracterMayuscula = nombreUsuario?.charAt(0)?.toUpperCase();
 
 
   return (
