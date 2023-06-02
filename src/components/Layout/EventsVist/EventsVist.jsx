@@ -19,6 +19,7 @@ export const EventsVist = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [categories, setCategories] = useState([]);
+  const [categoriesId, setCategoriesId] = useState([]);
 
   const filteredEvents = events.filter(
     (event) =>
@@ -56,13 +57,24 @@ export const EventsVist = () => {
         "https://time-check.azurewebsites.net/api/Event/get_event_types"
       );
       const data = await response.json();
-      console.log(data.response);
-      setCategories(data.response); // Actualiza el estado con los tipos de eventos obtenidos
+      
+      // Obtener los IDs de tipo de evento
+      const categoriesIds = data.response.map((evento) => evento.idTipoEvento);
+      
+      // Obtener los tipos de evento
+      const categories = data.response.map((evento) => evento.tipoEvento);
+      
+      // Actualizar los estados con los tipos de eventos y los IDs de tipo de evento obtenidos
+      setCategoriesId(categoriesIds);
+      setCategories(categories);
+      
+      console.log(categoriesIds);
       console.log(categories);
     } catch (error) {
       console.error("Error al obtener los tipos de eventos:", error);
     }
   };
+  
 
   useEffect(() => {
     fetchCategories();
@@ -118,14 +130,14 @@ export const EventsVist = () => {
                   <li
                     key={index}
                     className={`${
-                      selectedCategory === category.tipoEvento
+                      selectedCategory === category
                         ? "bg-purple-900"
                         : ""
                     } hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white`}
                     onClick={() => {
-                      setSelectedCategory(category.tipoEvento);
+                      setSelectedCategory(category);
                     }}>
-                    {category.tipoEvento}
+                    {category}
                   </li>
                 ))}
               </ul>
@@ -169,11 +181,12 @@ export const EventsVist = () => {
                     aforo={event.aforoEvento}
                     image={event.imagenEvento}
                     tipo_evento={event.tipoEvento}
+                    id_tipo_evento={categoriesId}
                     fecha_final={event.fechaFinalEvento}
                     fecha_inicio={event.fechaInicioEvento}
                     lugar={event.lugarEvento}
                     cupos_disponibles={event.cuposDisponibles}
-                    likes={event.likes}
+                    // likes={event.likes}
                     fetchEvents={fetchEvents}
                   />
                 ))}

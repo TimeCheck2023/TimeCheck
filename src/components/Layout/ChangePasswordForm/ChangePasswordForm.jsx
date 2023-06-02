@@ -10,7 +10,7 @@ const ChangePasswordForm = ({ nroDocumento, typeUser, correo }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Nuevo estado para controlar el loader
   const [errorMessage, setErrorMessage] = useState("");
-  console.log(correo);
+  // console.log(correo);
 
   const handleCurrentPasswordChange = (e) => {
     setCurrentPassword(e.target.value);
@@ -76,7 +76,7 @@ const ChangePasswordForm = ({ nroDocumento, typeUser, correo }) => {
 
       if (!response.ok) {
         toast.error(data);
-        console.log(data);
+        // console.log(data);
         setErrorMessage("");
       } else {
         // Contraseña actualizada correctamente

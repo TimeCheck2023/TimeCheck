@@ -17,6 +17,7 @@ export const ModalEventEdit = ({
   initialValorTotal,
   initialTipoEvento,
   fetchEvents,
+  initialTipoEventoId,
 }) => {
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -34,6 +35,7 @@ export const ModalEventEdit = ({
   const [aforo, setAforo] = useState(initialAforo);
   const [valorTotal, setValorTotal] = useState(initialValorTotal);
   const [tipoEvento, setTipoEvento] = useState(initialTipoEvento);
+  // const [tipoEvento, setTipoEvento] = useState(initialTipoEventoId);
 
   const [isUploading, setIsUploading] = useState();
   const [isDateValid, setIsDateValid] = useState(true);
@@ -49,8 +51,10 @@ export const ModalEventEdit = ({
     fetch("https://time-check.azurewebsites.net/api/Event/get_event_types")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        setEventTypes(data.response.map((type) => type.tipoEvento));
+        // console.log(data);
+        const typeEvents = data.response;
+        setEventTypes(typeEvents)
+        console.log(typeEvents)
       });
   }, []);
 
@@ -83,7 +87,7 @@ export const ModalEventEdit = ({
     }
   };
 
-  console.log(tipoEvento);
+  // console.log(tipoEvento);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -109,7 +113,7 @@ export const ModalEventEdit = ({
       setIsDateValid(startDate <= endDate);
     }
 
-    console.log(name);
+    // console.log(name);
 
     switch (name) {
       case "title":
@@ -207,7 +211,7 @@ export const ModalEventEdit = ({
     )
       .then((data) => {
         if (data.ok) {
-          console.log(data);
+          // console.log(data);
           // Manejar la respuesta del servidor
           // Hacer algo con la respuesta, por ejemplo, mostrar un mensaje de éxito
           toast.success("El evento se actualizó con éxito!", {
@@ -229,16 +233,19 @@ export const ModalEventEdit = ({
   return (
     <div
       className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 w-full"
-      onClick={handleBackdropClick}>
-      <form className="bg-white rounded-md shadow-md w-11/12 md:w-1/2 h-3/4 xl:h-4/5 flex flex-col overflow-scroll md:overflow-auto">
+      onClick={handleBackdropClick}
+    >
+      <form className="bg-white rounded-md shadow-md w-11/12 md:w-1/2 h-3/4 xl:h-4/5 2xl:h-92p flex flex-col overflow-scroll md:overflow-auto">
         <div className="flex justify-end px-4 py-2 rounded-t-md bg-neutral-100">
           <button
             className="text-gray-500 hover:text-gray-700 focus:outline-none"
-            onClick={handleCloseModal}>
+            onClick={handleCloseModal}
+          >
             <svg
               className="h-6 w-6 fill-current"
               viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg">
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <title>Close</title>
               <path
                 d="M14.348 14.849a1 1 0 01-1.414 0L10 11.414l-2.93 2.93a1 1 0 01-1.414-1.414l2.93-2.93-2.93-2.93a1 1 0 011.414-1.414l2.93 2.93 2.93-2.93a1 1 0 011.414 1.414l-2.93 2.93 2.93 2.93a1 1 0 010 1.414z"
@@ -279,7 +286,8 @@ export const ModalEventEdit = ({
                     type="file"
                     className="hidden"
                     name="imagen"
-                    onChange={handleSelectImage}></input>
+                    onChange={handleSelectImage}
+                  ></input>
                 </div>
               </div>
               <div className="flex flex-col w-full relative md:top-8 gap-10">
@@ -332,7 +340,8 @@ export const ModalEventEdit = ({
                   id="description"
                   rows="2"
                   defaultValue={description}
-                  onChange={handleInputChange}></textarea>
+                  onChange={handleInputChange}
+                ></textarea>
               </div>
               <div className="flex justify-between md:px-16 flex-col md:flex-row gap-5 md:gap-0">
                 <div className="flex flex-col">
@@ -380,12 +389,16 @@ export const ModalEventEdit = ({
                     name="type_event"
                     id="type_event"
                     onChange={handleInputChange}
-                    value={tipoEvento} // Asegúrate de establecer el valor seleccionado correctamente
-                    defaultValue={tipoEvento}
-                    className="md:w-72 border border-slate-200 py-1 px-3 rounded-md">
+                    value={tipoEvento}
+                    className="md:w-72 border border-slate-200 py-1 px-3 rounded-md"
+                  >
                     {eventTypes.map((type, index) => (
-                      <option key={type} value={index + 9}>
-                        {type}
+                      
+                      <option
+                        key={index}
+                        value={type.idTipoEvento}
+                      >
+                        {type.tipoEvento}
                       </option>
                     ))}
                   </select>
@@ -395,7 +408,8 @@ export const ModalEventEdit = ({
             <div className="footer flex md:relative md:bottom-14 xl:bottom-10  2xl:bottom-14  justify-center items-center w-full my-44 md:my-10 mb-40 2xl:my-0 2xl:mb-0 xl:gap-4">
               <button
                 className="hover:bg-purple-700 mb-10 bg-purple-500 text-white font-bold py-2 px-8 rounded"
-                onClick={handleCloseModal}>
+                onClick={handleCloseModal}
+              >
                 Volver
               </button>
               <button
@@ -403,12 +417,14 @@ export const ModalEventEdit = ({
                 className="hover:bg-emerald-900 mb-10 bg-emerald-600 text-white font-bold py-2 px-8 rounded"
                 onClick={() => {
                   setModalOpen(!modalOpen);
-                }}>
+                }}
+              >
                 Confirmar assitencia
               </button>
               <button
                 className="hover:bg-purple-700 mb-10 bg-purple-500 text-white font-bold py-2 px-8 rounded"
-                onClick={handleUpdateEvent}>
+                onClick={handleUpdateEvent}
+              >
                 Guardar
               </button>
             </div>
@@ -421,7 +437,8 @@ export const ModalEventEdit = ({
             <div className="flex justify-end px-4 py-2 rounded-t-md bg-neutral-100">
               <button
                 className="text-gray-500 hover:text-gray-700 focus:outline-none"
-                onClick={handleClose}>
+                onClick={handleClose}
+              >
                 <MdClose size={24} />
               </button>
             </div>
@@ -439,7 +456,8 @@ export const ModalEventEdit = ({
               <button
                 type="button" // Cambia el tipo de "submit" a "button"
                 className="hover:bg-purple-700 mb-10 bg-purple-500 text-white font-bold py-2 px-8 rounded"
-                onClick={handleConfirm}>
+                onClick={handleConfirm}
+              >
                 Confirmar Asistencia
               </button>
             </div>

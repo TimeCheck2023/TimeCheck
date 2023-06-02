@@ -21,8 +21,8 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
     fechaFinal: "",
     lugar: "",
     aforo: 0,
-    suborganizacionId: 41,
-    tipoEventoId: 9,
+    suborganizacionId: 53,
+    tipoEventoId: 18,
   });
 
   const maxCharacters = 150;
@@ -86,6 +86,14 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
   //Funcion para enviar todos los datos al backend para guardarlo en la DB
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validar si la imagen predeterminada se está enviando
+    if (state.imagen === "https://cdn-icons-png.flaticon.com/512/219/219254.png") {
+      toast.error("Debes seleccionar una imagen antes de guardar el evento", {
+        theme: "dark",
+      });
+      return; // Salir de la función sin guardar el evento
+    }
 
     // Preparar datos para enviar en la solicitud POST
     const data = {
@@ -323,15 +331,14 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                     name="tipoEventoId"
                     value={state.tipoEventoId}
                     onChange={handleInputsChange}>
-                    <option value="9">Educativo</option>
-                    <option value="10">Religioso</option>
-                    <option value="11">Social</option>
-                    <option value="12">Cultural</option>
-                    <option value="13">Musical</option>
-                    <option value="14">Deportivo</option>
-                    <option value="15">Festival</option>
-                    <option value="16">Feria</option>
-                    <option value="17">Exposiciones</option>
+                    <option value="18">Social</option>
+                    <option value="19">Deportivo</option>
+                    <option value="20">Cultural</option>
+                    <option value="21">Educativo</option>
+                    <option value="22">Religioso</option>
+                    <option value="23">Musical</option>
+                    <option value="24">Festival</option>
+                    <option value="25">Exposiciones</option>
                   </select>
                 </div>
               </div>

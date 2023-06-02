@@ -27,7 +27,7 @@ export const SlideBar = ({
 
   const token = localStorage.getItem("token_login");
   const decoded = jwtDecode(token);
-  console.log(decoded);
+  // console.log(decoded);
   const emailUser = decoded.payload.correo;
   const idOrg = decoded.payload.id_organización;
 
@@ -39,7 +39,7 @@ export const SlideBar = ({
             `https://timecheck.up.railway.app/org/${idOrg}`
           );
           const data = await response.json();
-          console.log(data.message);
+          // console.log(data.message);
           setNameOrg(data.message.nombre_organizacion)
           // setLoading(false);
         }

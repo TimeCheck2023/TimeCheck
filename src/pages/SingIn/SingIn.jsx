@@ -72,8 +72,8 @@ export const SingIn = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
-          console.log(data.error);
+          // console.log(data);
+          // console.log(data.error);s
           setIsLoading(false); // Desactivar el estado de carga
 
           if (data.error) {

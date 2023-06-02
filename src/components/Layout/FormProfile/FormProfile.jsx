@@ -53,8 +53,8 @@ export const FormProfile = ({ userData }) => {
       );
 
       if (response.ok) {
-        console.log(response);
-        console.log(response.ok);
+        // console.log(response);
+        // console.log(response.ok);
         // La solicitud fue exitosa, puedes mostrar una notificación de éxito o realizar alguna acción adicional
         toast.success("Perfil actualizado exitosamente", {
           theme: "dark",

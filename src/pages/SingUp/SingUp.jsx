@@ -193,7 +193,6 @@ export const SingUp = () => {
       if (Object.keys(errorsUser).length > 0) {
         console.log(errorsUser);
       } else {
-        console.log(values_us);
 
         // Muestra una notificación mientras se carga el formulario
         toast.info("Cargando...", {
@@ -224,7 +223,7 @@ export const SingUp = () => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             if (data.error) {
               toast.error(`Error: ${data.error}`, {
                 position: "bottom-center",
@@ -296,7 +295,6 @@ export const SingUp = () => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
             if (data.error) {
               toast.error(`Error: ${data.error}`, {
                 position: "bottom-center",

@@ -27,16 +27,26 @@ export const UserVist = () => {
       });
   }, []);
 
+  const handleFetchEvents = () => {
+    fetch("https://time-check.azurewebsites.net/api/Event/List")
+      .then((response) => response.json())
+      .then((data) => {
+        setEvents(data.response);
+        setLoading(false);
+      });
+  };
+  
+
   const fetchCategories = async () => {
     try {
       const response = await fetch(
         "https://time-check.azurewebsites.net/api/Event/get_event_types"
       );
       const data = await response.json();
-      console.log(data.response);
+      // console.log(data.response);
 
       setCategories(data.response); // Actualiza el estado con los tipos de eventos obtenidos
-      console.log(categories);
+      // console.log(categories);
     } catch (error) {
       console.error("Error al obtener los tipos de eventos:", error);
     }
@@ -151,7 +161,8 @@ export const UserVist = () => {
                     lugar={event.lugarEvento}
                     idEvento={event.idEvento}
                     cuposDisponibles={event.cuposDisponibles}
-                    likes={event.likes}
+                    fetchEvents={handleFetchEvents} // Agrega esta prop
+
                   />
                 ))}
               </>

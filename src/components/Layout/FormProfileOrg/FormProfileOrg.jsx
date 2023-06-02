@@ -35,7 +35,7 @@ export const FormProfileOrg = ({ orgData }) => {
       );
 
       const  data = await response.text();
-      console.log(data)
+      // console.log(data)
       if (response.ok) {
         toast.success(
           "Información de la organización actualizada exitosamente",

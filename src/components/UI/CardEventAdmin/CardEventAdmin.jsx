@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 export const CardEventAdmin = (props) => {
   const [openModal, setOpenModal] = useState(false);
 
+
   const handleOpenModal = () => {
     setOpenModal(!openModal);
   };
@@ -94,6 +95,7 @@ export const CardEventAdmin = (props) => {
           initialAforo={props.aforo}
           initialValorTotal={props.price}
           initialTipoEvento={props.tipo_evento}
+          initialTipoEventoId={props.id_tipo_evento}
           fetchEvents={props.fetchEvents}
         />
       )}

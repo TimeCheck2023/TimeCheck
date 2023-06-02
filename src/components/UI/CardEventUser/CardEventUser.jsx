@@ -4,6 +4,7 @@ import { ModalEventInfo } from "../../Layout/ModalEventInfo/ModalEventInfo";
 
 export const CardEventUser = (props) => {
   const [openModal, setOpenModal] = useState(false);
+  
 
   const handleOpenModal = () => {
     setOpenModal(!openModal);
@@ -58,7 +59,8 @@ export const CardEventUser = (props) => {
           tipo_evento={props.tipo_evento}
           idEvento={props.idEvento}
           cuposDisponibles={props.cuposDisponibles}
-          fetchEvents={props.fetchEvents}
+          fetchEvents={props.fetchEvents} // Pasa la prop aquí
+
         />
       )}
     </div>
