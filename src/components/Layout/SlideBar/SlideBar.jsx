@@ -23,7 +23,7 @@ export const SlideBar = ({
   const [openNavBar, setOpenNavBar] = useState(false);
   const [lower, setLower] = useState(false);
   const [subOrganizations, setSubOrganizations] = useState([]);
-  const [nameOrg, setNameOrg] = useState(null)
+  const [nameOrg, setNameOrg] = useState(null);
 
   const token = localStorage.getItem("token_login");
   const decoded = jwtDecode(token);
@@ -40,7 +40,7 @@ export const SlideBar = ({
           );
           const data = await response.json();
           // console.log(data.message);
-          setNameOrg(data.message.nombre_organizacion)
+          setNameOrg(data.message.nombre_organizacion);
           // setLoading(false);
         }
       } catch (error) {
@@ -48,13 +48,12 @@ export const SlideBar = ({
         // setLoading(false);
       }
     };
-  
+
     fetchOrgData();
   }, [idOrg]);
 
   const primerCaracterMayuscula = nameOrg?.charAt(0)?.toUpperCase();
   // console.log(nameOrg)
-
 
   // console.log(userType)
 
@@ -206,9 +205,13 @@ export const SlideBar = ({
           {" "}
           <p className="text-slate-500 text-base ">Cuenta</p>
           <div className={`flex flex-row ${openNavBar && "gap-3"}`}>
-          <div className="w-12 h-12 bg-purple-600 rounded-full mb-4 text-center flex items-center justify-center text-2xl font-semibold text-white">{primerCaracterMayuscula}</div>
+            <div className="w-12 h-12 bg-purple-600 rounded-full mb-4 text-center flex items-center justify-center text-2xl font-semibold text-white">
+              {primerCaracterMayuscula}
+            </div>
             <div>
-              {openNavBar && <p className="font-semibold truncate"></p>}
+              {openNavBar && (
+                <p className="font-semibold truncate">{nameOrg}</p>
+              )}
               {openNavBar && (
                 <p className="transition-all duration-500 ease-in-out font-medium text-sm text-slate-400 truncate ">
                   {emailUser}
