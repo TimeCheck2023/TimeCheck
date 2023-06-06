@@ -13,6 +13,7 @@ export const Dashboard = () => {
   const [idOrg, setIdOrg] = useState(null);
   const [showToast, setShowToast] = useState(false);
   const [rol, setRol] = useState(null);
+  const [idSubOrg, setIdSubOrg] = useState(null)
 
   const navigate = useNavigate();
 
@@ -24,7 +25,7 @@ export const Dashboard = () => {
     } else {
       const decoded = jwtDecode(token);
       setIdOrg(decoded.payload.id_organización);
-      console.log(decoded.payload.id_organización);
+      setIdSubOrg(decoded.payload.id_suborganizacion);
       // console.log(decoded.payload.nro_documento_usuario);
       setUserType(decoded.payload.EsUsuario);
       setRol(decoded.payload.rol);
@@ -60,7 +61,7 @@ export const Dashboard = () => {
             activeContactUs={false}
             activeNotify={false}
           />
-          <EventsVist />
+          <EventsVist userType={userType} idSubOrg={idSubOrg}/>
           <NavbarMobileUser />
         </div>
       );

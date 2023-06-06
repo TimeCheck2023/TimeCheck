@@ -10,7 +10,7 @@ import { LoaderEventsGet } from "../../UI/LoaderEventsGet/LoaderEventsGet";
 
 const PAGE_SIZE = 3;
 
-export const EventsVist = ({ idOrg }) => {
+export const EventsVist = ({ idOrg, userType,idSubOrg }) => {
   const [events, setEvents] = useState([]);
   const [page, setPage] = useState(0);
   const [openModal, setOpenModal] = useState(false);
@@ -20,7 +20,58 @@ export const EventsVist = ({ idOrg }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [categories, setCategories] = useState([]);
   const [categoriesId, setCategoriesId] = useState([]);
-  console.log(idOrg);
+  // console.log(idOrg);
+  // console.log(userType);
+
+
+  const fetchEventsOrg = () => {
+    fetch(
+      `https://time-check.azurewebsites.net/api/Event/GetEventsOrg?OrganizacionId=${idOrg}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setEvents(data.response);
+        setLoading(false);
+      });
+  };
+
+  const fetchEventsUserAdmin = () => {
+    fetch(
+      `https://time-check.azurewebsites.net/api/Event/List`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setEvents(data.response);
+        setLoading(false);
+      });
+  };
+
+
+  {
+    userType == 1 ?  (useEffect(() => {
+      fetch(
+        `https://time-check.azurewebsites.net/api/Event/List`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.response)
+          setEvents(data.response);
+          setLoading(false);
+        });
+    }, []))
+    :  (useEffect(() => {
+      fetch(
+        `https://time-check.azurewebsites.net/api/Event/GetEventsOrg?OrganizacionId=${idOrg}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setEvents(data);
+          setLoading(false);
+        });
+    }, []))
+  }
+
+
   const filteredEvents = events.filter(
     (event) =>
       (selectedCategory === null || event.tipoEvento === selectedCategory) &&
@@ -32,28 +83,6 @@ export const EventsVist = ({ idOrg }) => {
   const startIndex = page * PAGE_SIZE;
   const endIndex = startIndex + PAGE_SIZE;
   const visibleEvents = filteredEvents.slice(startIndex, endIndex);
-
-  const fetchEvents = () => {
-    fetch(
-      `https://time-check.azurewebsites.net/api/Event/GetEventsOrg?OrganizacionId=${idOrg}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setEvents(data.response);
-        setLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    fetch(
-      `https://time-check.azurewebsites.net/api/Event/GetEventsOrg?OrganizacionId=${idOrg}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setEvents(data);
-        setLoading(false);
-      });
-  }, []);
 
   const fetchCategories = async () => {
     try {
@@ -188,16 +217,16 @@ export const EventsVist = ({ idOrg }) => {
                     lugar={event.lugarEvento}
                     cupos_disponibles={event.cuposDisponibles}
                     // likes={event.likes}
-                    fetchEvents={fetchEvents}
+                    fetchEvents={fetchEventsOrg}
                   />
                 ))}
               </>
             )}
-            {/* <div
+      {userType == 1 && (            <div
               onClick={handleOpenModal}
               className="fixed bottom-40 rounded-full bg-slate-200 p-5 text-2xl text-purple-600  right-5 md:right-10 transform transition-transform hover:scale-125 hover:bg-slate-300">
               <ImPlus />
-            </div> */}
+            </div>)}
           </>
         )}
       </div>
@@ -222,7 +251,8 @@ export const EventsVist = ({ idOrg }) => {
       {openModal && (
         <ModalEventAdd
           handleCloseModal={handleCloseModal}
-          fetchEvents={fetchEvents}
+          fetchEvents={fetchEventsOrg}
+          idSubOrg={idSubOrg}
         />
       )}
       <div className=" md:pl-14 w-full">
