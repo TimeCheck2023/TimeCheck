@@ -10,7 +10,7 @@ import { LoaderEventsGet } from "../../UI/LoaderEventsGet/LoaderEventsGet";
 
 const PAGE_SIZE = 3;
 
-export const EventsVist = ({ idOrg, userType,idSubOrg }) => {
+export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
   const [events, setEvents] = useState([]);
   const [page, setPage] = useState(0);
   const [openModal, setOpenModal] = useState(false);
@@ -23,54 +23,51 @@ export const EventsVist = ({ idOrg, userType,idSubOrg }) => {
   // console.log(idOrg);
   // console.log(userType);
 
+  const fetchEvents1 = () => {
+    fetch(`https://time-check.azurewebsites.net/api/Event/List`)
+      .then((response) => response.json())
+      .then((data) => {
+        setEvents(data.response);
+        setLoading(false);
+      });
+  };
 
-  const fetchEventsOrg = () => {
+  const fetchEvents2 = () => {
     fetch(
       `https://time-check.azurewebsites.net/api/Event/GetEventsOrg?OrganizacionId=${idOrg}`
     )
       .then((response) => response.json())
       .then((data) => {
-        setEvents(data.response);
+        console.log(data)
+        setEvents(data);
         setLoading(false);
       });
   };
 
-  const fetchEventsUserAdmin = () => {
-    fetch(
-      `https://time-check.azurewebsites.net/api/Event/List`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setEvents(data.response);
-        setLoading(false);
-      });
-  };
-
+  const fetchEvents = userType == 1 ? fetchEvents1 : fetchEvents2;
 
   {
-    userType == 1 ?  (useEffect(() => {
-      fetch(
-        `https://time-check.azurewebsites.net/api/Event/List`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data.response)
-          setEvents(data.response);
-          setLoading(false);
-        });
-    }, []))
-    :  (useEffect(() => {
-      fetch(
-        `https://time-check.azurewebsites.net/api/Event/GetEventsOrg?OrganizacionId=${idOrg}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setEvents(data);
-          setLoading(false);
-        });
-    }, []))
+    userType == 1
+      ? useEffect(() => {
+          fetch(`https://time-check.azurewebsites.net/api/Event/List`)
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data.response);
+              setEvents(data.response);
+              setLoading(false);
+            });
+        }, [])
+      : useEffect(() => {
+          fetch(
+            `https://time-check.azurewebsites.net/api/Event/GetEventsOrg?OrganizacionId=${idOrg}`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              setEvents(data);
+              setLoading(false);
+            });
+        }, []);
   }
-
 
   const filteredEvents = events.filter(
     (event) =>
@@ -143,11 +140,12 @@ export const EventsVist = ({ idOrg, userType,idSubOrg }) => {
             onClick={() => {
               setOpenCategoria(!openCategoria);
             }}
-            className="flex justify-center items-center gap-2 px-4 py-2 w-36 md:w-40 bg-purple-600 hover:bg-purple-700 font-normal text-white">
+            className="flex justify-center items-center gap-2 px-4 py-2 w-36 md:w-40 bg-purple-600 hover:bg-purple-700 font-normal text-white"
+          >
             Categorias <BiChevronDown className="text-2xl" />
           </button>
           {!openCategoria && (
-            <div className="absolute mt-10 w-36 md:w-40 px-4 py-2 z-50 bg-purple-600 text-white">
+            <div className="absolute mt-10 w-36 md:w-40 px-4 py-2 z-50 bg-purple-600 text-white hover:cursor-pointer">
               <ul className="flex flex-col gap-2">
                 <li
                   className={`${
@@ -155,7 +153,8 @@ export const EventsVist = ({ idOrg, userType,idSubOrg }) => {
                   } hover:bg-purple-900 px-4 py-2 rounded-sm border-y border-white`}
                   onClick={() => {
                     setSelectedCategory(null);
-                  }}>
+                  }}
+                >
                   Todos
                 </li>
                 {categories.map((category, index) => (
@@ -166,7 +165,8 @@ export const EventsVist = ({ idOrg, userType,idSubOrg }) => {
                     } hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white`}
                     onClick={() => {
                       setSelectedCategory(category);
-                    }}>
+                    }}
+                  >
                     {category}
                   </li>
                 ))}
@@ -190,7 +190,8 @@ export const EventsVist = ({ idOrg, userType,idSubOrg }) => {
           events.length <= 1
             ? ""
             : "grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3"
-        } place-items-center gap-y-5 pb-10 xl:mt-0 xl:mb-0 lg:ml-96 xl:ml-0 mb-0 sm:mb-0`}>
+        } place-items-center gap-y-5 pb-10 xl:mt-0 xl:mb-0 lg:ml-96 xl:ml-0 mb-0 sm:mb-0`}
+      >
         {loading ? (
           <LoaderEventsGet />
         ) : (
@@ -217,16 +218,19 @@ export const EventsVist = ({ idOrg, userType,idSubOrg }) => {
                     lugar={event.lugarEvento}
                     cupos_disponibles={event.cuposDisponibles}
                     // likes={event.likes}
-                    fetchEvents={fetchEventsOrg}
+                    fetchEvents={fetchEvents}
                   />
                 ))}
               </>
             )}
-      {userType == 1 && (            <div
-              onClick={handleOpenModal}
-              className="fixed bottom-40 rounded-full bg-slate-200 p-5 text-2xl text-purple-600  right-5 md:right-10 transform transition-transform hover:scale-125 hover:bg-slate-300">
-              <ImPlus />
-            </div>)}
+            {userType == 1 && (
+              <div
+                onClick={handleOpenModal}
+                className="fixed bottom-40 rounded-full bg-slate-200 p-5 text-2xl text-purple-600  right-5 md:right-10 transform transition-transform hover:scale-125 hover:bg-slate-300"
+              >
+                <ImPlus />
+              </div>
+            )}
           </>
         )}
       </div>
@@ -241,7 +245,8 @@ export const EventsVist = ({ idOrg, userType,idSubOrg }) => {
                     page === i
                       ? "bg-purple-600 text-white"
                       : "bg-white text-gray-700 hover:bg-purple-100"
-                  }`}>
+                  }`}
+            >
               {i + 1}
             </button>
           ))}
@@ -251,7 +256,7 @@ export const EventsVist = ({ idOrg, userType,idSubOrg }) => {
       {openModal && (
         <ModalEventAdd
           handleCloseModal={handleCloseModal}
-          fetchEvents={fetchEventsOrg}
+          fetchEvents={fetchEvents}
           idSubOrg={idSubOrg}
         />
       )}

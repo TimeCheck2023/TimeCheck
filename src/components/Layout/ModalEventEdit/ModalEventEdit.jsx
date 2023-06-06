@@ -35,7 +35,7 @@ export const ModalEventEdit = ({
   const [aforo, setAforo] = useState(initialAforo);
   const [valorTotal, setValorTotal] = useState(initialValorTotal);
   const [tipoEvento, setTipoEvento] = useState(initialTipoEvento);
-  const [tipoEventoFinal, setTipoEventoFinal] = useState(0);
+  const [tipoEventoFinal, setTipoEventoFinal] = useState(18);
   // const [tipoEvento, setTipoEvento] = useState(initialTipoEventoId);
 
   // console.log(tipoEvento);
@@ -256,7 +256,7 @@ export const ModalEventEdit = ({
     <div
       className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 w-full"
       onClick={handleBackdropClick}>
-      <form className="bg-white rounded-md shadow-md w-11/12 md:w-1/2 h-3/4 xl:h-4/5 2xl:h-92p flex flex-col overflow-scroll md:overflow-auto">
+      <form className="bg-white rounded-md shadow-md w-11/12 md:w-1/2 h-3/4 xl:h-4/5 2xl:h-4/5 flex flex-col overflow-scroll md:overflow-auto">
         <div className="flex justify-end px-4 py-2 rounded-t-md bg-neutral-100">
           <button
             className="text-gray-500 hover:text-gray-700 focus:outline-none"
@@ -421,7 +421,7 @@ export const ModalEventEdit = ({
                 </div>
               </div>
             </div>
-            <div className="footer flex md:relative md:bottom-14 xl:bottom-10  2xl:bottom-14  justify-center items-center w-full my-44 md:my-10 mb-40 2xl:my-0 2xl:mb-0 xl:gap-4">
+            <div className="footer flex md:relative md:bottom-14 xl:bottom-10  2xl:bottom-5  justify-center items-center w-full my-44 md:my-10 mb-40 2xl:my-0 2xl:mb-0 xl:gap-4">
               <button
                 className="hover:bg-purple-700 mb-10 bg-purple-500 text-white font-bold py-2 px-8 rounded"
                 onClick={handleCloseModal}>

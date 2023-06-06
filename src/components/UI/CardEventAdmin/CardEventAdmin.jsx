@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { AiFillLike, AiOutlineDelete } from "react-icons/ai";
+import { AiFillLike, AiOutlineDelete, AiOutlineLike } from "react-icons/ai";
 import { ModalEventEdit } from "../../Layout/ModalEventEdit/ModalEventEdit";
 import { toast } from "react-toastify";
+import CommentModal from "../../Layout/CommentModal/CommentModal";
 
 export const CardEventAdmin = (props) => {
   const [openModal, setOpenModal] = useState(false);
+  const [openCommentModal, setOpenCommentModal] = useState(false);
 
   const handleOpenModal = () => {
     setOpenModal(!openModal);
@@ -67,44 +69,55 @@ export const CardEventAdmin = (props) => {
             className="rounded-md w-fit max-h-52 object-cover"
           />
         </div>
-        <div className="px-3 py-3">
-          <p className="text-base text-purple-600 font-bold">{props.title}</p>
-          <p className="text-xs truncate">{props.description}</p>
+        <div className="px-3 py-3 flex justify-between">
+          <div className="w-52 truncate ">
+            <p className="text-base text-purple-600 font-bold truncate">{props.title}</p>
+            <p className="text-xs truncate">{props.description}</p>
+          </div>
+          <div>
+            <p className="text-purple-600 font-medium">
+              {formatPrice(props.price)}
+            </p>
+          </div>
         </div>
         <div className="flex flex-row justify-between px-8 py-4">
-          {/* <button className="flex flex-row items-center border px-4 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-2">
-          <AiOutlineLike className=" text-xl" />
-          <p className="font-bold">{props.likes}</p>
-        </button> */}
-          <p className="text-purple-600 font-medium">
-            {formatPrice(props.price)}
-          </p>
+          <button className="flex flex-row items-center border w-14 text-center justify-center border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-1">
+            <AiOutlineLike className=" text-base" />
+            <p className="font-bold">{props.likes}</p>
+          </button>
+          <button onClick={() =>{setOpenCommentModal(!openCommentModal)}} className="flex flex-row items-center border w-32 text-center px-4 lg:px-5 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
+            <p>Comentarios</p>
+          </button>
           <button
             onClick={() => {
               setOpenModal(!openModal);
             }}
-            className="flex flex-row items-center border px-4 lg:px-5 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
+            className="flex flex-row items-center border px-4 lg:px-5 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold"
+          >
             <p>Ver más</p>
           </button>
         </div>
       </div>
       {openModal && (
         <ModalEventEdit
-          handleCloseModal={handleCloseModal}
-          idEvent={props.id}
-          initialTitle={props.title}
-          initialDescription={props.description}
-          initialImage={props.image}
-          initialFechaInicio={props.fecha_inicio}
-          initialFechaFinal={props.fecha_final}
-          initialLugar={props.lugar}
-          initialAforo={props.aforo}
-          initialValorTotal={props.price}
-          initialTipoEvento={props.tipo_evento}
-          initialTipoEventoId={props.id_tipo_evento}
-          fetchEvents={props.fetchEvents}
+        handleCloseModal={handleCloseModal}
+        idEvent={props.id}
+        initialTitle={props.title}
+        initialDescription={props.description}
+        initialImage={props.image}
+        initialFechaInicio={props.fecha_inicio}
+        initialFechaFinal={props.fecha_final}
+        initialLugar={props.lugar}
+        initialAforo={props.aforo}
+        initialValorTotal={props.price}
+        initialTipoEvento={props.tipo_evento}
+        initialTipoEventoId={props.id_tipo_evento}
+        fetchEvents={props.fetchEvents}
         />
-      )}
+        )}
+        {
+          openCommentModal && (<CommentModal/>)
+        }
     </>
   );
 };
