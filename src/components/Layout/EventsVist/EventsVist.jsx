@@ -10,7 +10,7 @@ import { LoaderEventsGet } from "../../UI/LoaderEventsGet/LoaderEventsGet";
 
 const PAGE_SIZE = 3;
 
-export const EventsVist = () => {
+export const EventsVist = ({ idOrg }) => {
   const [events, setEvents] = useState([]);
   const [page, setPage] = useState(0);
   const [openModal, setOpenModal] = useState(false);
@@ -20,7 +20,7 @@ export const EventsVist = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [categories, setCategories] = useState([]);
   const [categoriesId, setCategoriesId] = useState([]);
-
+  console.log(idOrg);
   const filteredEvents = events.filter(
     (event) =>
       (selectedCategory === null || event.tipoEvento === selectedCategory) &&
@@ -34,7 +34,9 @@ export const EventsVist = () => {
   const visibleEvents = filteredEvents.slice(startIndex, endIndex);
 
   const fetchEvents = () => {
-    fetch("https://time-check.azurewebsites.net/api/Event/List")
+    fetch(
+      `https://time-check.azurewebsites.net/api/Event/GetEventsOrg?OrganizacionId=${idOrg}`
+    )
       .then((response) => response.json())
       .then((data) => {
         setEvents(data.response);
@@ -43,10 +45,12 @@ export const EventsVist = () => {
   };
 
   useEffect(() => {
-    fetch("https://time-check.azurewebsites.net/api/Event/List")
+    fetch(
+      `https://time-check.azurewebsites.net/api/Event/GetEventsOrg?OrganizacionId=${idOrg}`
+    )
       .then((response) => response.json())
       .then((data) => {
-        setEvents(data.response);
+        setEvents(data);
         setLoading(false);
       });
   }, []);
@@ -57,24 +61,23 @@ export const EventsVist = () => {
         "https://time-check.azurewebsites.net/api/Event/get_event_types"
       );
       const data = await response.json();
-      
+
       // Obtener los IDs de tipo de evento
       const categoriesIds = data.response.map((evento) => evento.idTipoEvento);
-      
+
       // Obtener los tipos de evento
       const categories = data.response.map((evento) => evento.tipoEvento);
-      
+
       // Actualizar los estados con los tipos de eventos y los IDs de tipo de evento obtenidos
       setCategoriesId(categoriesIds);
       setCategories(categories);
-      
+
       console.log(categoriesIds);
       console.log(categories);
     } catch (error) {
       console.error("Error al obtener los tipos de eventos:", error);
     }
   };
-  
 
   useEffect(() => {
     fetchCategories();
@@ -130,9 +133,7 @@ export const EventsVist = () => {
                   <li
                     key={index}
                     className={`${
-                      selectedCategory === category
-                        ? "bg-purple-900"
-                        : ""
+                      selectedCategory === category ? "bg-purple-900" : ""
                     } hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white`}
                     onClick={() => {
                       setSelectedCategory(category);
@@ -192,11 +193,11 @@ export const EventsVist = () => {
                 ))}
               </>
             )}
-            <div
+            {/* <div
               onClick={handleOpenModal}
               className="fixed bottom-40 rounded-full bg-slate-200 p-5 text-2xl text-purple-600  right-5 md:right-10 transform transition-transform hover:scale-125 hover:bg-slate-300">
               <ImPlus />
-            </div>
+            </div> */}
           </>
         )}
       </div>

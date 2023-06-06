@@ -6,35 +6,46 @@ import { toast } from "react-toastify";
 export const CardEventAdmin = (props) => {
   const [openModal, setOpenModal] = useState(false);
 
-
   const handleOpenModal = () => {
     setOpenModal(!openModal);
   };
 
-  const handleDeleteEvent = () => {
-    fetch(`https://time-check.azurewebsites.net/api/Event/Delete/${props.id}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (response.ok) {
-          // El evento se eliminó correctamentec
-          toast.success("El evento se eliminó correctamente", {
-            theme: "dark",
-          });
-          props.fetchEvents(); // Llamar a la función fetchEvents
-          // Realizar cualquier otra acción necesaria, como actualizar la lista de eventos
-        } else {
-          // Manejar el caso en que la eliminación no fue exitosa
-          toast.error("Error al eliminar el evento", {
-            theme: "dark",
-          });
-        }
-      })
-      .catch((error) => {
-        // Manejar errores de red u otros errores de solicitud
-        console.error("Error en la solicitud:", error);
-      });
+  const formatPrice = (price) => {
+    if (price === 0) {
+      return "Gratis";
+    } else {
+      const formattedPrice = new Intl.NumberFormat("es-CO", {
+        style: "currency",
+        currency: "COP",
+      }).format(price);
+      return formattedPrice;
+    }
   };
+
+  // const handleDeleteEvent = () => {
+  //   fetch(`https://time-check.azurewebsites.net/api/Event/Delete/${props.id}`, {
+  //     method: "DELETE",
+  //   })
+  //     .then((response) => {
+  //       if (response.ok) {
+  //         // El evento se eliminó correctamentec
+  //         toast.success("El evento se eliminó correctamente", {
+  //           theme: "dark",
+  //         });
+  //         props.fetchEvents(); // Llamar a la función fetchEvents
+  //         // Realizar cualquier otra acción necesaria, como actualizar la lista de eventos
+  //       } else {
+  //         // Manejar el caso en que la eliminación no fue exitosa
+  //         toast.error("Error al eliminar el evento", {
+  //           theme: "dark",
+  //         });
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       // Manejar errores de red u otros errores de solicitud
+  //       console.error("Error en la solicitud:", error);
+  //     });
+  // };
 
   const handleCloseModal = () => {
     setOpenModal(false);
@@ -42,43 +53,38 @@ export const CardEventAdmin = (props) => {
 
   return (
     <>
-      <div className="w-80 mx-auto xl:h-full 2xl:h-full lg:h-full border border-black hover:shadow-xl hover:shadow-neutral-500 rounded-md transform transition-transform hover:scale-105 justify-between flex flex-col">
-        <div>
-          <p
-            onClick={handleDeleteEvent}
-            className="absolute right-0 text-red-600 font-bold p-3 cursor-pointer text-xl hover:scale-150">
-            <AiOutlineDelete />
+      <div className="w-96 h-full border border-slate-300 rounded-lg ">
+        <div className="flex justify-between px-2 py-1 text-sm">
+          <p className="font-bold">
+            {props.cupos_disponibles}/{props.aforo}
           </p>
+          <p className="text-slate-400 font-medium">{props.tipo_evento}</p>
+        </div>
+        <div className="p-3 flex justify-center">
           <img
             src={props.image}
-            alt="event"
-            className="rounded-t-md w-full object-cover bg-cover max-h-64"
+            alt="imagen"
+            className="rounded-md w-fit max-h-52 object-cover"
           />
         </div>
-        <div className="px-3 py-5">
-          <p className="font-bold text-xl truncate">{props.title}</p>
-          <p className="font-semibold text-slate-600 ">{props.tipo_evento}</p>
+        <div className="px-3 py-3">
+          <p className="text-base text-purple-600 font-bold">{props.title}</p>
+          <p className="text-xs truncate">{props.description}</p>
         </div>
-        <div>
-          <p className="px-3 text-sm truncate whitespace-pre-wrap line-clamp-0 text-justify">
-            {props.description}
+        <div className="flex flex-row justify-between px-8 py-4">
+          {/* <button className="flex flex-row items-center border px-4 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-2">
+          <AiOutlineLike className=" text-xl" />
+          <p className="font-bold">{props.likes}</p>
+        </button> */}
+          <p className="text-purple-600 font-medium">
+            {formatPrice(props.price)}
           </p>
-        </div>
-        <div className="flex justify-between px-3 py-6">
-          <p className="text-slate-400 font-normal">
-            {props.price !== 0 ? `$${props.price}` : "GRATIS"}
-          </p>
-          <p className="text-slate-400 font-normal">{`${props.cupos_disponibles}/${props.aforo}`}</p>
-        </div>
-        <div className="flex justify-between px-3 gap-4 mt-2 mb-4 2xl:mb-4">
-          {/* <button className="flex items-center px-3 bg-slate-100 rounded-md font-bold text-xl text-purple-600 gap-2">
-            <AiFillLike className="text-purple-600" />
-            {props.likes}
-          </button> */}
           <button
-            onClick={handleOpenModal}
-            className="hover:bg-purple-800 px-14 bg-purple-600 text-white font-medium py-1 rounded-md shadow-lg">
-            Ver más
+            onClick={() => {
+              setOpenModal(!openModal);
+            }}
+            className="flex flex-row items-center border px-4 lg:px-5 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
+            <p>Ver más</p>
           </button>
         </div>
       </div>

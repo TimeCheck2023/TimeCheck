@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 export const Dashboard = () => {
   const [userType, setUserType] = useState(null);
-  // const [idOrg, setIdOrg] = useState(null);
+  const [idOrg, setIdOrg] = useState(null);
   const [showToast, setShowToast] = useState(false);
   const [rol, setRol] = useState(null);
 
@@ -23,7 +23,8 @@ export const Dashboard = () => {
       navigate("/"); // Redirigir al usuario a la página de inicio de sesión
     } else {
       const decoded = jwtDecode(token);
-      // console.log(decoded);
+      setIdOrg(decoded.payload.id_organización);
+      console.log(decoded.payload.id_organización);
       // console.log(decoded.payload.nro_documento_usuario);
       setUserType(decoded.payload.EsUsuario);
       setRol(decoded.payload.rol);
@@ -53,13 +54,11 @@ export const Dashboard = () => {
     if (rol === 0) {
       return (
         <div className="w-full h-screen">
-          <SlideBar
-            activeConfig={false}
-            activeEvent={true}
-            activeGroup={false}
+          <SlideBarUser
+            activeHome={true}
+            activeAboutUs={false}
+            activeContactUs={false}
             activeNotify={false}
-            activeStats={false}
-            userType={userType}
           />
           <EventsVist />
           <NavbarMobileUser />
@@ -89,7 +88,7 @@ export const Dashboard = () => {
           activeNotify={false}
           activeStats={false}
         />
-        <EventsVist />
+        <EventsVist idOrg={idOrg} />
         <NavbarMobileUser />
       </div>
     );

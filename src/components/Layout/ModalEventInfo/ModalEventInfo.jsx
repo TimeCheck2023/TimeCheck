@@ -141,7 +141,7 @@ export const ModalEventInfo = ({
 
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 xl:h-full w-full pt-5 pb-10 mb-14 2xl:h-full">
-      <div className="bg-white rounded-md shadow-md w-11/12 xl:w-2/5 2xl:w-1/3 overflow-y-scroll xl:overflow-auto 2xl:overflow-auto h-full xl:h-2/3 2xl:h-3/4 flex flex-col">
+      <div className="bg-white rounded-md shadow-md w-11/12 xl:w-2/5 2xl:w-1/3 overflow-y-scroll xl:overflow-hidden 2xl:overflow-auto h-full xl:h-2/3 2xl:h-3/4 flex flex-col">
         <div className="flex justify-end px-4 py-2 rounded-t-md bg-neutral-100">
           <button
             className="text-gray-500 hover:text-gray-700 focus:outline-none"

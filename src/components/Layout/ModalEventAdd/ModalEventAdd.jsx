@@ -21,7 +21,8 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
     fechaFinal: "",
     lugar: "",
     aforo: 0,
-    suborganizacionId: 53,
+    valor_total: 0,
+    suborganizacionId: 55,
     tipoEventoId: 18,
   });
 
@@ -88,7 +89,9 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
     e.preventDefault();
 
     // Validar si la imagen predeterminada se está enviando
-    if (state.imagen === "https://cdn-icons-png.flaticon.com/512/219/219254.png") {
+    if (
+      state.imagen === "https://cdn-icons-png.flaticon.com/512/219/219254.png"
+    ) {
       toast.error("Debes seleccionar una imagen antes de guardar el evento", {
         theme: "dark",
       });
@@ -104,6 +107,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
       fecha_final: state.fechaFinal,
       lugar: state.lugar,
       aforo: state.aforo,
+      valor_total: state.valor_total,
       id_suborganizacion: state.suborganizacionId,
       id_tipo_evento: state.tipoEventoId,
     };
@@ -299,9 +303,12 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents }) => {
                   )}
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="cost_event">Precio del evento:</label>
+                  <label htmlFor="valor_total">Precio del evento:</label>
                   <input
-                    id="cost_event"
+                    id="valor_total"
+                    name="valor_total"
+                    value={state.valor_total}
+                    onChange={handleInputsChange}
                     className="md:w-72 border border-slate-200 py-1 px-3 rounded-md"
                     type="number"
                     placeholder="Precio del evento..."
