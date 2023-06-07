@@ -15,6 +15,7 @@ import { Politicas } from "./pages/Politicas/Politicas";
 import { ViewSubOrg } from "./pages/ViewSubOrg/ViewSubOrg";
 import { SubOrgView } from "./pages/SubOrgView/SubOrgView";
 import Verificacion from "./pages/Verificacion/Verificacion";
+import { StatisticsGraphics } from "./components/UI/StatisticsGraphics/StatisticsGraphics";
 function App() {
   return (
     <>
@@ -36,6 +37,7 @@ function App() {
           <Route path="/ViewSubOrg" element={<ViewSubOrg />} />
           <Route path="/Suborganization/:id" element={<SubOrgView />} />
           <Route path="/Verificacion/:codigo" element={<Verificacion />} />
+          <Route path="/StatisticsGraphics" element={<StatisticsGraphics/>}/>
         </Routes>
       </Router>
     </>
