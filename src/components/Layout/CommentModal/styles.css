@@ -1,0 +1,12 @@
+/* Colores personalizados */
+.scrollbar-thin {
+    scrollbar-width: thin;
+}
+
+.scrollbar-thumb-purple {
+    scrollbar-color: #A855F7;
+}
+
+.scrollbar-track-purple {
+    scrollbar-color: transparent;
+}

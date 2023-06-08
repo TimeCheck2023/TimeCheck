@@ -13,7 +13,7 @@ export const Dashboard = () => {
   const [idOrg, setIdOrg] = useState(null);
   const [showToast, setShowToast] = useState(false);
   const [rol, setRol] = useState(null);
-  const [idSubOrg, setIdSubOrg] = useState(null)
+  const [idSubOrg, setIdSubOrg] = useState(null);
 
   const navigate = useNavigate();
 
@@ -61,7 +61,7 @@ export const Dashboard = () => {
             activeContactUs={false}
             activeNotify={false}
           />
-          <EventsVist userType={userType} idSubOrg={idSubOrg}/>
+          <EventsVist userType={userType} idSubOrg={idSubOrg} />
           <NavbarMobileUser />
         </div>
       );
@@ -89,7 +89,7 @@ export const Dashboard = () => {
           activeNotify={false}
           activeStats={false}
         />
-        <EventsVist idOrg={idOrg} />
+        <EventsVist userType={userType} idOrg={idOrg} />
         <NavbarMobileUser />
       </div>
     );

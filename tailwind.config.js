@@ -1,20 +1,20 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      colors:{
+      colors: {
         cl1: "#C3FFF4",
-        cl2: "#FFF500"
+        cl2: "#FFF500",
       },
       spacing: {
-        '56p': '56%',
-        '92p': '92%'
-      }
+        "56p": "56%",
+        "92p": "92%",
+      },
     },
   },
-  plugins: [],
-}
+  plugins: [
+    require("tailwind-scrollbar"),
+    // ...
+  ],
+};
