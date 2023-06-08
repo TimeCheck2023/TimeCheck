@@ -51,10 +51,10 @@ export const StatisticsGraphics = () => {
             />
           </VictoryChart>
         </div>
+      </div>
         <div className="md:pl-14 w-full relative top-3/4">
           <Footer />
         </div>
-      </div>
     </>
   );
 };
