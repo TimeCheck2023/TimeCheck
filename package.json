@@ -17,6 +17,7 @@
     "react-onclickoutside": "^6.13.0",
     "react-router-dom": "^6.9.0",
     "react-toastify": "^9.1.2",
+    "socket.io-client": "^4.6.2",
     "tailwind-scrollbar": "^3.0.4",
     "victory": "^36.6.10"
   },

@@ -16,30 +16,36 @@ import { ViewSubOrg } from "./pages/ViewSubOrg/ViewSubOrg";
 import { SubOrgView } from "./pages/SubOrgView/SubOrgView";
 import Verificacion from "./pages/Verificacion/Verificacion";
 import { StatisticsGraphics } from "./components/UI/StatisticsGraphics/StatisticsGraphics";
+import { AuthProvider } from "./Context/AuthContext";
 function App() {
   return (
     <>
-      <Router>
-        <ToastContainer />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/SingUp" element={<SingUp />} />
-          <Route path="/SignIn" element={<SingIn />} />
-          <Route path="/AboutUs" element={<AboutUs />} />
-          <Route path="/ContactUs" element={<Contact />} />
-          <Route path="/Dashboard" element={<Dashboard />} />
-          <Route path="/Statistics" element={<Statistics />} />
-          <Route path="/Profile" element={<ProfileUser />} />
-          <Route path="/AddSubOrg" element={<AddSubOrg />} />
-          <Route path="/Notifications" element={<Notifications />} />
-          <Route path="/Terminos y Condiciones" element={<Terminos />} />
-          <Route path="/Politicas de Privacidad" element={<Politicas />} />
-          <Route path="/ViewSubOrg" element={<ViewSubOrg />} />
-          <Route path="/Suborganization/:id" element={<SubOrgView />} />
-          <Route path="/Verificacion/:codigo" element={<Verificacion />} />
-          <Route path="/StatisticsGraphics" element={<StatisticsGraphics/>}/>
-        </Routes>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <ToastContainer />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/SingUp" element={<SingUp />} />
+            <Route path="/SignIn" element={<SingIn />} />
+            <Route path="/AboutUs" element={<AboutUs />} />
+            <Route path="/ContactUs" element={<Contact />} />
+            <Route path="/Dashboard" element={<Dashboard />} />
+            <Route path="/Statistics" element={<Statistics />} />
+            <Route path="/Profile" element={<ProfileUser />} />
+            <Route path="/AddSubOrg" element={<AddSubOrg />} />
+            <Route path="/Notifications" element={<Notifications />} />
+            <Route path="/Terminos y Condiciones" element={<Terminos />} />
+            <Route path="/Politicas de Privacidad" element={<Politicas />} />
+            <Route path="/ViewSubOrg" element={<ViewSubOrg />} />
+            <Route path="/Suborganization/:id" element={<SubOrgView />} />
+            <Route path="/Verificacion/:codigo" element={<Verificacion />} />
+            <Route
+              path="/StatisticsGraphics"
+              element={<StatisticsGraphics />}
+            />
+          </Routes>
+        </Router>
+      </AuthProvider>
     </>
   );
 }

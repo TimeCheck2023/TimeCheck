@@ -1,13 +1,31 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiFillLike, AiOutlineDelete, AiOutlineLike } from "react-icons/ai";
 import { ModalEventEdit } from "../../Layout/ModalEventEdit/ModalEventEdit";
 import { toast } from "react-toastify";
 import CommentModal from "../../Layout/CommentModal/CommentModal";
+import io from "socket.io-client";
+import { AuthContext } from "../../../Context/AuthContext";
 
 export const CardEventAdmin = (props) => {
   const [openModal, setOpenModal] = useState(false);
   const [openCommentModal, setOpenCommentModal] = useState(false);
+  const [getComments, setGetComments] = useState([]);
 
+  const { socket } = useContext(AuthContext);
+
+  // funcion pra mostar el Modal de comentarios
+  const handleOpenModal = (eventId) => {
+    setOpenCommentModal(!openCommentModal);
+    // console.log(eventId);
+    // Evento para obtener los registros del servidor al cargar la aplicación
+    socket.emit("getComments", eventId);
+  };
+
+  useEffect(() => {
+    socket.on('resultComments', (getComments) => {
+      setGetComments(getComments);
+  })
+  }, []);
   const handleCloseCommentModal = () => {
     setOpenCommentModal(false);
   };
@@ -89,16 +107,18 @@ export const CardEventAdmin = (props) => {
           </button>
           <button
             onClick={() => {
-              setOpenCommentModal(!openCommentModal);
+              handleOpenModal(props.id);
             }}
-            className="flex flex-row items-center border w-32 text-center px-4 lg:px-5 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
+            className="flex flex-row items-center border w-32 text-center px-4 lg:px-5 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold"
+          >
             <p>Comentarios</p>
           </button>
           <button
             onClick={() => {
               setOpenModal(!openModal);
             }}
-            className="flex flex-row items-center border px-4 lg:px-5 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
+            className="flex flex-row items-center border px-4 lg:px-5 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold"
+          >
             <p>Ver más</p>
           </button>
         </div>
@@ -121,7 +141,10 @@ export const CardEventAdmin = (props) => {
         />
       )}
       {openCommentModal && (
-        <CommentModal handleCloseCommentModal={handleCloseCommentModal} />
+        <CommentModal
+          handleCloseCommentModal={handleCloseCommentModal}
+          getComments={getComments}
+        />
       )}
     </>
   );

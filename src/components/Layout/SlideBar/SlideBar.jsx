@@ -205,7 +205,7 @@ export const SlideBar = ({
           {" "}
           <p className="text-slate-500 text-base ">Cuenta</p>
           <div className={`flex flex-row ${openNavBar && "gap-3"}`}>
-            <div className="w-12 h-12 bg-purple-600 rounded-full mb-4 text-center flex items-center justify-center text-2xl font-semibold text-white">
+            <div className="w-12 h-12 bg-purple-600 rounded-full mb-4 text-center flex items-center justify-center text-2xl font-normal text-white">
               {primerCaracterMayuscula}
             </div>
             <div>
