@@ -24,9 +24,10 @@ export const StatisticsGraphics = () => {
         <h1 className="text-slate-950 text-3xl text-center font-bold">
           Estadisticas de los Eventos
         </h1>
-        <div className="w-2/5 h-1.3 z-20 my-4 mx-5 shadow-md border-violet-500">
-          <h1 className="text-violet-500 text-4xl font-bold">Charla Soft</h1>
-          <h2 className="text-color1 text-3xl font-bold">500</h2>
+        <div className="w-2/5 h-1.3 z-20 my-4 mx-5 shadow-lg border-violet-500">
+          <h1 className="ml-8 mt-8 text-violet-500 text-4xl font-bold">Charla Soft</h1>
+          <h2 className="ml-8 text-3xl font-bold">500</h2>
+          <h2 className="ml-8 text-slate-950 text-2xl font-bold">Asistentes</h2>
           <VictoryChart
             theme={VictoryTheme.material}
             domainPadding={{ x: 100 }}>
@@ -60,19 +61,6 @@ export const StatisticsGraphics = () => {
 };
 
 {
-  /* <VictoryChart theme={VictoryTheme.material} width={190} height={150} padding={{ top:20, bottom:50, left:40, right:50}}  >
-            <VictoryBar 
-               style={{
-                data: {
-                  fill: ({ index }) => colorScale[index % colorScale.length], // Asigna colores personalizados a cada barra
-                  },
-                  }}
-                  horizontal
-                  data={data}
-                  
-                  x="month"
-                  y="earnings"
-                  
-            />
-          </VictoryChart> */
 }
+
+

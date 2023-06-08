@@ -11,8 +11,7 @@ export const Servicios = () => {
       </div>
       <div>
         <p className="px-10  md:px-16 text-black text-xl text-justify md:text-left">
-          Puedes crear grupos dentro de tu propia empresa para crear eventos en
-          el momento que quieras!
+        Puedes crear grupos dentro de tu propia empresa para organizar eventos en el momento que desees.
         </p>
       </div>
       <div className="flex flex-col md:flex-row h-screen mt-5 md:mt-10">
