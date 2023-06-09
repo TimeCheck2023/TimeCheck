@@ -7,6 +7,7 @@ import {
 import { BsChatDots } from "react-icons/bs";
 import { AuthContext } from "../../../Context/AuthContext";
 import { useContext } from "react";
+import { RiLoader4Line } from "react-icons/ri";
 
 const CommentModal = ({
   handleCloseCommentModal,
@@ -100,7 +101,7 @@ const CommentModal = ({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white absolute h-4/5 w-1/2 mx-4 rounded-lg overflow-hidden gap-16 flex flex-col">
+      <div className="bg-white absolute top-5 lg:top-auto h-5/6 lg:h-4/5 w-11/12 lg:w-1/2 mx-4 rounded-lg overflow-hidden gap-5 lg:gap-16 flex flex-col">
         <div className="flex justify-between items-center p-6 bg-purple-600 text-white">
           <h2 className="text-2xl font-bold">Comentarios</h2>
           <button onClick={closeModal}>
@@ -108,32 +109,45 @@ const CommentModal = ({
           </button>
         </div>
 
-        <div className="p-4 mx-10 shadow-md bg-slate-50 shadow-neutral-400 rounded-md h-full overflow-y-scroll scrollbar-thumb-purple-900 scrollbar-track-transparent scrollbar-thin">
+        <div className="p-4 mx-1 lg:mx-10 shadow-md bg-slate-50 shadow-neutral-400 rounded-md h-full overflow-y-scroll scrollbar-thumb-purple-900 scrollbar-track-transparent scrollbar-thin">
           {getComments.length === 0 ? (
             <p className="text-center text-gray-500 mt-10">
               No hay comentarios aún.
             </p>
           ) : (
             <ul className="space-y-4 flex flex-col justify-center items-center text-center ">
+              {isLoadings && (
+                <div className="flex items-center justify-center">
+                  <div className="loader">
+                    <div className="loader-div1"></div>
+                    <div className="loader-div2"></div>
+                    <div className="loader-div2"></div>
+                    <div className="loader-div3"></div>
+                  </div>
+                </div>
+              )}
               {getComments.map((comment, index) => (
                 <li
                   key={index}
-                  className={`flex items-center w-4/5 gap-5 shadow-sm ${
+                  className={`flex items-center w-11/12 lg:w-4/5 gap-5 shadow-sm ${
                     comment.correo_usuario === correo ? "" : "flex-row-reverse"
-                  }`}>
+                  }`}
+                >
                   <div
                     className={`flex items-start w-full space-x-4 py-2 px-3  border shadow-md shadow-neutral-400 ${
                       comment.correo_usuario === correo
                         ? "rounded-t-2xl rounded-l-2xl"
                         : "flex-row-reverse rounded-t-2xl rounded-r-2xl"
-                    }`}>
+                    }`}
+                  >
                     {comment.correo_usuario === correo && (
                       <div className="relative">
                         <button
                           onClick={() => {
                             setCommentId(comment.id_comentario); // Almacena el comentario que se va a eliminar
                             setShowDeleteModal(true); // Muestra la modal de eliminación
-                          }}>
+                          }}
+                        >
                           <AiOutlineEllipsis className="text-gray-500 text-xl" />
                         </button>
                       </div>
@@ -144,7 +158,8 @@ const CommentModal = ({
                           comment.correo_usuario === correo
                             ? "text-right"
                             : "text-left"
-                        }`}>
+                        }`}
+                      >
                         {comment.correo_usuario}
                       </p>
                       <p
@@ -152,7 +167,8 @@ const CommentModal = ({
                           comment.correo_usuario === correo
                             ? "text-right"
                             : "text-left"
-                        }`}>
+                        }`}
+                      >
                         {comment.comentario}
                       </p>
                     </div>
@@ -166,19 +182,19 @@ const CommentModal = ({
           )}
         </div>
 
-        <div className="px-2 py-6 bg-slate-100">
-          {isLoadings && <p>Alguien está escribiendo...</p>}
+        <div className="px-2 py-3 lg:py-6 bg-slate-100">
           <form onSubmit={submitComment}>
             <input
-              className="w-11/12 h-14 px-10 border text-lg border-gray-300 rounded-md p-4 focus:outline-none"
+              className="w-4/5 lg:w-11/12 h-1 lg:h-14 lg:px-10 border  lg:text-lg border-gray-300 rounded-md p-4 focus:outline-none"
               placeholder="Escribe un comentario"
               value={newComment}
               onChange={handleInputChange}
             />
             <button
-              className="bg-purple-600 text-white py-5 px-5 rounded-md absolute right-5"
+              className="bg-purple-600 text-white py-2 px-3 lg:py-5 lg:px-5 rounded-md absolute right-5"
               type="submit"
-              disabled={isLoadingComments}>
+              disabled={isLoadingComments}
+            >
               {isLoadingComments ? (
                 <div className="spinner"></div>
               ) : (
@@ -196,7 +212,8 @@ const CommentModal = ({
             <div className="flex justify-end mt-6">
               <button
                 className="text-gray-500 mr-4"
-                onClick={() => setShowDeleteModal(false)}>
+                onClick={() => setShowDeleteModal(false)}
+              >
                 Cancelar
               </button>
               <button className="text-red-500" onClick={onDelete}>

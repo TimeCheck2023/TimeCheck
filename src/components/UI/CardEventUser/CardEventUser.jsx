@@ -1,12 +1,37 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { ModalEventInfo } from "../../Layout/ModalEventInfo/ModalEventInfo";
+import { AuthContext } from "../../../Context/AuthContext";
+import io from "socket.io-client";
+import CommentModal from "../../Layout/CommentModal/CommentModal";
 
 export const CardEventUser = (props) => {
   const [openModal, setOpenModal] = useState(false);
+  const [openCommentModal, setOpenCommentModal] = useState(false);
+  const [getComments, setGetComments] = useState([]);
 
-  const handleOpenModal = () => {
-    setOpenModal(!openModal);
+  const { socket, nroDocumento } = useContext(AuthContext);
+
+  // funcion pra mostar el Modal de comentarios
+  const handleOpenModal = (eventId) => {
+    setOpenCommentModal(!openCommentModal);
+    // console.log(eventId);
+    // Evento para obtener los registros del servidor al cargar la aplicación
+    socket.emit("getComments", eventId);
+  };
+
+  useEffect(() => {
+    socket.on("resultComments", (getComments) => {
+      setGetComments(getComments);
+    });
+  }, []);
+
+  const handleCloseCommentModal = () => {
+    setOpenCommentModal(false);
+  };
+
+  const updateComments = (newComments) => {
+    setGetComments(newComments);
   };
 
   const formatPrice = (price) => {
@@ -40,23 +65,38 @@ export const CardEventUser = (props) => {
             className="rounded-md w-fit max-h-52 object-cover"
           />
         </div>
-        <div className="px-3 py-3">
-          <p className="text-base text-purple-600 font-bold">{props.title}</p>
-          <p className="text-xs truncate">{props.description}</p>
+        <div className="px-3 py-3 flex justify-between">
+          <div className="w-52 truncate ">
+            <p className="text-base text-purple-600 font-bold truncate">
+              {props.title}
+            </p>
+            <p className="text-xs truncate">{props.description}</p>
+          </div>
+          <div>
+            <p className="text-purple-600 font-medium">
+              {formatPrice(props.price)}
+            </p>
+          </div>
         </div>
         <div className="flex flex-row justify-between px-8 py-4">
-          {/* <button className="flex flex-row items-center border px-4 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-2">
-          <AiOutlineLike className=" text-xl" />
-          <p className="font-bold">{props.likes}</p>
-        </button> */}
-          <p className="text-purple-600 font-medium">
-            {formatPrice(props.price)}
-          </p>
+          <button className="flex flex-row items-center border w-14 text-center justify-center border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-1">
+            <AiOutlineLike className=" text-base" />
+            {/* <p className="font-bold">{props.likes}</p> */}
+          </button>
+          <button
+            onClick={() => {
+              handleOpenModal(props.id);
+            }}
+            className="flex flex-row items-center border w-32 text-center px-4 lg:px-5 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold"
+          >
+            <p>Comentarios</p>
+          </button>
           <button
             onClick={() => {
               setOpenModal(!openModal);
             }}
-            className="flex flex-row items-center border px-4 lg:px-5 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
+            className="flex flex-row items-center border px-4 lg:px-5 xl:px-5 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold"
+          >
             <p>Ver más</p>
           </button>
         </div>
@@ -76,6 +116,16 @@ export const CardEventUser = (props) => {
           idEvento={props.idEvento}
           cuposDisponibles={props.cuposDisponibles}
           fetchEvents={props.fetchEvents} // Pasa la prop aquí
+        />
+      )}
+      {openCommentModal && (
+        <CommentModal
+          handleCloseCommentModal={handleCloseCommentModal}
+          getComments={getComments}
+          nroDocumento={nroDocumento}
+          eventId={props.id}
+          socket={socket}
+          updateComments={updateComments}
         />
       )}
     </>

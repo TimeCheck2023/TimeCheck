@@ -12,6 +12,7 @@ export const CardEventAdmin = (props) => {
   const [getComments, setGetComments] = useState([]);
 
   const { socket, nroDocumento } = useContext(AuthContext);
+  
 
   // funcion pra mostar el Modal de comentarios
   const handleOpenModal = (eventId) => {

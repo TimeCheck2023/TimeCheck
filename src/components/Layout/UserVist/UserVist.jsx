@@ -150,6 +150,7 @@ export const UserVist = () => {
                 {visibleEvents.map((event) => (
                   <CardEventUser
                     key={event.idEvento}
+                    id={event.idEvento}
                     price={event.valorTotalEvento}
                     title={event.nombreEvento}
                     description={event.descripcionEvento}
