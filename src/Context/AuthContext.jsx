@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
       const decoded = jwtDecode(token);
       setIdOrg(decoded.payload.id_organización);
       setIdSubOrg(decoded.payload.id_suborganizacion);
+      // console.log(decoded.payload.id_suborganizacion);
       setUserType(decoded.payload.EsUsuario);
       setRol(decoded.payload.rol);
       setCorreo(decoded.payload.correo);

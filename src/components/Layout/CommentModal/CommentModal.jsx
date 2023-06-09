@@ -48,7 +48,7 @@ const CommentModal = ({
     });
 
     socket.on("likes", (getLikes) => {
-      // console.log(getLikes);
+      console.log(getLikes)
     });
 
     // Evento de error
@@ -72,7 +72,9 @@ const CommentModal = ({
       socket.emit("activo");
     }
   };
+  
 
+  //Funcion para eliminar el comentario.
   const onDelete = () => {
     socket.emit("deleteComment", {
       commentId,
@@ -101,7 +103,7 @@ const CommentModal = ({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white absolute top-5 lg:top-auto h-5/6 lg:h-4/5 w-11/12 lg:w-1/2 mx-4 rounded-lg overflow-hidden gap-5 lg:gap-16 flex flex-col">
+      <div className="bg-white absolute top-5 lg:top-auto h-5/6 lg:h-4/5 w-full lg:w-1/2 rounded-lg overflow-hidden gap-5 lg:gap-16 flex flex-col">
         <div className="flex justify-between items-center p-6 bg-purple-600 text-white">
           <h2 className="text-2xl font-bold">Comentarios</h2>
           <button onClick={closeModal}>
@@ -109,7 +111,7 @@ const CommentModal = ({
           </button>
         </div>
 
-        <div className="p-4 mx-1 lg:mx-10 shadow-md bg-slate-50 shadow-neutral-400 rounded-md h-full overflow-y-scroll scrollbar-thumb-purple-900 scrollbar-track-transparent scrollbar-thin">
+        <div className="lg:p-4 mx-1 lg:mx-10 shadow-md bg-slate-50 shadow-neutral-400 rounded-md h-full overflow-y-scroll scrollbar-thumb-purple-900 scrollbar-track-transparent scrollbar-thin">
           {getComments.length === 0 ? (
             <p className="text-center text-gray-500 mt-10">
               No hay comentarios aún.
@@ -129,12 +131,12 @@ const CommentModal = ({
               {getComments.map((comment, index) => (
                 <li
                   key={index}
-                  className={`flex items-center w-11/12 lg:w-4/5 gap-5 shadow-sm ${
+                  className={`flex items-center w-11/12 lg:w-4/5 gap-2 lg:gap-5 ${
                     comment.correo_usuario === correo ? "" : "flex-row-reverse"
                   }`}
                 >
                   <div
-                    className={`flex items-start w-full space-x-4 py-2 px-3  border shadow-md shadow-neutral-400 ${
+                    className={`flex items-start w-full space-x-2 lg:space-x-4 py-2 px-3  border shadow-md shadow-neutral-400 ${
                       comment.correo_usuario === correo
                         ? "rounded-t-2xl rounded-l-2xl"
                         : "flex-row-reverse rounded-t-2xl rounded-r-2xl"
@@ -173,7 +175,7 @@ const CommentModal = ({
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center justify-center bg-purple-600 rounded-full h-14 w-16 text-white text-2xl">
+                  <div className="flex items-center justify-center bg-purple-600 rounded-full h-10 w-12 lg:h-14 lg:w-16 text-white text-lg lg:text-2xl">
                     {comment.nombre_completo_usuario?.charAt(0)?.toUpperCase()}
                   </div>
                 </li>

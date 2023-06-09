@@ -10,9 +10,36 @@ export const CardEventAdmin = (props) => {
   const [openModal, setOpenModal] = useState(false);
   const [openCommentModal, setOpenCommentModal] = useState(false);
   const [getComments, setGetComments] = useState([]);
+  const [likes, setLikes] = useState([])
 
-  const { socket, nroDocumento } = useContext(AuthContext);
-  
+  const { socket, nroDocumento, idSubOrg } = useContext(AuthContext);
+
+  // console.log(props)
+  // console.log(idSubOrg);
+
+  //Funcion para dar like
+  const CreateLikes = (id) => {
+    const objeto = new Object({
+      id_evento: id,
+      likes: 1,
+      nro_documento_usuario: nroDocumento,
+    });
+    socket.emit("createLikes", objeto);
+    console.log("enviar");
+
+
+
+  };
+
+  const DeleteLikes = (id) => {
+    const objeto = new Object({
+        id_evento: id,
+        nro_documento_usuario: nroDocumento
+    })
+    socket.emit('deleteLikes', objeto);
+
+
+}
 
   // funcion pra mostar el Modal de comentarios
   const handleOpenModal = (eventId) => {
@@ -26,7 +53,16 @@ export const CardEventAdmin = (props) => {
     socket.on("resultComments", (getComments) => {
       setGetComments(getComments);
     });
+
+
   }, []);
+
+  useEffect(() => {
+    socket.on("likes", (getLikes) => {
+      setLikes(getLikes);
+    });
+  }, [])
+  
 
   const handleCloseCommentModal = () => {
     setOpenCommentModal(false);
@@ -47,6 +83,8 @@ export const CardEventAdmin = (props) => {
       return formattedPrice;
     }
   };
+
+
 
   // const handleDeleteEvent = () => {
   //   fetch(`https://time-check.azurewebsites.net/api/Event/Delete/${props.id}`, {
@@ -107,22 +145,26 @@ export const CardEventAdmin = (props) => {
           </div>
         </div>
         <div className="flex flex-row justify-between px-8 py-4">
-          <button className="flex flex-row items-center border w-14 text-center justify-center border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-1">
-            <AiOutlineLike className=" text-base" />
-            <p className="font-bold">{props.likes}</p>
+          <button
+            onClick={()=>{likes.length === 0 ? CreateLikes(props.id) : DeleteLikes(props.id)}}
+            className="flex flex-row items-center border w-14 text-center justify-center border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-1"
+          >
+            {likes.length === 0 ? <AiFillLike className=" text-base" />  : <AiOutlineLike className=" text-base" /> }
           </button>
           <button
             onClick={() => {
               handleOpenModal(props.id);
             }}
-            className="flex flex-row items-center border w-32 text-center px-4 lg:px-5 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
+            className="flex flex-row items-center border w-32 text-center px-4 lg:px-5 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold"
+          >
             <p>Comentarios</p>
           </button>
           <button
             onClick={() => {
               setOpenModal(!openModal);
             }}
-            className="flex flex-row items-center border px-4 lg:px-5 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
+            className="flex flex-row items-center border px-4 lg:px-5 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold"
+          >
             <p>Ver más</p>
           </button>
         </div>

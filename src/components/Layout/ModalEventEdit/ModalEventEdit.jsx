@@ -23,7 +23,9 @@ export const ModalEventEdit = ({
     if (e.target === e.currentTarget) {
       handleCloseModal();
     }
-  };
+  }
+
+  console.log(idEvent)
 
   const [eventTypes, setEventTypes] = useState([]);
   const [title, setTitle] = useState(initialTitle);
@@ -57,7 +59,7 @@ export const ModalEventEdit = ({
         // console.log(data);
         const typeEvents = data.response;
         setEventTypes(typeEvents);
-        console.log(typeEvents);
+        // console.log(typeEvents);
       });
   }, []);
 

@@ -202,6 +202,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
                   <CardEventAdmin
                     key={event.idEvento}
                     id={event.idEvento}
+                    idSubOrg={event.idSuborganizacion}
                     price={event.valorTotalEvento}
                     title={event.nombreEvento}
                     description={event.descripcionEvento}
