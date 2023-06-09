@@ -38,7 +38,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
+        console.log(data);
         setEvents(data);
         setLoading(false);
       });
@@ -52,7 +52,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
           fetch(`https://time-check.azurewebsites.net/api/Event/List`)
             .then((response) => response.json())
             .then((data) => {
-              console.log(data.response);
+              // console.log(data.response);
               setEvents(data.response);
               setLoading(false);
             });
@@ -98,8 +98,8 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
       setCategoriesId(categoriesIds);
       setCategories(categories);
 
-      console.log(categoriesIds);
-      console.log(categories);
+      // console.log(categoriesIds);
+      // console.log(categories);
     } catch (error) {
       console.error("Error al obtener los tipos de eventos:", error);
     }
@@ -140,8 +140,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
             onClick={() => {
               setOpenCategoria(!openCategoria);
             }}
-            className="flex justify-center items-center gap-2 px-4 py-2 w-36 md:w-40 bg-purple-600 hover:bg-purple-700 font-normal text-white"
-          >
+            className="flex justify-center items-center gap-2 px-4 py-2 w-36 md:w-40 bg-purple-600 hover:bg-purple-700 font-normal text-white">
             Categorias <BiChevronDown className="text-2xl" />
           </button>
           {!openCategoria && (
@@ -153,8 +152,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
                   } hover:bg-purple-900 px-4 py-2 rounded-sm border-y border-white`}
                   onClick={() => {
                     setSelectedCategory(null);
-                  }}
-                >
+                  }}>
                   Todos
                 </li>
                 {categories.map((category, index) => (
@@ -165,8 +163,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
                     } hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white`}
                     onClick={() => {
                       setSelectedCategory(category);
-                    }}
-                  >
+                    }}>
                     {category}
                   </li>
                 ))}
@@ -190,8 +187,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
           events.length <= 1
             ? ""
             : "grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3"
-        } place-items-center gap-y-5 pb-10 xl:mt-0 xl:mb-0 lg:ml-96 xl:ml-0 mb-0 sm:mb-0`}
-      >
+        } place-items-center gap-y-5 pb-10 xl:mt-0 xl:mb-0 lg:ml-96 xl:ml-0 mb-0 sm:mb-0`}>
         {loading ? (
           <LoaderEventsGet />
         ) : (
@@ -226,8 +222,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
             {userType == 1 && (
               <div
                 onClick={handleOpenModal}
-                className="fixed bottom-40 rounded-full bg-slate-200 p-5 text-2xl text-purple-600  right-5 md:right-10 transform transition-transform hover:scale-125 hover:bg-slate-300"
-              >
+                className="fixed bottom-40 rounded-full bg-slate-200 p-5 text-2xl text-purple-600  right-5 md:right-10 transform transition-transform hover:scale-125 hover:bg-slate-300">
                 <ImPlus />
               </div>
             )}
@@ -245,8 +240,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
                     page === i
                       ? "bg-purple-600 text-white"
                       : "bg-white text-gray-700 hover:bg-purple-100"
-                  }`}
-            >
+                  }`}>
               {i + 1}
             </button>
           ))}

@@ -11,7 +11,7 @@ export const CardEventAdmin = (props) => {
   const [openCommentModal, setOpenCommentModal] = useState(false);
   const [getComments, setGetComments] = useState([]);
 
-  const { socket } = useContext(AuthContext);
+  const { socket, nroDocumento } = useContext(AuthContext);
 
   // funcion pra mostar el Modal de comentarios
   const handleOpenModal = (eventId) => {
@@ -22,12 +22,17 @@ export const CardEventAdmin = (props) => {
   };
 
   useEffect(() => {
-    socket.on('resultComments', (getComments) => {
+    socket.on("resultComments", (getComments) => {
       setGetComments(getComments);
-  })
+    });
   }, []);
+
   const handleCloseCommentModal = () => {
     setOpenCommentModal(false);
+  };
+
+  const updateComments = (newComments) => {
+    setGetComments(newComments);
   };
 
   const formatPrice = (price) => {
@@ -109,16 +114,14 @@ export const CardEventAdmin = (props) => {
             onClick={() => {
               handleOpenModal(props.id);
             }}
-            className="flex flex-row items-center border w-32 text-center px-4 lg:px-5 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold"
-          >
+            className="flex flex-row items-center border w-32 text-center px-4 lg:px-5 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
             <p>Comentarios</p>
           </button>
           <button
             onClick={() => {
               setOpenModal(!openModal);
             }}
-            className="flex flex-row items-center border px-4 lg:px-5 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold"
-          >
+            className="flex flex-row items-center border px-4 lg:px-5 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
             <p>Ver más</p>
           </button>
         </div>
@@ -144,6 +147,10 @@ export const CardEventAdmin = (props) => {
         <CommentModal
           handleCloseCommentModal={handleCloseCommentModal}
           getComments={getComments}
+          nroDocumento={nroDocumento}
+          eventId={props.id}
+          socket={socket}
+          updateComments={updateComments}
         />
       )}
     </>

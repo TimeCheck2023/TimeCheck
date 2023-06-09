@@ -26,7 +26,6 @@ export const Dashboard = () => {
       const decoded = jwtDecode(token);
       setIdOrg(decoded.payload.id_organización);
       setIdSubOrg(decoded.payload.id_suborganizacion);
-      // console.log(decoded.payload.nro_documento_usuario);
       setUserType(decoded.payload.EsUsuario);
       setRol(decoded.payload.rol);
 
