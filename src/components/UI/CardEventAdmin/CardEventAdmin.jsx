@@ -5,17 +5,20 @@ import { toast } from "react-toastify";
 import CommentModal from "../../Layout/CommentModal/CommentModal";
 import io from "socket.io-client";
 import { AuthContext } from "../../../Context/AuthContext";
+import ModalEventInfo from "../../Layout/ModalEventInfo/ModalEventInfo";
 
 export const CardEventAdmin = (props) => {
   const [openModal, setOpenModal] = useState(false);
   const [openCommentModal, setOpenCommentModal] = useState(false);
   const [getComments, setGetComments] = useState([]);
-  const [likes, setLikes] = useState([])
+  const [likes, setLikes] = useState([]);
 
-  const { socket, nroDocumento, idSubOrg } = useContext(AuthContext);
+  const { socket, nroDocumento, idSubOrg, idOrg } = useContext(AuthContext);
 
   // console.log(props)
   // console.log(idSubOrg);
+
+  const itsAdminHere = idSubOrg === props.idSubOrg;
 
   //Funcion para dar like
   const CreateLikes = (id) => {
@@ -25,21 +28,16 @@ export const CardEventAdmin = (props) => {
       nro_documento_usuario: nroDocumento,
     });
     socket.emit("createLikes", objeto);
-    console.log("enviar");
-
-
-
+    // console.log("enviar");
   };
 
   const DeleteLikes = (id) => {
     const objeto = new Object({
-        id_evento: id,
-        nro_documento_usuario: nroDocumento
-    })
-    socket.emit('deleteLikes', objeto);
-
-
-}
+      id_evento: id,
+      nro_documento_usuario: nroDocumento,
+    });
+    socket.emit("deleteLikes", objeto);
+  };
 
   // funcion pra mostar el Modal de comentarios
   const handleOpenModal = (eventId) => {
@@ -53,16 +51,24 @@ export const CardEventAdmin = (props) => {
     socket.on("resultComments", (getComments) => {
       setGetComments(getComments);
     });
-
-
-  }, []);
-
-  useEffect(() => {
     socket.on("likes", (getLikes) => {
       setLikes(getLikes);
+      // console.log(getLikes);
     });
-  }, [])
-  
+    // Evento de error
+    socket.on("error", (error) => {
+      console.log("Error en la conexión del socket:", error);
+    });
+
+    socket.emit("getLikes", nroDocumento);
+    // });
+  }, [socket]);
+
+  const resultLikes = likes.some(
+    (like) =>
+      like.nro_documento_usuario3 === nroDocumento &&
+      like.id_evento5 === props.id
+  );
 
   const handleCloseCommentModal = () => {
     setOpenCommentModal(false);
@@ -84,7 +90,13 @@ export const CardEventAdmin = (props) => {
     }
   };
 
-
+  // const handleLikeButtonClick = () => {
+  //   if (likes.length === 0) {
+  //     CreateLikes(props.id);
+  //   } else {
+  //     DeleteLikes(props.id);
+  //   }
+  // };
 
   // const handleDeleteEvent = () => {
   //   fetch(`https://time-check.azurewebsites.net/api/Event/Delete/${props.id}`, {
@@ -146,46 +158,85 @@ export const CardEventAdmin = (props) => {
         </div>
         <div className="flex flex-row justify-between px-8 py-4">
           <button
-            onClick={()=>{likes.length === 0 ? CreateLikes(props.id) : DeleteLikes(props.id)}}
-            className="flex flex-row items-center border w-14 text-center justify-center border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-1"
-          >
-            {likes.length === 0 ? <AiFillLike className=" text-base" />  : <AiOutlineLike className=" text-base" /> }
+            onClick={() => {
+              resultLikes ? DeleteLikes(props.id) : CreateLikes(props.id);
+            }}
+            className="flex flex-row items-center border w-14 text-center justify-center border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-1">
+            {resultLikes ? (
+              <AiFillLike className=" text-base" />
+            ) : (
+              <AiOutlineLike className=" text-base" />
+            )}
           </button>
           <button
             onClick={() => {
               handleOpenModal(props.id);
             }}
-            className="flex flex-row items-center border w-32 text-center px-4 lg:px-5 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold"
-          >
+            className="flex flex-row items-center border w-32 text-center px-4 lg:px-5 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
             <p>Comentarios</p>
           </button>
           <button
             onClick={() => {
               setOpenModal(!openModal);
             }}
-            className="flex flex-row items-center border px-4 lg:px-5 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold"
-          >
+            className="flex flex-row items-center border px-4 lg:px-5 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
             <p>Ver más</p>
           </button>
         </div>
       </div>
-      {openModal && (
-        <ModalEventEdit
-          handleCloseModal={handleCloseModal}
-          idEvent={props.id}
-          initialTitle={props.title}
-          initialDescription={props.description}
-          initialImage={props.image}
-          initialFechaInicio={props.fecha_inicio}
-          initialFechaFinal={props.fecha_final}
-          initialLugar={props.lugar}
-          initialAforo={props.aforo}
-          initialValorTotal={props.price}
-          initialTipoEvento={props.tipo_evento}
-          initialTipoEventoId={props.id_tipo_evento}
-          fetchEvents={props.fetchEvents}
-        />
-      )}
+      {idOrg
+        ? openModal && (
+            <ModalEventEdit
+              handleCloseModal={handleCloseModal}
+              idEvent={props.id}
+              initialTitle={props.title}
+              initialDescription={props.description}
+              initialImage={props.image}
+              initialFechaInicio={props.fecha_inicio}
+              initialFechaFinal={props.fecha_final}
+              initialLugar={props.lugar}
+              initialAforo={props.aforo}
+              initialValorTotal={props.price}
+              initialTipoEvento={props.tipo_evento}
+              initialTipoEventoId={props.id_tipo_evento}
+              fetchEvents={props.fetchEvents}
+            />
+          )
+        : itsAdminHere
+        ? openModal && (
+            <ModalEventEdit
+              handleCloseModal={handleCloseModal}
+              idEvent={props.id}
+              initialTitle={props.title}
+              initialDescription={props.description}
+              initialImage={props.image}
+              initialFechaInicio={props.fecha_inicio}
+              initialFechaFinal={props.fecha_final}
+              initialLugar={props.lugar}
+              initialAforo={props.aforo}
+              initialValorTotal={props.price}
+              initialTipoEvento={props.tipo_evento}
+              initialTipoEventoId={props.id_tipo_evento}
+              fetchEvents={props.fetchEvents}
+            />
+          )
+        : openModal && (
+            <ModalEventInfo
+              handleCloseModal={handleCloseModal}
+              title={props.title}
+              description={props.description}
+              image={props.image}
+              fecha_inicio={props.fecha_inicio}
+              fecha_final={props.fecha_final}
+              lugar={props.lugar}
+              aforo={props.aforo}
+              valor_total={props.price}
+              tipo_evento={props.tipo_evento}
+              idEvento={props.id}
+              cuposDisponibles={props.cuposDisponibles}
+              fetchEvents={props.fetchEvents}
+            />
+          )}
       {openCommentModal && (
         <CommentModal
           handleCloseCommentModal={handleCloseCommentModal}

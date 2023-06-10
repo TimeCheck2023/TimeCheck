@@ -20,17 +20,15 @@ export const SingIn = () => {
   // console.log(url);
 
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const token = localStorage.getItem("token_login");
 
     if (token) {
       navigate("/Dashboard"); // Redirigir al usuario a la página de inicio de sesión
     } else {
-
     }
   }, [navigate]);
-
 
   const handleEmailChange = (e) => {
     // Actualiza el estado del correo electrónico
@@ -181,7 +179,7 @@ export const SingIn = () => {
                   onChange={handlePasswordChange}
                 />
                 <div
-                  className="absolute  inset-y-16 right-14 lg:right-40 mt-1 md:mt-0 md:inset-y-12 xl:right-48 2xl:right-48 cursor-pointer"
+                  className="absolute  inset-y-16 right-14 lg:right-40 mt-1 md:mt-0 md:inset-y-12 sm:right-28 md:right-60 xl:right-48 2xl:right-48 cursor-pointer"
                   onClick={toggleShowPassword}>
                   {showPassword ? (
                     <BsEyeSlashFill className="text-gray-400" />

@@ -21,6 +21,7 @@ export const ModalEventInfo = ({
   tipo_evento,
   idEvento,
   cuposDisponibles,
+  fetchEvents,
 }) => {
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -85,11 +86,8 @@ export const ModalEventInfo = ({
           theme: "dark",
         });
         handleCloseModal();
-        props.fetchEvents(); // Llama a la función fetchEvents
-
-        setTimeout(() => {
-          window.location.reload(); // Reiniciar la página después de 1 segundo
-        }, 2000);
+        fetchEvents();
+        // props.fetchEvents(); // Llama a la función fetchEvents
       })
       .catch((error) => {
         console.error(error);
@@ -112,7 +110,7 @@ export const ModalEventInfo = ({
     fetch(
       `https://time-check.azurewebsites.net/api/Attendance/CancelAttendance?${params.toString()}`,
       {
-        method: "PUT",
+        method: "DELETE",
       }
     )
       .then((response) => {
@@ -120,12 +118,10 @@ export const ModalEventInfo = ({
           toast.success("Se canceló la asistencia con éxito!", {
             theme: "dark",
           });
-          props.fetchEvents(); // Llama a la función fetchEvents
+          fetchEvents();
+          // props.fetchEvents(); // Llama a la función fetchEvents
 
           handleCloseModal();
-          setTimeout(() => {
-            window.location.reload(); // Reiniciar la página después de 1 segundo
-          }, 2000);
         } else {
           // Hubo un error en la solicitud
           throw new Error("Error al eliminar la asistencia");

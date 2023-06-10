@@ -18,11 +18,11 @@ export const BodyContactUs = () => {
           className={`w-1/2 h-full bg-cover bg-black hidden md:block bg-center ${
             isLoading ? "bg-black" : "bg-black"
           } h-full`}></div> */}
-        <div className="">
-          <img 
-            src="/FondoContactanos.webp" 
-            alt="" 
-            className="w-full h-full object-cover" 
+        <div className="w-1/2">
+          <img
+            src="/FondoContactanos.webp"
+            alt=""
+            className="w-full h-full object-cover"
           />
         </div>
         <div className="w-full md:w-3/5 h-full">
@@ -51,7 +51,9 @@ export const BodyContactUs = () => {
                 action=""
                 className="flex flex-col gap-3 w-full items-center">
                 <div className="flex flex-col w-full items-center">
-                  <label className="font-bold" htmlFor="name">Nombre Completo</label>
+                  <label className="font-bold" htmlFor="name">
+                    Nombre Completo
+                  </label>
                   <input
                     className="border bg-gray-100 border-gray-300 rounded-md p-2 w-4/5 md:w-2/5 focus:outline-none focus:ring focus:ring-purple-800"
                     type="text"
@@ -60,7 +62,9 @@ export const BodyContactUs = () => {
                   />
                 </div>
                 <div className="flex flex-col w-full items-center">
-                  <label className="font-bold bottom-auto" htmlFor="email">Correo Electronico:</label>
+                  <label className="font-bold bottom-auto" htmlFor="email">
+                    Correo Electronico:
+                  </label>
                   <input
                     className="border bg-gray-100 border-gray-300 rounded-md p-2 w-4/5 md:w-2/5 focus:outline-none focus:ring focus:ring-purple-800"
                     type="email"
@@ -69,7 +73,9 @@ export const BodyContactUs = () => {
                   />
                 </div>
                 <div className="flex flex-col w-full items-center">
-                  <label className="font-bold" htmlFor="mensaje">Mensaje:</label>
+                  <label className="font-bold" htmlFor="mensaje">
+                    Mensaje:
+                  </label>
                   <textarea
                     className="h-40 px-4 py-2 bg-gray-100 border w-4/5 md:w-2/5 border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-purple-800"
                     placeholder="Escribe tu mensaje aquí"

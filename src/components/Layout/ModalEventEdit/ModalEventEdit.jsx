@@ -23,9 +23,9 @@ export const ModalEventEdit = ({
     if (e.target === e.currentTarget) {
       handleCloseModal();
     }
-  }
+  };
 
-  console.log(idEvent)
+  // console.log(idEvent);
 
   const [eventTypes, setEventTypes] = useState([]);
   const [title, setTitle] = useState(initialTitle);
@@ -218,6 +218,7 @@ export const ModalEventEdit = ({
       fecha_final: fechaFinal,
       lugar: lugar,
       aforo: aforo,
+      valor_total: valorTotal,
       id_tipo_evento: tipoEventoFinal,
     };
 

@@ -47,10 +47,6 @@ const CommentModal = ({
       setisLoadings(desactivo);
     });
 
-    socket.on("likes", (getLikes) => {
-      console.log(getLikes)
-    });
-
     // Evento de error
     socket.on("error", (error) => {
       console.log("Error en la conexión del socket:", error);
@@ -60,7 +56,6 @@ const CommentModal = ({
       console.log(getComments);
       // setModalVisible(false);
     });
-    socket.emit("getLikes", nroDocumento);
     // });
   }, [socket]);
 

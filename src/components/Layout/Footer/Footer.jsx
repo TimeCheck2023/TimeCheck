@@ -8,12 +8,13 @@ import {
   AiFillFacebook,
 } from "react-icons/ai";
 
-export const Footer = () => {
+export const Footer = ({ style }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
   return (
-    <div className="bg-slate-100 h-96 md:h-72 lg:h-36 w-full pb-10 sm:pb-0 flex flex-col justify-center ">
+    <div
+      className={`bg-slate-100 h-96 md:h-72 lg:h-36 w-full pb-10 sm:pb-0 flex flex-col justify-center pl-14 ${style}`}>
       <div className="flex flex-col lg:flex-row justify-between">
         <div className="relative md:left-14 flex justify-center items-center">
           <span className="text-purple-600 text-3xl sm:text-4xl font-bold">

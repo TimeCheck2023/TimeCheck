@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     socket.on("connect", () => {
-      console.log("Conectado al servidor");
+      // console.log("Conectado al servidor");
     });
   }, []);
 

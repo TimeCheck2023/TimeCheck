@@ -256,7 +256,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
         />
       )}
       <div className=" md:pl-14 w-full">
-        <Footer />
+        <Footer style={""} />
       </div>
     </div>
   );

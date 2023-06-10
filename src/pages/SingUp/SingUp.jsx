@@ -20,7 +20,6 @@ export const SingUp = () => {
     if (token) {
       navigate("/Dashboard"); // Redirigir al usuario a la página de inicio de sesión
     } else {
-
     }
   }, [navigate]);
   const url = import.meta.env.VITE_URL;
@@ -193,7 +192,6 @@ export const SingUp = () => {
       if (Object.keys(errorsUser).length > 0) {
         console.log(errorsUser);
       } else {
-
         // Muestra una notificación mientras se carga el formulario
         toast.info("Cargando...", {
           position: "top-right",
@@ -344,7 +342,7 @@ export const SingUp = () => {
         <div>
           <div className="relative left-24 top-20">
             <h1 className="text-white font-bold text-6xl leading-66 tracking-wider font-sans">
-              ¡Registrate en <br></br>nuestra plataforma!
+              ¡Regístrate en <br></br>nuestra plataforma!
             </h1>
           </div>
           <div className="relative left-24 top-28 w-3/4">
