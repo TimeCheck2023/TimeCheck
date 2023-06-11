@@ -15,7 +15,8 @@ export const CardEventAdmin = (props) => {
 
   const { socket, nroDocumento, idSubOrg, idOrg } = useContext(AuthContext);
 
-  // console.log(props)
+  // console.log(props.idSubOrg);
+  // console.log(idSubOrg);
   // console.log(idSubOrg);
 
   const itsAdminHere = idSubOrg === props.idSubOrg;

@@ -80,14 +80,26 @@ export const ModalEventInfo = ({
       },
       body: JSON.stringify(requestBody),
     })
-      .then((response) => response.text()) // Obtener la respuesta como texto
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Ya no hay cupo para este evento!");
+        }
+        return response.text();
+      })
       .then((data) => {
+        console.log(data);
         toast.success("Tu asistencia ha sido exitosa!", {
           theme: "dark",
         });
         handleCloseModal();
         fetchEvents();
         // props.fetchEvents(); // Llama a la función fetchEvents
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error(error.message, {
+          theme: "dark",
+        });
       })
       .catch((error) => {
         console.error(error);

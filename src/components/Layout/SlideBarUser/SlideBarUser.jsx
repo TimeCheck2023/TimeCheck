@@ -184,7 +184,7 @@ export const SlideBarUser = ({
           to={"/Profile"}
           className={`${
             activeProfile ? "bg-slate-300" : "hover:bg-neutral-300"
-          } rounded-md px-4`}>
+          } rounded-md px-3`}>
           {" "}
           <p className="text-slate-500 text-base ">Cuenta</p>
           <div className={`flex flex-row ${openNavBar && "gap-3"}`}>
@@ -196,7 +196,7 @@ export const SlideBarUser = ({
                 <p className="font-semibold truncate">{nombreUsuario}</p>
               )}
               {openNavBar && (
-                <p className="transition-all duration-500 ease-in-out font-medium text-sm text-slate-400 truncate ">
+                <p className=" font-medium text-sm text-slate-400 truncate ">
                   {emailUser}
                 </p>
               )}

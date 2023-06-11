@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { toast } from "react-toastify";
 
-export const ModalEventAdd = ({ handleCloseModal, fetchEvents,idSubOrg }) => {
+export const ModalEventAdd = ({ handleCloseModal, fetchEvents, idSubOrg }) => {
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       handleCloseModal();
@@ -13,7 +13,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents,idSubOrg }) => {
   const [isStartDateValid, setIsStartDateValid] = useState(true);
   const [isNumberValid, setIsNumberValid] = useState(true);
 
-  console.log(idSubOrg)
+  // console.log(idSubOrg)
 
   const [state, setState] = useState({
     nombreEvento: "",
@@ -128,6 +128,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents,idSubOrg }) => {
       }
     )
       .then((response) => {
+        console.log(response.text());
         if (response.ok) {
           // Evento guardado con éxito
           toast.success("Evento guardado con éxito", {
