@@ -13,6 +13,8 @@ export const CardEventUser = (props) => {
 
   const { socket, nroDocumento } = useContext(AuthContext);
 
+  console.log(nroDocumento);
+
   // funcion pra mostar el Modal de comentarios
   const handleOpenModal = (eventId) => {
     setOpenCommentModal(!openCommentModal);
@@ -46,6 +48,7 @@ export const CardEventUser = (props) => {
     });
     socket.on("likes", (getLikes) => {
       setLikes(getLikes);
+      // console.log(getLikes);
       // console.log(getLikes);
     });
     // Evento de error

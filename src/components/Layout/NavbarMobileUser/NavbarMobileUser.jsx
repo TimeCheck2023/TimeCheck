@@ -68,13 +68,14 @@ export const NavbarMobileUser = () => {
           className="text-center flex-col text-white p-3 mr-9 rounded-full bg-purple-600 flex justify-center items-center">
           <AiOutlineMenu className="text-4xl" />
         </div>
-        <div
-          onClick={toggleModal}
+        <Link
+          to="/Profile"
+          // onClick={toggleModal}
           className="text-center flex-col text-purple-600 flex justify-center items-center relative" // Agregar la clase "relative" para poder posicionar el modal correctamente
         >
           <CgProfile className="text-4xl" />
           <p className="text-sm">Perfil</p>
-          {showModal && ( // Mostrar el modal solo cuando "showModal" es true
+          {/* {showModal && ( // Mostrar el modal solo cuando "showModal" es true
             <div className="absolute bottom-16 right-0 bg-white rounded-md shadow-md px-4 py-3">
               <ul className="flex flex-col gap-4 text-lg font-semibold">
                 <li className="px-3 hover:bg-purple-500 hover:text-white rounded-md py-1">
@@ -85,8 +86,8 @@ export const NavbarMobileUser = () => {
                 </li>
               </ul>
             </div>
-          )}
-        </div>
+          )} */}
+        </Link>
       </div>
       {openNav && <BtnsNavMobile menuRef={menuRef} userType={userType} />}
     </div>

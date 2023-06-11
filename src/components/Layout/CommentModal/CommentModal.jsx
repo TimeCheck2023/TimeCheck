@@ -67,7 +67,6 @@ const CommentModal = ({
       socket.emit("activo");
     }
   };
-  
 
   //Funcion para eliminar el comentario.
   const onDelete = () => {
@@ -128,23 +127,20 @@ const CommentModal = ({
                   key={index}
                   className={`flex items-center w-11/12 lg:w-4/5 gap-2 lg:gap-5 ${
                     comment.correo_usuario === correo ? "" : "flex-row-reverse"
-                  }`}
-                >
+                  }`}>
                   <div
                     className={`flex items-start w-full space-x-2 lg:space-x-4 py-2 px-3  border shadow-md shadow-neutral-400 ${
                       comment.correo_usuario === correo
                         ? "rounded-t-2xl rounded-l-2xl"
                         : "flex-row-reverse rounded-t-2xl rounded-r-2xl"
-                    }`}
-                  >
+                    }`}>
                     {comment.correo_usuario === correo && (
                       <div className="relative">
                         <button
                           onClick={() => {
                             setCommentId(comment.id_comentario); // Almacena el comentario que se va a eliminar
                             setShowDeleteModal(true); // Muestra la modal de eliminación
-                          }}
-                        >
+                          }}>
                           <AiOutlineEllipsis className="text-gray-500 text-xl" />
                         </button>
                       </div>
@@ -155,8 +151,7 @@ const CommentModal = ({
                           comment.correo_usuario === correo
                             ? "text-right"
                             : "text-left"
-                        }`}
-                      >
+                        }`}>
                         {comment.correo_usuario}
                       </p>
                       <p
@@ -164,8 +159,7 @@ const CommentModal = ({
                           comment.correo_usuario === correo
                             ? "text-right"
                             : "text-left"
-                        }`}
-                      >
+                        }`}>
                         {comment.comentario}
                       </p>
                     </div>
@@ -190,8 +184,7 @@ const CommentModal = ({
             <button
               className="bg-purple-600 text-white py-2 px-3 lg:py-5 lg:px-5 rounded-md absolute right-5"
               type="submit"
-              disabled={isLoadingComments}
-            >
+              disabled={isLoadingComments}>
               {isLoadingComments ? (
                 <div className="spinner"></div>
               ) : (
@@ -209,8 +202,7 @@ const CommentModal = ({
             <div className="flex justify-end mt-6">
               <button
                 className="text-gray-500 mr-4"
-                onClick={() => setShowDeleteModal(false)}
-              >
+                onClick={() => setShowDeleteModal(false)}>
                 Cancelar
               </button>
               <button className="text-red-500" onClick={onDelete}>

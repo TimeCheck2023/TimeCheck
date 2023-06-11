@@ -134,7 +134,7 @@ export const UserVist = () => {
             value={searchQuery}
             onChange={handleSearchQueryChange}
           />
-          <div className="absolute right-10 mr-6 top-12 xl:top-12 2xl:top-12 2xl:right-80 2xl:mr-72 2xl:pr-2 xl:right-1/3 xl:mr-0 lg:right-1/4 lg:mr-24 md:right-1/4 md:mr-16 sm:mr-28 mt-1 text-lg">
+          <div className="absolute right-12 mr-6 top-12 xl:top-12 2xl:top-12 2xl:right-80 2xl:mr-72 2xl:pr-2 xl:right-1/3 xl:mr-0 lg:right-1/4 lg:mr-24 md:right-1/4 md:mr-16 sm:mr-28 mt-1 text-lg">
             <AiOutlineSearch />
           </div>
         </div>

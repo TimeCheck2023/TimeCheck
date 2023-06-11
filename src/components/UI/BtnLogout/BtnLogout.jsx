@@ -1,22 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BiLogOut } from "react-icons/bi";
-import {Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../Context/AuthContext";
 
 export const BtnLogout = ({ openNavBar }) => {
-
   const navigate = useNavigate();
-
-
-  const url = import.meta.env.VITE_URL;
-  // console.log(url);
+  const { updateNroDocumento } = useContext(AuthContext);
 
   const handleLogout = () => {
     // Eliminar el token de sesión del almacenamiento local
     localStorage.removeItem("token_login");
     localStorage.removeItem("hasShownToast");
+    // Actualizar el número de documento a null
+    updateNroDocumento(null);
     // Redirigir al usuario a la página de inicio de sesión
     navigate(`/`);
   };
+
   return (
     <div
       onClick={handleLogout}

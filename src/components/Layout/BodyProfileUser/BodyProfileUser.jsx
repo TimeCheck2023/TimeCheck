@@ -4,12 +4,18 @@ import { SubOrganizations } from "../SubOrganizations/SubOrganizations";
 import { ImSpinner9 } from "react-icons/im";
 import { FormProfileOrg } from "../FormProfileOrg/FormProfileOrg";
 import ChangePasswordForm from "../ChangePasswordForm/ChangePasswordForm";
+import { useContext } from "react";
+import { AuthContext } from "../../../Context/AuthContext";
 
 export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
   const [activeTab, setActiveTab] = useState("profile");
   const [userData, setUserData] = useState([]);
   const [orgData, setOrgData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [nombreUsuario, setNombreUsuario] = useState("");
+  const [nameOrg, setNameOrg] = useState(null);
+
+  const {} = useContext(AuthContext);
 
   if (typeUser == 1) {
     useEffect(() => {
@@ -32,6 +38,27 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
         fetchUserData();
       }
     }, [nroDocumento]);
+
+    useEffect(() => {
+      const fetchUserData = async () => {
+        try {
+          if (nroDocumento) {
+            const response = await fetch(
+              `https://timecheck.up.railway.app/user/${nroDocumento}`
+            );
+            const data = await response.json();
+            // console.log(data.message);
+            setNombreUsuario(data.message.nombre_completo_usuario);
+            // setLoading(false);
+          }
+        } catch (error) {
+          console.log(error);
+          // setLoading(false);
+        }
+      };
+
+      fetchUserData();
+    }, [nroDocumento]);
   } else {
     useEffect(() => {
       const fetchOrgData = async () => {
@@ -53,6 +80,26 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
         fetchOrgData();
       }
     }, [idOrg]);
+    useEffect(() => {
+      const fetchOrgData = async () => {
+        try {
+          if (idOrg) {
+            const response = await fetch(
+              `https://timecheck.up.railway.app/org/${idOrg}`
+            );
+            const data = await response.json();
+            // console.log(data.message);
+            setNameOrg(data.message.nombre_organizacion);
+            // setLoading(false);
+          }
+        } catch (error) {
+          console.log(error);
+          // setLoading(false);
+        }
+      };
+
+      fetchOrgData();
+    }, [idOrg]);
   }
 
   const handleTabChange = (tab) => {
@@ -60,6 +107,11 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
   };
 
   // console.log(typeUser);
+
+  const primeraLetra =
+    typeUser === 1
+      ? nombreUsuario?.charAt(0)?.toUpperCase()
+      : nameOrg?.charAt(0)?.toUpperCase();
 
   const renderContent = () => {
     if (loading) {
@@ -111,7 +163,9 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
       <div className="w-11/12 h-5/6 flex flex-col md:flex-row z-30 gap-5 absolute md:ml-24 center mt-16 ">
         <div className=" w-full md:w-1/4 bg-slate-50 h-5/6 md:h-full shadow-lg shadow-neutral-500">
           <div className="flex justify-center items-center flex-col py-8 gap-5">
-            <div className="h-36 w-36 bg-black rounded-full"></div>
+            <div className="h-36 w-36 bg-purple-900 rounded-full text-center flex justify-center items-center text-5xl font-light text-white">
+              {primeraLetra}
+            </div>
             <p className="text-xl font-medium">
               {typeUser === 1
                 ? userData.nombre_completo_usuario
@@ -143,9 +197,9 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
               className={`flex justify-center items-center h-32 pb-32  lg:pb-96 md:pb-0 ${
                 typeUser === 2 ? "mt-60 xl:mt-80" : null
               }`}>
-              <button className="hover:bg-slate-200 px-12 py-2 border border-slate-200 text-purple-500 font-bold bg-slate-100 shadow-md rounded-md">
+              {/* <button className="hover:bg-slate-200 px-12 py-2 border border-slate-200 text-purple-500 font-bold bg-slate-100 shadow-md rounded-md">
                 Compartir perfil
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

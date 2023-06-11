@@ -178,7 +178,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
           value={searchQuery}
           onChange={handleSearchQueryChange}
         />
-        <div className="absolute text-white right-5 top-24 md:right-1/3 mr-5 md:top-28 mt-1 text-lg">
+        <div className="absolute text-white right-12 top-24 md:right-1/3 mr-5 md:top-28 mt-1 text-lg">
           <AiOutlineSearch />
         </div>
       </div>

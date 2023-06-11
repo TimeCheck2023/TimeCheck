@@ -7,6 +7,8 @@ import React, { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
 import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthContext";
 
 export const Dashboard = () => {
   const [userType, setUserType] = useState(null);
@@ -16,6 +18,8 @@ export const Dashboard = () => {
   const [idSubOrg, setIdSubOrg] = useState(null);
 
   const navigate = useNavigate();
+
+  const { updateNroDocumento } = useContext(AuthContext);
 
   useEffect(() => {
     const token = localStorage.getItem("token_login");
@@ -28,6 +32,7 @@ export const Dashboard = () => {
       setIdSubOrg(decoded.payload.id_suborganizacion);
       setUserType(decoded.payload.EsUsuario);
       setRol(decoded.payload.rol);
+      updateNroDocumento(decoded.payload.nro_documento_usuario);
 
       const hasShownToast = localStorage.getItem("hasShownToast");
       if (hasShownToast) {

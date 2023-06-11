@@ -14,32 +14,52 @@ export const AuthProvider = ({ children }) => {
   const [rol, setRol] = useState(null);
   const [nroDocumento, setNroDocumento] = useState(null);
   const [correo, setCorreo] = useState(null);
+  // const [nameOrg, setNameOrg] = useState(null);
+
+  // const token = localStorage.getItem("token_login");
+
+  useEffect(() => {
+    console.log("Número de documento actualizado:", nroDocumento);
+  }, [nroDocumento]);
 
   useEffect(() => {
     const token = localStorage.getItem("token_login");
     if (token) {
       const decoded = jwtDecode(token);
+      setNroDocumento(decoded.payload.nro_documento_usuario); // Actualizar el número de documento primero
       setIdOrg(decoded.payload.id_organización);
       setIdSubOrg(decoded.payload.id_suborganizacion);
-      // console.log(decoded.payload.id_suborganizacion);
       setUserType(decoded.payload.EsUsuario);
       setRol(decoded.payload.rol);
       setCorreo(decoded.payload.correo);
-      setNroDocumento(decoded.payload.nro_documento_usuario);
+      // setNameOrg(data.message.nombre_organizacion);
     } else {
-      // console.log("no hay token");
+      // No hay token
     }
   }, []);
 
+  const updateNroDocumento = (newNroDocumento) => {
+    setNroDocumento(newNroDocumento);
+  };
+
   useEffect(() => {
     socket.on("connect", () => {
-      // console.log("Conectado al servidor");
+      // Conectado al servidor
     });
   }, []);
 
   return (
     <AuthContext.Provider
-      value={{ idOrg, idSubOrg, userType, rol, nroDocumento, socket, correo }}>
+      value={{
+        idOrg,
+        idSubOrg,
+        userType,
+        rol,
+        nroDocumento,
+        socket,
+        correo,
+        updateNroDocumento,
+      }}>
       {children}
     </AuthContext.Provider>
   );
