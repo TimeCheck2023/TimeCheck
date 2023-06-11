@@ -99,30 +99,30 @@ export const CardEventAdmin = (props) => {
   //   }
   // };
 
-  // const handleDeleteEvent = () => {
-  //   fetch(`https://time-check.azurewebsites.net/api/Event/Delete/${props.id}`, {
-  //     method: "DELETE",
-  //   })
-  //     .then((response) => {
-  //       if (response.ok) {
-  //         // El evento se eliminó correctamentec
-  //         toast.success("El evento se eliminó correctamente", {
-  //           theme: "dark",
-  //         });
-  //         props.fetchEvents(); // Llamar a la función fetchEvents
-  //         // Realizar cualquier otra acción necesaria, como actualizar la lista de eventos
-  //       } else {
-  //         // Manejar el caso en que la eliminación no fue exitosa
-  //         toast.error("Error al eliminar el evento", {
-  //           theme: "dark",
-  //         });
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       // Manejar errores de red u otros errores de solicitud
-  //       console.error("Error en la solicitud:", error);
-  //     });
-  // };
+  const handleDeleteEvent = () => {
+    fetch(`https://time-check.azurewebsites.net/api/Event/Delete/${props.id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          // El evento se eliminó correctamentec
+          toast.success("El evento se eliminó correctamente", {
+            theme: "dark",
+          });
+          props.fetchEvents(); // Llamar a la función fetchEvents
+          // Realizar cualquier otra acción necesaria, como actualizar la lista de eventos
+        } else {
+          // Manejar el caso en que la eliminación no fue exitosa
+          toast.error("Error al eliminar el evento", {
+            theme: "dark",
+          });
+        }
+      })
+      .catch((error) => {
+        // Manejar errores de red u otros errores de solicitud
+        console.error("Error en la solicitud:", error);
+      });
+  };
 
   const handleCloseModal = () => {
     setOpenModal(false);
@@ -135,6 +135,13 @@ export const CardEventAdmin = (props) => {
           <p className="font-bold">
             {props.cupos_disponibles}/{props.aforo}
           </p>
+          {itsAdminHere && (
+            <button
+              onClick={handleDeleteEvent}
+              className="px-3 py-1 text-white bg-red-500 rounded-md text-xl hover:bg-red-800 font-semibold">
+              <AiOutlineDelete />
+            </button>
+          )}
           <p className="text-slate-400 font-medium">{props.tipo_evento}</p>
         </div>
         <div className="p-3 flex justify-center">
