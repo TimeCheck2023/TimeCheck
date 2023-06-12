@@ -6,6 +6,7 @@ import CommentModal from "../../Layout/CommentModal/CommentModal";
 import io from "socket.io-client";
 import { AuthContext } from "../../../Context/AuthContext";
 import ModalEventInfo from "../../Layout/ModalEventInfo/ModalEventInfo";
+import moment from "moment";
 
 export const CardEventAdmin = (props) => {
   const [openModal, setOpenModal] = useState(false);
@@ -14,6 +15,13 @@ export const CardEventAdmin = (props) => {
   const [likes, setLikes] = useState([]);
 
   const { socket, nroDocumento, idSubOrg, idOrg } = useContext(AuthContext);
+
+  const currentDatetime = moment().format("YYYY-MM-DDTHH:mm:ss");
+  console.log(currentDatetime);
+  console.log(props.fecha_final);
+
+  const fechaFinal = moment(props.fecha_final, "YYYY-MM-DDTHH:mm:ss");
+  const itsOnTime = fechaFinal.isSameOrBefore(currentDatetime);
 
   // console.log(props.idSubOrg);
   // console.log(idSubOrg);
@@ -128,13 +136,25 @@ export const CardEventAdmin = (props) => {
     setOpenModal(false);
   };
 
+  const mostrar = !itsAdminHere && itsOnTime;
+
   return (
     <>
-      <div className="w-96 h-full border border-slate-300 rounded-lg ">
+      <div
+        className={`${mostrar ? "hidden" : ""} w-96 h-full border  rounded-lg ${
+          itsOnTime ? "border-red-300" : "border-slate-300"
+        } `}>
         <div className="flex justify-between px-2 py-1 text-sm">
           <p className="font-bold">
             {props.cupos_disponibles}/{props.aforo}
           </p>
+          {idOrg && (
+            <button
+              onClick={handleDeleteEvent}
+              className="px-3 py-1 text-white bg-red-500 rounded-md text-xl hover:bg-red-800 font-semibold">
+              <AiOutlineDelete />
+            </button>
+          )}
           {itsAdminHere && (
             <button
               onClick={handleDeleteEvent}

@@ -18,9 +18,9 @@ export const AuthProvider = ({ children }) => {
 
   // const token = localStorage.getItem("token_login");
 
-  useEffect(() => {
-    console.log("Número de documento actualizado:", nroDocumento);
-  }, [nroDocumento]);
+  // useEffect(() => {
+  //   console.log("Número de documento actualizado:", nroDocumento);
+  // }, [nroDocumento]);
 
   useEffect(() => {
     const token = localStorage.getItem("token_login");
@@ -42,6 +42,14 @@ export const AuthProvider = ({ children }) => {
     setNroDocumento(newNroDocumento);
   };
 
+  const updateIdOrg = (newIdOrg) => {
+    setIdOrg(newIdOrg);
+  };
+
+  const updateIdSubOrg = (newIdSubOrg) => {
+    setIdSubOrg(newIdSubOrg);
+  };
+
   useEffect(() => {
     socket.on("connect", () => {
       // Conectado al servidor
@@ -59,6 +67,8 @@ export const AuthProvider = ({ children }) => {
         socket,
         correo,
         updateNroDocumento,
+        updateIdOrg,
+        updateIdSubOrg,
       }}>
       {children}
     </AuthContext.Provider>

@@ -4,16 +4,29 @@ import { ModalEventInfo } from "../../Layout/ModalEventInfo/ModalEventInfo";
 import { AuthContext } from "../../../Context/AuthContext";
 import io from "socket.io-client";
 import CommentModal from "../../Layout/CommentModal/CommentModal";
+import moment from "moment";
 
 export const CardEventUser = (props) => {
   const [openModal, setOpenModal] = useState(false);
   const [openCommentModal, setOpenCommentModal] = useState(false);
   const [getComments, setGetComments] = useState([]);
   const [likes, setLikes] = useState([]);
+  // const [itsOnTime, setItsOnTime] = useState(false);
 
   const { socket, nroDocumento } = useContext(AuthContext);
 
-  console.log(nroDocumento);
+  const currentDatetime = moment().format("YYYY-MM-DDTHH:mm:ss");
+  console.log(currentDatetime);
+  console.log(props.fecha_final);
+
+  // Función para validar si la fecha final es igual o pasó la fecha actual
+  // const isPastOrEqual = () => {
+  const fechaFinal = moment(props.fecha_final, "YYYY-MM-DDTHH:mm:ss");
+  const itsOnTime = fechaFinal.isSameOrBefore(currentDatetime);
+  // console.log(setItsOnTime);
+  // };
+
+  // console.log(nroDocumento);
 
   // funcion pra mostar el Modal de comentarios
   const handleOpenModal = (eventId) => {
@@ -91,7 +104,10 @@ export const CardEventUser = (props) => {
   };
   return (
     <>
-      <div className="w-4/5 h-full border border-slate-300 rounded-lg ">
+      <div
+        className={`w-4/5 h-full border border-slate-300 rounded-lg ${
+          itsOnTime ? "hidden" : ""
+        }`}>
         <div className="flex justify-between px-2 py-1 text-sm">
           <p className="font-bold">
             {props.cuposDisponibles}/{props.aforo}

@@ -5,7 +5,8 @@ import { AuthContext } from "../../../Context/AuthContext";
 
 export const BtnLogout = ({ openNavBar }) => {
   const navigate = useNavigate();
-  const { updateNroDocumento } = useContext(AuthContext);
+  const { updateNroDocumento, updateIdOrg, updateIdSubOrg } =
+    useContext(AuthContext);
 
   const handleLogout = () => {
     // Eliminar el token de sesión del almacenamiento local
@@ -13,6 +14,8 @@ export const BtnLogout = ({ openNavBar }) => {
     localStorage.removeItem("hasShownToast");
     // Actualizar el número de documento a null
     updateNroDocumento(null);
+    updateIdOrg(null);
+    updateIdSubOrg(null);
     // Redirigir al usuario a la página de inicio de sesión
     navigate(`/`);
   };

@@ -7,6 +7,7 @@ import { Footer } from "../Footer/Footer";
 import { ModalEventAdd } from "../ModalEventAdd/ModalEventAdd";
 import NoEventsMessage from "../../UI/NotEventsMessage/NotEventsMessage";
 import { LoaderEventsGet } from "../../UI/LoaderEventsGet/LoaderEventsGet";
+import moment from "moment";
 
 const PAGE_SIZE = 3;
 
@@ -20,8 +21,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [categories, setCategories] = useState([]);
   const [categoriesId, setCategoriesId] = useState([]);
-  // console.log(idOrg);
-  // console.log(userType);
+  const [option, setOption] = useState(1);
 
   const fetchEvents1 = () => {
     fetch(`https://time-check.azurewebsites.net/api/Event/List`)
@@ -30,7 +30,10 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
         setEvents(data.response);
         setLoading(false);
       });
+    setOption(1);
   };
+
+  // console.log(idSubOrg);
 
   const fetchEvents2 = () => {
     fetch(
@@ -44,36 +47,37 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
       });
   };
 
-  const fetchEvents = userType == 1 ? fetchEvents1 : fetchEvents2;
+  const fetchEvents3 = () => {
+    fetch(
+      `https://time-check.azurewebsites.net/api/Event/GetEventsBySuborganization/${idSubOrg}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setEvents(data.response);
+        setLoading(false);
+      });
 
-  {
-    userType == 1
-      ? useEffect(() => {
-          fetch(`https://time-check.azurewebsites.net/api/Event/List`)
-            .then((response) => response.json())
-            .then((data) => {
-              // console.log(data.response);
-              setEvents(data.response);
-              setLoading(false);
-            });
-        }, [])
-      : useEffect(() => {
-          fetch(
-            `https://time-check.azurewebsites.net/api/Event/GetEventsOrg?OrganizacionId=${idOrg}`
-          )
-            .then((response) => response.json())
-            .then((data) => {
-              setEvents(data);
-              setLoading(false);
-            });
-        }, []);
-  }
+    setOption(2);
+  };
+
+  const fetchEvents = userType === 1 ? fetchEvents1 : fetchEvents2;
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    fetchEvents();
+  }, [idSubOrg]);
 
   const filteredEvents = events.filter(
     (event) =>
       (selectedCategory === null || event.tipoEvento === selectedCategory) &&
       (searchQuery === "" ||
-        event.nombreEvento.toLowerCase().includes(searchQuery.toLowerCase()))
+        event.nombreEvento.toLowerCase().includes(searchQuery.toLowerCase())) &&
+      ((userType === 1 && moment(event.fechaFinalEvento).isAfter(moment())) ||
+        userType !== 1)
   );
 
   const totalPages = Math.ceil(filteredEvents.length / PAGE_SIZE);
@@ -97,18 +101,10 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
       // Actualizar los estados con los tipos de eventos y los IDs de tipo de evento obtenidos
       setCategoriesId(categoriesIds);
       setCategories(categories);
-
-      // console.log(categoriesIds);
-      // console.log(categories);
     } catch (error) {
       console.error("Error al obtener los tipos de eventos:", error);
     }
   };
-
-  useEffect(() => {
-    fetchCategories();
-    // console.log(categories.tipoEvento)
-  }, []);
 
   const handleSearchQueryChange = (e) => {
     setSearchQuery(e.target.value);
@@ -126,14 +122,33 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
     setPage(newPage);
   };
 
-  // const shouldShowPaginator = visibleEvents.length > PAGE_SIZE && events.length > PAGE_SIZE;
   return (
     <div className="w-full h-full flex items-center flex-col gap-12">
-      <div className="mt-2 text-center">
-        <h1 className=" md:pl-20 text-2xl lg:text-5xl font-semibold">
-          Historial de Eventos
-        </h1>
-      </div>
+      <header className="mt-2 text-center">
+        {idSubOrg && (
+          <nav className="flex justify-center gap-4">
+            <button
+              onClick={fetchEvents1}
+              className={`px-4 py-2 rounded ${
+                option === 1 ? "bg-purple-600 text-white" : ""
+              }`}>
+              Ver todos los eventos
+            </button>
+            <button
+              onClick={fetchEvents3}
+              className={`px-4 py-2 rounded ${
+                option === 1 ? "" : "bg-purple-600 text-white"
+              }`}>
+              Ver eventos de tu suborganización
+            </button>
+          </nav>
+        )}
+        {!idSubOrg && (
+          <h1 className="md:pl-20 text-2xl lg:text-5xl font-semibold">
+            Historial de Eventos
+          </h1>
+        )}
+      </header>
       <div className="w-full flex justify-center">
         <div className="flex flex-col md:mb-0 sm:mb-0">
           <button
@@ -178,7 +193,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
           value={searchQuery}
           onChange={handleSearchQueryChange}
         />
-        <div className="absolute text-white right-12 top-24 md:right-1/3 mr-5 md:top-28 mt-1 text-lg">
+        <div className="absolute text-white right-12 top-24 md:right-1/3 mr-5 md:top-24 md:text-2xl md:mt-2 mt-1 text-lg">
           <AiOutlineSearch />
         </div>
       </div>
@@ -220,7 +235,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
                 ))}
               </>
             )}
-            {userType == 1 && (
+            {userType === 1 && (
               <div
                 onClick={handleOpenModal}
                 className="fixed bottom-40 rounded-full bg-slate-200 p-5 text-2xl text-purple-600  right-5 md:right-10 transform transition-transform hover:scale-125 hover:bg-slate-300">

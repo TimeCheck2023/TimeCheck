@@ -19,7 +19,8 @@ export const Dashboard = () => {
 
   const navigate = useNavigate();
 
-  const { updateNroDocumento } = useContext(AuthContext);
+  const { updateNroDocumento, updateIdOrg, updateIdSubOrg } =
+    useContext(AuthContext);
 
   useEffect(() => {
     const token = localStorage.getItem("token_login");
@@ -33,6 +34,8 @@ export const Dashboard = () => {
       setUserType(decoded.payload.EsUsuario);
       setRol(decoded.payload.rol);
       updateNroDocumento(decoded.payload.nro_documento_usuario);
+      updateIdOrg(decoded.payload.id_organización);
+      updateIdSubOrg(decoded.payload.id_suborganizacion);
 
       const hasShownToast = localStorage.getItem("hasShownToast");
       if (hasShownToast) {

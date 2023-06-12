@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { MdClose } from "react-icons/md";
+import moment from "moment";
 
 export const ModalEventEdit = ({
   handleCloseModal,
@@ -51,6 +52,13 @@ export const ModalEventEdit = ({
 
   const [selectedImage, setSelectedImage] = useState(image);
   const [documento, setDocumento] = useState("");
+
+  const currentDatetime = moment().format("YYYY-MM-DDTHH:mm:ss");
+  console.log(currentDatetime);
+  // console.log(props.fecha_final);
+
+  const fechaFinall = moment(fechaFinal, "YYYY-MM-DDTHH:mm:ss");
+  const itsOnTime = fechaFinall.isSameOrBefore(currentDatetime);
 
   useEffect(() => {
     fetch("https://time-check.azurewebsites.net/api/Event/get_event_types")
@@ -430,14 +438,16 @@ export const ModalEventEdit = ({
                 onClick={handleCloseModal}>
                 Volver
               </button>
-              <button
-                type="button"
-                className="hover:bg-emerald-900 mb-10 bg-emerald-600 text-white font-bold py-2 px-8 rounded"
-                onClick={() => {
-                  setModalOpen(!modalOpen);
-                }}>
-                Confirmar assitencia
-              </button>
+              {!itsOnTime && (
+                <button
+                  type="button"
+                  className="hover:bg-emerald-900 mb-10 bg-emerald-600 text-white font-bold py-2 px-8 rounded"
+                  onClick={() => {
+                    setModalOpen(!modalOpen);
+                  }}>
+                  Confirmar assitencia
+                </button>
+              )}
               <button
                 className="hover:bg-purple-700 mb-10 bg-purple-500 text-white font-bold py-2 px-8 rounded"
                 onClick={handleUpdateEvent}>
