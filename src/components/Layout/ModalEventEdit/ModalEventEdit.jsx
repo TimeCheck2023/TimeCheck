@@ -196,14 +196,22 @@ export const ModalEventEdit = ({
     fetch(
       `https://time-check.azurewebsites.net/api/Attendance/ConfirmAttendance?${params.toString()}`,
       {
-        method: "POST",
+        method: "PUT",
       }
     )
       .then((response) => {
+        console.log(response);
         if (response.ok) {
-          toast.success("Asistencia confirmada correctamente");
+          return response.text();
         } else {
           throw new Error("Error en la solicitud");
+        }
+      })
+      .then((message) => {
+        if (message == "Estado de asistencia actualizado correctamente.") {
+          toast.success(message);
+        } else {
+          toast.error(message);
         }
       })
       .catch((error) => {
