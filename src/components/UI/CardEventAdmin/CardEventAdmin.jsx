@@ -17,8 +17,8 @@ export const CardEventAdmin = (props) => {
   const { socket, nroDocumento, idSubOrg, idOrg } = useContext(AuthContext);
 
   const currentDatetime = moment().format("YYYY-MM-DDTHH:mm:ss");
-  console.log(currentDatetime);
-  console.log(props.fecha_final);
+  // console.log(currentDatetime);
+  // console.log(props.fecha_final);
 
   const fechaFinal = moment(props.fecha_final, "YYYY-MM-DDTHH:mm:ss");
   const itsOnTime = fechaFinal.isSameOrBefore(currentDatetime);
