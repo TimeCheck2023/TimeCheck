@@ -217,6 +217,7 @@ export const SingUp = () => {
             emailAddress: values_us.emailAddress,
             password: values_us.password,
             device: "pc",
+            image_url: 'https://res.cloudinary.com/centroconveciones/image/upload/v1686668335/meamjbp3t0unhclqrpbh.jpg'
           }),
         })
           .then((response) => response.json())
@@ -289,6 +290,7 @@ export const SingUp = () => {
             organization_password: values_org.password,
             numero_telefono: values_org.numero_telefono,
             device: "pc",
+            image_url: 'https://res.cloudinary.com/centroconveciones/image/upload/v1686668335/meamjbp3t0unhclqrpbh.jpg' 
           }),
         })
           .then((response) => response.json())

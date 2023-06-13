@@ -53,7 +53,7 @@ const CommentModal = ({
     });
 
     socket.on("delete", (getComments) => {
-      console.log(getComments);
+      // console.log(getComments);
       // setModalVisible(false);
     });
     // });

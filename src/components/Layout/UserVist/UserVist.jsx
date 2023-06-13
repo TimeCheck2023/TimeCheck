@@ -23,6 +23,7 @@ export const UserVist = () => {
       .then((response) => response.json())
       .then((data) => {
         setEvents(data.response);
+        // console.log(data.response)
         setLoading(false);
       });
   }, []);

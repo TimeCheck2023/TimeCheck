@@ -22,8 +22,8 @@ export const ViewSubOrg = () => {
     } else {
       const decoded = jwtDecode(token);
       setIdOrg(decoded.payload.id_organización);
-      console.log(decoded);
-      console.log(decoded.payload);
+      // console.log(decoded);
+      // console.log(decoded.payload);
       setNameOrg(decoded.payload.correo);
 
       const hasShownToast = localStorage.getItem("hasShownToast");
@@ -43,7 +43,7 @@ export const ViewSubOrg = () => {
           } else {
             // Aquí puedes realizar cualquier operación con los datos obtenidos
             setSubOrganizations(data.message);
-            console.log(data.message);
+            // console.log(data.message);
           }
         })
         .catch((error) => {

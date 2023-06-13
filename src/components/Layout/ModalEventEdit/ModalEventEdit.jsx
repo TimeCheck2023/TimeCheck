@@ -126,7 +126,7 @@ export const ModalEventEdit = ({
       setIsDateValid(startDate <= endDate);
     }
 
-    console.log(name.value);
+    // console.log(name.value);
 
     switch (name) {
       case "title":
@@ -200,7 +200,7 @@ export const ModalEventEdit = ({
       }
     )
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         if (response.ok) {
           return response.text();
         } else {

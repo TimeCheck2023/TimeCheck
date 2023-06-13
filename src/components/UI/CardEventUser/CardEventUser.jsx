@@ -16,8 +16,8 @@ export const CardEventUser = (props) => {
   const { socket, nroDocumento } = useContext(AuthContext);
 
   const currentDatetime = moment().format("YYYY-MM-DDTHH:mm:ss");
-  console.log(currentDatetime);
-  console.log(props.fecha_final);
+  // console.log(currentDatetime);
+  // console.log(props.fecha_final);
 
   // Función para validar si la fecha final es igual o pasó la fecha actual
   // const isPastOrEqual = () => {

@@ -128,7 +128,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents, idSubOrg }) => {
       }
     )
       .then((response) => {
-        console.log(response.text());
+        // console.log(response.text());
         if (response.ok) {
           // Evento guardado con éxito
           toast.success("Evento guardado con éxito", {
@@ -138,7 +138,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents, idSubOrg }) => {
           fetchEvents();
         } else {
           response.text().then((errorMessage) => {
-            console.log(errorMessage);
+            // console.log(errorMessage);
             // Mostrar el mensaje de error en Toastify
             toast.error(errorMessage, {
               theme: "dark",

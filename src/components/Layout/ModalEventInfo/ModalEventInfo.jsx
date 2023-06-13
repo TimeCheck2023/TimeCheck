@@ -87,7 +87,7 @@ export const ModalEventInfo = ({
         return response.text();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         toast.success("Tu asistencia ha sido exitosa!", {
           theme: "dark",
         });
