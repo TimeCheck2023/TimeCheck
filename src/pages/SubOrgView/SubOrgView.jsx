@@ -18,8 +18,11 @@ export const SubOrgView = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
+  const [isModalEditOpen, setIsModalEditOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState("");
   const [typeUser, setTypeUser] = useState(null);
+  const [rol, setRol] = useState(null);
+  const [nroDocumento, setNroDocumento] = useState(null);
 
   const [deleteMemberId, setDeleteMemberId] = useState(null);
   const [deleteSubOrgId, setDeleteSubOrgId] = useState(null);
@@ -52,8 +55,6 @@ export const SubOrgView = () => {
     navigate(-1); // Navegar de vuelta a la página anterior
   };
 
-
-  
   useEffect(() => {
     // Obtener los miembros de la suborganización
     fetch(`https://timecheck.up.railway.app/user/SubOrgMiembro/${id}`)
@@ -80,7 +81,6 @@ export const SubOrgView = () => {
       .catch((error) => console.log(error));
   }, [id]);
 
-  
   const handleUserSearch = (searchQuery) => {
     if (!searchQuery) {
       setFilteredMembers(availableMembers); // Mostrar todos los miembros si no hay una consulta de búsqueda
@@ -115,7 +115,7 @@ export const SubOrgView = () => {
       setSelectedMembers(members.map((member) => member.nro_documento_usuario)); // Seleccionar todos los miembros
     }
   };
-  
+
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
@@ -132,6 +132,41 @@ export const SubOrgView = () => {
     setSelectedRole(role);
   };
 
+  const handleDeleteMember = (id) => {
+    setSelectedUser(id);
+    setIsModalDeleteOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    // Aquí puedes realizar la eliminación del miembro
+    console.log("Eliminando miembro con ID:", selectedUser);
+    setIsModalDeleteOpen(false);
+  };
+
+  const handleCancelDelete = () => {
+    setSelectedUser("");
+    setIsModalDeleteOpen(false);
+  };
+
+  const handleUsers = () => {
+    console.log("obteniendo");
+    try {
+      fetch(`https://timecheck.up.railway.app/user/SubOrgMiembro/${id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          if (data.error) {
+            console.log(data.error);
+          } else {
+            console.log(data.message);
+            setMembers(data.message);
+          }
+        });
+    } catch (error) {
+      setMembers([]);
+    }
+  };
+
   const fetchUsersSinSubOrg = () => {
     fetch(
       `https://time-check.azurewebsites.net/api/User/UsuariosSinSuborganizacion/${id}`
@@ -140,37 +175,23 @@ export const SubOrgView = () => {
       .then((data) => {
         setFilteredMembers([]);
         setAvailableMembers(data);
-  
+
         // Realizar el fetch de los miembros de la organización después de obtener los miembros sin organización
         handleUsers();
       })
       .catch((error) => console.log(error));
   };
-  
-  const handleUsers = () => {
-    fetch(`https://timecheck.up.railway.app/user/SubOrgMiembro/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        if (data.error) {
-          console.log(data.error);
-        } else {
-          setMembers(data.message);
-        }
-      })
-      .catch((error) => console.log(error));
-  };
-  
+
   const handleAddMember = (e) => {
     e.preventDefault();
-  
+
     if (selectedUser && selectedRole) {
       const body = JSON.stringify({
         id_suborganizacion2: parseInt(id),
         nro_documento_usuario1: selectedUser,
         rol: selectedRole === "Admin" ? "0" : "1",
       });
-  
+
       fetch("https://time-check.azurewebsites.net/api/User/NuevoMiembro", {
         method: "POST",
         headers: {
@@ -196,10 +217,42 @@ export const SubOrgView = () => {
         });
     }
   };
-  
+
+  const handleEditMember = () => {
+    const body = {
+      id_suborganizacion2: id, // Reemplaza el valor 0 con el ID de la suborganización correspondiente
+      nro_documento_usuario1: nroDocumento, // Reemplaza "selectedUser" con el número de documento del usuario seleccionado
+      rol: rol, // Reemplaza "rol" con el valor del rol seleccionado
+    };
+
+    fetch("https://time-check.azurewebsites.net/api/Member/EditMemberRole", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        console.log(data);
+        setFilteredMembers([]);
+        fetchUsersSinSubOrg();
+        toast.success("Miembro actualizado correctamente!");
+        setIsModalEditOpen(false);
+
+        // Realizar las acciones necesarias después de la actualización/editar exitosa del miembro
+        // Por ejemplo, mostrar una notificación o actualizar la lista de miembros
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Hubo un error!");
+        // Manejar cualquier error que ocurra durante la solicitud
+      });
+  };
+
   const onDeleteConfirm = (deleteMemberId, deleteSubOrgId) => {
     const url = `https://time-check.azurewebsites.net/api/Member/DeleteMember?nroDocumentoUsuario=${deleteMemberId}&idSuborganizacion=${deleteSubOrgId}`;
-  
+
     fetch(url, {
       method: "DELETE",
       headers: {
@@ -214,10 +267,12 @@ export const SubOrgView = () => {
       .then((data) => {
         console.log(data);
         fetchUsersSinSubOrg();
+        setFilteredMembers([]);
+        handleUsers();
+        setIsModalDeleteOpen(false);
         toast.success(
           "Se eliminó correctamente el miembro de la suborganización!"
         );
-        setIsModalDeleteOpen(false);
       })
       .catch((error) => {
         // Manejo de errores
@@ -225,7 +280,6 @@ export const SubOrgView = () => {
         console.log(error);
       });
   };
-  
 
   return (
     <div className="container mx-auto p-4">
@@ -268,7 +322,7 @@ export const SubOrgView = () => {
           <table className="w-full bg-white border border-gray-300">
             <thead>
               <tr>
-                {typeUser === 2 && (
+                {/* {typeUser === 2 && (
                   <th className="bg-gray-100 px-4 py-2">
                     {" "}
                     <input
@@ -277,7 +331,7 @@ export const SubOrgView = () => {
                       onChange={handleSelectAll}
                     />
                   </th>
-                )}
+                )} */}
                 <th className="bg-gray-100 px-4 py-2">Nombre</th>
                 <th className="bg-gray-100 px-4 py-2">Correo</th>
                 <th className="bg-gray-100 px-4 py-2">Rol</th>
@@ -289,7 +343,7 @@ export const SubOrgView = () => {
             <tbody>
               {members.map((member) => (
                 <tr key={member.idUsuario}>
-                  {typeUser === 2 && (
+                  {/* {typeUser === 2 && (
                     <td className="border px-4 py-2 text-center">
                       <input
                         type="checkbox"
@@ -300,7 +354,7 @@ export const SubOrgView = () => {
                         key={`${member.nro_documento_usuario}`}
                       />
                     </td>
-                  )}
+                  )} */}
                   <td className="border px-4 py-2">
                     {member.nombre_completo_usuario}
                   </td>
@@ -321,9 +375,12 @@ export const SubOrgView = () => {
                           <AiFillDelete />
                         </button>
                         <button
-                          onClick={() =>
-                            handleEditMember(member.nro_documento_usuario)
-                          }
+                          onClick={() => {
+                            setRol(member.rol);
+                            setNroDocumento(member.nro_documento_usuario);
+                            // console.log(member.rol);
+                            setIsModalEditOpen(true);
+                          }}
                           className="text-purple-600 hover:text-purple-800 text-xl">
                           <AiOutlineEdit />
                         </button>
@@ -343,6 +400,42 @@ export const SubOrgView = () => {
             onDeleteConfirm(deleteMemberId, deleteSubOrgId)
           }
         />
+      )}
+
+      {isModalEditOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg p-6 w-80 flex flex-col items-center gap-4">
+            <h2 className="text-lg font-semibold mb-4 text-center">
+              Cambiar Rol
+            </h2>
+            <select
+              value={rol}
+              name="rol"
+              id="rol"
+              className="flex justify-center items-center text-center border px-3 py-1 rounded-md"
+              onChange={(e) => setRol(e.target.value)}>
+              {" "}
+              <option value="0">Administrador</option>
+              <option value="1">Miembro</option>
+            </select>
+            <div className="flex justify-end">
+              <button
+                className="mr-2 px-4 py-2 rounded-lg bg-blue-600 text-white"
+                onClick={() => {
+                  handleEditMember();
+                }}>
+                Cambiar
+              </button>
+              <button
+                className="px-4 py-2 rounded-lg bg-gray-200 text-gray-800"
+                onClick={() => {
+                  setIsModalEditOpen(false);
+                }}>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {isModalOpen && (
