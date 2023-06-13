@@ -91,7 +91,7 @@ export const BodyContactUs = () => {
       </div>
       <Footer />
     </div>
-      </>
+    
   );
 };
 
