@@ -29,6 +29,7 @@ export const Dashboard = () => {
       navigate("/"); // Redirigir al usuario a la página de inicio de sesión
     } else {
       const decoded = jwtDecode(token);
+      console.log(decoded.payload)
       setIdOrg(decoded.payload.id_organización);
       setIdSubOrg(decoded.payload.id_suborganizacion);
       setUserType(decoded.payload.EsUsuario);

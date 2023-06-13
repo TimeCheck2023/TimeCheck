@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
   const [rol, setRol] = useState(null);
   const [nroDocumento, setNroDocumento] = useState(null);
   const [correo, setCorreo] = useState(null);
+  const [image, setImage] = useState(null)
   // const [nameOrg, setNameOrg] = useState(null);
 
   // const token = localStorage.getItem("token_login");
@@ -32,6 +33,8 @@ export const AuthProvider = ({ children }) => {
       setUserType(decoded.payload.EsUsuario);
       setRol(decoded.payload.rol);
       setCorreo(decoded.payload.correo);
+      setImage(decoded.payload.image_url)
+      console.log(decoded.payload)
       // setNameOrg(data.message.nombre_organizacion);
     } else {
       // No hay token
@@ -69,6 +72,7 @@ export const AuthProvider = ({ children }) => {
         updateNroDocumento,
         updateIdOrg,
         updateIdSubOrg,
+        image
       }}>
       {children}
     </AuthContext.Provider>

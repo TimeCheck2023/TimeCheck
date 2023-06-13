@@ -4,7 +4,7 @@ import noEventsIllustration from "/notFoundEvents.svg";
 
 const NoEventsMessage = () => {
   return (
-    <div className="flex flex-col items-center text-center justify-center py-20">
+    <div className="flex flex-col items-center text-center justify-center py-20 ">
       <img
         src={noEventsIllustration}
         alt="No hay eventos registrados"

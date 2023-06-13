@@ -12,6 +12,7 @@ export const CardEventUser = (props) => {
   const [getComments, setGetComments] = useState([]);
   const [likes, setLikes] = useState([]);
   // const [itsOnTime, setItsOnTime] = useState(false);
+  const [nroLikes, setNroLikes] = useState(null);
 
   const { socket, nroDocumento } = useContext(AuthContext);
 
@@ -26,6 +27,8 @@ export const CardEventUser = (props) => {
   // console.log(setItsOnTime);
   // };
 
+  // console.log(props.id
+  // console.log(props.nroLikes)
   // console.log(nroDocumento);
 
   // funcion pra mostar el Modal de comentarios
@@ -59,17 +62,27 @@ export const CardEventUser = (props) => {
     socket.on("resultComments", (getComments) => {
       setGetComments(getComments);
     });
+
+    // socket.on('Countlikes', (data) => {
+    //   setNroLikes(data);
+    //   console.log(data)
+    // })
+
     socket.on("likes", (getLikes) => {
       setLikes(getLikes);
       // console.log(getLikes);
       // console.log(getLikes);
     });
+
     // Evento de error
     socket.on("error", (error) => {
       console.log("Error en la conexión del socket:", error);
     });
 
     socket.emit("getLikes", nroDocumento);
+
+    // socket.emit('getCountLikes', props.id)
+
     // });
   }, [socket]);
 
@@ -105,9 +118,10 @@ export const CardEventUser = (props) => {
   return (
     <>
       <div
-        className={`w-4/5 h-full border border-slate-300 rounded-lg ${
+        className={`w-3/5 h-full border border-slate-300 rounded-lg ${
           itsOnTime ? "hidden" : ""
-        }`}>
+        }`}
+      >
         <div className="flex justify-between px-2 py-1 text-sm">
           <p className="font-bold">
             {props.cuposDisponibles}/{props.aforo}
@@ -121,17 +135,17 @@ export const CardEventUser = (props) => {
             className="rounded-md w-fit max-h-52 object-cover"
           />
         </div>
-        <div className="px-3 py-3 flex justify-between">
-          <div className="w-52 truncate ">
+        <div className="w-full px-3 py-3 flex flex-col">
+          <div className="w-full truncate flex justify-between">
             <p className="text-base text-purple-600 font-bold truncate">
               {props.title}
             </p>
-            <p className="text-xs truncate">{props.description}</p>
-          </div>
-          <div>
             <p className="text-purple-600 font-medium">
               {formatPrice(props.price)}
             </p>
+          </div>
+          <div className="">
+            <p className="text-xs truncate">{props.description}</p>
           </div>
         </div>
         <div className="flex flex-row justify-between px-8 py-4">
@@ -139,25 +153,30 @@ export const CardEventUser = (props) => {
             onClick={() => {
               resultLikes ? DeleteLikes(props.id) : CreateLikes(props.id);
             }}
-            className="flex flex-row items-center border w-14 text-center justify-center border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-1">
+            className="flex flex-row items-center border w-14 text-center justify-center border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-1"
+          >
             {resultLikes ? (
               <AiFillLike className=" text-base" />
             ) : (
               <AiOutlineLike className=" text-base" />
             )}
+
+            {/* {nroLikes} */}
           </button>
           <button
             onClick={() => {
               handleOpenModal(props.id);
             }}
-            className="flex flex-row items-center border w-32 text-center px-4 lg:px-5 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
+            className="flex flex-row items-center border w-32 text-center px-4 lg:px-5 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold"
+          >
             <p>Comentarios</p>
           </button>
           <button
             onClick={() => {
               setOpenModal(!openModal);
             }}
-            className="flex flex-row items-center border px-4 lg:px-5 xl:px-5 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
+            className="flex flex-row items-center border px-4 lg:px-5 xl:px-5 w-32 text-center 2xl:justify-center border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold"
+          >
             <p>Ver más</p>
           </button>
         </div>

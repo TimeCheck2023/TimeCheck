@@ -15,6 +15,8 @@ import {
 } from "react-icons/ai";
 import jwtDecode from "jwt-decode";
 import { BtnLogout } from "../../UI/BtnLogout/BtnLogout";
+import { AuthContext } from "../../../Context/AuthContext";
+import { useContext } from "react";
 
 export const SlideBarUser = ({
   activeHome,
@@ -27,6 +29,8 @@ export const SlideBarUser = ({
   const [lower, setLower] = useState(false);
   const [nroUser, setNroUser] = useState(0);
   const [nombreUsuario, setNombreUsuario] = useState("");
+
+  const {image} = useContext(AuthContext);
 
   const token = localStorage.getItem("token_login");
   const decoded = jwtDecode(token);
@@ -188,12 +192,13 @@ export const SlideBarUser = ({
           {" "}
           <p className="text-slate-500 text-base ">Cuenta</p>
           <div className={`flex flex-row ${openNavBar && "gap-3"}`}>
-            <div className="w-12 h-12 bg-purple-600 rounded-full mb-4 text-center flex items-center justify-center text-2xl font-semibold text-white">
+            <img src={image} alt="img" className="rounded-full w-12"/>
+            {/* <div className="w-12 h-12 bg-purple-600 rounded-full mb-4 text-center flex items-center justify-center text-2xl font-semibold text-white">
               {primerCaracterMayuscula}
-            </div>
+            </div> */}
             <div>
               {openNavBar && (
-                <p className="font-semibold truncate">{nombreUsuario}</p>
+                <p className="font-semibold w-40 truncate">{nombreUsuario}</p>
               )}
               {openNavBar && (
                 <p className=" font-medium text-sm text-slate-400 truncate ">

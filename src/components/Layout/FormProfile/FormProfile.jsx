@@ -48,27 +48,29 @@ export const FormProfile = ({ userData }) => {
             emailAddress: correoElectronico,
             address: direccion,
             typeofpopulation: tipoPoblacion,
+            device: "pc",
+            image_url:"https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"
           }),
         }
-      );
+      ).then((response) => response.json())
+      .then((data) => {
 
-      if (response.ok) {
-        // console.log(response);
-        // console.log(response.ok);
-        // La solicitud fue exitosa, puedes mostrar una notificación de éxito o realizar alguna acción adicional
-        toast.success("Perfil actualizado exitosamente", {
-          theme: "dark",
-          autoClose: 1500, // Duración de la alerta en milisegundos (3 segundos en este caso)
-        });
-        setTimeout(() => {
-          window.location.reload();
-        }, 1500); // Retraso de 3 segundos antes de recargar la página
-      } else {
-        // La solicitud no fue exitosa, puedes mostrar una notificación de error o realizar alguna acción adicional
-        toast.error("Error al actualizar el perfil", {
-          theme: "dark",
-        });
-      }
+        if(data.error){
+          toast.error("Error al actualizar el perfil", {
+            theme: "dark",
+          });
+        }else{
+          console.log(data)
+          toast.success("Perfil actualizado exitosamente", {
+            theme: "dark",
+            autoClose: 1500, // Duración de la alerta en milisegundos (3 segundos en este caso)
+          });
+          // setTimeout(() => {
+          //   window.location.reload();
+          // }, 1500); // Retraso de 3 segundos antes de recargar la página
+        }
+
+      })
     } catch (error) {
       // Ocurrió un error durante la solicitud, puedes mostrar una notificación de error o realizar alguna acción adicional
       console.error("Error al realizar la solicitud", error);
@@ -107,7 +109,7 @@ export const FormProfile = ({ userData }) => {
           <option value="Desplazado">Desplazado</option>
           <option value="LGBTI">LGBTI</option>
           <option value="Discapacitado">Discapacitado</option>
-          <option value="Otro">Otro</option>
+          <option value="Ninguno">Ninguno</option>
         </select>
       </div>
       <div className="flex flex-col gap-2 py-2 px-2">
@@ -146,7 +148,7 @@ export const FormProfile = ({ userData }) => {
           value={direccion}
           onChange={(e) => setDireccion(e.target.value)}
           className="border rounded-sm text-sm py-3 md:py-2 px-2"
-          placeholder="Bro Colon Cll21A #10-08 Montengro - Quindio"
+          placeholder="Dirección Residencial"
           required
         />
       </div>

@@ -11,6 +11,7 @@ import {
 } from "react-icons/ai";
 import { BtnLogout } from "../../UI/BtnLogout/BtnLogout";
 import jwtDecode from "jwt-decode";
+import { AuthContext } from "../../../Context/AuthContext";
 
 export const SlideBar = ({
   activeEvent,
@@ -25,9 +26,10 @@ export const SlideBar = ({
   const [subOrganizations, setSubOrganizations] = useState([]);
   const [nameOrg, setNameOrg] = useState(null);
 
+  const {image} = useContext(AuthContext);
+
   const token = localStorage.getItem("token_login");
   const decoded = jwtDecode(token);
-  // console.log(decoded);
   const emailUser = decoded.payload.correo;
   const idOrg = decoded.payload.id_organización;
 
@@ -205,9 +207,10 @@ export const SlideBar = ({
           {" "}
           <p className="text-slate-500 text-base ">Cuenta</p>
           <div className={`flex flex-row ${openNavBar && "gap-3"}`}>
-            <div className="w-12 h-12 bg-purple-600 rounded-full mb-4 text-center flex items-center justify-center text-2xl font-normal text-white">
+            <img src={image} alt="img" />
+            {/* <div className="w-12 h-12 bg-purple-600 rounded-full mb-4 text-center flex items-center justify-center text-2xl font-normal text-white">
               {primerCaracterMayuscula}
-            </div>
+            </div> */}
             <div>
               {openNavBar && (
                 <p className="font-semibold truncate">{nameOrg}</p>

@@ -5,6 +5,8 @@ import { CardEventUser } from "../../UI/CardEventUser/CardEventUser";
 import { Footer } from "../Footer/Footer";
 import { LoaderEventsGet } from "../../UI/LoaderEventsGet/LoaderEventsGet";
 import NoEventsMessage from "../../UI/NotEventsMessage/NotEventsMessage";
+import { useContext } from "react";
+import { AuthContext } from "../../../Context/AuthContext";
 
 const PAGE_SIZE = 8;
 
@@ -17,6 +19,13 @@ export const UserVist = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [categories, setCategories] = useState([]);
+  const [nroLikes, setNroLikes] = useState(null)
+
+
+  const { socket } = useContext(AuthContext);
+
+
+
 
   useEffect(() => {
     fetch("https://time-check.azurewebsites.net/api/Event/List")
@@ -51,6 +60,11 @@ export const UserVist = () => {
       console.error("Error al obtener los tipos de eventos:", error);
     }
   };
+
+  useEffect(() => {
+
+  }, [socket])
+  
 
   useEffect(() => {
     fetchCategories();
@@ -139,7 +153,7 @@ export const UserVist = () => {
             <AiOutlineSearch />
           </div>
         </div>
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 place-items-center content-center justify-center items-center place-content-center  gap-5 pb-10 xl:mb-0">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-3 place-items-center content-center justify-center items-center place-content-center  gap-5 pb-10 xl:mb-0 2xl:justify-center 2xl:items-center 2xl:text-center">
           {loading ? (
             <LoaderEventsGet />
           ) : (
@@ -164,6 +178,7 @@ export const UserVist = () => {
                       idEvento={event.idEvento}
                       cuposDisponibles={event.cuposDisponibles}
                       fetchEvents={handleFetchEvents} // Agrega esta prop
+                      nroLikes={nroLikes}
                     />
                   ))}
                 </>

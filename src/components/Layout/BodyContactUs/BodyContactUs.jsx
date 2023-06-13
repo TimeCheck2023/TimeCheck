@@ -12,7 +12,8 @@ export const BodyContactUs = () => {
   }, []);
 
   return (
-    <div className="sm:ml-24">
+<>
+<div className="sm:ml-24">
       <div className="w-full md:h-full flex flex-row bg-white ">
         {/* <div
           className={`w-1/2 h-full bg-cover bg-black hidden md:block bg-center ${
@@ -96,5 +97,6 @@ export const BodyContactUs = () => {
       </div>
       <Footer />
     </div>
+      </>
   );
 };

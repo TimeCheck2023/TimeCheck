@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FormProfile } from "../FormProfile/FormProfile";
 import { SubOrganizations } from "../SubOrganizations/SubOrganizations";
 import { ImSpinner9 } from "react-icons/im";
 import { FormProfileOrg } from "../FormProfileOrg/FormProfileOrg";
 import ChangePasswordForm from "../ChangePasswordForm/ChangePasswordForm";
-import { useContext } from "react";
 import { AuthContext } from "../../../Context/AuthContext";
+import { AiOutlineCamera } from "react-icons/ai";
 
 export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
   const [activeTab, setActiveTab] = useState("profile");
@@ -14,8 +14,9 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
   const [loading, setLoading] = useState(true);
   const [nombreUsuario, setNombreUsuario] = useState("");
   const [nameOrg, setNameOrg] = useState(null);
+  const [image, setImage] = useState(null)
 
-  const {} = useContext(AuthContext);
+  // const { image } = useContext(AuthContext);
 
   if (typeUser == 1) {
     useEffect(() => {
@@ -27,6 +28,7 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
           const data = await response.json();
           // console.log(data.message);
           setUserData(data.message);
+          setImage(data.message.image_url)
           setLoading(false);
         } catch (error) {
           console.log(error);
@@ -47,6 +49,7 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
               `https://timecheck.up.railway.app/user/${nroDocumento}`
             );
             const data = await response.json();
+            setImage(data.message.image_url)
             // console.log(data.message);
             setNombreUsuario(data.message.nombre_completo_usuario);
             // setLoading(false);
@@ -163,9 +166,17 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
       <div className="w-11/12 h-5/6 flex flex-col md:flex-row z-30 gap-5 absolute md:ml-24 center mt-16 ">
         <div className=" w-full md:w-1/4 bg-slate-50 h-5/6 md:h-full shadow-lg shadow-neutral-500">
           <div className="flex justify-center items-center flex-col py-8 gap-5">
-            <div className="h-36 w-36 bg-purple-900 rounded-full text-center flex justify-center items-center text-5xl font-light text-white">
-              {primeraLetra}
+            <div className="bg-black w-auto absolute h-auto rounded-full   top-10 left-60">
+              <label htmlFor="img">
+                {" "}
+                <AiOutlineCamera className="text-2xl bg-purple-600 rounded-full p-1 text-white" />
+              </label>
+              <input type="file" className="hidden " name="img" id="img"/>
             </div>
+            <img src={image} alt="img" className="w-32 rounded-full" />
+            {/* <div className="h-36 w-36 bg-purple-900 rounded-full text-center flex justify-center items-center text-5xl font-light text-white">
+              {primeraLetra}
+            </div> */}
             <p className="text-xl font-medium">
               {typeUser === 1
                 ? userData.nombre_completo_usuario
@@ -196,7 +207,8 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
             <div
               className={`flex justify-center items-center h-32 pb-32  lg:pb-96 md:pb-0 ${
                 typeUser === 2 ? "mt-60 xl:mt-80" : null
-              }`}>
+              }`}
+            >
               {/* <button className="hover:bg-slate-200 px-12 py-2 border border-slate-200 text-purple-500 font-bold bg-slate-100 shadow-md rounded-md">
                 Compartir perfil
               </button> */}
@@ -209,14 +221,16 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
               className={`px-4 py-2 rounded-md hover:bg-slate-100  ${
                 activeTab === "profile" ? "bg-slate-200" : ""
               }`}
-              onClick={() => handleTabChange("profile")}>
+              onClick={() => handleTabChange("profile")}
+            >
               Configuración
             </button>
             <button
               className={`px-4 py-2 rounded-md hover:bg-slate-100  ${
                 activeTab === "changePassword" ? "bg-slate-200" : ""
               }`}
-              onClick={() => handleTabChange("changePassword")}>
+              onClick={() => handleTabChange("changePassword")}
+            >
               Cambiar clave
             </button>
             {typeUser !== 2 && (
@@ -224,7 +238,8 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
                 className={`px-4 py-2 rounded-md hover:bg-slate-100  ${
                   activeTab === "suborganizations" ? "bg-slate-200" : ""
                 }`}
-                onClick={() => handleTabChange("suborganizations")}>
+                onClick={() => handleTabChange("suborganizations")}
+              >
                 Suborganizaciones
               </button>
             )}

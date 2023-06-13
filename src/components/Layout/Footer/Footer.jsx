@@ -65,7 +65,7 @@ export const Footer = ({ style }) => {
       </div>
       <div className="flex justify-center items-center mt-4 pb-10 lg:pb-0 text-center md:text-left md:mt-3">
         <p className="font-sans font-semibold text-neutral-600">
-          &copy; Copyright 2023, Todos los derechos reservados por{" "}
+          &copy; 2023, Todos los derechos reservados por{" "}
           <strong>Time Check</strong>
         </p>
       </div>
