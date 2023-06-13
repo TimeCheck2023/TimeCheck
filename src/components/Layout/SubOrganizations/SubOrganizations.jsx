@@ -15,7 +15,7 @@ export const SubOrganizations = () => {
         if (response.ok) {
           const data = await response.json();
           setSubOrganizations(data.message);
-          console.log(data.message);
+          // console.log(data.message);
         } else {
           throw new Error("Failed to fetch data");
         }

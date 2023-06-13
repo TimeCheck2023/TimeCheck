@@ -60,11 +60,11 @@ export const SubOrgView = () => {
     fetch(`https://timecheck.up.railway.app/user/SubOrgMiembro/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.error) {
           console.log(data.error);
         } else {
-          console.log(data.message);
+          // console.log(data.message);
           setMembers(data.message);
         }
       })
@@ -149,16 +149,16 @@ export const SubOrgView = () => {
   };
 
   const handleUsers = () => {
-    console.log("obteniendo");
+    // console.log("obteniendo");
     try {
       fetch(`https://timecheck.up.railway.app/user/SubOrgMiembro/${id}`)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           if (data.error) {
             console.log(data.error);
           } else {
-            console.log(data.message);
+            // console.log(data.message);
             setMembers(data.message);
           }
         });

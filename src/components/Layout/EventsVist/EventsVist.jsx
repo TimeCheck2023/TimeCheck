@@ -41,9 +41,9 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setEvents(data);
-        console.log(data)
+        // console.log(data)
         setLoading(false);
       });
   };
@@ -54,7 +54,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setEvents(data.response);
         setLoading(false);
       });

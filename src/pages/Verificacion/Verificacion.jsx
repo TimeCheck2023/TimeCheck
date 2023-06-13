@@ -18,7 +18,7 @@ const Verificacion = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
 
         if (data.error) {
           setLoading(false);
