@@ -131,7 +131,7 @@ export const SlideBar = ({
                 )}
               </div>
             </Link>
-            <Link
+            {/* <Link
               to="/Statistics"
               className={`${
                 activeStats ? "bg-slate-300" : "hover:bg-neutral-300"
@@ -148,7 +148,7 @@ export const SlideBar = ({
                   ""
                 )}
               </div>
-            </Link>
+            </Link> */}
             {!userType && (
               <Link
                 to={"/ViewSubOrg"}

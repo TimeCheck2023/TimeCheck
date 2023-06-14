@@ -146,7 +146,7 @@ export const CardEventUser = (props) => {
           </div>
         </div>
         <div className="flex flex-row justify-between px-8 py-4">
-          <BtnLike eventId={props.id} />
+          {/* <BtnLike eventId={props.id} /> */}
           <button
             onClick={() => {
               handleOpenModal(props.id);

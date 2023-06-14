@@ -27,7 +27,8 @@ export const BtnLike = (props) => {
       nro_documento_usuario: nroDocumento,
     });
     socket.emit("deleteLikes", objeto);
-  };
+  };const isYourLike = nroLikes.length > 0 && nroLikes[0].id_evento === props.eventId;
+
 
   useEffect(() => {
     socket.emit("getCountLikes", props.eventId);

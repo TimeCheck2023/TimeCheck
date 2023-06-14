@@ -187,7 +187,7 @@ export const CardEventAdmin = (props) => {
           </div>
         </div>
         <div className="flex flex-row justify-between px-8 py-4">
-          <button
+          {/* <button
             disabled={true}
             onClick={() => {
               resultLikes ? DeleteLikes(props.id) : CreateLikes(props.id);
@@ -198,7 +198,7 @@ export const CardEventAdmin = (props) => {
             ) : (
               <AiOutlineLike className=" text-base" />
             )}
-          </button>
+          </button> */}
           <button
             onClick={() => {
               handleOpenModal(props.id);
