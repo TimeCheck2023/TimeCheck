@@ -61,13 +61,13 @@ export const FormOrg = ({ handleInputChange, errors }) => {
         </div>{" "}
         <div className="flex w-full">
           <div className="flex flex-col w-full ">
-            <label htmlFor="phone" className="font-bold">
+            <label htmlFor="numero_telefono" className="font-bold">
               Telefono<strong className="text-red-600">*</strong>
             </label>
             <input
               onChange={handleInputChange}
-              id="phone"
-              name="phone"
+              id="numero_telefono"
+              name="numero_telefono"
               className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 lg:w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
               type="number"
               placeholder="3211234567"

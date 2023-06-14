@@ -26,7 +26,7 @@ export const SlideBar = ({
   const [subOrganizations, setSubOrganizations] = useState([]);
   const [nameOrg, setNameOrg] = useState(null);
 
-  const {image} = useContext(AuthContext);
+  const { image } = useContext(AuthContext);
 
   const token = localStorage.getItem("token_login");
   const decoded = jwtDecode(token);
@@ -207,7 +207,11 @@ export const SlideBar = ({
           {" "}
           <p className="text-slate-500 text-base ">Cuenta</p>
           <div className={`flex flex-row ${openNavBar && "gap-3"}`}>
-            <img src={image} alt="img" />
+            <img
+              src={image}
+              alt="img"
+              className="h-12 w-12 object-cover rounded-full"
+            />
             {/* <div className="w-12 h-12 bg-purple-600 rounded-full mb-4 text-center flex items-center justify-center text-2xl font-normal text-white">
               {primerCaracterMayuscula}
             </div> */}

@@ -20,6 +20,8 @@ export const CardEventAdmin = (props) => {
   // console.log(currentDatetime);
   // console.log(props.fecha_final);
 
+  const isOrg = nroDocumento === undefined;
+
   const fechaFinal = moment(props.fecha_final, "YYYY-MM-DDTHH:mm:ss");
   const itsOnTime = fechaFinal.isSameOrBefore(currentDatetime);
 
@@ -186,10 +188,11 @@ export const CardEventAdmin = (props) => {
         </div>
         <div className="flex flex-row justify-between px-8 py-4">
           <button
+            disabled={true}
             onClick={() => {
               resultLikes ? DeleteLikes(props.id) : CreateLikes(props.id);
             }}
-            className="flex flex-row items-center border w-14 text-center justify-center border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-1">
+            className={`flex flex-row items-center border w-14 text-center justify-center border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-1 `}>
             {resultLikes ? (
               <AiFillLike className=" text-base" />
             ) : (

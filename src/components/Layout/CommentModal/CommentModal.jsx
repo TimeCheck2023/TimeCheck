@@ -23,6 +23,9 @@ const CommentModal = ({
   const [commentId, setCommentId] = useState(null);
 
   //loading para saber si están comentando
+  // console.log(eventId);
+  // console.log(nroDocumento);
+  const isOrg = nroDocumento === undefined;
   const [isLoadings, setisLoadings] = useState(null);
 
   const { correo } = useContext(AuthContext);
@@ -105,7 +108,10 @@ const CommentModal = ({
           </button>
         </div>
 
-        <div className="lg:p-4 mx-1 lg:mx-10 shadow-md bg-slate-50 shadow-neutral-400 rounded-md h-full overflow-y-scroll scrollbar-thumb-purple-900 scrollbar-track-transparent scrollbar-thin">
+        <div
+          className={`lg:p-4 mx-1 lg:mx-10 shadow-md bg-slate-50 shadow-neutral-400 rounded-md overflow-y-scroll scrollbar-thumb-purple-900 scrollbar-track-transparent scrollbar-thin ${
+            isOrg ? "h-4/5" : " h-full"
+          }`}>
           {getComments.length === 0 ? (
             <p className="text-center text-gray-500 mt-10">
               No hay comentarios aún.
@@ -173,7 +179,7 @@ const CommentModal = ({
           )}
         </div>
 
-        <div className="px-2 py-3 lg:py-6 bg-slate-100">
+        <div className={`px-2 py-3 lg:py-6 bg-slate-100 ${isOrg && "hidden"}`}>
           <form onSubmit={submitComment}>
             <input
               className="w-4/5 lg:w-11/12 h-1 lg:h-14 lg:px-10 border  lg:text-lg border-gray-300 rounded-md p-4 focus:outline-none"

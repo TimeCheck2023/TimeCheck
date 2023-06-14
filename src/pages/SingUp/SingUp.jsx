@@ -67,7 +67,7 @@ export const SingUp = () => {
     emailAddress: "",
     password: "",
     confirmPassword: "",
-    phone: "",
+    numero_telefono: "",
   });
 
   const handleInputChange = (event) => {
@@ -98,10 +98,11 @@ export const SingUp = () => {
       errorsO.emailAddress = "El correo electrónico no es valido!";
     }
 
-    if (!values.phone) {
-      errorsO.phone = "Debe ingresar su número de teléfono";
-    } else if (!/^[0-9]+$/.test(values.phone)) {
-      errorsO.phone = "El número de teléfono debe contener solo números";
+    if (!values.numero_telefono) {
+      errorsO.numero_telefono = "Debe ingresar su número de teléfono";
+    } else if (!/^[0-9]+$/.test(values.numero_telefono)) {
+      errorsO.numero_telefono =
+        "El número de teléfono debe contener solo números";
     }
 
     if (!values.password) {
@@ -217,7 +218,8 @@ export const SingUp = () => {
             emailAddress: values_us.emailAddress,
             password: values_us.password,
             device: "pc",
-            image_url: 'https://res.cloudinary.com/centroconveciones/image/upload/v1686668335/meamjbp3t0unhclqrpbh.jpg'
+            image_url:
+              "https://res.cloudinary.com/centroconveciones/image/upload/v1686668335/meamjbp3t0unhclqrpbh.jpg",
           }),
         })
           .then((response) => response.json())
@@ -290,7 +292,8 @@ export const SingUp = () => {
             organization_password: values_org.password,
             numero_telefono: values_org.numero_telefono,
             device: "pc",
-            image_url: 'https://res.cloudinary.com/centroconveciones/image/upload/v1686668335/meamjbp3t0unhclqrpbh.jpg' 
+            image_url:
+              "https://res.cloudinary.com/centroconveciones/image/upload/v1686668335/meamjbp3t0unhclqrpbh.jpg",
           }),
         })
           .then((response) => response.json())

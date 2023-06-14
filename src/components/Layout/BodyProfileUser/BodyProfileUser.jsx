@@ -16,7 +16,6 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
   const [nameOrg, setNameOrg] = useState(null);
   const [image, setImage] = useState(null);
   const [isUploading, setIsUploading] = useState(null);
-  const [imageToken, setImageToken] = useState("");
 
   const [imageUrl, setImageUrl] = useState(null);
 
@@ -38,6 +37,23 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
     }
   };
 
+  const fetchOrgData = async () => {
+    try {
+      const response = await fetch(
+        `https://timecheck.up.railway.app/org/${idOrg}`
+      );
+      const data = await response.json();
+      // console.log(data.message);
+      setOrgData(data.message);
+      setImage(data.message.image_url);
+
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
   if (typeUser == 1) {
     useEffect(() => {
       const fetchUserData = async () => {
@@ -46,8 +62,10 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
             `https://timecheck.up.railway.app/user/${nroDocumento}`
           );
           const data = await response.json();
+          console.log(data);
           // console.log(data.message);
           setUserData(data.message);
+
           setImage(data.message.image_url);
           setLoading(false);
         } catch (error) {
@@ -70,6 +88,8 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
             );
             const data = await response.json();
             setImage(data.message.image_url);
+            console.log(data.message.image_url);
+
             // console.log(data.message);
             setNombreUsuario(data.message.nombre_completo_usuario);
             // setLoading(false);
@@ -92,6 +112,8 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
           const data = await response.json();
           // console.log(data.message);
           setOrgData(data.message);
+          setImage(data.message.image_url);
+
           setLoading(false);
         } catch (error) {
           console.log(error);
@@ -162,7 +184,12 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
         );
       } else {
         return (
-          <FormProfileOrg orgData={orgData} imageUrl={imageUrl} image={image} />
+          <FormProfileOrg
+            orgData={orgData}
+            imageUrl={imageUrl}
+            image={image}
+            fetchUserData={fetchOrgData}
+          />
         );
       }
     } else if (activeTab === "changePassword") {
@@ -188,8 +215,6 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
     formData.append("cloud_name", "centroconveciones");
 
     // Generar un nuevo token único para la imagen
-    const newToken = Math.random().toString(36).substr(2, 9);
-    setImageToken(newToken);
 
     try {
       const res = await fetch(
@@ -240,7 +265,6 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
                 name="img"
                 id="img"
                 onChange={handleSelectImage}
-                key={imageToken} // Agrega una clave única para forzar la actualización del componente cuando se seleccione una nueva imagen
               />
             </div>
             {isUploading ? (

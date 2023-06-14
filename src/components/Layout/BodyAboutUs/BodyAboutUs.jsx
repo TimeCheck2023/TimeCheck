@@ -12,7 +12,12 @@ export const BodyAboutUs = () => {
           Sobre Nosotros
         </h1>
         <p className="font-semibold text-white text-lg w-4/5 text-justify xl:text-justify lg:w-5/12 lg:text-center">
-        TimeCheck es una innovadora herramienta en línea diseñada para facilitar la gestión de eventos y mejorar la experiencia para los organizadores como para los participantes. Nuestra plataforma ofrece un sistema automatizado de registro de asistentes que permite a los organizadores llevar un control eficiente de la asistencia en tiempo real.
+          TimeCheck es una innovadora herramienta en línea diseñada para
+          facilitar la gestión de eventos y mejorar la experiencia para los
+          organizadores como para los participantes. Nuestra plataforma ofrece
+          un sistema automatizado de registro de asistentes que permite a los
+          organizadores llevar un control eficiente de la asistencia en tiempo
+          real.
         </p>
       </div>
       <div className="flex flex-col lg:flex-row w-full mb-0 lg:mb-0 2xl:mt-10 2xl:mb-32 xl:mb-40">
@@ -67,19 +72,19 @@ export const BodyAboutUs = () => {
         </div>
         <div className="flex flex-col justify-center items-center">
           <div className="flex flex-col lg:flex-row w-1/2 justify-center items-center">
-            <ContactTeam name="Yuliam A. Osorio P." />
-            <ContactTeam name="Juan Pablo Aranda H." />
-            <ContactTeam name="Carolina Rivera Garcia" />
+            <ContactTeam name="Yuliam A. Osorio P." image="" />
+            <ContactTeam name="Juan Pablo Aranda H." image="/aranda.jpeg" />
+            <ContactTeam name="Carolina Rivera Garcia" image="/calorina.jpg" />
           </div>
           <div className="flex flex-col lg:flex-row w-1/2 justify-center items-center">
-            <ContactTeam name="Jose Daniel Aldana" />
-            <ContactTeam name="Yvette Daniela Campo" />
-            <ContactTeam name="Mateo H. Mahecha" />
+            <ContactTeam name="Jose Daniel Aldana" image="" />
+            <ContactTeam name="Yvette Daniela Campo" image="/yvette.jpg" />
+            <ContactTeam name="Mateo H. Mahecha" image="/mateo.jpg" />
           </div>
           <div className="flex flex-col lg:flex-row w-1/2 justify-center items-center">
-            <ContactTeam name="Sara Valentina Russi" />
-            <ContactTeam name="Juan David Galindo " />
-            <ContactTeam name="Carlos Alberto Malambo" />
+            <ContactTeam name="Sara Valentina Russi" image="/sara.jpg" />
+            <ContactTeam name="Juan David Galindo " image="/galindo.jpeg" />
+            <ContactTeam name="Carlos Alberto Malambo" image="/malambo.jpg" />
           </div>
         </div>
       </div>

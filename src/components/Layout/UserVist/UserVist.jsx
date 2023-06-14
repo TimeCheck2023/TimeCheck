@@ -197,9 +197,7 @@ export const UserVist = () => {
           </div>
         )}
       </div>
-      <Footer
-        style={`${events.length === 0 && "absolute bottom-0 left-0 pl-"}`}
-      />
+      <Footer style={`${events.length <= 4 && "absolute bottom-0"}`} />
     </>
   );
 };

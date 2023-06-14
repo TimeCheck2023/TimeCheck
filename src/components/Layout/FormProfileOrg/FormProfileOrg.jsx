@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../../Context/AuthContext";
+import { useContext } from "react";
 
-export const FormProfileOrg = ({ orgData }) => {
+export const FormProfileOrg = ({ orgData, image, imageUrl, fetchUserData }) => {
   const [idOrg, setIdOrg] = useState(orgData.id_organización || 0);
 
   const [organizationName, setOrganizationName] = useState(
@@ -12,6 +14,10 @@ export const FormProfileOrg = ({ orgData }) => {
   );
   const [phoneNumber, setPhoneNumber] = useState(orgData.numero_telefono || "");
   const [email, setEmail] = useState(orgData.correo_organizacion || "");
+
+  const { updateUserInfo } = useContext(AuthContext);
+
+  const imageValid = imageUrl === null ? image : imageUrl;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,27 +35,41 @@ export const FormProfileOrg = ({ orgData }) => {
             address_organization: organizationAddress,
             email_organization: email,
             numero_telefono: phoneNumber,
-            device: "pc"
+            device: "pc",
+            image_url: imageValid,
           }),
         }
       );
 
-      const  data = await response.text();
-      // console.log(data)
-      if (response.ok) {
-        toast.success(
-          "Información de la organización actualizada exitosamente",
-          {
-            theme: "dark",
-            autoClose: 3000,
-          }
-        );
-
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000); // Retraso de 3 segundos antes de recargar la página
+      const data = await response.json();
+      console.log(data);
+      if (data.error) {
+        toast.error("Error al actualizar el perfil", {
+          theme: "dark",
+        });
       } else {
-        console.error("Error al actualizar la información de la organización");
+        // setEmailUpdate(data.data.recordsets[0][0].mensaje);
+        // console.log(data.data.recordsets[0][0].mensaje);
+        updateUserInfo(imageValid);
+        // console.log(imageValid);
+        toast.success("Perfil actualizado exitosamente", {
+          theme: "dark",
+          autoClose: 100, // Duración de la alerta en milisegundos (3 segundos en este caso)
+        });
+        fetchUserData();
+
+        if (data.data.recordsets[0][0].mensaje === "cambiado") {
+          toast.info("Necesitas volver a iniciar sesión!", {
+            autoClose: 2000,
+            theme: "dark",
+          });
+          // setTimeout(() => {
+          //   localStorage.removeItem("token_login");
+
+          //   // Redirigir al usuario a la página de inicio de sesión
+          //   navigate(`/SignIn`);
+          // }, 2000);
+        }
       }
     } catch (error) {
       console.error("Error al realizar la solicitud", error);

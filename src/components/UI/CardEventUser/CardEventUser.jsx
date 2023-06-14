@@ -5,6 +5,7 @@ import { AuthContext } from "../../../Context/AuthContext";
 import io from "socket.io-client";
 import CommentModal from "../../Layout/CommentModal/CommentModal";
 import moment from "moment";
+import { BtnLike } from "../BtnLike/BtnLike";
 
 export const CardEventUser = (props) => {
   const [openModal, setOpenModal] = useState(false);
@@ -12,7 +13,8 @@ export const CardEventUser = (props) => {
   const [getComments, setGetComments] = useState([]);
   const [likes, setLikes] = useState([]);
   // const [itsOnTime, setItsOnTime] = useState(false);
-  const [nroLikes, setNroLikes] = useState(null);
+  // const [nroLikes, setNroLikes] = useState(null);
+  // const [eventLikes, setEventLikes] = useState({});
 
   const { socket, nroDocumento } = useContext(AuthContext);
 
@@ -58,33 +60,29 @@ export const CardEventUser = (props) => {
     socket.emit("deleteLikes", objeto);
   };
 
+  // useEffect(() => {}, [socket, props.id]);
+
   useEffect(() => {
     socket.on("resultComments", (getComments) => {
       setGetComments(getComments);
     });
 
-    // socket.on('Countlikes', (data) => {
+    // socket.on("Countlikes", (data) => {
     //   setNroLikes(data);
-    //   console.log(data)
-    // })
+    //   console.log(data);
+    // });
 
-    socket.on("likes", (getLikes) => {
-      setLikes(getLikes);
-      // console.log(getLikes);
-      // console.log(getLikes);
-    });
+    // socket.on("likes", (getLikes) => {
+    //   setLikes(getLikes);
+    //   // console.log(getLikes);
+    //   // console.log(getLikes);
+    // });
 
     // Evento de error
     socket.on("error", (error) => {
       console.log("Error en la conexión del socket:", error);
     });
-
-    socket.emit("getLikes", nroDocumento);
-
-    // socket.emit('getCountLikes', props.id)
-
-    // });
-  }, [socket]);
+  }, [socket, props.id]);
 
   const resultLikes = likes.some(
     (like) =>
@@ -148,19 +146,7 @@ export const CardEventUser = (props) => {
           </div>
         </div>
         <div className="flex flex-row justify-between px-8 py-4">
-          <button
-            onClick={() => {
-              resultLikes ? DeleteLikes(props.id) : CreateLikes(props.id);
-            }}
-            className="flex flex-row items-center border w-14 text-center justify-center border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-1">
-            {resultLikes ? (
-              <AiFillLike className=" text-base" />
-            ) : (
-              <AiOutlineLike className=" text-base" />
-            )}
-
-            {/* {nroLikes} */}
-          </button>
+          <BtnLike eventId={props.id} />
           <button
             onClick={() => {
               handleOpenModal(props.id);
