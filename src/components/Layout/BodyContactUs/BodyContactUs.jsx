@@ -1,9 +1,25 @@
-import React, { useState, useEffect, Link } from "react";
+import React, { useState, useEffect, useRef} from "react";
 import { Footer } from "../Footer/Footer";
 import styles from "./BodyContactUs.module.css";
+import emailjs from "@emailjs/browser";
 
 export const BodyContactUs = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const refForm = useRef();
+
+  const handleSubmitEmail = (event) =>{
+    event.preventDefault();
+
+    const serviceId = "service_95ye6xa";
+    const templateId = "template_havn4yo";
+    //3
+    const apiKey = "5CQTAYXP4nS0p-pWU";
+
+    emailjs.sendForm(serviceId, templateId, refForm.current , apiKey)
+    .then( result => console.log(result.text))
+    .catch(error => console.error(error))
+     refForm.current.reset();
+  }
 
   useEffect(() => {
     window.addEventListener("load", () => {
@@ -43,6 +59,8 @@ export const BodyContactUs = () => {
                   </h2>
                 </div>
                 <form
+                  ref={refForm}
+                  onSubmit={handleSubmitEmail}
                   action=""
                   className="flex flex-col gap-3 w-full items-center">
                   <div className="flex flex-col w-full items-center">
@@ -52,7 +70,8 @@ export const BodyContactUs = () => {
                     <input
                       className="border bg-gray-100 border-gray-300 rounded-md p-2 w-4/5 md:w-2/5 xl:w-4/5 2xl:w-2/3 focus:outline-none focus:ring focus:ring-purple-800"
                       type="text"
-                      id="name"
+                      name="from_name"
+                      id="from_name"
                       placeholder="Ingrese su nombre completo..."
                     />
                   </div>
@@ -63,6 +82,7 @@ export const BodyContactUs = () => {
                     <input
                       className="border bg-gray-100 border-gray-300 rounded-md p-2 w-4/5 md:w-2/5 xl:w-4/5 2xl:w-2/3 focus:outline-none focus:ring focus:ring-purple-800"
                       type="email"
+                      name="email"
                       id="email"
                       placeholder="Ingrese su correo electronico..."
                     />
@@ -74,8 +94,8 @@ export const BodyContactUs = () => {
                     <textarea
                       className="h-40 px-4 py-2 bg-gray-100 resize-none border w-2/5 md:w-2/5 xl:w-4/5 2xl:w-2/3 border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-purple-800"
                       placeholder="Escribe tu mensaje aquí"
-                      name="mensaje"
-                      id="mensaje"
+                      name="message"
+                      id="message"
                       cols="30"
                       rows="8"></textarea>
                   </div>
