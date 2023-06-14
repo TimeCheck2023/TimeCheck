@@ -14,7 +14,9 @@ export const AuthProvider = ({ children }) => {
   const [rol, setRol] = useState(null);
   const [nroDocumento, setNroDocumento] = useState(null);
   const [correo, setCorreo] = useState(null);
-  const [image, setImage] = useState(null)
+  const [image, setImage] = useState(null);
+  const [emailUser, setEmailUser] = useState(null);
+  const [nroUsuario, setNroUsuario] = useState(null);
   // const [nameOrg, setNameOrg] = useState(null);
 
   // const token = localStorage.getItem("token_login");
@@ -33,8 +35,11 @@ export const AuthProvider = ({ children }) => {
       setUserType(decoded.payload.EsUsuario);
       setRol(decoded.payload.rol);
       setCorreo(decoded.payload.correo);
-      setImage(decoded.payload.image_url)
-      console.log(decoded.payload)
+      setImage(decoded.payload.image_url);
+      // console.log(decoded.payload);
+      setEmailUser(decoded.payload.correo);
+      setNroUsuario(decoded.payload.nro_documento_usuario);
+
       // setNameOrg(data.message.nombre_organizacion);
     } else {
       // No hay token
@@ -51,6 +56,10 @@ export const AuthProvider = ({ children }) => {
 
   const updateIdSubOrg = (newIdSubOrg) => {
     setIdSubOrg(newIdSubOrg);
+  };
+
+  const updateUserInfo = (newImageURL) => {
+    setImage(newImageURL);
   };
 
   useEffect(() => {
@@ -72,7 +81,10 @@ export const AuthProvider = ({ children }) => {
         updateNroDocumento,
         updateIdOrg,
         updateIdSubOrg,
-        image
+        image,
+        emailUser,
+        nroUsuario,
+        updateUserInfo,
       }}>
       {children}
     </AuthContext.Provider>

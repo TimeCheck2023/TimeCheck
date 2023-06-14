@@ -12,6 +12,8 @@ export const BtnLogout = ({ openNavBar }) => {
     // Eliminar el token de sesión del almacenamiento local
     localStorage.removeItem("token_login");
     localStorage.removeItem("hasShownToast");
+    localStorage.removeItem("values_org");
+    localStorage.removeItem("values_us");
     // Actualizar el número de documento a null
     updateNroDocumento(null);
     updateIdOrg(null);

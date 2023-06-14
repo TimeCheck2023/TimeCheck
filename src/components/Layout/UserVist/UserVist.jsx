@@ -19,13 +19,9 @@ export const UserVist = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [categories, setCategories] = useState([]);
-  const [nroLikes, setNroLikes] = useState(null)
-
+  const [nroLikes, setNroLikes] = useState(null);
 
   const { socket } = useContext(AuthContext);
-
-
-
 
   useEffect(() => {
     fetch("https://time-check.azurewebsites.net/api/Event/List")
@@ -61,10 +57,7 @@ export const UserVist = () => {
     }
   };
 
-  useEffect(() => {
-
-  }, [socket])
-  
+  useEffect(() => {}, [socket]);
 
   useEffect(() => {
     fetchCategories();
@@ -131,7 +124,7 @@ export const UserVist = () => {
                         selectedCategory === category.tipoEvento
                           ? "bg-purple-900"
                           : ""
-                      } hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white`}
+                      } hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white cursor-pointer`}
                       onClick={() => {
                         setSelectedCategory(category.tipoEvento);
                       }}>

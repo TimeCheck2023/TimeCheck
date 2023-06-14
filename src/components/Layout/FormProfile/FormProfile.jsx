@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useContext } from "react";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-export const FormProfile = ({ userData }) => {
+export const FormProfile = ({ userData, imageUrl, image, fetchUserData }) => {
   const [fullName, setFullName] = useState(
     userData.nombre_completo_usuario || ""
   );
@@ -20,6 +23,12 @@ export const FormProfile = ({ userData }) => {
   );
   const [telefono, setTelefono] = useState(userData.telefono_usuario || "");
 
+  const { updateUserInfo } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const [emailUpdate, setEmailUpdate] = useState(null);
+
   useEffect(() => {
     setFullName(userData.nombre_completo_usuario || "");
     setTipoPoblacion(userData.tipo_poblacion_usuario || "");
@@ -29,6 +38,8 @@ export const FormProfile = ({ userData }) => {
     setCorreoElectronico(userData.correo_usuario || "");
     setTelefono(userData.telefono_usuario || "");
   }, [userData]);
+
+  const imageValid = imageUrl === null ? image : imageUrl;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,28 +60,42 @@ export const FormProfile = ({ userData }) => {
             address: direccion,
             typeofpopulation: tipoPoblacion,
             device: "pc",
-            image_url:"https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"
+            image_url: imageValid,
           }),
         }
-      ).then((response) => response.json())
-      .then((data) => {
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log(data);
+          if (data.error) {
+            toast.error("Error al actualizar el perfil", {
+              theme: "dark",
+            });
+          } else {
+            // setEmailUpdate(data.data.recordsets[0][0].mensaje);
+            // console.log(data.data.recordsets[0][0].mensaje);
+            updateUserInfo(imageValid);
+            // console.log(imageValid);
+            toast.success("Perfil actualizado exitosamente", {
+              theme: "dark",
+              autoClose: 900, // Duración de la alerta en milisegundos (3 segundos en este caso)
+            });
+            fetchUserData();
 
-        if(data.error){
-          toast.error("Error al actualizar el perfil", {
-            theme: "dark",
-          });
-        }else{
-          console.log(data)
-          toast.success("Perfil actualizado exitosamente", {
-            theme: "dark",
-            autoClose: 1500, // Duración de la alerta en milisegundos (3 segundos en este caso)
-          });
-          // setTimeout(() => {
-          //   window.location.reload();
-          // }, 1500); // Retraso de 3 segundos antes de recargar la página
-        }
+            if (data.data.recordsets[0][0].mensaje === "cambiado") {
+              toast.info("Necesitas volver a iniciar sesión!", {
+                autoClose: 2000,
+                theme: "dark",
+              });
+              setTimeout(() => {
+                localStorage.removeItem("token_login");
 
-      })
+                // Redirigir al usuario a la página de inicio de sesión
+                navigate(`/SignIn`);
+              }, 2000);
+            }
+          }
+        });
     } catch (error) {
       // Ocurrió un error durante la solicitud, puedes mostrar una notificación de error o realizar alguna acción adicional
       console.error("Error al realizar la solicitud", error);

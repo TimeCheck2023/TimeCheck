@@ -220,9 +220,9 @@ export const SubOrgView = () => {
 
   const handleEditMember = () => {
     const body = {
-      id_suborganizacion2: id, // Reemplaza el valor 0 con el ID de la suborganización correspondiente
-      nro_documento_usuario1: nroDocumento, // Reemplaza "selectedUser" con el número de documento del usuario seleccionado
-      rol: rol, // Reemplaza "rol" con el valor del rol seleccionado
+      id_suborganizacion2: id, // ID de la suborganización correspondiente
+      nro_documento_usuario1: nroDocumento, // Número de documento del usuario seleccionado
+      rol: rol, // El valor del rol seleccionado
     };
 
     fetch("https://time-check.azurewebsites.net/api/Member/EditMemberRole", {
