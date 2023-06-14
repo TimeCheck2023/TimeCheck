@@ -5,9 +5,9 @@ import io from "socket.io-client";
 
 export const BtnLike = (props) => {
   const [likes, setLikes] = useState([]);
-  const [nroLikes, setNroLikes] = useState([]);
+  const [nroLikes, setNroLikes] = useState();
 
-  //   console.log(props.id)
+  console.log(props.eventId);
 
   const { socket, nroDocumento } = useContext(AuthContext);
 
@@ -36,7 +36,8 @@ export const BtnLike = (props) => {
 
     socket.on("Countlikes", (data) => {
       setNroLikes(data);
-      console.log(data);
+      console.log(data.id_evento5);
+      // console.log(data);
     });
 
     socket.on("likes", (getLikes) => {
@@ -58,6 +59,8 @@ export const BtnLike = (props) => {
       like.id_evento5 === props.eventId
   );
 
+  // const isYourLike = nroLikes.id_evento5 === props.eventId && nroLikes[""];
+
   return (
     <button
       onClick={() => {
@@ -69,7 +72,7 @@ export const BtnLike = (props) => {
       ) : (
         <AiOutlineLike className="text-base" />
       )}
-      {/* {nroLikes} */}
+      {/* {isYourLike} */}
     </button>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 
 export const ContactTeam = (props) => {
-  console.log(props.image);
+  // console.log(props.image);
   return (
     <div className="w-full flex flex-col justify-center items-center my-10">
       <div className="">

@@ -72,11 +72,11 @@ export const CardEventUser = (props) => {
     //   console.log(data);
     // });
 
-    // socket.on("likes", (getLikes) => {
-    //   setLikes(getLikes);
-    //   // console.log(getLikes);
-    //   // console.log(getLikes);
-    // });
+    socket.on("likes", (getLikes) => {
+      // setLikes(getLikes);
+      // console.log(getLikes);
+      // console.log(getLikes);
+    });
 
     // Evento de error
     socket.on("error", (error) => {

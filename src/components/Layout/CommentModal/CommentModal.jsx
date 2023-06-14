@@ -36,7 +36,7 @@ const CommentModal = ({
 
   useEffect(() => {
     getComments.map((comment) => {
-      // console.log(comment);
+      console.log(comment);
     });
   }, [getComments]);
 
@@ -170,9 +170,16 @@ const CommentModal = ({
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center justify-center bg-purple-600 rounded-full h-10 w-12 lg:h-14 lg:w-16 text-white text-lg lg:text-2xl">
-                    {comment.nombre_completo_usuario?.charAt(0)?.toUpperCase()}
+                  <div>
+                    <img
+                      src={comment.image_url}
+                      alt="img"
+                      className="h-14 w-16 rounded-full"
+                    />
                   </div>
+                  {/* <div className="flex items-center justify-center bg-purple-600 rounded-full h-10 w-12 lg:h-14 lg:w-16 text-white text-lg lg:text-2xl">
+                    {comment.nombre_completo_usuario?.charAt(0)?.toUpperCase()}
+                  </div> */}
                 </li>
               ))}
             </ul>

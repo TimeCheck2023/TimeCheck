@@ -72,7 +72,7 @@ export const BodyAboutUs = () => {
         </div>
         <div className="flex flex-col justify-center items-center">
           <div className="flex flex-col lg:flex-row w-1/2 justify-center items-center">
-            <ContactTeam name="Yuliam A. Osorio P." image="" />
+            <ContactTeam name="Yuliam A. Osorio P." image="/Osorio.jpeg" />
             <ContactTeam name="Juan Pablo Aranda H." image="/aranda.jpeg" />
             <ContactTeam name="Carolina Rivera Garcia" image="/calorina.jpg" />
           </div>

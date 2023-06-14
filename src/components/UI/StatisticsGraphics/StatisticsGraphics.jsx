@@ -3,6 +3,8 @@ import { Footer } from "../../Layout/Footer/Footer";
 import { VictoryChart, VictoryBar, VictoryTheme, VictoryAxis } from "victory";
 import { SlideBar } from "../../Layout/SlideBar/SlideBar";
 import { NavbarMobileUser } from "../../Layout/NavbarMobileUser/NavbarMobileUser";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const colorScale = ["#7032DD", "#E697FF"];
 
@@ -18,6 +20,12 @@ const data = [
 ];
 
 export const StatisticsGraphics = () => {
+  const location = useLocation();
+  const idSubOrg = location.state && location.state.idSubOrg;
+  useEffect(() => {
+    console.log(idSubOrg);
+  }, [idSubOrg]);
+
   return (
     <>
       <SlideBar />
@@ -29,9 +37,9 @@ export const StatisticsGraphics = () => {
         </h1>
         <div className="w-4/5 flex flex-col justify-center items-center md:w-2/5 h-1.3 z-20 my-4 mx-5 shadow-lg border-violet-500">
           <h1 className="ml-8 mt-8 text-violet-500 text-4xl font-bold">
-            Charla Soft
+            Presentación de proyectos
           </h1>
-          <h2 className="ml-8 text-3xl font-bold">500</h2>
+          {/* <h2 className="ml-8 text-3xl font-bold">500</h2> */}
           <h2 className="ml-8 text-slate-950 text-2xl font-bold">Asistentes</h2>
           <VictoryChart
             theme={VictoryTheme.material}
