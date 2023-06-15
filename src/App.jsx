@@ -40,7 +40,7 @@ function App() {
             <Route path="/Suborganization/:id" element={<SubOrgView />} />
             <Route path="/Verificacion/:codigo" element={<Verificacion />} />
             <Route
-              path="/StatisticsGraphics"
+              path="/StatisticsGraphics/:id"
               element={<StatisticsGraphics />}
             />
           </Routes>

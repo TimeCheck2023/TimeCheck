@@ -3,10 +3,49 @@ import { Footer } from "../../Layout/Footer/Footer";
 import { VictoryChart, VictoryBar, VictoryTheme, VictoryAxis } from "victory";
 import { SlideBar } from "../../Layout/SlideBar/SlideBar";
 import { NavbarMobileUser } from "../../Layout/NavbarMobileUser/NavbarMobileUser";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
+
+
 const colorScale = ["#7032DD", "#E697FF"];
+
+
+
+// useEffect(() => {
+//   const fetchSubsOrg = async () => {
+//     try {
+//       const response = await fetch(
+//         `https://timecheck.up.railway.app/SubOrg/${id}`
+//       );
+//       const data = await response.json();
+//       console.log(data)
+//       // setEvents(data.message);
+//       // console.log(data.message);
+//       // console.log(data.message[0]);
+//       // setNombreOrg(data.message[0].nombre_suborganizacion);
+//       // setDescripcionSubOrg(data.message[0].descripcion_suborganizacion);
+//       // setIdSubOrg(data.message[0].id_suborganizacion);
+//       console.log(data.message[0].id_suborganizacion);
+//       // console.log(data.message);
+//       // setUserData(data.message);
+
+//       // setImage(data.message.image_url);
+//       // setLoading(false);
+//     } catch (error) {
+//       console.log(error);
+//       // setLoading(false);
+//     }
+//   };
+
+//   // if () {
+//   //   fetchSubsOrg();
+//   // }
+// }, []);
+
+// useEffect(() => {
+//   console.log(id);
+// }, [id]);
 
 const data = [
   {
@@ -20,11 +59,11 @@ const data = [
 ];
 
 export const StatisticsGraphics = () => {
-  const location = useLocation();
-  const idSubOrg = location.state && location.state.idSubOrg;
-  useEffect(() => {
-    console.log(idSubOrg);
-  }, [idSubOrg]);
+
+  const { id } = useParams();
+
+
+  console.log(id)
 
   return (
     <>
@@ -43,7 +82,8 @@ export const StatisticsGraphics = () => {
           <h2 className="ml-8 text-slate-950 text-2xl font-bold">Asistentes</h2>
           <VictoryChart
             theme={VictoryTheme.material}
-            domainPadding={{ x: 100 }}>
+            domainPadding={{ x: 100 }}
+          >
             <VictoryBar
               style={{
                 data: {
@@ -72,6 +112,3 @@ export const StatisticsGraphics = () => {
     </>
   );
 };
-
-{
-}

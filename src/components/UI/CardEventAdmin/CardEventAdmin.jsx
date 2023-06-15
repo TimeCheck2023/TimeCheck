@@ -27,9 +27,11 @@ export const CardEventAdmin = (props) => {
 
   // console.log(props.idSubOrg);
   // console.log(idSubOrg);
-  // console.log(idSubOrg);
+  console.log(idSubOrg);
 
   const itsAdminHere = idSubOrg === props.idSubOrg;
+
+  // console.log(props.idSubOrg)
 
   //Funcion para dar like
   const CreateLikes = (id) => {
@@ -138,7 +140,10 @@ export const CardEventAdmin = (props) => {
     setOpenModal(false);
   };
 
-  const mostrar = !itsAdminHere && itsOnTime;
+  console.log(itsAdminHere)
+  console.log(itsOnTime)
+
+  const mostrar = itsAdminHere && itsOnTime;
 
   return (
     <>

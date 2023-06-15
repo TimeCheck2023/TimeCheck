@@ -12,6 +12,7 @@ export const StatisticsView = () => {
   const [descripcionSubOrg, setDescripcionSubOrg] = useState();
   const [idSubOrg, setIdSubOrg] = useState();
   const { idOrg } = useContext(AuthContext);
+  const [events, setEvents] = useState([]);
 
   /*descripcion_suborganizacion
 : 
@@ -33,6 +34,8 @@ nombre_suborganizacion
           `https://timecheck.up.railway.app/SubOrg/${idOrg}`
         );
         const data = await response.json();
+        setEvents(data.message);
+        console.log(data.message);
         console.log(data.message[0]);
         setNombreOrg(data.message[0].nombre_suborganizacion);
         setDescripcionSubOrg(data.message[0].descripcion_suborganizacion);
@@ -53,6 +56,10 @@ nombre_suborganizacion
       fetchSubsOrg();
     }
   }, [idOrg]);
+  
+  events.map((event) => {
+    console.log(event.nombre_suborganizacion);
+  });
 
   useEffect(() => {}, []);
 
@@ -63,16 +70,24 @@ nombre_suborganizacion
           Panel de Estadisticas
         </h1>
       </div>
-      <Link to={{ pathname: "/StatisticsGraphics", state: { idSubOrg } }}>
-        <div className="w-72 h-72 z-30 my-4 bg-purple-500 flex flex-col justify-center items-center rounded-md shadow-md border border-gray-500">
-          <h2 className="text-white text-center text-2xl font-bold">
-            {nombreOrg}
-          </h2>
-          <h3 className="text-white text-center px-8 mt-4 font-semibold">
-            {descripcionSubOrg}
-          </h3>
-        </div>
-      </Link>
+      <div className="grid grid-cols-2 gap-10 place-content-center text-center content-center place-self-center justify-between">
+        {" "}
+        {events.map((event) => (
+         <Link
+         to={`/StatisticsGraphics/${event.id_suborganizacion}`}
+       >
+            <div className="w-72 h-72 z-30 my-4 bg-purple-500 flex gap-5 flex-col justify-center items-center rounded-md shadow-md border border-gray-500">
+              <h2 className="text-white text-center text-2xl font-bold">
+                {event.nombre_suborganizacion}
+              </h2>
+              <h3 className="text-white text-center font-semibold">
+                {event.descripcion_suborganizacion}
+              </h3>
+            </div>
+          </Link>
+        ))}
+      </div>
+
       <div className="md:pl-14 w-full relative top-3/4">
         <Footer />
       </div>

@@ -95,7 +95,7 @@ export const UserVist = () => {
 
   return (
     <>
-      <div className="sm:pl-20 flex flex-col gap-10 2xl:gap-14 xl:gap-16">
+      <div className="sm:pl-20 flex flex-col gap-10 2xl:gap-14 xl:gap-16 bg-slate-50">
         <div className="w-full flex justify-center mt-10">
           <div className="flex flex-col">
             <button

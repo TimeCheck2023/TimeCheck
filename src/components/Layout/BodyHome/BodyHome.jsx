@@ -18,7 +18,7 @@ export const BodyHome = () => {
   }, []);
 
   return (
-    <div className="w-full sm:ml-24 h-screen">
+    <div className="w-full sm:ml-24 h-screen bg-gray-100">
       <div
         className={`bg-cover bg-center h-80 md:h-80 w-full flex flex-col items-center md:items-start ${
           !isLoading ? "bg-gray-400 animate-pulse" : styles.img

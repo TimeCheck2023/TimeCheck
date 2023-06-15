@@ -109,8 +109,8 @@ export const BodyContactUs = () => {
             </div>
           </div>
         </div>
-      </div>
       <Footer />
+      </div>
     </>
   );
 };

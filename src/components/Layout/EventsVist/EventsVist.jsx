@@ -43,6 +43,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
       .then((data) => {
         // console.log(data);
         setEvents(data);
+        console.log(data)
         // console.log(data)
         setLoading(false);
       });

@@ -7,7 +7,7 @@ export const BtnLike = (props) => {
   const [likes, setLikes] = useState([]);
   const [nroLikes, setNroLikes] = useState();
 
-  console.log(props.eventId);
+  // console.log(props.eventId);
 
   const { socket, nroDocumento } = useContext(AuthContext);
 
@@ -27,22 +27,29 @@ export const BtnLike = (props) => {
       nro_documento_usuario: nroDocumento,
     });
     socket.emit("deleteLikes", objeto);
-  };const isYourLike = nroLikes.length > 0 && nroLikes[0].id_evento === props.eventId;
+  };
+  
+  
+  // const isYourLike = nroLikes.length > 0 && nroLikes[0].id_evento === props.eventId;
+
+  // console.log(props.eventId)
 
 
   useEffect(() => {
     socket.emit("getCountLikes", props.eventId);
 
-    socket.emit("getLikes", nroDocumento);
 
     socket.on("Countlikes", (data) => {
       setNroLikes(data);
-      console.log(data.id_evento5);
+      // console.log(data)
+      // console.log(data?.[""])
+      // console.log(data.id_evento5);
       // console.log(data);
     });
 
     socket.on("likes", (getLikes) => {
       setLikes(getLikes);
+      // console.log(getLikes)
       //   console.log(getLikes);
     });
 
@@ -51,7 +58,6 @@ export const BtnLike = (props) => {
       console.log("Error en la conexión del socket:", error);
     });
 
-    socket.emit("getLikes", nroDocumento);
   }, [socket]);
 
   const resultLikes = likes.some(
@@ -59,6 +65,20 @@ export const BtnLike = (props) => {
       like.nro_documento_usuario3 === nroDocumento &&
       like.id_evento5 === props.eventId
   );
+
+  // const countLikes = likes.some(
+  //   (like) =>
+  //     like.nro_documento_usuario3 === nroDocumento &&
+  //     like.id_evento5 === props.eventId
+  // );
+
+  // let countLikes = 0;
+
+  // if(nroLikes === null || nroLikes?.[""] === undefined){
+  //   countLikes = 0;
+  // }else if(nroLikes?.id_evento5 === props.eventId ){
+  //   countLikes = nroLikes[""]
+  // }
 
   // const isYourLike = nroLikes.id_evento5 === props.eventId && nroLikes[""];
 
@@ -73,7 +93,7 @@ export const BtnLike = (props) => {
       ) : (
         <AiOutlineLike className="text-base" />
       )}
-      {/* {isYourLike} */}
+      {/* {countLikes} */}
     </button>
   );
 };
