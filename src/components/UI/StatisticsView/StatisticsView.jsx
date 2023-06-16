@@ -6,89 +6,69 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../../Context/AuthContext";
 import { useState } from "react";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 
 export const StatisticsView = () => {
-  const [nombreOrg, setNombreOrg] = useState();
-  const [descripcionSubOrg, setDescripcionSubOrg] = useState();
-  const [idSubOrg, setIdSubOrg] = useState();
-  const { idOrg } = useContext(AuthContext);
-  const [events, setEvents] = useState([]);
+  const { idOrg, socket } = useContext(AuthContext);
 
-  /*descripcion_suborganizacion
-: 
-"Grupo de desarrollo de software de el SENA"
-id_organizacion2
-: 
-69
-id_suborganizacion
-: 
-67
-nombre_suborganizacion
-: 
-"Desarrolladores " */
+  const [events, setEvents] = useState([]);
+  const [eventId, setEventId] = useState([]);
+
+
+
 
   useEffect(() => {
-    const fetchSubsOrg = async () => {
+    const fetchEvents = async () => {
       try {
         const response = await fetch(
-          `https://timecheck.up.railway.app/SubOrg/${idOrg}`
+          `https://time-check.azurewebsites.net/api/Event/GetEventsOrg?OrganizacionId=${idOrg}`
         );
         const data = await response.json();
-        setEvents(data.message);
-        console.log(data.message);
-        console.log(data.message[0]);
-        setNombreOrg(data.message[0].nombre_suborganizacion);
-        setDescripcionSubOrg(data.message[0].descripcion_suborganizacion);
-        setIdSubOrg(data.message[0].id_suborganizacion);
-        console.log(data.message[0].id_suborganizacion);
-        // console.log(data.message);
-        // setUserData(data.message);
 
-        // setImage(data.message.image_url);
-        // setLoading(false);
+        // setEventId(data[1].idEvento);
+        setEvents(data);
+        // console.log(data.idEvento)
+        console.log(data);
       } catch (error) {
         console.log(error);
-        // setLoading(false);
       }
     };
 
     if (idOrg) {
-      fetchSubsOrg();
+      fetchEvents();
     }
   }, [idOrg]);
-  
-  events.map((event) => {
-    console.log(event.nombre_suborganizacion);
-  });
 
-  useEffect(() => {}, []);
+
+
+  const getColor = (datum) => colorPalette[datum.x];
 
   return (
-    <div className="w-full h-full flex items-center flex-col gap-12">
-      <div className="mt-2">
+    <div className="w-full h-screen flex items-center flex-col gap-12">
         <h1 className="md:pl-20 text-3xl lg:text-5xl font-semibold">
-          Panel de Estadisticas
+          Eventos y Estadisticas
         </h1>
-      </div>
-      <div className="grid grid-cols-2 gap-10 place-content-center text-center content-center place-self-center justify-between">
-        {" "}
-        {events.map((event) => (
-         <Link
-         to={`/StatisticsGraphics/${event.id_suborganizacion}`}
-       >
-            <div className="w-72 h-72 z-30 my-4 bg-purple-500 flex gap-5 flex-col justify-center items-center rounded-md shadow-md border border-gray-500">
-              <h2 className="text-white text-center text-2xl font-bold">
-                {event.nombre_suborganizacion}
-              </h2>
-              <h3 className="text-white text-center font-semibold">
-                {event.descripcion_suborganizacion}
-              </h3>
-            </div>
-          </Link>
+
+      <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-10 justify-items-center">
+      {events.map((event,index) => (
+      <Link
+      to={`/StatisticsGraphics/${event.idEvento}`}
+      key={index}
+    >
+         <div className="w-72 h-72 z-30 my-4 bg-purple-500 flex gap-5 flex-col justify-center items-center rounded-md shadow-md border border-gray-500">
+           <h2 className="text-white text-center text-2xl font-bold">
+             {event.nombreEvento}
+           </h2>
+           <h3 className="text-white font-medium text-justify px-2">
+             {event.descripcionEvento}
+           </h3>
+         </div>
+       </Link>
         ))}
+
       </div>
 
-      <div className="md:pl-14 w-full relative top-3/4">
+      <div className="md:pl-14 w-full relative top-3/5">
         <Footer />
       </div>
     </div>
