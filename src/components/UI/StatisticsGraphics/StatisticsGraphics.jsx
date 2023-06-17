@@ -122,6 +122,11 @@ export const StatisticsGraphics = () => {
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
+      // Verificar si el contenido excede el tamaño de la página del PDF
+      if (pdfHeight > pdf.internal.pageSize.getHeight()) {
+        pdf.addPage(); // Agregar una nueva página al PDF
+      }
+
       // Agregar margen al PDF
       const margin = 10; // Puedes ajustar el valor del margen según tus necesidades
       const adjustedWidth = pdfWidth - margin * 2;
