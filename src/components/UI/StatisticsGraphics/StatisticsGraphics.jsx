@@ -140,7 +140,7 @@ export const StatisticsGraphics = () => {
         adjustedWidth,
         adjustedHeight
       );
-      pdf.save(`${nameEvent}.pdf`);
+      pdf.save(`${nameEvent}/Estadisticas.pdf`);
     });
   };
 
