@@ -180,7 +180,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents, idSubOrg }) => {
         <div className="h-full">
           <div className="w-full h-full px-4 flex flex-col">
             <div className="flex items-center justify-center mb-8">
-              <h2 className="font-bold text-4xl text-purple-700">
+              <h2 className="font-bold text-4xl text-violet-700">
                 Crear Evento
               </h2>
             </div>
@@ -200,7 +200,7 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents, idSubOrg }) => {
                 )}
                 <div className="md:relative md:left-10 2xl:left-10 text-lg md:w-72 flex justify-center my-5">
                   <label htmlFor="input-file" className="cursor-pointer">
-                    <strong className="text-purple-600">Agregar</strong> imagen
+                    <strong className="text-violet-600">Agregar</strong> imagen
                     del evento
                   </label>
                   <input
@@ -354,13 +354,13 @@ export const ModalEventAdd = ({ handleCloseModal, fetchEvents, idSubOrg }) => {
               </div>
               <div className="footer flex md:relative md:bottom-14 pb-10 md:pb-0 xl:bottom-0  2xl:bottom-0 2xl:mt-10 justify-center items-center w-full my-10 2xl:my-0">
                 <button
-                  className="hover:bg-purple-700 bg-purple-500 text-white font-bold py-2 px-8 rounded mr-4"
+                  className="hover:bg-violet-700 bg-violet-500 text-white font-bold py-2 px-8 rounded mr-4"
                   onClick={handleCloseModal}>
                   Volver
                 </button>
                 <button
                   onClick={handleSubmit}
-                  className="hover:bg-purple-700 bg-purple-500 text-white font-bold py-2 px-8 rounded">
+                  className="hover:bg-violet-700 bg-violet-500 text-white font-bold py-2 px-8 rounded">
                   Guardar
                 </button>
               </div>

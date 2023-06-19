@@ -212,7 +212,7 @@ export const SlideBar = ({
               alt="img"
               className="h-12 w-12 object-cover rounded-full"
             />
-            {/* <div className="w-12 h-12 bg-purple-600 rounded-full mb-4 text-center flex items-center justify-center text-2xl font-normal text-white">
+            {/* <div className="w-12 h-12 bg-violet-600 rounded-full mb-4 text-center flex items-center justify-center text-2xl font-normal text-white">
               {primerCaracterMayuscula}
             </div> */}
             <div>

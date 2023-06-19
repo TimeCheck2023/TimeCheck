@@ -193,7 +193,7 @@ export const SingIn = () => {
               </div>
             </div>
             {/* <div className="relative mt-5 text-center left-16 lg:mt-0 lg:left-1/4 xl:left-60 w-60 xl:my-7 2xl:left-64 2xl:mt-3">
-              <p className="font-sans font-normal text-lg leading-6 flex items-center relative right-14 text-purple-600">
+              <p className="font-sans font-normal text-lg leading-6 flex items-center relative right-14 text-violet-600">
                 <Link to="" className="hover:underline">
                   ¿Olvidaste tu contraseña?
                 </Link>
@@ -207,7 +207,7 @@ export const SingIn = () => {
               <div className="flex gap-2 lg:gap-28 xl:gap-16 flex-col md:flex-row">
                 <button
                   type="submit"
-                  className="p-4 w-56 h-14 flex justify-center bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold"
+                  className="p-4 w-56 h-14 flex justify-center bg-violet-700 hover:bg-violet-900 rounded-lg text-white font-bold"
                   placeholder="Iniciar Sesión"
                   value={"Iniciar Sesión"}
                   disabled={isLoading}>
@@ -217,7 +217,7 @@ export const SingIn = () => {
                     "Iniciar sesión"
                   )}
                 </button>
-                {/* <button className=" p-4 w-56 h-14  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-4">
+                {/* <button className=" p-4 w-56 h-14  bg-violet-700 hover:bg-violet-900 rounded-lg text-white font-bold flex gap-4">
                   <p className="text-2xl pl-3">
                     <FcGoogle />
                   </p>
@@ -227,7 +227,7 @@ export const SingIn = () => {
               <div className="mt-16 lg:mt-6 xl:mt-16 flex justify-center items-center flex-col">
                 <p className="font-sans font-normal text-xl leading-6 flex flex-col md:flex-row gap-1 items-center text-gray-500">
                   ¿No tienes cuenta?
-                  <strong className="text-purple-600 ml-3">
+                  <strong className="text-violet-600 ml-3">
                     <Link className="hover:underline" to="/SingUp">
                       ¡Crea una ahora!
                     </Link>
@@ -235,7 +235,7 @@ export const SingIn = () => {
                 </p>
 
                 <Link
-                  className="p-4 w-40 h-14 mt-6 xl:mt-12 mb-20 md:mb-0 bg-purple-900 hover:bg-purple-600 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center"
+                  className="p-4 w-40 h-14 mt-6 xl:mt-12 mb-20 md:mb-0 bg-violet-900 hover:bg-violet-600 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center"
                   to="/">
                   Volver
                 </Link>

@@ -37,7 +37,7 @@ export const BodyHome = () => {
       </div>
       <div>
         <div className="relative left-5 md:left-20 top-28 w-4/5">
-          <div className="text-purple-600 text-center  md:text-left text-3xl xl:text-4xl relative left-4 md:left-0 font-bold font-sans xl:mb-56">
+          <div className="text-violet-600 text-center  md:text-left text-3xl xl:text-4xl relative left-4 md:left-0 font-bold font-sans xl:mb-56">
             <h1>Algunos de Nuestros Eventos</h1>
           </div>
           <div className="xl:w-2/5 w-full mb-52 lg:mb-0 lg:w-1/3 relative left-4 md:left-0 lg:left-0 top-5">

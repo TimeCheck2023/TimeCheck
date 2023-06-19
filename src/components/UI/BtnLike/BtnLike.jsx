@@ -28,16 +28,13 @@ export const BtnLike = (props) => {
     });
     socket.emit("deleteLikes", objeto);
   };
-  
-  
+
   // const isYourLike = nroLikes.length > 0 && nroLikes[0].id_evento === props.eventId;
 
   // console.log(props.eventId)
 
-
   useEffect(() => {
     socket.emit("getCountLikes", props.eventId);
-
 
     socket.on("Countlikes", (data) => {
       setNroLikes(data);
@@ -57,7 +54,6 @@ export const BtnLike = (props) => {
     socket.on("error", (error) => {
       console.log("Error en la conexión del socket:", error);
     });
-
   }, [socket]);
 
   const resultLikes = likes.some(
@@ -87,7 +83,7 @@ export const BtnLike = (props) => {
       onClick={() => {
         resultLikes ? DeleteLikes(props.eventId) : CreateLikes(props.eventId);
       }}
-      className="flex flex-row items-center border w-14 text-center justify-center border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-1">
+      className="flex flex-row items-center border w-14 text-center justify-center border-slate-300 rounded-md hover:bg-violet-600 hover:text-white text-violet-600 p-1 gap-1 xl:gap-1">
       {resultLikes ? (
         <AiFillLike className="text-base" />
       ) : (

@@ -56,7 +56,7 @@ export const NavbarMobileUser = () => {
       <div className="w-full md:hidden h-20 bg-white fixed bottom-0 z-50 flex justify-between  px-8 sm:px-16 items-center">
         <div
           onClick={handleLogout}
-          className="text-center flex-col text-purple-600 flex justify-center items-center">
+          className="text-center flex-col text-violet-600 flex justify-center items-center">
           <FiLogIn className="text-4xl" />
           <p className="text-sm">Cerrar sesión</p>
         </div>
@@ -65,23 +65,23 @@ export const NavbarMobileUser = () => {
             setOpenNav(!openNav);
             setShowModal(false);
           }}
-          className="text-center flex-col text-white p-3 mr-9 rounded-full bg-purple-600 flex justify-center items-center">
+          className="text-center flex-col text-white p-3 mr-9 rounded-full bg-violet-600 flex justify-center items-center">
           <AiOutlineMenu className="text-4xl" />
         </div>
         <Link
           to="/Profile"
           // onClick={toggleModal}
-          className="text-center flex-col text-purple-600 flex justify-center items-center relative" // Agregar la clase "relative" para poder posicionar el modal correctamente
+          className="text-center flex-col text-violet-600 flex justify-center items-center relative" // Agregar la clase "relative" para poder posicionar el modal correctamente
         >
           <CgProfile className="text-4xl" />
           <p className="text-sm">Perfil</p>
           {/* {showModal && ( // Mostrar el modal solo cuando "showModal" es true
             <div className="absolute bottom-16 right-0 bg-white rounded-md shadow-md px-4 py-3">
               <ul className="flex flex-col gap-4 text-lg font-semibold">
-                <li className="px-3 hover:bg-purple-500 hover:text-white rounded-md py-1">
+                <li className="px-3 hover:bg-violet-500 hover:text-white rounded-md py-1">
                   <Link to="/Profile">Perfil</Link>
                 </li>
-                <li className="px-3 hover:bg-purple-500 hover:text-white rounded-md py-1">
+                <li className="px-3 hover:bg-violet-500 hover:text-white rounded-md py-1">
                   <Link to="/Notifications">Notificaciones</Link>
                 </li>
               </ul>

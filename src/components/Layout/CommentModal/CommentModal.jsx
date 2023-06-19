@@ -101,7 +101,7 @@ const CommentModal = ({
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white absolute top-5 lg:top-auto h-5/6 lg:h-4/5 w-full lg:w-1/2 rounded-lg overflow-hidden gap-5 lg:gap-16 flex flex-col">
-        <div className="flex justify-between items-center p-6 bg-purple-600 text-white">
+        <div className="flex justify-between items-center p-6 bg-violet-600 text-white">
           <h2 className="text-2xl font-bold">Comentarios</h2>
           <button onClick={closeModal}>
             <AiOutlineClose className="text-2xl" />
@@ -109,7 +109,7 @@ const CommentModal = ({
         </div>
 
         <div
-          className={`lg:p-4 mx-1 lg:mx-10 shadow-md bg-slate-50 shadow-neutral-400 rounded-md overflow-y-scroll scrollbar-thumb-purple-900 scrollbar-track-transparent scrollbar-thin ${
+          className={`lg:p-4 mx-1 lg:mx-10 shadow-md bg-slate-50 shadow-neutral-400 rounded-md overflow-y-scroll scrollbar-thumb-violet-900 scrollbar-track-transparent scrollbar-thin ${
             isOrg ? "h-4/5" : " h-full"
           }`}>
           {getComments.length === 0 ? (
@@ -177,7 +177,7 @@ const CommentModal = ({
                       className="h-14 w-16 rounded-full"
                     />
                   </div>
-                  {/* <div className="flex items-center justify-center bg-purple-600 rounded-full h-10 w-12 lg:h-14 lg:w-16 text-white text-lg lg:text-2xl">
+                  {/* <div className="flex items-center justify-center bg-violet-600 rounded-full h-10 w-12 lg:h-14 lg:w-16 text-white text-lg lg:text-2xl">
                     {comment.nombre_completo_usuario?.charAt(0)?.toUpperCase()}
                   </div> */}
                 </li>
@@ -195,7 +195,7 @@ const CommentModal = ({
               onChange={handleInputChange}
             />
             <button
-              className="bg-purple-600 text-white py-2 px-3 lg:py-5 lg:px-5 rounded-md absolute right-5"
+              className="bg-violet-600 text-white py-2 px-3 lg:py-5 lg:px-5 rounded-md absolute right-5"
               type="submit"
               disabled={isLoadingComments}>
               {isLoadingComments ? (

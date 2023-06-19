@@ -12,7 +12,8 @@ export const CardEventUser = (props) => {
   const [openCommentModal, setOpenCommentModal] = useState(false);
   const [getComments, setGetComments] = useState([]);
   const [likes, setLikes] = useState([]);
-  const [nroLikes, setNroLikes] = useState();
+  // const [nroLikes, setNroLikes] = useState();
+  const [likesCount, setLikesCount] = useState(0);
 
   // const [itsOnTime, setItsOnTime] = useState(false);
   // const [nroLikes, setNroLikes] = useState(null);
@@ -65,14 +66,21 @@ export const CardEventUser = (props) => {
   // useEffect(() => {}, [socket, props.id]);
 
   useEffect(() => {
-
     socket.on("resultComments", (getComments) => {
       setGetComments(getComments);
     });
 
+    /*{countLikes: 3, likesDetails: Array(3)} */
+
     socket.on("Countlikes", (data) => {
-      setNroLikes(data);
-      console.log(data);
+      const eventLikes = data.likesDetails.find(
+        (item) => item.id_evento5 === props.id
+      );
+
+      // console.log(eventLikes);
+      if (eventLikes) {
+        setLikesCount(data.countLikes);
+      }
     });
 
     socket.on("likes", (getLikes) => {
@@ -88,8 +96,6 @@ export const CardEventUser = (props) => {
     socket.emit("getCountLikes", props.id);
 
     socket.emit("getLikes", nroDocumento);
-
-
   }, [socket, props.id]);
 
   const resultLikes = likes.some(
@@ -97,6 +103,8 @@ export const CardEventUser = (props) => {
       like.nro_documento_usuario3 === nroDocumento &&
       like.id_evento5 === props.id
   );
+
+  // console.log(resultLikes);
 
   const handleCloseCommentModal = () => {
     setOpenCommentModal(false);
@@ -126,8 +134,7 @@ export const CardEventUser = (props) => {
       <div
         className={`xl:w-4/5 2xl:w-3/5 h-full border border-slate-300 bg-gray-100 rounded-lg ${
           itsOnTime ? "hidden" : ""
-        }`}
-      >
+        }`}>
         <div className="flex justify-between px-2 py-1 text-sm">
           <p className="font-bold">
             {props.cuposDisponibles}/{props.aforo}
@@ -143,10 +150,10 @@ export const CardEventUser = (props) => {
         </div>
         <div className="w-full px-3 py-3 flex flex-col">
           <div className="w-full truncate flex justify-between">
-            <p className="text-base text-purple-600 font-bold truncate">
+            <p className="text-base text-violet-600 font-bold truncate">
               {props.title}
             </p>
-            <p className="text-purple-600 font-medium">
+            <p className="text-violet-600 font-medium">
               {formatPrice(props.price)}
             </p>
           </div>
@@ -157,33 +164,28 @@ export const CardEventUser = (props) => {
         <div className="flex flex-row justify-between px-8 py-4">
           <button
             onClick={() => {
-              resultLikes
-                ? DeleteLikes(props.id)
-                : CreateLikes(props.id);
+              resultLikes ? DeleteLikes(props.id) : CreateLikes(props.id);
             }}
-            className="flex flex-row items-center border w-14 text-center justify-center border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-1"
-          >
+            className="flex flex-row items-center border w-14 text-center justify-center border-slate-300 rounded-md hover:bg-violet-600 hover:text-white text-violet-600 p-1 gap-1 xl:gap-1">
             {resultLikes ? (
               <AiFillLike className="text-base" />
             ) : (
               <AiOutlineLike className="text-base" />
             )}
-            {/* {countLikes} */}
+            {likesCount}
           </button>
           <button
             onClick={() => {
               handleOpenModal(props.id);
             }}
-            className="flex flex-row items-center border w-32 text-center px-4 lg:px-5 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold"
-          >
+            className="flex flex-row items-center border w-32 text-center px-4 lg:px-5 border-slate-300 rounded-md hover:bg-violet-600 hover:text-white text-violet-600 p-1 gap-1 font-semibold">
             <p>Comentarios</p>
           </button>
           <button
             onClick={() => {
               setOpenModal(!openModal);
             }}
-            className="flex flex-row items-center border px-4 lg:px-5 xl:px-5  2xl:w-32 text-center 2xl:justify-center border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold"
-          >
+            className="flex flex-row items-center border px-4 lg:px-5 xl:px-5  2xl:w-32 text-center 2xl:justify-center border-slate-300 rounded-md hover:bg-violet-600 hover:text-white text-violet-600 p-1 gap-1 font-semibold">
             <p>Ver más</p>
           </button>
         </div>

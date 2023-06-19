@@ -9,9 +9,7 @@ export const SubOrganizations = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "https://timecheck.up.railway.app/SubOrg"
-        );
+        const response = await fetch("https://timecheck.up.railway.app/SubOrg");
         if (response.ok) {
           const data = await response.json();
           setSubOrganizations(data.message);
@@ -41,7 +39,7 @@ export const SubOrganizations = () => {
 
   return (
     <div className="border w-full flex gap-1 justify-center flex-col items-center h-full xl:h-4/5 border-neutral-300 mx-2 xl:mx-0 my-2 mb-10 pb-10">
-      <h2 className="text-center py-2 text-2xl xl:text-4xl text-purple-800 font-semibold">
+      <h2 className="text-center py-2 text-2xl xl:text-4xl text-violet-800 font-semibold">
         Suborganizaciones
       </h2>
       <div className="w-full h-full xl:h-1/2 grid place-items-center md:grid-cols-2 xl:grid-cols-3  ">
@@ -65,7 +63,7 @@ export const SubOrganizations = () => {
                   key={i}
                   className={`pagination-item ${
                     currentPage === i + 1 ? "active" : ""
-                  } bg-purple-500 text-white px-4 py-2 rounded-md mx-1`}
+                  } bg-violet-500 text-white px-4 py-2 rounded-md mx-1`}
                   onClick={() => paginate(i + 1)}>
                   {i + 1}
                 </button>

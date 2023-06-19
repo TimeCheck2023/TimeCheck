@@ -8,6 +8,8 @@ import { ModalEventAdd } from "../ModalEventAdd/ModalEventAdd";
 import NoEventsMessage from "../../UI/NotEventsMessage/NotEventsMessage";
 import { LoaderEventsGet } from "../../UI/LoaderEventsGet/LoaderEventsGet";
 import moment from "moment";
+import { AuthContext } from "../../../Context/AuthContext";
+import { useContext } from "react";
 
 const PAGE_SIZE = 3;
 
@@ -22,6 +24,8 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
   const [categories, setCategories] = useState([]);
   const [categoriesId, setCategoriesId] = useState([]);
   const [option, setOption] = useState(1);
+
+  const { nroDocumento } = useContext(AuthContext);
 
   const fetchEvents1 = () => {
     fetch(`https://time-check.azurewebsites.net/api/Event/List`)
@@ -43,7 +47,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
       .then((data) => {
         // console.log(data);
         setEvents(data);
-        console.log(data)
+        console.log(data);
         // console.log(data)
         setLoading(false);
       });
@@ -61,6 +65,20 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
       });
 
     setOption(2);
+  };
+
+  const fetchEvents4 = () => {
+    fetch(
+      `https://time-check.azurewebsites.net/api/Event/PendingEvents/${nroDocumento}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data);
+        setEvents(data.response);
+        setLoading(false);
+      });
+
+    setOption(3);
   };
 
   const fetchEvents = userType === 1 ? fetchEvents1 : fetchEvents2;
@@ -132,16 +150,23 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
             <button
               onClick={fetchEvents1}
               className={`px-4 py-2 rounded ${
-                option === 1 ? "bg-purple-600 text-white" : ""
+                option === 1 ? "bg-violet-600 text-white" : ""
               }`}>
               Ver todos los eventos
             </button>
             <button
               onClick={fetchEvents3}
               className={`px-4 py-2 rounded ${
-                option === 1 ? "" : "bg-purple-600 text-white"
+                option === 2 ? "bg-violet-600 text-white" : ""
               }`}>
               Ver eventos de tu suborganización
+            </button>
+            <button
+              onClick={fetchEvents4}
+              className={`px-4 py-2 rounded ${
+                option === 3 ? "bg-violet-600 text-white" : ""
+              }`}>
+              Ver eventos pendientes
             </button>
           </nav>
         )}
@@ -157,16 +182,16 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
             onClick={() => {
               setOpenCategoria(!openCategoria);
             }}
-            className="flex justify-center items-center gap-2 px-4 py-2 w-36 md:w-40 bg-purple-600 hover:bg-purple-700 font-normal text-white">
+            className="flex justify-center items-center gap-2 px-4 py-2 w-36 md:w-40 bg-violet-600 hover:bg-violet-700 font-normal text-white">
             Categorias <BiChevronDown className="text-2xl" />
           </button>
           {!openCategoria && (
-            <div className="absolute mt-10 w-36 md:w-40 px-4 py-2 z-50 bg-purple-600 text-white hover:cursor-pointer">
+            <div className="absolute mt-10 w-36 md:w-40 px-4 py-2 z-50 bg-violet-600 text-white hover:cursor-pointer">
               <ul className="flex flex-col gap-2">
                 <li
                   className={`${
-                    selectedCategory === null ? "bg-purple-900" : ""
-                  } hover:bg-purple-900 px-4 py-2 rounded-sm border-y border-white`}
+                    selectedCategory === null ? "bg-violet-900" : ""
+                  } hover:bg-violet-900 px-4 py-2 rounded-sm border-y border-white`}
                   onClick={() => {
                     setSelectedCategory(null);
                   }}>
@@ -176,8 +201,8 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
                   <li
                     key={index}
                     className={`${
-                      selectedCategory === category ? "bg-purple-900" : ""
-                    } hover:bg-purple-900 px-4 py-2 rounded-sm border-b border-white`}
+                      selectedCategory === category ? "bg-violet-900" : ""
+                    } hover:bg-violet-900 px-4 py-2 rounded-sm border-b border-white`}
                     onClick={() => {
                       setSelectedCategory(category);
                     }}>
@@ -201,7 +226,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
       </div>
       <div
         className={`w-full grid ${
-          events.length <= 1
+          visibleEvents.length <= 1
             ? ""
             : "grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3"
         } place-items-center gap-y-5 pb-10 xl:mt-0 xl:mb-0 lg:ml-96 xl:ml-0 mb-0 sm:mb-0`}>
@@ -209,7 +234,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
           <LoaderEventsGet />
         ) : (
           <>
-            {events.length === 0 ? (
+            {visibleEvents.length === 0 ? (
               <div className="w-screen h-full flex justify-center items-center">
                 <NoEventsMessage />
               </div>
@@ -240,7 +265,7 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
             {userType === 1 && (
               <div
                 onClick={handleOpenModal}
-                className="fixed bottom-40 rounded-full bg-slate-200 p-5 text-2xl text-purple-600  right-5 md:right-10 transform transition-transform hover:scale-125 hover:bg-slate-300">
+                className="fixed bottom-40 rounded-full bg-slate-200 p-5 text-2xl text-violet-600  right-5 md:right-10 transform transition-transform hover:scale-125 hover:bg-slate-300">
                 <ImPlus />
               </div>
             )}
@@ -256,8 +281,8 @@ export const EventsVist = ({ idOrg, userType, idSubOrg }) => {
               className={`px-4 py-2 rounded-md font-medium border
                   ${
                     page === i
-                      ? "bg-purple-600 text-white"
-                      : "bg-white text-gray-700 hover:bg-purple-100"
+                      ? "bg-violet-600 text-white"
+                      : "bg-white text-gray-700 hover:bg-violet-100"
                   }`}>
               {i + 1}
             </button>

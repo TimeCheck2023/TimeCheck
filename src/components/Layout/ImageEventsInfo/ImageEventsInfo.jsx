@@ -18,10 +18,10 @@ export default function ImageEventsInfo(props) {
             <p className="font-bold">{props.priceEvent}</p>
           </div>
           <div className="flex flex-col md:flex-row items-center gap-1 md:gap-3 ">
-            <div className="text-purple-600 font-bold ">
+            <div className="text-violet-600 font-bold ">
               <p>{props.typeEvent}</p>
             </div>
-            <div className="text-purple-600 font-extrabold flex flex-row justify-center items-center  w-14 text-center md:pl-1 h-7 mt-1 gap-2 bg-slate-200 shadow-md rounded-md">
+            <div className="text-violet-600 font-extrabold flex flex-row justify-center items-center  w-14 text-center md:pl-1 h-7 mt-1 gap-2 bg-slate-200 shadow-md rounded-md">
               <AiFillLike />
               {props.likesEvent}
             </div>

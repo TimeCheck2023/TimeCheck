@@ -79,7 +79,7 @@ export const SlideBarUser = ({
   return (
     <div
       onClick={toggleNavBar}
-      className={`h-full hidden md:block z-50 bg-slate-50 fixed border-r border-neutral-400 ${
+      className={`h-full hidden md:block z-50 bg-slate-100 fixed border-r border-neutral-400 ${
         openNavBar
           ? " w-72 transition-all duration-500 ease-in-out"
           : "w-24 transition-all duration-300 ease-in"
@@ -193,7 +193,7 @@ export const SlideBarUser = ({
           <p className="text-slate-500 text-base ">Cuenta</p>
           <div className={`flex flex-row ${openNavBar && "gap-3"}`}>
             <img src={image} alt="img" className="rounded-full w-12 h-12" />
-            {/* <div className="w-12 h-12 bg-purple-600 rounded-full mb-4 text-center flex items-center justify-center text-2xl font-semibold text-white">
+            {/* <div className="w-12 h-12 bg-violet-600 rounded-full mb-4 text-center flex items-center justify-center text-2xl font-semibold text-white">
               {primerCaracterMayuscula}
             </div> */}
             <div>

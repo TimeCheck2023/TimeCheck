@@ -87,7 +87,7 @@ export const Politicas = () => {
       </p>
       <button
         onClick={handleGoBack}
-        className=" text-center w-60 mb-16 rounded-md bg-purple-600 hover:bg-purple-950 text-white font-semibold px-4 py-2">
+        className=" text-center w-60 mb-16 rounded-md bg-violet-600 hover:bg-violet-950 text-white font-semibold px-4 py-2">
         Volver
       </button>
     </div>

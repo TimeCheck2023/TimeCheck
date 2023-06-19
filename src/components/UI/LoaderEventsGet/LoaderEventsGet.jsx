@@ -3,7 +3,7 @@ import React from "react";
 export const LoaderEventsGet = () => {
   return (
     <div className="absolute">
-      <svg className="animate-spin h-8 w-8 text-purple-600" viewBox="0 0 24 24">
+      <svg className="animate-spin h-8 w-8 text-violet-600" viewBox="0 0 24 24">
         <circle
           className="opacity-25"
           cx="12"

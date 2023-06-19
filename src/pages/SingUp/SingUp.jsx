@@ -416,22 +416,22 @@ export const SingUp = () => {
                   He leido y acepto los{" "}
                   <Link
                     to={"/Terminos y Condiciones"}
-                    className="font-bold text-purple-800 hover:underline">
+                    className="font-bold text-violet-800 hover:underline">
                     Términos y Condiciones
                   </Link>{" "}
                   y la
                   <Link
                     to={"/Politicas de Privacidad"}
-                    className="ml-1 font-bold text-purple-800 hover:underline">
+                    className="ml-1 font-bold text-violet-800 hover:underline">
                     Politíca de privacidad
                   </Link>
                 </label>
               </div>
               <div className="flex flex-col md:flex-row gap-5 lg:gap-10 xl:gap-40">
-                <button className=" p-4 w-72 md:w-40 lg:w-72 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold">
+                <button className=" p-4 w-72 md:w-40 lg:w-72 h-55  bg-violet-700 hover:bg-violet-900 rounded-lg text-white font-bold">
                   Registrarse
                 </button>
-                {/* <button className=" p-4 w-72 lg:w-72 h-55  bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex  gap-5 lg:gap-4">
+                {/* <button className=" p-4 w-72 lg:w-72 h-55  bg-violet-700 hover:bg-violet-900 rounded-lg text-white font-bold flex  gap-5 lg:gap-4">
                   <p className="text-2xl pl-7">
                     <FcGoogle />
                   </p>
@@ -444,14 +444,14 @@ export const SingUp = () => {
                   <p className="font-sans font-normal text-xl leading-6 flex items-center text-gray-500">
                     ¿Ya tienes cuenta?{" "}
                   </p>
-                  <strong className="text-purple-600 ml-3">
+                  <strong className="text-violet-600 ml-3">
                     <Link className="hover:underline text-xl" to="/SignIn">
                       ¡Inicia sesión!
                     </Link>
                   </strong>
                 </div>
                 <Link
-                  className=" w-40 h-14 my-5 2xl:mt-5 mb-28 lg:my-0 lg:mt-0 xl:mt-10 bg-purple-700 hover:bg-purple-900 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center"
+                  className=" w-40 h-14 my-5 2xl:mt-5 mb-28 lg:my-0 lg:mt-0 xl:mt-10 bg-violet-700 hover:bg-violet-900 rounded-lg text-white font-bold flex gap-9 text-center justify-center items-center"
                   to="/">
                   Volver
                 </Link>

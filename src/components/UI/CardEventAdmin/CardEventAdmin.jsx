@@ -27,7 +27,7 @@ export const CardEventAdmin = (props) => {
 
   // console.log(props.idSubOrg);
   // console.log(idSubOrg);
-  console.log(idSubOrg);
+  // console.log(idSubOrg);
 
   const itsAdminHere = idSubOrg === props.idSubOrg;
 
@@ -140,8 +140,8 @@ export const CardEventAdmin = (props) => {
     setOpenModal(false);
   };
 
-  console.log(itsAdminHere)
-  console.log(itsOnTime)
+  // console.log(itsAdminHere);
+  // console.log(itsOnTime);
 
   const mostrar = itsAdminHere && itsOnTime;
 
@@ -180,13 +180,13 @@ export const CardEventAdmin = (props) => {
         </div>
         <div className="px-3 py-3 flex justify-between">
           <div className="w-52 truncate ">
-            <p className="text-base text-purple-600 font-bold truncate">
+            <p className="text-base text-violet-600 font-bold truncate">
               {props.title}
             </p>
             <p className="text-xs truncate">{props.description}</p>
           </div>
           <div>
-            <p className="text-purple-600 font-medium">
+            <p className="text-violet-600 font-medium">
               {formatPrice(props.price)}
             </p>
           </div>
@@ -197,7 +197,7 @@ export const CardEventAdmin = (props) => {
             onClick={() => {
               resultLikes ? DeleteLikes(props.id) : CreateLikes(props.id);
             }}
-            className={`flex flex-row items-center border w-14 text-center justify-center border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 xl:gap-1 `}>
+            className={`flex flex-row items-center border w-14 text-center justify-center border-slate-300 rounded-md hover:bg-violet-600 hover:text-white text-violet-600 p-1 gap-1 xl:gap-1 `}>
             {resultLikes ? (
               <AiFillLike className=" text-base" />
             ) : (
@@ -208,14 +208,14 @@ export const CardEventAdmin = (props) => {
             onClick={() => {
               handleOpenModal(props.id);
             }}
-            className="flex flex-row items-center border w-32 text-center px-4 lg:px-5 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
+            className="flex flex-row items-center border w-32 text-center px-4 lg:px-5 border-slate-300 rounded-md hover:bg-violet-600 hover:text-white text-violet-600 p-1 gap-1 font-semibold">
             <p>Comentarios</p>
           </button>
           <button
             onClick={() => {
               setOpenModal(!openModal);
             }}
-            className="flex flex-row items-center border px-4 lg:px-5 xl:px-8 border-slate-300 rounded-md hover:bg-purple-600 hover:text-white text-purple-600 p-1 gap-1 font-semibold">
+            className="flex flex-row items-center border px-4 lg:px-5 xl:px-8 border-slate-300 rounded-md hover:bg-violet-600 hover:text-white text-violet-600 p-1 gap-1 font-semibold">
             <p>Ver más</p>
           </button>
         </div>

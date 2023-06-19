@@ -149,7 +149,7 @@ export const StatisticsGraphics = () => {
       <div className="w-full bg-gray-200 flex justify-between py-2">
         <div className="flex items-center justify-end py-2 px-4">
           <Link
-            className="bg-purple-600 px-6 py-2  text-white rounded-md flex items-center justify-around hover:bg-purple-800"
+            className="bg-violet-600 px-6 py-2  text-white rounded-md flex items-center justify-around hover:bg-violet-800"
             onClick={() => window.history.back()}>
             <AiOutlineArrowLeft className="text-lg" />
             <span className="ml-2">Volver</span>
@@ -158,7 +158,7 @@ export const StatisticsGraphics = () => {
 
         <div className="flex items-center justify-end py-2 px-4">
           <button
-            className="bg-purple-600 text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 hover:bg-purple-800"
+            className="bg-violet-600 text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 hover:bg-violet-800"
             onClick={exportToPDF}>
             <AiOutlineFilePdf className="text-lg" />
             <span>Exportar a PDF</span>
@@ -181,10 +181,10 @@ export const StatisticsGraphics = () => {
                 <h2 className="font-semibold text-slate-500 text-xl">
                   {events?.nombreEvento}
                 </h2>
-                <div className="flex text-3xl font-bold text-purple-700">
+                <div className="flex text-3xl font-bold text-violet-700">
                   <p>{aforo}</p>
                 </div>
-                <div className="text-purple-400 text-xl font-semibold">
+                <div className="text-violet-400 text-xl font-semibold">
                   <p>Cupos del evento</p>
                 </div>
               </div>
@@ -243,9 +243,9 @@ export const StatisticsGraphics = () => {
             )}
           </div>
           <div className="w-full md:w-2/5 rounded-2xl flex flex-col justify-center md:justify-between items-center gap-10 md:gap-0">
-            <div className="w-72 h-32 border border-purple-400 rounded-2xl flex flex-row justify-around items-center px-2">
-              <div className="w-20 h-20 rounded-full border border-purple-300 text-center flex items-center justify-center">
-                <FaCommentAlt className="text-purple-600 text-4xl" />
+            <div className="w-72 h-32 border border-violet-400 rounded-2xl flex flex-row justify-around items-center px-2">
+              <div className="w-20 h-20 rounded-full border border-violet-300 text-center flex items-center justify-center">
+                <FaCommentAlt className="text-violet-600 text-4xl" />
               </div>
               <div className="text-center flex flex-col gap-2">
                 <h2 className="font-semibold text-xl">Comentarios</h2>
@@ -253,9 +253,9 @@ export const StatisticsGraphics = () => {
               </div>
             </div>
 
-            <div className="w-72 h-32 border border-purple-400 rounded-2xl flex flex-row justify-around items-center px-2">
-              <div className="w-20 h-20 rounded-full border border-purple-300 text-center flex items-center justify-center">
-                <AiFillHeart className="text-purple-600 text-6xl" />
+            <div className="w-72 h-32 border border-violet-400 rounded-2xl flex flex-row justify-around items-center px-2">
+              <div className="w-20 h-20 rounded-full border border-violet-300 text-center flex items-center justify-center">
+                <AiFillHeart className="text-violet-600 text-6xl" />
               </div>
               <div className="text-center flex flex-col gap-2">
                 <h2 className="font-semibold text-xl">Likes</h2>

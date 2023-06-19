@@ -296,7 +296,7 @@ export const ModalEventEdit = ({
         <div className="h-full">
           <div className="w-full h-full px-4">
             <div className="flex items-center justify-center mb-8">
-              <h2 className="font-bold text-4xl text-center text-purple-700">
+              <h2 className="font-bold text-4xl text-center text-violet-700">
                 Editar Evento
               </h2>
             </div>
@@ -316,7 +316,7 @@ export const ModalEventEdit = ({
                 )}
                 <div className="md:relative md:left-10 2xl:left-10 text-lg md:w-72 flex justify-center my-5">
                   <label htmlFor="input-file" className="cursor-pointer">
-                    <strong className="text-purple-600">Cambiar</strong> imagen
+                    <strong className="text-violet-600">Cambiar</strong> imagen
                     del evento
                   </label>
                   <input
@@ -442,7 +442,7 @@ export const ModalEventEdit = ({
             </div>
             <div className="footer flex md:relative md:bottom-14 xl:bottom-10  2xl:bottom-5  justify-center items-center w-full my-44 md:my-10 mb-40 2xl:my-0 2xl:mb-0 xl:gap-4">
               <button
-                className="hover:bg-purple-700 mb-10 bg-purple-500 text-white font-bold py-2 px-8 rounded"
+                className="hover:bg-violet-700 mb-10 bg-violet-500 text-white font-bold py-2 px-8 rounded"
                 onClick={handleCloseModal}>
                 Volver
               </button>
@@ -457,7 +457,7 @@ export const ModalEventEdit = ({
                 </button>
               )}
               <button
-                className="hover:bg-purple-700 mb-10 bg-purple-500 text-white font-bold py-2 px-8 rounded"
+                className="hover:bg-violet-700 mb-10 bg-violet-500 text-white font-bold py-2 px-8 rounded"
                 onClick={handleUpdateEvent}>
                 Guardar
               </button>
@@ -488,7 +488,7 @@ export const ModalEventEdit = ({
               />
               <button
                 type="button" // Cambia el tipo de "submit" a "button"
-                className="hover:bg-purple-700 mb-10 bg-purple-500 text-white font-bold py-2 px-8 rounded"
+                className="hover:bg-violet-700 mb-10 bg-violet-500 text-white font-bold py-2 px-8 rounded"
                 onClick={handleConfirm}>
                 Confirmar Asistencia
               </button>

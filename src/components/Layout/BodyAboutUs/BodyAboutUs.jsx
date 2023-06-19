@@ -23,7 +23,7 @@ export const BodyAboutUs = () => {
       <div className="flex flex-col lg:flex-row w-full mb-0 lg:mb-0 2xl:mt-10 2xl:mb-32 xl:mb-40">
         <div className="flex flex-col px-16 md:w-2/3  gap-20 md:gap-32 2xl:gap-20 justify-center items-center mt-5 md:mt-0 xl:my-14 2xl:my-8">
           <div className="flex flex-col w-full 2xl:w-4/5 gap-5 justify-center items-center text-center">
-            <h2 className="text-4xl font-semibold text-purple-600 w-80">
+            <h2 className="text-4xl font-semibold text-violet-600 w-80">
               Nuestra Misión
             </h2>
             <p className="text-xl  w-full 2xl:w-full text-justify lg:pl-9">
@@ -35,7 +35,7 @@ export const BodyAboutUs = () => {
             </p>
           </div>
           <div className="flex flex-col w-full 2xl:w-4/5 gap-5 justify-center items-center text-center">
-            <h2 className="text-4xl font-semibold text-purple-600 w-80">
+            <h2 className="text-4xl font-semibold text-violet-600 w-80">
               Nuestra Visión
             </h2>
             <p className="text-xl  w-full 2xl:w-full text-justify lg:pl-9">
@@ -66,7 +66,7 @@ export const BodyAboutUs = () => {
       </div>
       <div className="w-full ">
         <div className="flex flex-col mt-80 md:mt-0 w-full justify-center items-center gap-3">
-          <h2 className="text-3xl lg:text-4xl font-bold text-purple-600">
+          <h2 className="text-3xl lg:text-4xl font-bold text-violet-600">
             Conoce a Nuestro Equipo{" "}
           </h2>
         </div>

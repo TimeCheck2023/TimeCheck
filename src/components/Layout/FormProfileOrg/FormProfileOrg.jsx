@@ -137,7 +137,7 @@ export const FormProfileOrg = ({ orgData, image, imageUrl, fetchUserData }) => {
       <div className="flex justify-center mt-4 xl:mt-12 mb-32">
         <button
           type="submit"
-          className="px-20 py-2 bg-purple-600 text-white font-semibold rounded-md hover:bg-purple-700">
+          className="px-20 py-2 bg-violet-600 text-white font-semibold rounded-md hover:bg-violet-700">
           Actualizar
         </button>
       </div>

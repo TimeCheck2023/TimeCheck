@@ -162,7 +162,7 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
     if (loading) {
       return (
         <div className="flex flex-col items-center justify-center h-full">
-          <ImSpinner9 className="animate-spin text-4xl text-purple-950" />
+          <ImSpinner9 className="animate-spin text-4xl text-violet-950" />
           <p className="ml-2">Cargando...</p>
         </div>
       ); // Mostrar un indicador de carga mientras se obtiene el dato
@@ -250,14 +250,14 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
 
   return (
     <div className="flex w-full flex-row justify-center ">
-      <div className="w-full h-40 bg-purple-900"></div>
+      <div className="w-full h-40 bg-violet-900"></div>
       <div className="w-11/12 h-5/6 flex flex-col md:flex-row z-30 gap-5 absolute md:ml-24 center mt-16 ">
         <div className=" w-full md:w-1/4 bg-slate-50 h-5/6 md:h-full shadow-lg shadow-neutral-500">
           <div className="flex justify-center items-center flex-col py-8 gap-5">
             <div className="bg-black w-auto absolute h-auto rounded-full   top-10 left-60">
               <label htmlFor="img">
                 {" "}
-                <AiOutlineCamera className="text-2xl bg-purple-600 rounded-full p-1 text-white" />
+                <AiOutlineCamera className="text-2xl bg-violet-600 rounded-full p-1 text-white" />
               </label>
               <input
                 type="file"
@@ -269,7 +269,7 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
             </div>
             {isUploading ? (
               <div className="flex items-center justify-center rounded-full flex-col bg-neutral-900 h-32 w-32 text-center">
-                <ImSpinner9 className="animate-spin text-4xl text-purple-950" />
+                <ImSpinner9 className="animate-spin text-4xl text-violet-950" />
               </div>
             ) : (
               <img
@@ -278,7 +278,7 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
                 className="w-32 h-32 rounded-full"
               />
             )}
-            {/* <div className="h-36 w-36 bg-purple-900 rounded-full text-center flex justify-center items-center text-5xl font-light text-white">
+            {/* <div className="h-36 w-36 bg-violet-900 rounded-full text-center flex justify-center items-center text-5xl font-light text-white">
               {primeraLetra}
             </div> */}
             <p className="text-xl font-medium">
@@ -302,7 +302,7 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
               </div> */}
                 <div className="border-y py-5 border-neutral-300 px-7 flex flex-row justify-between">
                   <p>Eventos pendientes</p>
-                  <p className="text-purple-600 font-bold">
+                  <p className="text-violet-600 font-bold">
                     {userData.pendientes}
                   </p>
                 </div>
@@ -312,7 +312,7 @@ export const BodyProfileUser = ({ nroDocumento, typeUser, idOrg }) => {
               className={`flex justify-center items-center h-32 pb-32  lg:pb-96 md:pb-0 ${
                 typeUser === 2 ? "mt-60 xl:mt-80" : null
               }`}>
-              {/* <button className="hover:bg-slate-200 px-12 py-2 border border-slate-200 text-purple-500 font-bold bg-slate-100 shadow-md rounded-md">
+              {/* <button className="hover:bg-slate-200 px-12 py-2 border border-slate-200 text-violet-500 font-bold bg-slate-100 shadow-md rounded-md">
                 Compartir perfil
               </button> */}
             </div>

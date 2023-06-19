@@ -5,13 +5,14 @@ export const Servicios = () => {
   return (
     <div className=" w-full h-full mb-48 sm:mb-0 bg-gray-100">
       <div>
-        <h2 className="text-purple-600 text-4xl px-16 py-5 text-center md:text-left font-sans font-bold">
+        <h2 className="text-violet-600 text-4xl px-16 py-5 text-center md:text-left font-sans font-bold">
           Servicios
         </h2>
       </div>
       <div>
         <p className="px-10  md:px-16 text-black text-xl text-justify md:text-left">
-        Puedes crear grupos dentro de tu propia empresa para organizar eventos en el momento que desees.
+          Puedes crear grupos dentro de tu propia empresa para organizar eventos
+          en el momento que desees.
         </p>
       </div>
       <div className="flex flex-col md:flex-row h-screen mt-5 md:mt-10">

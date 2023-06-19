@@ -160,7 +160,7 @@ const ChangePasswordForm = ({ nroDocumento, typeUser, correo }) => {
         <button
           type="submit"
           disabled={isLoading} // Deshabilitar el botón mientras se realiza la petición
-          className="relative px-4 py-2 w-60 h-10 bg-purple-600 text-white font-semibold rounded-md hover:bg-purple-700">
+          className="relative px-4 py-2 w-60 h-10 bg-violet-600 text-white font-semibold rounded-md hover:bg-violet-700">
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white" />

@@ -33,7 +33,7 @@ export const NavbarMobile = () => {
       <div className="w-full sm:hidden h-20 bg-white fixed bottom-0 z-50 flex justify-between px-7 sm:px-16 items-center">
         <Link
           to="/SignIn"
-          className="text-center flex-col text-purple-600 flex justify-center items-center">
+          className="text-center flex-col text-violet-600 flex justify-center items-center">
           <FiLogIn className="text-4xl" />
           <p className="text-sm">Iniciar Sesión</p>
         </Link>
@@ -41,12 +41,12 @@ export const NavbarMobile = () => {
           onClick={() => {
             setOpenNav(!openNav);
           }}
-          className="text-center flex flex-col text-white h-16 w-16 mr-5 justify-center items-center rounded-full bg-purple-600 ">
+          className="text-center flex flex-col text-white h-16 w-16 mr-5 justify-center items-center rounded-full bg-violet-600 ">
           <AiOutlineMenu className="text-4xl" />
         </div>
         <Link
           to="/SingUp"
-          className="text-center flex-col text-purple-600 flex justify-center items-center">
+          className="text-center flex-col text-violet-600 flex justify-center items-center">
           <AiOutlineUserSwitch className="text-4xl" />
           <p className="text-sm">Registrate</p>
         </Link>
@@ -58,25 +58,25 @@ export const NavbarMobile = () => {
           <div className="btns-menu flex justify-center items-center">
             <Link
               to="/ContactUs"
-              className="bg-purple-600 rounded-full h-16 w-16 mx-2 text-center flex justify-center items-center text-3xl text-white">
+              className="bg-violet-600 rounded-full h-16 w-16 mx-2 text-center flex justify-center items-center text-3xl text-white">
               <MdOutlineContactMail />
             </Link>
             {user ? (
               <Link
                 to="/Dashboard"
-                className="bg-purple-600 rounded-full h-16 w-16 mx-2 mb-16 text-center flex justify-center items-center text-3xl">
+                className="bg-violet-600 rounded-full h-16 w-16 mx-2 mb-16 text-center flex justify-center items-center text-3xl">
                 <AiFillHome className="text-white" />
               </Link>
             ) : (
               <Link
                 to="/"
-                className="bg-purple-600 rounded-full h-16 w-16 mx-2 mb-16 text-center flex justify-center items-center text-3xl">
+                className="bg-violet-600 rounded-full h-16 w-16 mx-2 mb-16 text-center flex justify-center items-center text-3xl">
                 <AiFillHome className="text-white" />
               </Link>
             )}
             <Link
               to="/AboutUs"
-              className="bg-purple-600 rounded-full h-16 w-16 mx-2 text-center flex justify-center items-center text-3xl text-white">
+              className="bg-violet-600 rounded-full h-16 w-16 mx-2 text-center flex justify-center items-center text-3xl text-white">
               <MdOutlineContentPasteSearch />
             </Link>
           </div>

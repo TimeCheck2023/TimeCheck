@@ -291,7 +291,7 @@ export const SubOrgView = () => {
         <div>
           <button
             onClick={handleGoBack}
-            className="flex items-center justify-center rounded-full bg-purple-600 text-white w-11 py-2 hover:bg-purple-900">
+            className="flex items-center justify-center rounded-full bg-violet-600 text-white w-11 py-2 hover:bg-violet-900">
             <AiOutlineCaretLeft className="text-2xl" />
           </button>
         </div>
@@ -299,7 +299,7 @@ export const SubOrgView = () => {
         {typeUser === 2 && (
           <button
             onClick={handleOpenModal}
-            className="flex items-center gap-3 bg-purple-600 text-white px-5 py-2 rounded-md hover:bg-purple-900">
+            className="flex items-center gap-3 bg-violet-600 text-white px-5 py-2 rounded-md hover:bg-violet-900">
             <AiFillPlusCircle className="text-lg" />
             <span>Agregar miembro</span>
           </button>
@@ -381,7 +381,7 @@ export const SubOrgView = () => {
                             // console.log(member.rol);
                             setIsModalEditOpen(true);
                           }}
-                          className="text-purple-600 hover:text-purple-800 text-xl">
+                          className="text-violet-600 hover:text-violet-800 text-xl">
                           <AiOutlineEdit />
                         </button>
                       </div>

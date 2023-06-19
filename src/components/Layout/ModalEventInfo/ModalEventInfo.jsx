@@ -158,7 +158,7 @@ export const ModalEventInfo = ({
           </button>
         </div>
         <div className="text-center ">
-          <h1 className="text-2xl text-purple-600 font-bold">{title}</h1>
+          <h1 className="text-2xl text-violet-600 font-bold">{title}</h1>
         </div>
         <div className="flex flex-col justify-center items-center my-5 xl:my-0 xl:mb-4 xl:gap-3 gap-5">
           <img
@@ -170,19 +170,19 @@ export const ModalEventInfo = ({
         </div>
         <div className="grid px-4 grid-cols-1 gap-4 my-2 xl:grid-cols-2 2xl:grid-cols-2 2xl:gap-5 xl:gap-5">
           <div className="flex items-center">
-            <MdEvent className="h-5 w-5 text-purple-600 mr-2" />
+            <MdEvent className="h-5 w-5 text-violet-600 mr-2" />
             <span>{tipo_evento}</span>
           </div>
           <div className="flex items-center">
-            <MdLocationOn className="h-5 w-5 text-purple-600 mr-2" />
+            <MdLocationOn className="h-5 w-5 text-violet-600 mr-2" />
             <span>{lugar}</span>
           </div>
           <div className="flex items-center">
-            <MdAccessTime className="h-5 w-5 text-purple-600 mr-2" />
+            <MdAccessTime className="h-5 w-5 text-violet-600 mr-2" />
             <span>{moment(fecha_inicio).format("LLLL")}</span>
           </div>
           <div className="flex items-center">
-            <MdAccessTime className="h-5 w-5 text-purple-600 mr-2" />
+            <MdAccessTime className="h-5 w-5 text-violet-600 mr-2" />
             <span>{moment(fecha_final).format("LLLL")}</span>
           </div>
         </div>
@@ -197,14 +197,14 @@ export const ModalEventInfo = ({
         <div className="flex flex-row justify-between px-10 mt-3 mb-10 xl:px-40 2xl:px-20">
           <button
             onClick={handleCloseModal}
-            className="bg-purple-600 text-white px-7 xl:px-16 xl:py-3 2xl:px-20 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold">
+            className="bg-violet-600 text-white px-7 xl:px-16 xl:py-3 2xl:px-20 py-2 rounded-lg hover:bg-violet-800 hover:font-semibold">
             Volver
           </button>
           {(attendance && attendance.tipoAsistencia === "cancelado") ||
           !attendance?.exists ? (
             <button
               onClick={handleSubmitAttendance}
-              className="bg-purple-600 text-white px-7 xl:px-16 xl:py-3 2xl:px-20 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold">
+              className="bg-violet-600 text-white px-7 xl:px-16 xl:py-3 2xl:px-20 py-2 rounded-lg hover:bg-violet-800 hover:font-semibold">
               Asistir
             </button>
           ) : (
@@ -213,7 +213,7 @@ export const ModalEventInfo = ({
             attendance.exists && (
               <button
                 onClick={handleDeleteAttendance}
-                className="bg-purple-600 text-white px-7 xl:px-5 xl:py-3 2xl:px-8 py-2 rounded-lg hover:bg-purple-800 hover:font-semibold">
+                className="bg-violet-600 text-white px-7 xl:px-5 xl:py-3 2xl:px-8 py-2 rounded-lg hover:bg-violet-800 hover:font-semibold">
                 Cancelar asistencia
               </button>
             )

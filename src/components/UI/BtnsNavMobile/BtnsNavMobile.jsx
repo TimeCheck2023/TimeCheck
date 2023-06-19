@@ -17,31 +17,31 @@ export const BtnsNavMobile = ({ menuRef, userType }) => {
         {userType == 1 ? (
           <Link
             to="/ContactUs"
-            className="bg-purple-600 rounded-full h-16 w-16 mx-2 text-center flex justify-center items-center text-3xl text-white">
+            className="bg-violet-600 rounded-full h-16 w-16 mx-2 text-center flex justify-center items-center text-3xl text-white">
             <MdOutlineContactMail />
           </Link>
         ) : (
           <Link
             to="/Statistics"
-            className="bg-purple-600 rounded-full h-16 w-16 mx-2 text-center flex justify-center items-center text-3xl text-white">
+            className="bg-violet-600 rounded-full h-16 w-16 mx-2 text-center flex justify-center items-center text-3xl text-white">
             <CgOpenCollective />
           </Link>
         )}
         <Link
           to="/Dashboard"
-          className="bg-purple-600 rounded-full h-16 w-16 mx-2 mb-16 text-center flex justify-center items-center text-3xl">
+          className="bg-violet-600 rounded-full h-16 w-16 mx-2 mb-16 text-center flex justify-center items-center text-3xl">
           <AiFillHome className="text-white" />
         </Link>
         {userType == 1 ? (
           <Link
             to="/AboutUs"
-            className="bg-purple-600 rounded-full h-16 w-16 mx-2 text-center flex justify-center items-center text-3xl text-white">
+            className="bg-violet-600 rounded-full h-16 w-16 mx-2 text-center flex justify-center items-center text-3xl text-white">
             <MdOutlineContentPasteSearch />
           </Link>
         ) : (
           <Link
             to="/ViewSubOrg"
-            className="bg-purple-600 rounded-full h-16 w-16 mx-2 text-center flex justify-center items-center text-3xl text-white">
+            className="bg-violet-600 rounded-full h-16 w-16 mx-2 text-center flex justify-center items-center text-3xl text-white">
             <BiGroup />
           </Link>
         )}

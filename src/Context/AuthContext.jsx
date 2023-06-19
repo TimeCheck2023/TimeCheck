@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
       setRol(decoded.payload.rol);
       setCorreo(decoded.payload.correo);
       setImage(decoded.payload.image_url);
-      // console.log(decoded.payload);
+      console.log(decoded.payload);
       setEmailUser(decoded.payload.correo);
       setNroUsuario(decoded.payload.nro_documento_usuario);
 

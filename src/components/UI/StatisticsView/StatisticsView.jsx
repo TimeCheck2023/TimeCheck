@@ -14,9 +14,6 @@ export const StatisticsView = () => {
   const [events, setEvents] = useState([]);
   const [eventId, setEventId] = useState([]);
 
-
-
-
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -39,33 +36,27 @@ export const StatisticsView = () => {
     }
   }, [idOrg]);
 
-
-
   const getColor = (datum) => colorPalette[datum.x];
 
   return (
     <div className="w-full h-screen flex items-center flex-col gap-12">
-        <h1 className="md:pl-20 text-3xl lg:text-5xl font-semibold">
-          Eventos y Estadisticas
-        </h1>
+      <h1 className="md:pl-20 text-3xl lg:text-5xl font-semibold">
+        Eventos y Estadisticas
+      </h1>
 
       <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-10 justify-items-center">
-      {events.map((event,index) => (
-      <Link
-      to={`/StatisticsGraphics/${event.idEvento}`}
-      key={index}
-    >
-         <div className="w-72 h-72 z-30 my-4 bg-purple-500 flex gap-5 flex-col justify-center items-center rounded-md shadow-md border border-gray-500">
-           <h2 className="text-white text-center text-2xl font-bold">
-             {event.nombreEvento}
-           </h2>
-           <h3 className="text-white font-medium text-justify px-2">
-             {event.descripcionEvento}
-           </h3>
-         </div>
-       </Link>
+        {events.map((event, index) => (
+          <Link to={`/StatisticsGraphics/${event.idEvento}`} key={index}>
+            <div className="w-72 h-72 z-30 my-4 bg-violet-500 flex gap-5 flex-col justify-center items-center rounded-md shadow-md border border-gray-500">
+              <h2 className="text-white text-center text-2xl font-bold">
+                {event.nombreEvento}
+              </h2>
+              <h3 className="text-white font-medium text-justify px-2">
+                {event.descripcionEvento}
+              </h3>
+            </div>
+          </Link>
         ))}
-
       </div>
 
       <div className="md:pl-14 w-full relative top-3/5">

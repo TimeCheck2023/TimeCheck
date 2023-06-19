@@ -3,8 +3,8 @@ import { AiFillNotification, AiOutlineCloseCircle } from "react-icons/ai";
 
 export const Notification = () => {
   return (
-    <div className="flex gap-6 items-center border w-11/12 rounded-md bg-slate-50 shadow-md shadow-neutral-400 border-neutral-900 py-3 px-5 hover:bg-slate-100 hover:border-purple-500 cursor-pointer">
-      <div className="text-5xl text-purple-600">
+    <div className="flex gap-6 items-center border w-11/12 rounded-md bg-slate-50 shadow-md shadow-neutral-400 border-neutral-900 py-3 px-5 hover:bg-slate-100 hover:border-violet-500 cursor-pointer">
+      <div className="text-5xl text-violet-600">
         <AiFillNotification />
       </div>
       <div className="flex flex-col gap-2">
