@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { BtnModalInfo } from "../../UI/BtnModalInfo/BtnModalInfo";
 import moment from "moment";
 import "moment/locale/es";
@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { MdClose, MdEvent, MdLocationOn, MdAccessTime } from "react-icons/md";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { BsCheckCircle, BsXCircle } from "react-icons/bs";
+import { AuthContext } from "../../../Context/AuthContext";
 
 export const ModalEventInfo = ({
   handleCloseModal,
@@ -28,6 +29,9 @@ export const ModalEventInfo = ({
       handleCloseModal();
     }
   };
+
+
+  const { socket } = useContext(AuthContext);
 
   const [correoUser, setCorreoUser] = useState();
   const [attendance, setAttendance] = useState();
@@ -66,7 +70,13 @@ export const ModalEventInfo = ({
   }, []);
 
   const handleSubmitAttendance = (e) => {
+
+
+
+
     e.preventDefault();
+
+
 
     const requestBody = {
       eventId: idEvento,
@@ -93,6 +103,7 @@ export const ModalEventInfo = ({
         });
         handleCloseModal();
         fetchEvents();
+        socket.emit("getAsistencia", idEvento);
         // props.fetchEvents(); // Llama a la función fetchEvents
       })
       .catch((error) => {
@@ -108,6 +119,7 @@ export const ModalEventInfo = ({
 
   const handleDeleteAttendance = (e) => {
     e.preventDefault();
+
 
     const data = {
       correoUsuario: correoUser,
@@ -130,6 +142,7 @@ export const ModalEventInfo = ({
           toast.success("Se canceló la asistencia con éxito!", {
             theme: "dark",
           });
+          socket.emit("getAsistencia", idEvento);
           fetchEvents();
           // props.fetchEvents(); // Llama a la función fetchEvents
 

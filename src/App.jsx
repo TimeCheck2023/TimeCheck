@@ -17,6 +17,7 @@ import { SubOrgView } from "./pages/SubOrgView/SubOrgView";
 import Verificacion from "./pages/Verificacion/Verificacion";
 import { StatisticsGraphics } from "./components/UI/StatisticsGraphics/StatisticsGraphics";
 import { AuthProvider } from "./Context/AuthContext";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 function App() {
   return (
     <>
@@ -42,6 +43,10 @@ function App() {
             <Route
               path="/StatisticsGraphics/:id"
               element={<StatisticsGraphics />}
+            />
+            <Route
+              path="/ForgotPassword"
+              element={<ForgotPassword />}
             />
           </Routes>
         </Router>

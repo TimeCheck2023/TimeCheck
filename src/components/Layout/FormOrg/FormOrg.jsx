@@ -43,7 +43,7 @@ export const FormOrg = ({ handleInputChange, errors }) => {
         <div className="flex relative lg:left-20 w-full">
           <div className="flex flex-col w-full ">
             <label htmlFor="emailAddress" className="font-bold">
-              Correo electronico
+              Correo electrónico
               <strong className="text-red-600">*</strong>
             </label>
             <input
@@ -52,7 +52,7 @@ export const FormOrg = ({ handleInputChange, errors }) => {
               name="emailAddress"
               className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 lg:w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}
               type="email"
-              placeholder="correo@corre.com"
+              placeholder="Correo electrónico"
             />
             {errors.emailAddress && (
               <p className="text-red-600 font-bold">{errors.emailAddress}</p>

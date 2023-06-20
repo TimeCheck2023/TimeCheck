@@ -43,7 +43,7 @@ export const StatisticsGraphics = () => {
     socket.emit("getAsistencia", id);
 
     socket.on("Asistencias", (data) => {
-      // console.log(data);
+      console.log(data);
       setConfirmadas(data.asistencias_confirmadas);
       setPendientes(data.asistencias_pendientes);
       setCanceladas(data.asistencias_canceladas);
@@ -265,7 +265,7 @@ export const StatisticsGraphics = () => {
           </div>
         </div>
         <div className="w-full mt-10 mx-10">
-          <h2 className="text-xl font-bold mb-4">Usuarios pendientes</h2>
+          <h2 className="text-xl font-bold mb-4 text-violet-500">Usuarios pendientes</h2>
           <div className="overflow-x-auto">
             <table className="w-full table-fixed">
               <thead>
@@ -293,7 +293,7 @@ export const StatisticsGraphics = () => {
         </div>
 
         <div className="w-full mt-10 mx-10">
-          <h2 className="text-xl font-bold mb-4">Usuarios confirmados</h2>
+          <h2 className="text-xl font-bold mb-4 text-green-500">Usuarios confirmados</h2>
           <div className="overflow-x-auto">
             <table className="w-full table-fixed">
               <thead>
@@ -321,7 +321,7 @@ export const StatisticsGraphics = () => {
         </div>
 
         <div className="w-full mt-10 mx-10">
-          <h2 className="text-xl font-bold mb-4">Usuarios que no asistieron</h2>
+          <h2 className="text-xl font-bold mb-4 text-red-500">Usuarios que no asistieron</h2>
           <div className="overflow-x-auto">
             <table className="w-full table-fixed">
               <thead>

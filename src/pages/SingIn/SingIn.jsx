@@ -192,13 +192,13 @@ export const SingIn = () => {
                 )}
               </div>
             </div>
-            {/* <div className="relative mt-5 text-center left-16 lg:mt-0 lg:left-1/4 xl:left-60 w-60 xl:my-7 2xl:left-64 2xl:mt-3">
+            <div className="relative mt-5 text-center left-16 lg:mt-0 lg:left-1/4 xl:left-60 w-60 xl:my-7 2xl:left-64 2xl:mt-3">
               <p className="font-sans font-normal text-lg leading-6 flex items-center relative right-14 text-violet-600">
-                <Link to="" className="hover:underline">
+                <Link to="/ForgotPassword" className="hover:underline">
                   ¿Olvidaste tu contraseña?
                 </Link>
               </p>
-            </div> */}
+            </div>
             {formError && (
               <p className="text-red-500 font-bold mt-2">{formError}</p>
             )}

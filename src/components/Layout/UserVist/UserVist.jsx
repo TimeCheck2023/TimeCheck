@@ -121,7 +121,7 @@ export const UserVist = () => {
 
   return (
     <>
-      <div className="sm:pl-20 flex flex-col gap-10 2xl:gap-14 xl:gap-16">
+      <div className="sm:pl-20 flex flex-col gap-10 2xl:gap-14 xl:gap-16 mb-20">
         <header className="mt-2 text-center">
           {nroDocumento && (
             <nav className="flex justify-center gap-4">
@@ -188,7 +188,7 @@ export const UserVist = () => {
             value={searchQuery}
             onChange={handleSearchQueryChange}
           />
-          <div className="absolute right-12 mr-6 top-20 xl:top-28 xl:mt-2 xl:text-2xl 2xl:top-12 2xl:right-80 2xl:mr-72 2xl:pr-2 xl:right-1/3 xl:mr-0 lg:right-1/4 lg:mr-24 md:right-1/4 md:mr-16 sm:mr-28 mt-3 text-2xl">
+          <div className="absolute right-12 mr-6 top-20 xl:top-28 xl:mt-2 xl:text-2xl 2xl:top-24 2xl:right-80 2xl:mr-72 2xl:pr-2 2xl:mt-4 xl:right-1/3 xl:mr-0 lg:right-1/4 lg:mr-24 md:right-1/4 md:mr-16 sm:mr-28 mt-3 text-2xl">
             <AiOutlineSearch />
           </div>
         </div>
