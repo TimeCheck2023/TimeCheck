@@ -132,7 +132,7 @@ export const CardEventUser = (props) => {
   return (
     <>
       <div
-        className={`xl:w-4/5 2xl:w-3/5 h-full border border-slate-300 bg-gray-100 rounded-lg ${
+        className={`xl:w-4/5 2xl:w-3/5 w-96 h-full border border-slate-300 bg-gray-100 rounded-lg ${
           itsOnTime ? "hidden" : ""
         }`}>
         <div className="flex justify-between px-2 py-1 text-sm">

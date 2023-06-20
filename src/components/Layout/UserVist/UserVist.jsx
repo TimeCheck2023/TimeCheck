@@ -148,7 +148,7 @@ export const UserVist = () => {
               onClick={() => {
                 setOpenCategoria(!openCategoria);
               }}
-              className="flex justify-center items-center gap-2 px-4 py-2 w-40 bg-violet-800 hover:bg-violet-700 font-normal text-white">
+              className="flex justify-center items-center gap-2 px-4 py-2 w-36 md:w-40 bg-violet-800 hover:bg-violet-700 font-normal text-white">
               Categorias <BiChevronDown className="text-2xl" />
             </button>
             {!openCategoria && (
@@ -188,11 +188,11 @@ export const UserVist = () => {
             value={searchQuery}
             onChange={handleSearchQueryChange}
           />
-          <div className="absolute right-12 mr-6 top-12 xl:top-28 xl:mt-2 xl:text-2xl 2xl:top-12 2xl:right-80 2xl:mr-72 2xl:pr-2 xl:right-1/3 xl:mr-0 lg:right-1/4 lg:mr-24 md:right-1/4 md:mr-16 sm:mr-28 mt-1 text-lg">
+          <div className="absolute right-12 mr-6 top-20 xl:top-28 xl:mt-2 xl:text-2xl 2xl:top-12 2xl:right-80 2xl:mr-72 2xl:pr-2 xl:right-1/3 xl:mr-0 lg:right-1/4 lg:mr-24 md:right-1/4 md:mr-16 sm:mr-28 mt-3 text-2xl">
             <AiOutlineSearch />
           </div>
         </div>
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-3 place-items-center content-center justify-center items-center place-content-center gap-5 pb-0 xl:mb-0 2xl:justify-center 2xl:items-center 2xl:text-center">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-3 place-items-center content-center justify-center items-center  place-content-center gap-5 pb-0 xl:mb-0 2xl:justify-center 2xl:items-center 2xl:text-center">
           {loading ? (
             <LoaderEventsGet />
           ) : events.length === 0 ? (
@@ -222,7 +222,7 @@ export const UserVist = () => {
           )}
         </div>
         {totalPages > 1 && (
-          <div className="flex gap-2 mt-0 justify-center items-center my-10 xl:my-5">
+          <div className="flex gap-2 justify-center items-center my-10 xl:my-20">
             {[...Array(totalPages)].map((_, i) => (
               <button
                 key={i}

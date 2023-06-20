@@ -13,6 +13,7 @@ export const CardEventAdmin = (props) => {
   const [openCommentModal, setOpenCommentModal] = useState(false);
   const [getComments, setGetComments] = useState([]);
   const [likes, setLikes] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const { socket, nroDocumento, idSubOrg, idOrg } = useContext(AuthContext);
 
@@ -30,27 +31,6 @@ export const CardEventAdmin = (props) => {
   // console.log(idSubOrg);
 
   const itsAdminHere = idSubOrg === props.idSubOrg;
-
-  // console.log(props.idSubOrg)
-
-  //Funcion para dar like
-  const CreateLikes = (id) => {
-    const objeto = new Object({
-      id_evento: id,
-      likes: 1,
-      nro_documento_usuario: nroDocumento,
-    });
-    socket.emit("createLikes", objeto);
-    // console.log("enviar");
-  };
-
-  const DeleteLikes = (id) => {
-    const objeto = new Object({
-      id_evento: id,
-      nro_documento_usuario: nroDocumento,
-    });
-    socket.emit("deleteLikes", objeto);
-  };
 
   // funcion pra mostar el Modal de comentarios
   const handleOpenModal = (eventId) => {
@@ -85,6 +65,14 @@ export const CardEventAdmin = (props) => {
 
   const handleCloseCommentModal = () => {
     setOpenCommentModal(false);
+  };
+
+  const handleConfirmDelete = () => {
+    setShowDeleteModal(true); // Abrir el modal de confirmación
+  };
+
+  const handleCancelDelete = () => {
+    setShowDeleteModal(false); // Cerrar el modal de confirmación
   };
 
   const updateComments = (newComments) => {
@@ -157,7 +145,7 @@ export const CardEventAdmin = (props) => {
           </p>
           {idOrg && (
             <button
-              onClick={handleDeleteEvent}
+              onClick={handleConfirmDelete}
               className="px-3 py-1 text-white bg-red-500 rounded-md text-xl hover:bg-red-800 font-semibold">
               <AiOutlineDelete />
             </button>
@@ -220,6 +208,28 @@ export const CardEventAdmin = (props) => {
           </button>
         </div>
       </div>
+
+      {showDeleteModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-neutral-800 bg-opacity-60">
+          <div className="bg-white p-8 rounded-md shadow-lg">
+            <p className="text-lg font-semibold mb-4">
+              ¿Estás seguro de que deseas eliminar este evento?
+            </p>
+            <div className="flex justify-end">
+              <button
+                onClick={handleCancelDelete}
+                className="mr-2 px-4 py-2 bg-gray-200 text-gray-700 rounded-md font-semibold">
+                No
+              </button>
+              <button
+                onClick={handleDeleteEvent}
+                className="px-4 py-2 bg-red-500 text-white rounded-md font-semibold">
+                Sí, eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {idOrg
         ? openModal && (
             <ModalEventEdit
