@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Footer } from "../Footer/Footer";
 import styles from "./BodyContactUs.module.css";
 import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
 
 export const BodyContactUs = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -20,6 +21,17 @@ export const BodyContactUs = () => {
       .then((result) => console.log(result.text))
       .catch((error) => console.error(error));
     refForm.current.reset();
+
+    toast.success("El formulario se ha enviado correctamente!", {
+      position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+    });
   };
 
   useEffect(() => {
@@ -71,6 +83,7 @@ export const BodyContactUs = () => {
                     <input
                       className="border bg-gray-100 border-gray-300 rounded-md p-2 w-4/5 md:w-2/5 xl:w-4/5 2xl:w-2/3 focus:outline-none focus:ring focus:ring-violet-800"
                       type="text"
+                      required
                       name="from_name"
                       id="from_name"
                       placeholder="Ingrese su nombre completo..."
@@ -84,6 +97,7 @@ export const BodyContactUs = () => {
                       className="border bg-gray-100 border-gray-300 rounded-md p-2 w-4/5 md:w-2/5 xl:w-4/5 2xl:w-2/3 focus:outline-none focus:ring focus:ring-violet-800"
                       type="email"
                       name="email"
+                      required
                       id="email"
                       placeholder="Ingrese su correo electronico..."
                     />
@@ -97,11 +111,12 @@ export const BodyContactUs = () => {
                       placeholder="Escribe tu mensaje aquí"
                       name="message"
                       id="message"
+                      required
                       cols="30"
                       rows="8"></textarea>
                   </div>
                   <div className="flex justify-center md:left-20 w-80 ">
-                    <button className="bg-violet-700 py-3 px-2 w-64 rounded-md text-white text-xl font-semibold hover:bg-violet-600">
+                    <button onClick={handleSubmitEmail} className="bg-violet-700 py-3 px-2 w-64 rounded-md text-white text-xl font-semibold hover:bg-violet-600">
                       Enviar
                     </button>
                   </div>
