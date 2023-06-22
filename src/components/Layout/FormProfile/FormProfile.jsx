@@ -91,7 +91,7 @@ export const FormProfile = ({ userData, imageUrl, image, fetchUserData }) => {
                 localStorage.removeItem("token_login");
 
                 // Redirigir al usuario a la página de inicio de sesión
-                navigate(`/SignIn`);
+                navigate(`/SingIn`);
               }, 2000);
             }
           }

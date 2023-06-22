@@ -246,7 +246,7 @@ export const SingUp = () => {
                   progress: false,
                   onClose: () => {
                     setTimeout(() => {
-                      navigate("/SignIn");
+                      navigate("/SingIn");
                     }, 2000); // Redireccionar después de 2 segundos (2000 milisegundos)
                   },
                 }
@@ -319,7 +319,7 @@ export const SingUp = () => {
                   progress: false,
                   onClose: () => {
                     setTimeout(() => {
-                      navigate("/SignIn");
+                      navigate("/SingIn");
                     }, 2000); // Redireccionar después de 2 segundos (2000 milisegundos)
                   },
                 }
@@ -445,7 +445,7 @@ export const SingUp = () => {
                     ¿Ya tienes cuenta?{" "}
                   </p>
                   <strong className="text-violet-600 ml-3">
-                    <Link className="hover:underline text-xl" to="/SignIn">
+                    <Link className="hover:underline text-xl" to="/SingIn">
                       ¡Inicia sesión!
                     </Link>
                   </strong>

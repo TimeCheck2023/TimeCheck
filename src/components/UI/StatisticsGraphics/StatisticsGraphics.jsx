@@ -38,29 +38,33 @@ export const StatisticsGraphics = () => {
 
   const { id } = useParams();
 
+  console.log(id);
+
   const { socket } = useContext(AuthContext);
   useEffect(() => {
     socket.emit("getAsistencia", id);
 
     socket.on("Asistencias", (data) => {
       console.log(data);
-      setConfirmadas(data.asistencias_confirmadas);
-      setPendientes(data.asistencias_pendientes);
-      setCanceladas(data.asistencias_canceladas);
+      if (data.id_evento == id) {
+        setConfirmadas(data.asistencias_confirmadas);
+        setPendientes(data.asistencias_pendientes);
+        setCanceladas(data.asistencias_canceladas);
+      }
     });
 
     socket.emit("getCountLikes", id);
 
     socket.on("Countlikes", (data) => {
       setNroLikes(data.countLikes);
-      console.log(data);
+      // console.log(data);
     });
 
     socket.emit("getCountComments", id);
 
     socket.on("CountComment", (data) => {
       setComments(data);
-      console.log(data);
+      // console.log(data);
     });
   }, []);
 
@@ -265,7 +269,9 @@ export const StatisticsGraphics = () => {
           </div>
         </div>
         <div className="w-full mt-10 mx-10">
-          <h2 className="text-xl font-bold mb-4 text-violet-500">Usuarios pendientes</h2>
+          <h2 className="text-xl font-bold mb-4 text-violet-500">
+            Usuarios pendientes
+          </h2>
           <div className="overflow-x-auto">
             <table className="w-full table-fixed">
               <thead>
@@ -293,7 +299,9 @@ export const StatisticsGraphics = () => {
         </div>
 
         <div className="w-full mt-10 mx-10">
-          <h2 className="text-xl font-bold mb-4 text-green-500">Usuarios confirmados</h2>
+          <h2 className="text-xl font-bold mb-4 text-green-500">
+            Usuarios confirmados
+          </h2>
           <div className="overflow-x-auto">
             <table className="w-full table-fixed">
               <thead>
@@ -321,7 +329,9 @@ export const StatisticsGraphics = () => {
         </div>
 
         <div className="w-full mt-10 mx-10">
-          <h2 className="text-xl font-bold mb-4 text-red-500">Usuarios que no asistieron</h2>
+          <h2 className="text-xl font-bold mb-4 text-red-500">
+            Usuarios que no asistieron
+          </h2>
           <div className="overflow-x-auto">
             <table className="w-full table-fixed">
               <thead>

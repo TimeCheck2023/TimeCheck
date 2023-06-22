@@ -18,6 +18,8 @@ import Verificacion from "./pages/Verificacion/Verificacion";
 import { StatisticsGraphics } from "./components/UI/StatisticsGraphics/StatisticsGraphics";
 import { AuthProvider } from "./Context/AuthContext";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import { CodeVerification } from "./pages/CodeVerification/CodeVerification";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 function App() {
   return (
     <>
@@ -27,7 +29,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/SingUp" element={<SingUp />} />
-            <Route path="/SignIn" element={<SingIn />} />
+            <Route path="/SingIn" element={<SingIn />} />
             <Route path="/AboutUs" element={<AboutUs />} />
             <Route path="/ContactUs" element={<Contact />} />
             <Route path="/Dashboard" element={<Dashboard />} />
@@ -44,10 +46,9 @@ function App() {
               path="/StatisticsGraphics/:id"
               element={<StatisticsGraphics />}
             />
-            <Route
-              path="/ForgotPassword"
-              element={<ForgotPassword />}
-            />
+            <Route path="/ForgotPassword" element={<ForgotPassword />} />
+            <Route path="/CodeVerification" element={<CodeVerification />} />
+            <Route path="/ResetPassword" element={<ResetPassword />} />
           </Routes>
         </Router>
       </AuthProvider>
