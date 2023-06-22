@@ -72,7 +72,7 @@ export const NavBarHome = (props) => {
                   {openNavBar ? <p>Inicio</p> : ""}
                 </div>
               </Link>
-              <Link to="/SignIn" aria-label="Ve a iniciar sesión">
+              <Link to="/SingIn" aria-label="Ve a iniciar sesión">
                 <div
                   className={`my-5 flex gap-4 items-center  w-full py-2 pl-2 rounded-sm hover:bg-neutral-800`}>
                   {" "}

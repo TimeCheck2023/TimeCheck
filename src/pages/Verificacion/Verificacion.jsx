@@ -41,7 +41,7 @@ const Verificacion = () => {
             progress: false,
             onClose: () => {
               setTimeout(() => {
-                navigate("/SignIn");
+                navigate("/SingIn");
               }, 1000); // Redireccionar después de 1 segundos (1000 milisegundos)
             },
           });
