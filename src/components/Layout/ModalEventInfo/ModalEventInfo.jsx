@@ -120,6 +120,7 @@ export const ModalEventInfo = ({
   const handleDeleteAttendance = (e) => {
     e.preventDefault();
 
+      
 
     const data = {
       correoUsuario: correoUser,

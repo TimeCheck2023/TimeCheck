@@ -42,7 +42,7 @@ const ForgotPassword = () => {
             localStorage.setItem("codigo", data.message.codigo);
             localStorage.setItem(
               "nroDocumento",
-              data.message.nro_documento_usuario
+              data.message.id
             );
             navigate("/CodeVerification");
           }
