@@ -77,7 +77,7 @@ export const BodyAboutUs = () => {
             <ContactTeam name="Carolina Rivera Garcia" image="/calorina.jpg" />
           </div>
           <div className="flex flex-col lg:flex-row w-1/2 justify-center items-center">
-            <ContactTeam name="Jose Daniel Aldana" image="" />
+            <ContactTeam name="Jose Daniel Aldana" image="/Aldana.jpeg" />
             <ContactTeam name="Yvette Daniela Campo" image="/yvette.jpg" />
             <ContactTeam name="Mateo H. Mahecha" image="/mateo.jpg" />
           </div>
