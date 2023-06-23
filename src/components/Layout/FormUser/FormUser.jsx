@@ -34,8 +34,8 @@ export const FormUser = ({ handleInputChange, errors }) => {
               onChange={handleInputChange}
               defaultValue="Cédula de ciudadania"
               className={`bg-blue-gray-50 border border-gray-300 shadow-md rounded-xl h-12 lg:w-4/5 p-2 hover:border-gray-400 focus:border-gray-600 focus:outline-none`}>
-              <option value="Cédula de ciudadania">Cédula de ciudadania</option>
-              <option value="Tarjeta de identidad">Tarjeta de identidad</option>
+              <option value="Cédula de ciudadania">Cédula de Ciudadanía</option>
+              <option value="Tarjeta de identidad">Tarjeta de Identidad</option>
               <option value="Cédula de extranjeria">
                 Cédula de extranjeria
               </option>

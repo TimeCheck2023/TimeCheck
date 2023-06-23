@@ -24,13 +24,13 @@ export const BodyContactUs = () => {
 
     toast.success("El formulario se ha enviado correctamente!", {
       position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
     });
   };
 
@@ -116,7 +116,9 @@ export const BodyContactUs = () => {
                       rows="8"></textarea>
                   </div>
                   <div className="flex justify-center md:left-20 w-80 ">
-                    <button onClick={handleSubmitEmail} className="bg-violet-700 py-3 px-2 w-64 rounded-md text-white text-xl font-semibold hover:bg-violet-600">
+                    <button
+                      onClick={handleSubmitEmail}
+                      className="bg-violet-700 py-3 px-2 w-64 rounded-md text-white text-xl font-semibold hover:bg-violet-600">
                       Enviar
                     </button>
                   </div>
